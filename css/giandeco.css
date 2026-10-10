@@ -552,6 +552,59 @@ img{ max-width:100%; display:block; }
 }
 .gd-shop-card-close:hover{ background: var(--accent); color: var(--ebano); }
 
+/* --- controles sobre la fotografía --- */
+.gd-shop-dot{ transition: opacity .35s ease; }
+.gd-shop.sin-puntos .gd-shop-dot{ opacity:0; pointer-events:none; }
+.gd-shop.sin-puntos .gd-shop-card{ display:none; }
+.gd-shop-bar{ position:absolute; top:14px; right:14px; z-index:5; display:flex; gap:8px; }
+.gd-shop-bar button{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; height:36px; padding:0 15px;
+  border-radius:18px; border:1px solid rgba(222,216,203,.24); cursor:pointer;
+  background: rgba(10,10,9,.58); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color:#DED8CB; font-family: var(--body); font-weight:500; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
+  transition: border-color .25s ease, color .25s ease, background-color .25s ease;
+}
+.gd-shop-bar button:hover, .gd-shop-bar button[aria-pressed="true"]{ border-color: var(--laton); color: var(--laton); }
+.gd-shop-bar button:focus-visible{ outline:2px solid var(--laton); outline-offset:2px; }
+.gd-shop-bar svg{ width:16px; height:16px; flex:none; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.gd-shop-amp{ width:36px; padding:0 !important; }
+@media (max-width:719px){
+  .gd-shop-bar{ left:12px; right:auto; }
+  .gd-shop-ver{ width:36px; padding:0 !important; }
+  .gd-shop-ver span{ display:none; }
+}
+
+/* --- puntos finos: un aro que deja ver la pieza; crece al acercarse --- */
+.gd-shop.is-fino .gd-shop-dot{ width:30px; height:30px; }
+.gd-shop.is-fino .gd-shop-dot i{
+  inset:8px; background: rgba(10,10,9,.3); border:1.5px solid rgba(255,255,255,.95);
+  box-shadow:0 1px 6px rgba(0,0,0,.5); transition: transform .35s var(--gd-ease), background-color .25s ease, border-color .25s ease;
+}
+.gd-shop.is-fino .gd-shop-dot i::before{ display:none; }
+.gd-shop.is-fino .gd-shop-dot i::after{ inset:3px; background: var(--laton); }
+.gd-shop.is-fino .gd-shop-dot b{ inset:8px; border-color: rgba(255,255,255,.55); animation-duration:3.4s; }
+.gd-shop.is-fino .gd-shop-dot:hover i, .gd-shop.is-fino .gd-shop-dot:focus-visible i, .gd-shop.is-fino .gd-shop-dot.is-open i{
+  transform: scale(1.55); background: var(--laton); border-color:#fff;
+}
+.gd-shop.is-fino .gd-shop-dot:hover i::after, .gd-shop.is-fino .gd-shop-dot.is-open i::after{ background: var(--ebano); }
+@media (max-width:720px){ .gd-shop.is-fino .gd-shop-dot{ width:30px; height:30px; } .gd-shop.is-fino .gd-shop-dot i::after{ inset:3px; } }
+
+/* --- fotografía ampliada --- */
+.gd-luz{
+  position:fixed; inset:0; z-index:120; display:grid; place-items:center; padding: clamp(14px,3vw,44px);
+  background: rgba(8,8,7,.96); opacity:0; visibility:hidden; transition: opacity .35s ease, visibility 0s linear .35s;
+}
+.gd-luz.is-open{ opacity:1; visibility:visible; transition: opacity .35s ease; }
+.gd-luz img{ max-width:100%; max-height: calc(100svh - 2 * clamp(14px,3vw,44px) - 36px); width:auto; height:auto; object-fit:contain; border-radius:2px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+.gd-luz-cap{ position:absolute; left:0; right:0; bottom:14px; margin:0; text-align:center; font-family: var(--body); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color: rgba(222,216,203,.6); }
+.gd-luz-x{
+  position:absolute; top:16px; right:16px; width:40px; height:40px; border-radius:50%; display:grid; place-items:center; cursor:pointer;
+  background: rgba(10,10,9,.6); border:1px solid rgba(222,216,203,.24); color:#DED8CB; transition: border-color .25s ease, color .25s ease;
+}
+.gd-luz-x:hover{ border-color: var(--laton); color: var(--laton); }
+.gd-luz-x svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; }
+@media (prefers-reduced-motion: reduce){ .gd-luz, .gd-shop-dot{ transition:none; } }
+
 .gd-shop-hint{
   display:inline-flex; align-items:center; gap:9px; margin-top:var(--sp-16);
   font-family: var(--body); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color: var(--text-faint);

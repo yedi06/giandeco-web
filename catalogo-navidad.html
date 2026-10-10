@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/giandeco.css?v=9">
+<link rel="stylesheet" href="css/giandeco.css?v=10">
 <link rel="stylesheet" href="css/gd-tienda.css?v=5">
 <link rel="stylesheet" href="css/gd-movil.css?v=1">
 <link rel="stylesheet" href="css/gd-tema.css?v=1">
@@ -63,9 +63,6 @@
   .nv-filtro.is-active{ background:var(--accent); border-color:var(--accent); color:var(--ebano); }
   .nv-vacio{ color:var(--text-dim); font-size:.92rem; }
   /* comedor de la colección: 26 puntos, más finos; en móvil se recorre deslizando */
-  .nv-shop .gd-shop-dot{ width:26px; height:26px; }
-  .nv-shop .gd-shop-dot i::before{ inset:5px; }
-  .nv-shop .gd-shop-dot i::after{ inset:9px; }
   .nv-shop-tip{ display:none; }
   @media (max-width:719px){
     .nv-shop-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-inline:calc(var(--gd-gut) * -1); padding-inline:var(--gd-gut); scrollbar-width:none; }
@@ -123,7 +120,7 @@
     <p class="gd-body reveal d2">Las veintiséis piezas de la colección en un mismo comedor: mesa, chimenea, aparador y repisa. Toque cada punto para ver la ficha y el precio.</p>
 
     <div class="nv-shop-wrap reveal-scale" style="margin-top:var(--sp-24);">
-      <div class="gd-shop nv-shop">
+      <div class="gd-shop nv-shop is-fino">
         <img decoding="async" class="gd-shop-img" src="images/espacios/mesa-servida-navidad.jpg?v=4" width="1920" height="1084" alt="Comedor navideño ambientado por Giandeco con las 26 piezas de la colección Navidad 2026: mesa servida con arreglo de pino y berries, portavelas, renos dorados y taza cascanuez; chimenea con casitas, árbol y muñeco de nieve de porcelana iluminados; aparador con cascanueces, casa de jengibre, Papá Noel y bomboneras; repisa con tren de jengibre y cascanueces; faroles y venados transparentes junto al árbol">
         <button class="gd-shop-dot" style="left:20.4%; top:28.4%" data-prod="casa-iluminada-pequena"></button>
         <button class="gd-shop-dot" style="left:16.4%; top:18.0%" data-prod="arbol-iluminado"></button>
@@ -182,7 +179,7 @@
 </section>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=14"></script>
+<script src="js/giandeco.js?v=15"></script>
 <script>
 (function(){
   var P = window.GD_NAVIDAD || {};

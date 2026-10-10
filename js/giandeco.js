@@ -451,6 +451,39 @@ if(progressEl){
      <button class="gd-shop-dot" style="left:32%;top:58%" data-prod="comoda-flow"></button>
    </div>
    -------------------------------------------------------------------------- */
+/* iconos de Heroicons 2.2.0 (outline) · MIT · Tailwind Labs */
+var ICO_OJO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>';
+var ICO_AMPLIAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>';
+var ICO_CERRAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6l12 12"/></svg>';
+
+/* vista ampliada: la fotografía sola, a pantalla completa */
+function ampliarFoto(img){
+  var luz = document.getElementById('gdLuz');
+  if(!luz){
+    document.body.insertAdjacentHTML('beforeend',
+      '<div class="gd-luz" id="gdLuz" role="dialog" aria-modal="true" aria-label="Fotografía ampliada" aria-hidden="true">' +
+        '<button type="button" class="gd-luz-x" aria-label="Cerrar">' + ICO_CERRAR + '</button>' +
+        '<img alt=""><p class="gd-luz-cap"></p></div>');
+    luz = document.getElementById('gdLuz');
+    luz.addEventListener('click', function(e){ if(e.target === luz || e.target.closest('.gd-luz-x')) cerrarFoto(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarFoto(); });
+  }
+  var grande = luz.querySelector('img');
+  grande.src = img.currentSrc || img.src; grande.alt = img.alt;
+  luz.querySelector('.gd-luz-cap').textContent = 'Producción Giandeco';
+  luz._vuelve = document.activeElement;
+  luz.classList.add('is-open'); luz.setAttribute('aria-hidden', 'false');
+  document.documentElement.style.overflow = 'hidden';
+  luz.querySelector('.gd-luz-x').focus();
+}
+function cerrarFoto(){
+  var luz = document.getElementById('gdLuz');
+  if(!luz || !luz.classList.contains('is-open')) return;
+  luz.classList.remove('is-open'); luz.setAttribute('aria-hidden', 'true');
+  document.documentElement.style.overflow = '';
+  if(luz._vuelve && luz._vuelve.focus) luz._vuelve.focus();
+}
+
 function montarPuntos(){
   document.querySelectorAll('.gd-shop').forEach(function(shop){
     var dots = shop.querySelectorAll('.gd-shop-dot');
@@ -464,6 +497,13 @@ function montarPuntos(){
       dot.setAttribute('aria-label', 'Ver ' + nombre);
       dot.setAttribute('type', 'button');
     });
+
+    // controles sobre la foto: ver solo el ambiente y ampliar
+    var bar = document.createElement('div');
+    bar.className = 'gd-shop-bar';
+    bar.innerHTML = '<button type="button" class="gd-shop-ver" aria-pressed="false">' + ICO_OJO + '<span>Ver solo el ambiente</span></button>' +
+      '<button type="button" class="gd-shop-amp" aria-label="Ampliar la fotografía" title="Ampliar">' + ICO_AMPLIAR + '</button>';
+    shop.appendChild(bar);
 
     var card = document.createElement('div');
     card.className = 'gd-shop-card';
@@ -525,6 +565,15 @@ function montarPuntos(){
     }
 
     shop.addEventListener('click', function(e){
+      var ver = e.target.closest('.gd-shop-ver');
+      if(ver){
+        var oculto = shop.classList.toggle('sin-puntos');
+        cerrar();
+        ver.setAttribute('aria-pressed', oculto ? 'true' : 'false');
+        ver.querySelector('span').textContent = oculto ? 'Mostrar las piezas' : 'Ver solo el ambiente';
+        return;
+      }
+      if(e.target.closest('.gd-shop-amp')){ cerrar(); ampliarFoto(shop.querySelector('.gd-shop-img')); return; }
       if(e.target.closest('.gd-shop-card-close')){ cerrar(); return; }
       if(e.target.closest('.gd-shop-card')) return;
       var dot = e.target.closest('.gd-shop-dot');
