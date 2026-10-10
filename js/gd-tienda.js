@@ -50,7 +50,7 @@ var CFG = {
   CUPONES: {},
   /* Datos legales del estudio. Lo que esté vacío se muestra como
      "por confirmar" en las páginas de ayuda y en el libro de reclamaciones. */
-  EMPRESA: { razon:'', ruc:'', dir:'Ca. Las Bellísimas 170, Urb. Vipol — Callao 07036', correo:'contacto@giandeco.com', tel:'+51 920 775 559' },
+  EMPRESA: { razon:'Luis Giancarlo Jiménez Sánchez', ruc:'10452729691', dir:'Ca. Las Bellísimas 170, Urb. Vipol — Callao 07036', correo:'contacto@giandeco.com', tel:'+51 920 775 559' },
   /* En false, las páginas de políticas llevan el aviso "borrador pendiente
      de validación". Se pasa a true cuando el estudio las aprueba. */
   LEGAL_VALIDADO: false,
