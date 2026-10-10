@@ -582,7 +582,18 @@ img{ max-width:100%; display:block; }
 }
 .gd-shop.is-fino .gd-shop-dot i::before{ display:none; }
 .gd-shop.is-fino .gd-shop-dot i::after{ inset:3px; background: var(--laton); }
-.gd-shop.is-fino .gd-shop-dot b{ inset:8px; border-color: rgba(255,255,255,.55); animation-duration:3.4s; }
+/* la onda que invita a tocar: dos aros que se abren desde el punto, uno tras otro */
+.gd-shop.is-fino .gd-shop-dot b{ inset:8px; border:1.5px solid rgba(255,255,255,.9); animation: gdOnda 2.6s cubic-bezier(.2,.6,.3,1) infinite; }
+.gd-shop.is-fino .gd-shop-dot b::after{
+  content:''; position:absolute; inset:-1.5px; border-radius:50%; border:1.5px solid rgba(201,162,74,.95);
+  animation: gdOnda 2.6s cubic-bezier(.2,.6,.3,1) 1.3s infinite; opacity:0;
+}
+@keyframes gdOnda{
+  0%{ transform:scale(1); opacity:.95; }
+  80%, 100%{ transform:scale(2.9); opacity:0; }
+}
+.gd-shop.is-fino .gd-shop-dot:hover b, .gd-shop.is-fino .gd-shop-dot.is-open b{ animation:none; opacity:0; }
+@media (prefers-reduced-motion: reduce){ .gd-shop.is-fino .gd-shop-dot b, .gd-shop.is-fino .gd-shop-dot b::after{ animation:none; opacity:0; } }
 .gd-shop.is-fino .gd-shop-dot:hover i, .gd-shop.is-fino .gd-shop-dot:focus-visible i, .gd-shop.is-fino .gd-shop-dot.is-open i{
   transform: scale(1.55); background: var(--laton); border-color:#fff;
 }
