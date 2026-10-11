@@ -499,3 +499,14 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .co-rev dd{ margin:0; color:var(--text-dim); font-size:.92rem; line-height:1.6; overflow-wrap:anywhere; }
 .co-rev button{ background:none; border:none; padding:2px 0; cursor:pointer; font-family:var(--body); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
 .co-body .co-res .co-conf{ margin-top:18px; }
+
+/* --- pago en línea (pagar.html) --- */
+.pg-prueba{ display:inline-block; margin:0 0 var(--sp-24); padding:6px 12px; border:1px dashed var(--line); border-radius:2px; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim); }
+.pg-caja{ max-width:520px; margin:0 0 var(--sp-24); padding:22px 24px 24px; border:1px solid var(--line); border-radius:2px; }
+.pg-items{ list-style:none; margin:0; padding:0 0 16px; border-bottom:1px solid var(--line); display:grid; gap:8px; }
+.pg-items li{ font-size:.92rem; line-height:1.5; color:var(--lino); }
+.pg-conf{ max-width:520px; margin-top:var(--sp-24); }
+.pg-espera{ width:34px; height:34px; margin:var(--sp-24) 0; border-radius:50%; border:1px solid var(--line); border-top-color:var(--accent); animation:pgGira .9s linear infinite; }
+@keyframes pgGira{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){ .pg-espera{ animation-duration:2.4s; } }
+#pgPagar[disabled]{ opacity:.6; cursor:default; }

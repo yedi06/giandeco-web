@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=12">
-<link rel="stylesheet" href="css/gd-tienda.css?v=5">
+<link rel="stylesheet" href="css/gd-tienda.css?v=6">
 </head>
 <!-- data-home: el checkout no lleva el menú del sitio. Tiene su propia cabecera,
      sin nada que distraiga de terminar la compra. -->
@@ -36,9 +36,10 @@
 
 <script src="js/giandeco.js?v=15"></script>
 <script src="js/gd-tienda.js?v=7"></script>
+<script src="js/gd-pago.js?v=1"></script>
 <script>
 (function(){
-  var T = window.GD_TIENDA, esc = T.esc, C = T.CFG;
+  var T = window.GD_TIENDA, esc = T.esc, C = T.CFG, P = window.GD_PAGO;
   var root = document.getElementById('co');
   var ok = new URLSearchParams(location.search).get('ok');
 
@@ -60,7 +61,8 @@
              : '<li><b>Usted paga</b>' + esc(ped.pago) + '. Recibe su comprobante electrónico en ' + esc(ped.cliente.email) + '.</li>') +
         '<li><b>' + (ped.entrega.tipo === 'recojo' ? 'Recoge en el estudio' : 'Recibe en su dirección') + '</b>' + esc(ped.entrega.resumen) + '</li>' +
       '</ol>' +
-      '<div class="co-ok-acc"><a class="gd-btn gd-btn-ghost" href="cuenta#pedidos">Ver mis pedidos</a>' +
+      '<div class="co-ok-acc">' + (!cot && !ped.pagado && P.activa() ? '<a class="gd-btn gd-btn-ghost" href="pagar?n=' + encodeURIComponent(ped.n) + '">Pagar en línea</a>' : '') +
+        '<a class="gd-btn gd-btn-ghost" href="cuenta#pedidos">Ver mis pedidos</a>' +
         '<a class="gd-link" href="seguimiento?n=' + encodeURIComponent(ped.n) + '" style="align-self:center;">Seguir este pedido' + T.FLECHA + '</a></div></div>' +
       '<section class="gdt-sec" style="margin-top:var(--sp-64);"><div class="gdt-sec-head"><div><p class="gd-eyebrow">Selección del estudio</p><h2 class="gd-h2">Para seguir armando el ambiente</h2></div></div>' +
         '<div class="gd-grid">' + T.recomendados(4).map(function(k){ return T.card(k); }).join('') + '</div></section>';
@@ -158,7 +160,7 @@
 
   var pasoPago = soloCot ? '' :
     '<section class="co-paso" data-paso="2" hidden><h2 class="co-paso-t">¿Cómo prefiere pagar?</h2>' +
-      '<p class="co-ayuda" style="margin-bottom:20px;">El pago se realiza después de que el estudio confirme su pedido. Esta web no solicita datos de tarjeta.</p>' +
+      '<p class="co-ayuda" id="coPagoAyuda" style="margin-bottom:20px;"></p>' +
       '<div id="coPago"></div>' + pie(2) + '</section>';
 
   var pasoFinal =
@@ -184,7 +186,7 @@
       '<dl class="co-tot" id="coTot"></dl>' +
       '<p class="co-res-nota"><a href="#" data-gdt-abrir style="color:var(--text-dim);">Editar la selección</a></p>' +
       '<ul class="co-conf">' +
-        '<li>Sin cobro hasta que el estudio confirme.</li>' +
+        '<li id="coConfPago"></li>' +
         '<li>Boleta o factura electrónica a su correo.</li>' +
         '<li>Atención directa del estudio por WhatsApp.</li>' +
       '</ul>' +
@@ -225,6 +227,18 @@
     }).join('');
   }
   function pagoElegido(){ var k = radio('pago'); return C.PAGO.filter(function(m){ return m.key === k; })[0]; }
+
+  /* pasarela: con ella, tarjeta, cuotas y Yape se pagan en línea al registrar el pedido */
+  var pasarela = P.activa();
+  function enLinea(m){ return pasarela && !!m && P.EN_LINEA.indexOf(m.key) !== -1; }
+  function textosPago(){
+    var a = $('coPagoAyuda'), b = $('coConfPago');
+    if(a) a.textContent = pasarela
+      ? 'Con tarjeta o Yape paga en línea al registrar el pedido, en el formulario seguro de Culqi: esta web no ve ni guarda los datos de su tarjeta. Los demás medios se coordinan con el estudio.'
+      : 'El pago se realiza después de que el estudio confirme su pedido. Esta web no solicita datos de tarjeta.';
+    if(b) b.textContent = pasarela ? 'Pago en línea protegido por Culqi.' : 'Sin cobro hasta que el estudio confirme.';
+  }
+  P.estado().then(function(a){ if(a !== pasarela){ pasarela = a; textosPago(); } });
 
   var cupon = null;
   function descuento(){
@@ -331,7 +345,7 @@
     msg.textContent = cupon ? 'Código aplicado.' : 'Ese código no es válido.';
     totales();
   });
-  condicionales(); mostrar(0);
+  condicionales(); textosPago(); mostrar(0);
 
   // si la selección cambia desde el cajón, el resumen se rehace entero
   var enviando = false;
@@ -370,6 +384,8 @@
                     dep:g('coDep'), prov:g('coProv'), distrito:g('coDist'), dir:g('coDir'), ref:g('coRef'), inmueble:g('coInm'), acceso:g('coAcc'), pago:pago ? pago.key : '' });
     enviando = true;
     T.carrito.vaciar();
+    // medio en línea: directo a pagar. Si el total aún depende del estudio, esa página lo explica.
+    if(enLinea(pago)){ location.href = 'pagar?n=' + encodeURIComponent(ped.n); return; }
     window.open(T.wa(T.pedidos.mensaje(ped)), '_blank', 'noopener');
     location.href = 'checkout?ok=' + encodeURIComponent(ped.n);
   });

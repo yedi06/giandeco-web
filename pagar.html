@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="js/gd-acceso.js?v=2"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagar mi pedido — Giandeco Studio Design</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0A0A09">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/giandeco.css?v=12">
+<link rel="stylesheet" href="css/gd-tienda.css?v=6">
+</head>
+<!-- Misma cabecera sobria del checkout: nada que distraiga de pagar. -->
+<body data-home="true" class="co-body">
+
+<header class="co-head">
+  <a class="co-head-volver" href="cuenta#pedidos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Mis pedidos</a>
+  <a class="co-head-logo" href="./" aria-label="Giandeco Studio Design"><img src="img/logo-negativo.svg" alt="Giandeco Studio Design"></a>
+  <span class="co-head-seguro"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Pago seguro</span>
+</header>
+
+<main class="co-top"><div class="gd-in"><div class="co-ok" id="pg" aria-live="polite"></div></div></main>
+
+<footer class="co-foot">
+  <a href="compra-segura" target="_blank">Compra segura</a>
+  <a href="envios-y-entregas" target="_blank">Envíos</a>
+  <a href="cambios-y-garantia" target="_blank">Cambios y garantía</a>
+  <a href="terminos-y-condiciones" target="_blank">Términos</a>
+  <a href="politica-de-privacidad" target="_blank">Privacidad</a>
+  <a href="libro-de-reclamaciones" target="_blank">Libro de reclamaciones</a>
+</footer>
+
+<script src="js/giandeco.js?v=15"></script>
+<script src="js/gd-tienda.js?v=7"></script>
+<script src="js/gd-pago.js?v=1"></script>
+<script>
+(function(){
+  var T = window.GD_TIENDA, P = window.GD_PAGO, esc = T.esc;
+  var root = document.getElementById('pg');
+  var n = (new URLSearchParams(location.search).get('n') || '').trim().toUpperCase();
+  var local = n ? T.pedidos.get(n) : null, cel = local ? local.cliente.cel : '';
+  var c = null;   // lo que el servidor dice que se debe
+
+  function money(cent){ return T.fmt(cent / 100); }
+  function waBtn(texto, msg, clase){
+    return '<a class="gd-btn ' + (clase || 'gd-btn-ghost') + '" href="' + T.wa(msg) + '" target="_blank" rel="noopener">' + texto + T.FLECHA + '</a>';
+  }
+  function cabecera(eyebrow, titulo){
+    return '<p class="gd-eyebrow">' + eyebrow + '</p><h1>' + titulo + '</h1>' + (n ? '<p class="co-ok-n">' + esc(n) + '</p>' : '');
+  }
+  function enlaces(){
+    return '<div class="co-ok-acc" style="margin-top:var(--sp-40);"><a class="gd-btn gd-btn-ghost" href="cuenta#pedidos">Ver mis pedidos</a>' +
+      '<a class="gd-link" href="seguimiento?n=' + encodeURIComponent(n) + '" style="align-self:center;">Seguir este pedido' + T.FLECHA + '</a></div>';
+  }
+
+  /* ---------- sin número, o pedido hecho en otro dispositivo ---------- */
+  function pedirDatos(aviso){
+    root.innerHTML = '<p class="gd-eyebrow">Pago en línea</p><h1>Pagar mi pedido</h1>' +
+      '<p class="co-lead">Escriba el número de su pedido y el celular con el que lo registró.</p>' +
+      '<form class="gd-form" id="pgForm" novalidate style="max-width:520px;">' +
+        '<div class="gd-field"><label for="pgN">Número de pedido</label><input id="pgN" type="text" placeholder="GD-000000-0000" autocomplete="off" value="' + esc(n) + '"><span class="gdt-err">Escriba el número completo, por ejemplo GD-261007-1234.</span></div>' +
+        '<div class="gd-field"><label for="pgCel">Celular</label><input id="pgCel" type="tel" inputmode="numeric" maxlength="9" placeholder="9XX XXX XXX" autocomplete="tel-national"><span class="gdt-err">Celular de 9 dígitos que empiece en 9.</span></div>' +
+        (aviso ? '<p class="gdt-err" style="display:block;">' + aviso + '</p>' : '') +
+        '<button type="submit" class="gd-btn gd-btn-primary" style="justify-self:start;">Continuar' + T.FLECHA + '</button></form>';
+    document.getElementById('pgForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var a = document.getElementById('pgN'), b = document.getElementById('pgCel');
+      var vn = a.value.trim().toUpperCase(), vc = b.value.replace(/\D/g, '');
+      var okN = /^GD-\d{6}-\d{4}$/.test(vn), okC = /^9\d{8}$/.test(vc);
+      a.closest('.gd-field').classList.toggle('is-mal', !okN); b.closest('.gd-field').classList.toggle('is-mal', !okC);
+      if(!okN || !okC) return;
+      n = vn; cel = vc; local = T.pedidos.get(n);
+      history.replaceState(null, '', 'pagar?n=' + encodeURIComponent(n));
+      consultar(0);
+    });
+  }
+
+  /* ---------- pedido que todavía no se puede pagar aquí ---------- */
+  var PORQUE = {
+    'envio':   ['El estudio confirma el envío', 'Su pedido está registrado. En cuanto el estudio confirme el costo de envío a su dirección, podrá pagarlo en esta misma página.'],
+    'armado':  ['El estudio cotiza el armado', 'Su pedido está registrado. En cuanto el estudio le confirme el costo de armado o instalación, podrá pagarlo en esta misma página.'],
+    'cotizar': ['El estudio confirma su pedido', 'Su pedido incluye piezas que el estudio cotiza. Cuando reciba el detalle, coordinamos el pago con usted.'],
+    'monto':   ['Coordinemos el pago', 'Por su monto, este pedido se paga coordinando directamente con el estudio.'],
+    'cerrado': ['Pedido cerrado', 'Este pedido ya no admite pagos. Si cree que es un error, escríbanos.'],
+    'sin-pasarela': ['Coordinemos el pago', 'Su pedido está registrado. El estudio le enviará los datos para pagar con el medio que eligió.']
+  };
+  function noPagable(motivo){
+    var t = PORQUE[motivo] || PORQUE['sin-pasarela'];
+    root.innerHTML = cabecera('Pedido registrado', t[0]) + '<p class="co-lead">' + t[1] + '</p>' +
+      '<div class="co-ok-acc">' + waBtn('Escribir al estudio', local ? T.pedidos.mensaje(local) : 'Hola Giandeco, quiero coordinar el pago de mi pedido ' + n + '.', 'gd-btn-primary') + '</div>' + enlaces();
+  }
+
+  /* ---------- pagado ---------- */
+  function pagado(p){
+    if(local && !local.pagado){ var l = T.pedidos.lista(); l.forEach(function(x){ if(x.n === n) x.pagado = true; }); T.db('pedidos', l); }
+    var con = p && p.medio === 'yape' ? 'Yape' : p && p.ultimos4 ? (p.marca ? esc(p.marca) + ' ' : 'Tarjeta ') + 'terminada en ' + esc(p.ultimos4) : '';
+    root.innerHTML = cabecera('Pago recibido', 'Gracias' + (c && c.cliente && c.cliente.nombre ? ', ' + esc(c.cliente.nombre) : '')) +
+      '<p class="co-lead">Recibimos su pago' + (p && p.monto ? ' de <b style="color:var(--lino);">' + money(p.monto) + '</b>' : '') + (con ? ' con ' + con : '') + '. ' +
+        'El estudio prepara su pedido y le escribe para coordinar la entrega. Su comprobante electrónico llega a su correo.</p>' +
+      (p && p.ref ? '<p class="gd-form-nota">Referencia del pago: ' + esc(p.ref) + '</p>' : '') +
+      '<div class="co-ok-acc" style="margin-top:var(--sp-24);">' + waBtn('Avisar al estudio', 'Hola Giandeco, acabo de pagar en línea mi pedido ' + n + '.', 'gd-btn-primary') + '</div>' + enlaces();
+  }
+
+  /* ---------- listo para pagar ---------- */
+  function fila(dt, dd, clase){ return '<div' + (clase ? ' class="' + clase + '"' : '') + '><dt>' + dt + '</dt><dd>' + dd + '</dd></div>'; }
+  function listo(aviso){
+    var d = c.desglose;
+    root.innerHTML = cabecera('Pago en línea', 'Pagar mi pedido') +
+      (c.prueba ? '<p class="pg-prueba">Modo de prueba · no se realizan cobros reales</p>' : '') +
+      '<div class="pg-caja">' +
+        '<ul class="pg-items">' + c.items.map(function(x){ return '<li><span>' + x.qty + ' × ' + esc(x.nombre) + '</span></li>'; }).join('') + '</ul>' +
+        '<dl class="co-tot">' + fila('Subtotal', money(d.subtotal)) + (d.descuento ? fila('Descuento', '− ' + money(d.descuento)) : '') +
+          fila('Envío', d.envio ? money(d.envio) : 'Sin costo') + (d.armado ? fila('Armado / instalación', money(d.armado)) : '') +
+          fila('Total a pagar', money(c.monto), 'es-total') + (T.CFG.PRECIOS_CON_IGV ? fila('Incluye IGV (18 %)', money(c.monto * 18 / 118), 'es-igv') : '') + '</dl>' +
+      '</div>' +
+      '<p class="gdt-err" id="pgAviso" style="display:' + (aviso ? 'block' : 'none') + ';margin:0 0 16px;">' + (aviso ? esc(aviso) : '') + '</p>' +
+      '<div class="co-ok-acc"><button type="button" class="gd-btn gd-btn-primary" id="pgPagar">Pagar ' + money(c.monto) + T.FLECHA + '</button></div>' +
+      '<ul class="co-conf pg-conf">' +
+        '<li>Tarjeta de crédito o débito' + (c.yape ? ' y Yape' : '') + ', en el formulario seguro de Culqi.</li>' +
+        '<li>Giandeco no ve ni guarda los datos de su tarjeta.</li>' +
+        '<li>Su banco puede pedirle una verificación adicional.</li>' +
+      '</ul>' +
+      '<p class="gd-form-nota" style="margin-top:var(--sp-24);">¿Prefiere otro medio de pago? ' +
+        '<a href="' + T.wa('Hola Giandeco, quiero coordinar el pago de mi pedido ' + n + '.') + '" target="_blank" rel="noopener">Escriba al estudio</a>.</p>';
+    document.getElementById('pgPagar').addEventListener('click', function(){
+      var b = this; if(b.disabled) return;
+      b.disabled = true; setTimeout(function(){ b.disabled = false; }, 2500);   // evita el doble clic mientras abre el formulario
+      P.pagar({ n:n, cel:cel, cuenta:c, alProcesar:procesando, alTerminar:resultado });
+    });
+  }
+  function procesando(){
+    root.innerHTML = cabecera('Pago en línea', 'Procesando su pago') +
+      '<p class="co-lead">No cierre ni recargue esta página. Puede tardar unos segundos.</p><div class="pg-espera" role="status" aria-label="Procesando"></div>';
+  }
+  function resultado(r){
+    if(r.ok && r.pagado){ pagado(r); return; }
+    if(r.motivo === 'incierto' || r.motivo === 'en-curso'){
+      root.innerHTML = cabecera('Pago en verificación', 'Estamos confirmando su pago') +
+        '<p class="co-lead">No recibimos a tiempo la respuesta del banco. <b style="color:var(--lino);">No vuelva a pagar:</b> el estudio verifica la operación y le confirma por WhatsApp. Si el cobro no se realizó, no se le descuenta nada.</p>' +
+        '<div class="co-ok-acc">' + waBtn('Escribir al estudio', 'Hola Giandeco, intenté pagar en línea mi pedido ' + n + ' y quedó en verificación.', 'gd-btn-primary') + '</div>' + enlaces();
+      return;
+    }
+    if(r.cerrado){ listo(''); return; }
+    if(r.motivo && r.motivo !== 'error'){ consultar(0); return; }    // el pedido cambió mientras tanto
+    listo(r.mensaje || 'No se pudo completar el pago. Inténtelo de nuevo en un momento.');
+  }
+
+  /* ---------- consulta al servidor ---------- */
+  function consultar(intento){
+    root.innerHTML = cabecera('Pago en línea', 'Un momento') + '<div class="pg-espera" role="status" aria-label="Consultando su pedido"></div>';
+    P.consulta(n, cel).then(function(r){
+      // el pedido recién registrado puede tardar un instante en llegar al servidor
+      if(r && !r.ok && r.motivo === 'no-encontrado' && local && intento < 5){ setTimeout(function(){ consultar(intento + 1); }, 1200); return; }
+      if(!r || r.motivo === 'error'){
+        root.innerHTML = cabecera('Pago en línea', 'No pudimos consultar su pedido') +
+          '<p class="co-lead">Revise su conexión e inténtelo de nuevo. Su pedido sigue registrado.</p>' +
+          '<div class="co-ok-acc"><button type="button" class="gd-btn gd-btn-primary" id="pgOtra">Reintentar</button>' + waBtn('Escribir al estudio', 'Hola Giandeco, quiero pagar mi pedido ' + n + '.') + '</div>';
+        document.getElementById('pgOtra').addEventListener('click', function(){ consultar(0); });
+        return;
+      }
+      if(!r.ok){ pedirDatos('No encontramos un pedido con ese número y ese celular.'); return; }
+      c = r;
+      if(r.pagable) T.db('pasarela', true); else if(r.motivo === 'sin-pasarela') T.db('pasarela', false);
+      if(r.pagado) pagado(r.pago || {});
+      else if(r.pagable) listo('');
+      else noPagable(r.motivo);
+    });
+  }
+
+  if(!/^GD-\d{6}-\d{4}$/.test(n)){ n = ''; pedirDatos(''); }
+  else if(!cel) pedirDatos('');
+  else consultar(0);
+})();
+</script>
+</body>
+</html>

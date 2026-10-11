@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=12">
-<link rel="stylesheet" href="css/gd-tienda.css?v=5">
+<link rel="stylesheet" href="css/gd-tienda.css?v=6">
 </head>
 <body data-pagina="ayuda">
 
@@ -67,7 +67,8 @@
     if(p) out.innerHTML = linea(p.estado || 0, '<p class="gd-form-nota" style="margin-top:16px;">' + T.esc(p.entrega.resumen) + '</p>');
     if(!celOk){ if(!p) out.innerHTML = ''; return; }
     T.rpc('estado_pedido', { p_n:n, p_cel:cel }).then(function(e){
-      if(e) out.innerHTML = linea(e.estado, (e.envio != null ? '<p class="gd-form-nota" style="margin-top:16px;">Envío confirmado: ' + T.fmt(e.envio) + (e.pagado ? ' · Pago recibido' : '') + '</p>' : ''));
+      if(e) out.innerHTML = linea(e.estado, (e.envio != null || e.pagado ? '<p class="gd-form-nota" style="margin-top:16px;">' + (e.envio != null ? 'Envío confirmado: ' + T.fmt(e.envio) : '') + (e.envio != null && e.pagado ? ' · ' : '') + (e.pagado ? 'Pago recibido' : '') + '</p>' : '') +
+        (!e.pagado && T.db('pasarela') === true ? '<p style="margin-top:16px;"><a class="gd-link" href="pagar?n=' + encodeURIComponent(n) + '">Pagar en línea' + T.FLECHA + '</a></p>' : ''));
       else if(!p) out.innerHTML = '<div class="cu-vacio"><p>No encontramos un pedido con ese número y ese celular. Revise los datos o consulte al estudio.</p>' +
         '<a class="gd-btn gd-btn-primary" href="' + waEstado + '" target="_blank" rel="noopener">Consultar por WhatsApp' + T.FLECHA + '</a></div>';
     });
