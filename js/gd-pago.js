@@ -76,7 +76,7 @@ function pagar(o){
       options: { lang:'es', installments:true, modal:true, paymentMethods:medios, paymentMethodsSort:Object.keys(medios) },
       appearance: {
         theme:'default', hiddenCulqiLogo:false, hiddenBannerContent:false, hiddenBanner:false, hiddenToolBarAmount:false,
-        menuType:'sidebar', buttonCardPayText:'Pagar ' + T.fmt(c.monto / 100),
+        menuType:'sidebar', buttonCardPayText:'Pagar',   // Culqi añade el monto
         logo:'https://giandeco.com/images/firma/logo-giandeco-oficial.png',
         defaultStyle:{ bannerColor:'#0A0A09', buttonBackground:'#C9A24A', menuColor:'#9C7A2B', linksColor:'#9C7A2B', buttonTextColor:'#0A0A09', priceColor:'#C9A24A' }
       }
