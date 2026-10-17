@@ -301,11 +301,14 @@
   try{ pos = JSON.parse(store('gdChatPos') || 'null'); }catch(e){ pos = null; }
   if(!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number') pos = { h: 'r', x: 24, v: 'b', y: 24 };
 
+  // en Mi cuenta (móvil) hay una barra inferior fija de 72 px: la burbuja se apoya encima
+  function lift(){ return (window.innerWidth <= 859 && document.body.classList.contains('cx-es-panel')) ? 72 : 0; }
   function place(){
     var w = root.offsetWidth, h = root.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
     var cap = vw <= 560 ? 16 : 9999;                                 // en móvil, más cerca de la esquina
     var x = Math.max(M, Math.min(pos.x, cap, vw - w - M)) + 'px';
-    var y = Math.max(M, Math.min(pos.v === 'b' ? Math.min(pos.y, cap) : pos.y, vh - h - M)) + 'px';
+    var L = pos.v === 'b' ? lift() : 0;
+    var y = Math.max(M, Math.min(pos.v === 'b' ? Math.min(pos.y, cap) + L : pos.y, vh - h - M)) + 'px';
     root.style.left   = pos.h === 'l' ? x : 'auto';
     root.style.right  = pos.h === 'r' ? x : 'auto';
     root.style.top    = pos.v === 't' ? y : 'auto';
@@ -316,12 +319,12 @@
   function snap(){
     var r = root.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight, E = 24;
     var toLeft = r.left + r.width / 2 < vw / 2;
-    var top = Math.max(E, Math.min(r.top, vh - r.height - E));
+    var top = Math.max(E, Math.min(r.top, vh - r.height - E - lift()));
     root.classList.add('is-snap');
     root.style.left = (toLeft ? E : vw - r.width - E) + 'px';
     root.style.top = top + 'px';
     pos = { h: toLeft ? 'l' : 'r', x: E, v: (top + r.height / 2 > vh / 2) ? 'b' : 't' };
-    pos.y = Math.round(pos.v === 'b' ? vh - top - r.height : top);
+    pos.y = Math.round(pos.v === 'b' ? vh - top - r.height - lift() : top);
     store('gdChatPos', JSON.stringify(pos));
     var t0 = Date.now();
     (function follow(){ if(isOpen) placePanel(); if(Date.now() - t0 < 700) requestAnimationFrame(follow); })();
@@ -335,7 +338,7 @@
       v: (r.top + r.height / 2 > vh / 2) ? 'b' : 't'
     };
     pos.x = Math.round(pos.h === 'r' ? vw - r.right : r.left);
-    pos.y = Math.round(pos.v === 'b' ? vh - r.bottom : r.top);
+    pos.y = Math.round(pos.v === 'b' ? vh - r.bottom - lift() : r.top);
     store('gdChatPos', JSON.stringify(pos));
   }
   function placePanel(){
@@ -393,6 +396,7 @@
   window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
   window.addEventListener('resize', place);
+  try{ new MutationObserver(function(){ place(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] }); }catch(e){}
 
   // ---------- conversación: lo que el cliente elige o escribe se continúa en WhatsApp ----------
   function burbuja(txt, yo){

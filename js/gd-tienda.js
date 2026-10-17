@@ -390,7 +390,7 @@ var pedidos = {
   get: function(n){ return pedidos.lista().filter(function(p){ return p.n === n; })[0] || null; },
   crear: function(d){
     var f = new Date(), p2 = function(x){ return ('0' + x).slice(-2); };
-    d.n = 'GD-' + String(f.getFullYear()).slice(2) + p2(f.getMonth() + 1) + p2(f.getDate()) + '-' + Math.floor(1000 + Math.random() * 9000);
+    d.n = 'GD' + String(f.getFullYear()).slice(2) + p2(f.getMonth() + 1) + p2(f.getDate()) + Math.floor(1000 + Math.random() * 9000);   // corrido y sin guiones: GD2610124821
     d.fecha = f.toISOString(); d.estado = 0;
     var l = pedidos.lista(); l.unshift(d); db('pedidos', l);
     nube('pedidos', d.n, d);

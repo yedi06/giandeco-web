@@ -233,7 +233,7 @@ Deno.serve(async (req) => {
   try { q = await req.json(); } catch (_e) { return out({ ok: false }, 400); }
   try {
     if (q.accion === 'estado') return out({ ok: true, activa: ACTIVA, prueba: ACTIVA && PRUEBA });
-    if (!/^GD-\d{6}-\d{4}$/.test(String(q.n ?? '')) || !/^9\d{8}$/.test(String(q.cel ?? ''))) return out({ ok: false, motivo: 'no-encontrado' });
+    if (!/^GD-?\d{6}-?\d{4}$/.test(String(q.n ?? '')) || !/^9\d{8}$/.test(String(q.cel ?? ''))) return out({ ok: false, motivo: 'no-encontrado' });
 
     if (q.accion === 'consulta') {
       const d = await leerPedido(q.n, q.cel);

@@ -37,7 +37,7 @@
 </footer>
 
 <script src="js/giandeco.js?v=20261016f"></script>
-<script src="js/gd-tienda.js?v=20261016f"></script>
+<script src="js/gd-tienda.js?v=20261017cuenta"></script>
 <script src="js/gd-pago.js?v=20261016f"></script>
 <script>
 (function(){
@@ -65,7 +65,7 @@
     root.innerHTML = '<p class="gd-eyebrow">Pago en línea</p><h1>Pagar mi pedido</h1>' +
       '<p class="co-lead">Escriba el número de su pedido y el celular con el que lo registró.</p>' +
       '<form class="gd-form" id="pgForm" novalidate style="max-width:520px;">' +
-        '<div class="gd-field"><label for="pgN">Número de pedido</label><input id="pgN" type="text" placeholder="GD-000000-0000" autocomplete="off" value="' + esc(n) + '"><span class="gdt-err">Escriba el número completo, por ejemplo GD-261007-1234.</span></div>' +
+        '<div class="gd-field"><label for="pgN">Número de pedido</label><input id="pgN" type="text" placeholder="GD0000000000" autocomplete="off" value="' + esc(n) + '"><span class="gdt-err">Escriba el número completo, por ejemplo GD2610071234.</span></div>' +
         '<div class="gd-field"><label for="pgCel">Celular</label><input id="pgCel" type="tel" inputmode="numeric" maxlength="9" placeholder="9XX XXX XXX" autocomplete="tel-national"><span class="gdt-err">Celular de 9 dígitos que empiece en 9.</span></div>' +
         (aviso ? '<p class="gdt-err" style="display:block;">' + aviso + '</p>' : '') +
         '<button type="submit" class="gd-btn gd-btn-primary" style="justify-self:start;">Continuar' + T.FLECHA + '</button></form>';
@@ -73,7 +73,7 @@
       e.preventDefault();
       var a = document.getElementById('pgN'), b = document.getElementById('pgCel');
       var vn = a.value.trim().toUpperCase(), vc = b.value.replace(/\D/g, '');
-      var okN = /^GD-\d{6}-\d{4}$/.test(vn), okC = /^9\d{8}$/.test(vc);
+      var okN = /^GD-?\d{6}-?\d{4}$/.test(vn), okC = /^9\d{8}$/.test(vc);
       a.closest('.gd-field').classList.toggle('is-mal', !okN); b.closest('.gd-field').classList.toggle('is-mal', !okC);
       if(!okN || !okC) return;
       n = vn; cel = vc; local = T.pedidos.get(n);
@@ -199,7 +199,7 @@
     });
   }
 
-  if(!/^GD-\d{6}-\d{4}$/.test(n)){ n = ''; pedirDatos(''); }
+  if(!/^GD-?\d{6}-?\d{4}$/.test(n)){ n = ''; pedirDatos(''); }
   else if(!cel) pedirDatos('');
   else consultar(0);
 })();

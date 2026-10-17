@@ -73,6 +73,11 @@ function alEntrar(s){
     uid: u.id || '', proveedor: (u.app_metadata && u.app_metadata.provider) || 'email',
     foto: md.avatar_url || md.picture || ''
   });
+  /* datos de perfil que el cliente guardó en su cuenta (cumpleaños, género, comunicación):
+     al entrar en otro dispositivo vuelven a estar */
+  var pf = T.db('perfil') || {};
+  ['nac', 'genero', 'cumple', 'novedades', 'canal'].forEach(function(k){ if(md[k] !== undefined && md[k] !== null) pf[k] = md[k]; });
+  T.db('perfil', pf);
   return s;
 }
 function refrescar(s){

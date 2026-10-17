@@ -27,7 +27,7 @@
     <nav class="cu-nav" aria-label="Centro de ayuda"><a href="compra-segura">Compra segura</a><a href="envios-y-entregas">Envíos y entregas</a><a href="cambios-y-garantia">Cambios y garantía</a><a href="preguntas-frecuentes">Preguntas frecuentes</a><a href="seguimiento" class="is-active" aria-current="page">Seguir mi pedido</a><a href="opiniones">Opiniones de clientes</a><a href="terminos-y-condiciones">Términos y condiciones</a><a href="politica-de-privacidad">Privacidad</a><a href="libro-de-reclamaciones">Libro de reclamaciones</a></nav>
     <article class="lg-prosa">
       <form class="gd-form" id="sgForm" novalidate style="max-width:520px;">
-        <div class="gd-field"><label for="sgN">Número de pedido</label><input id="sgN" type="text" placeholder="GD-000000-0000" autocomplete="off"><span class="gdt-err">Escriba el número completo, por ejemplo GD-261007-1234.</span></div>
+        <div class="gd-field"><label for="sgN">Número de pedido</label><input id="sgN" type="text" placeholder="GD0000000000" autocomplete="off"><span class="gdt-err">Escriba el número completo, por ejemplo GD2610071234.</span></div>
         <div class="gd-field"><label for="sgCel">Celular con el que hizo el pedido</label><input id="sgCel" type="tel" inputmode="numeric" maxlength="9" placeholder="9XX XXX XXX" autocomplete="tel-national"><span class="gdt-err">Celular de 9 dígitos que empiece en 9.</span></div>
         <button type="submit" class="gd-btn gd-btn-primary" style="justify-self:start;">Consultar<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
       </form>
@@ -47,13 +47,13 @@
 <div id="gdFooter"></div>
 <script src="js/giandeco.js?v=20261016f"></script>
 <script src="js/gd-movil.js?v=20261016f" defer></script>
-<script src="js/gd-tienda.js?v=20261016f"></script>
+<script src="js/gd-tienda.js?v=20261017cuenta"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, out = document.getElementById('sgOut'), inp = document.getElementById('sgN');
   var q = new URLSearchParams(location.search).get('n'); if(q) inp.value = q;
   function consultar(){
-    var n = inp.value.trim().toUpperCase(), bien = /^GD-\d{6}-\d{4}$/.test(n);
+    var n = inp.value.trim().toUpperCase(), bien = /^GD-?\d{6}-?\d{4}$/.test(n);
     inp.closest('.gd-field').classList.toggle('is-mal', !bien);
     if(!bien){ out.innerHTML = ''; return; }
     var p = T.pedidos.get(n);
@@ -79,6 +79,6 @@
   if(q) consultar();
 })();
 </script>
-<script src="js/gd-chat.js?v=20261017burbuja" defer></script>
+<script src="js/gd-chat.js?v=20261017cuentab" defer></script>
 </body>
 </html>
