@@ -14,9 +14,14 @@
 var SITIO = {
   retail: {
     label:'Retail', home:'retail',
+    /* La página principal de Retail ES Navidad: en la barra de secciones
+       "Navidad" va primera y queda marcada al entrar a Retail. Comparte
+       dirección con "home", por eso lleva alias:true — el menú móvil, el pie
+       y la lista de páginas no la repiten. */
     secciones:[
       { key:'home',      label:'Retail',              href:'retail' },
-      { key:'diseno',    label:'Diseño de tiendas',   href:'retail-diseno-tiendas' },
+      { key:'navidad',   label:'Navidad',             href:'retail', alias:true },
+      { key:'diseno',    label:'Servicios',           href:'retail-diseno-tiendas' },
       { key:'proyectos', label:'Proyectos',           href:'retail-proyectos' },
       { key:'blog',      label:'Blog',                href:'retail-blog' }
     ]
@@ -220,7 +225,7 @@ function headerHTML(){
     // mundo solo abre/cierra el acordeón (no es un link), así que este es
     // el único lugar desde el que se puede navegar a la página principal
     // de ese mundo en pantallas chicas.
-    var links = mm.secciones.map(function(s){ return '<a href="' + s.href + '">' + s.label + '</a>'; }).join('');
+    var links = mm.secciones.filter(function(s){ return !s.alias; }).map(function(s){ return '<a href="' + s.href + '">' + s.label + '</a>'; }).join('');
     if(mm.pronto) links += mm.pronto.map(function(p){ return '<a href="' + p.href + '" data-pronto title="Disponible próximamente">' + p.label + '</a>'; }).join('');
     return '<div class="sh-acc' + (k === mundoActual ? ' is-open' : '') + '">' +
       '<button type="button" class="sh-acc-btn">' + mm.label +
@@ -294,7 +299,7 @@ function footerHTML(){
         '<img src="img/logo-positivo.svg" alt="Giandeco Studio Design">' +
         '<p>Visual merchandising y diseño de espacios comerciales. Remodelamos su local, montamos la campaña y ejecutamos la obra bajo una sola dirección.</p>' +
       '</div>' +
-      col('Retail', SITIO.retail.secciones.map(function(s){ return { label:s.key==='home'?'Retail':s.label, href:s.href }; })) +
+      col('Retail', SITIO.retail.secciones.filter(function(s){ return !s.alias; }).map(function(s){ return { label:s.key==='home'?'Retail':s.label, href:s.href }; })) +
       col('Catálogo', SITIO.catalogo.secciones.map(function(s){ return { label:s.key==='home'?'Ver catálogo':s.label, href:s.href }; })) +
       '<div class="gd-footer-col"><h4>Contacto</h4>' +
         '<ul class="gd-footer-contact">' +
@@ -375,6 +380,7 @@ Object.keys(SITIO).forEach(function(k){
   SITIO[k].secciones.forEach(function(s){ INDICE.push({ label: SITIO[k].label + ' · ' + s.label, href:s.href }); });
   (SITIO[k].pronto || []).forEach(function(p){ INDICE.push({ label: p.label + ' (próximamente)', href:p.href }); });
 });
+INDICE.push({ label:'Retail · Navidad para tiendas: preguntas y reserva', href:'retail-navidad' });
 PAGINAS.forEach(function(p){ INDICE.push({ label:p.label, href:p.href }); });
 Object.keys(PRODUCTOS).forEach(function(k){ INDICE.push({ label: PRODUCTOS[k].nombre + ' — ' + PRODUCTOS[k].precio, href:window.GD_URL(k) }); });
 Object.keys(ILUMINACION).forEach(function(k){ INDICE.push({ label: ILUMINACION[k].nombre + ' — ' + ILUMINACION[k].precio, href:window.GD_URL(k) }); });
