@@ -218,6 +218,19 @@
   +   '.gdc-badge{min-width:17px;height:17px;padding:0 5px;font-size:10px;top:-3px;right:-3px}.gdc-grip{transform:scale(.85)}'
   + '}';
 
+  /* ---------- burbuja «Diálogo»: bronce con humo, globo sólido que llena el círculo (oct 2026) ---------- */
+  css += ''
+  + '.gdc-seal{width:60px;height:60px;background:#8A6F3C;color:#F4F1EA;box-shadow:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));transition:transform .3s ' + EASE + '}'
+  + '.gdc:hover .gdc-seal{background:#8A6F3C;box-shadow:none;transform:translateY(-2px)}'
+  + '.gdc.is-drag .gdc-seal,.gdc.is-open .gdc-seal{background:#8A6F3C;box-shadow:none;transform:none}'
+  + '.gdc-g{width:60px;height:60px;stroke:none}'          /* los colores vienen del propio SVG */
+  + '.gdc-x{color:#F4F1EA}'
+  + '.gdc-badge{top:-3px;right:-3px;width:20px;min-width:20px;height:20px;padding:0;border-radius:50%;background:#F4F1EA;color:#0A0A09;font-weight:500;font-size:11px;box-shadow:0 0 0 2.5px var(--bg,#0A0A09)}'
+  + ':root[data-tema="claro"] .gdc-seal{filter:drop-shadow(0 8px 16px rgba(10,10,9,.18))}'
+  + ':root[data-tema="claro"] .gdc-badge{box-shadow:0 0 0 2.5px var(--bg,#F4F1EA)}'
+  + '@media (max-width:640px){.gdc-seal,.gdc-g{width:56px;height:56px}}'
+  + '@media (max-width:560px){.gdc-seal,.gdc-g{width:52px;height:52px}}';
+
   + ':root[data-tema="claro"] .gdc-grip i{background:#6F6A63}';
   var st = document.createElement('style');
   st.textContent = css;
@@ -236,8 +249,12 @@
       '<span class="gdc-grip" aria-hidden="true" title="Arrastre para mover"><i></i><i></i><i></i><i></i><i></i><i></i></span>'
     + '<button class="gdc-btn" type="button" aria-label="Abrir chat con Giandeco, 1 mensaje" aria-expanded="false" aria-controls="gdcPanel">'
     +   '<span class="gdc-seal" aria-hidden="true">'
-    +     /* icono de conversación: burbuja al frente y otra asomando detrás */
-          '<svg class="gdc-g" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 8.5h13v10.5H8l-5.5 4z"/><path d="M7 4.5h14.5V15"/></svg>'
+    +     /* icono «Diálogo» (propuesta 03): globo humo al frente con puntos en negativo y otro al 50 % detrás */
+          '<svg class="gdc-g" viewBox="0 0 64 64" aria-hidden="true">'
+    +       '<path d="M31 11h17a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4h-1v6l-7-6h-9a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4Z" fill="#F4F1EA" fill-opacity=".5"/>'
+    +       '<path d="M16 21h20a4 4 0 0 1 4 4v13a4 4 0 0 1-4 4H26l-8 7v-7h-2a4 4 0 0 1-4-4V25a4 4 0 0 1 4-4Z" fill="#8A6F3C" stroke="#8A6F3C" stroke-width="5"/>'
+    +       '<path fill-rule="evenodd" fill="#F4F1EA" d="M16 21h20a4 4 0 0 1 4 4v13a4 4 0 0 1-4 4H26l-8 7v-7h-2a4 4 0 0 1-4-4V25a4 4 0 0 1 4-4Z M17.3 31.5a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0-4.4 0Z M23.8 31.5a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0-4.4 0Z M30.3 31.5a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0-4.4 0Z"/>'
+    +     '</svg>'
     +     '<svg class="gdc-x" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12"/></svg><span class="gdc-badge">1</span></span>'
     + '</button>';
 

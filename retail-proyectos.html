@@ -5,7 +5,7 @@
 <script src="js/gd-acceso.js?v=20261015k"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proyectos retail — Giandeco Studio Design</title>
-<meta name="description" content="Diez casos de retail y espacios comerciales: El Corte Inglés, Pycca, Walon, Enchantée Paris, Baby Club, Ferrehome, Mássimo Café y Hotel Unión Cusco. Reto, qué hicimos y resultado.">
+<meta name="description" content="Doce casos de retail y espacios comerciales: SuperHome y Ferrehome Navidad 2026, El Corte Inglés, Pycca, Walon, Enchantée Paris, Baby Club, Ferrehome, Mássimo Café y Hotel Unión Cusco. Reto, qué hicimos y resultado.">
 <meta name="theme-color" content="#0A0A09">
 <!-- seo -->
 <link rel="canonical" href="https://giandeco.com/retail-proyectos">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Giandeco Studio Design">
 <meta property="og:locale" content="es_PE">
 <meta property="og:title" content="Proyectos retail — Giandeco Studio Design">
-<meta property="og:description" content="Diez casos de retail y espacios comerciales: El Corte Inglés, Pycca, Walon, Enchantée Paris, Baby Club, Ferrehome, Mássimo Café y Hotel Unión Cusco. Reto, qué hicimos y resultado.">
+<meta property="og:description" content="Doce casos de retail y espacios comerciales: SuperHome y Ferrehome Navidad 2026, El Corte Inglés, Pycca, Walon, Enchantée Paris, Baby Club, Ferrehome, Mássimo Café y Hotel Unión Cusco. Reto, qué hicimos y resultado.">
 <meta property="og:url" content="https://giandeco.com/retail-proyectos">
 <meta property="og:image" content="https://giandeco.com/images/work/walonfiguritas.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -96,8 +96,8 @@
 <section class="gd-hero is-corto">
   <div class="gd-hero-panel">
     <p class="gd-migas reveal-left"><a href="./">Inicio</a> / <a href="retail">Retail</a> / <span>Proyectos</span></p>
-    <p class="gd-hero-eyebrow reveal-left"><i></i>Diez casos, diez retos</p>
-    <h1 class="reveal-left d1">Diez locales, <em>diez problemas</em> distintos</h1>
+    <p class="gd-hero-eyebrow reveal-left"><i></i>Doce casos, doce retos</p>
+    <h1 class="reveal-left d1">Doce proyectos, <em>doce problemas</em> distintos</h1>
     <p class="reveal-left d2">Tiendas departamentales, boutiques, campañas nacionales, cafés y hotelería. Cada caso con su reto, lo que hicimos y lo que pasó después.</p>
   </div>
   <div class="gd-hero-media">
@@ -126,10 +126,18 @@
 </section>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261015k"></script>
+<script src="js/giandeco.js?v=20261017rn"></script>
 <script>
 (function(){
   var CASOS = [
+    { slug:'superhome-navidad-2026', cat:'Campaña de Navidad 2026', grupo:'navidad', nombre:'SuperHome', sub:'Tres mesas y un taller en tienda', img:'images/retail-navidad-2026/sh-borgona-2-md.jpg', link:'retail-navidad-superhome',
+      reto:'Que la vajilla, la cristalería y las figuras de temporada dejaran de verse como anaquel y empezaran a verse como una cena de Navidad.',
+      hice:'Monté tres mesas escenográficas con mercadería de la propia tienda — borgoña y dorado al ingreso, un nacimiento blanco y dorado, y una mesa de girasoles y cristal para fuera de temporada — y dirigí en vivo un taller navideño en el frontis de la tienda, armando una mesa completa frente a las clientas.',
+      res:'La vajilla se exhibe en uso, la tienda gana una foto en cada mesa y el taller convirtió la temporada en un evento.' },
+    { slug:'ferrehome-navidad-2026', cat:'Campaña de Navidad 2026', grupo:'navidad', nombre:'Ferrehome · Navidad', sub:'Cinco puntos de temporada en el recorrido', img:'images/retail-navidad-2026/fh-jengibre-1-md.jpg', link:'retail-navidad-ferrehome',
+      reto:'Llevar la Navidad a todo el recorrido de un bazar de hogar, sin que la temporada quedara encerrada en un solo pasillo.',
+      hice:'Repartí la temporada en cinco puntos con historia de color propia: un árbol temático de jengibre, un árbol clásico rojo y blanco con Papá Noel de pie, una mesa de cascanueces que también funciona como exhibidor de esferas, una vitrina de casitas de jengibre con luz en cada repisa y un rincón de renos junto a la ventana.',
+      res:'Segunda temporada con Ferrehome: la Navidad se encuentra en cada pasillo y cada escena exhibe producto a la venta.' },
     { slug:'el-corte-ingles', cat:'Retail departamental', grupo:'tiendas', nombre:'El Corte Inglés', sub:'Ambientes de exhibición de lujo', img:'images/work/corteingles.jpg',
       reto:'Crear una experiencia de compra que se sintiera de lujo sin perder claridad de recorrido.',
       hice:'Curé y monté los ambientes de exhibición combinando mobiliario de diseño, textiles e iluminación puntual sobre paletas neutras. Construí escenarios principales e islotes comerciales con letras corpóreas y niveles arquitectónicos que dirigieron el tráfico a las zonas de mayor conversión.',
@@ -183,6 +191,7 @@
   var GRUPOS = [
     { key:'todos', label:'Todos' },
     { key:'tiendas', label:'Tiendas y boutiques' },
+    { key:'navidad', label:'Navidad 2026' },
     { key:'campanas', label:'Campañas' },
     { key:'gastronomia', label:'Gastronomía y hotelería' },
     { key:'mobiliario', label:'Mobiliario y decoración' }
@@ -227,6 +236,7 @@
           '<div class="pr-bloque"><b>Reto</b><p>' + c.reto + '</p></div>' +
           '<div class="pr-bloque"><b>Cómo acompañamos el proyecto</b><p>' + c.hice + '</p></div>' +
           '<div class="pr-quote-wrap"><span class="pr-quote-label">Resultado</span><p class="pr-quote">' + c.res + '</p></div>' +
+          (c.link ? '<a class="gd-link" style="margin-top:24px;" href="' + c.link + '">Ver el montaje completo <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>' : '') +
         '</div>' +
       '</div>' +
     '</article>';
@@ -257,6 +267,6 @@
 </script>
 <script src="js/gd-tienda.js?v=20261015k" defer></script>
 <script src="js/gd-movil.js?v=20261015k" defer></script>
-<script src="js/gd-chat.js?v=20261015k" defer></script>
+<script src="js/gd-chat.js?v=20261016burbuja" defer></script>
 </body>
 </html>

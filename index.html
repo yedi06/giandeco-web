@@ -1501,6 +1501,7 @@
       <div class="sh-acc-panel">
         <a href="retail">Retail</a>
         <a href="retail-diseno-tiendas">Diseño de tiendas</a>
+        <a href="retail-navidad">Navidad para tiendas</a>
         <a href="retail-proyectos">Proyectos</a>
         <a href="retail-blog">Blog</a>
       </div>
@@ -1571,6 +1572,40 @@
   </div>
 </section>
 <!-- ================ fin del bloque header / navegación / banner ================ -->
+
+<!-- ==================== TEMPORADA NAVIDAD 2026 (franja) ==================== -->
+<style>
+  .hm-temp{ background:#0A0A09; border-top:1px solid rgba(201,162,74,.28); border-bottom:1px solid #2a2621; }
+  .hm-temp-in{ width:100%; max-width:var(--gd-max,1840px); margin-inline:auto; padding:clamp(22px,3vw,34px) var(--gd-gut,clamp(20px,4.2vw,80px));
+    display:grid; gap:18px 40px; grid-template-columns:1fr; align-items:center; }
+  @media (min-width:900px){ .hm-temp-in{ grid-template-columns:auto 1fr auto; } }
+  .hm-temp-fotos{ display:flex; gap:8px; }
+  .hm-temp-fotos img{ width:clamp(54px,6vw,74px); aspect-ratio:3/4; height:auto; object-fit:cover; border-radius:2px; }
+  .hm-temp-k{ display:block; font-family:'Jost',sans-serif; font-weight:500; font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:#C9A24A; margin-bottom:6px; }
+  .hm-temp-t{ margin:0; font-family:'Bodoni Moda',Georgia,serif; font-weight:400; font-size:clamp(1.35rem,2.1vw,1.8rem); line-height:1.15; color:#DED8CB; text-wrap:balance; }
+  .hm-temp-cta{ display:flex; flex-wrap:wrap; gap:10px; }
+  .hm-temp-cta a{ display:inline-flex; align-items:center; gap:8px; font-family:'Jost',sans-serif; font-weight:500; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; padding:12px 20px; border-radius:2px; border:1px solid rgba(222,216,203,.28); color:#DED8CB; transition:border-color .25s, color .25s, background-color .25s; }
+  .hm-temp-cta a.is-pri{ background:#C9A24A; border-color:#C9A24A; color:#0A0A09; }
+  .hm-temp-cta a:hover{ border-color:#C9A24A; color:#C9A24A; }
+  .hm-temp-cta a.is-pri:hover{ background:#dcb768; color:#0A0A09; }
+</style>
+<section class="hm-temp gd-oscuro" aria-label="Navidad 2026 para tiendas">
+  <div class="hm-temp-in">
+    <div class="hm-temp-fotos" aria-hidden="true">
+      <img src="images/retail-navidad-2026/sh-borgona-2-md.jpg" width="570" height="760" alt="" loading="lazy" decoding="async">
+      <img src="images/retail-navidad-2026/fh-jengibre-1-md.jpg" width="570" height="760" alt="" loading="lazy" decoding="async">
+      <img src="images/retail-navidad-2026/sh-nacimiento-2-md.jpg" width="570" height="760" alt="" loading="lazy" decoding="async">
+    </div>
+    <div>
+      <span class="hm-temp-k">Recién montado · Navidad 2026</span>
+      <p class="hm-temp-t">SuperHome y Ferrehome ya están en temporada. ¿Su tienda?</p>
+    </div>
+    <div class="hm-temp-cta">
+      <a class="is-pri" href="retail-navidad">Ver los montajes</a>
+      <a href="https://wa.me/51920775559?text=Hola%20Giandeco%2C%20quiero%20reservar%20una%20fecha%20de%20montaje%20de%20Navidad%202026%20para%20mi%20tienda." target="_blank" rel="noopener">Reservar fecha</a>
+    </div>
+  </div>
+</section>
 
 <!-- ==================== MANIFIESTO ==================== -->
 <section class="gd-sec gd-manifiesto">
@@ -2175,6 +2210,7 @@
     retail: { label: 'Retail', cats: [
       { label: 'Retail', href: 'retail' },
       { label: 'Diseño de tiendas', href: 'retail-diseno-tiendas' },
+      { label: 'Navidad para tiendas', href: 'retail-navidad' },
       { label: 'Proyectos', href: 'retail-proyectos' },
       { label: 'Blog', href: 'retail-blog' }
     ]},
@@ -2738,4 +2774,4 @@
 </script>
 <script src="js/gd-tienda.js?v=20261015k" defer></script>
 <script src="js/gd-movil.js?v=20261015k" defer></script>
-<script src="js/gd-chat.js?v=20261015k" defer></script>
+<script src="js/gd-chat.js?v=20261016burbuja" defer></script>
