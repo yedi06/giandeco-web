@@ -185,6 +185,16 @@ body .hm-metodo .gd-ba-tab{ font-size:clamp(.82rem,.76rem + .16vw,.95rem); }
 body #estudio .gd-estudio-firma span{ font-size:var(--hm-t-label); }
 body .hm-cta .gd-btn{ font-size:clamp(.8rem,.74rem + .14vw,.92rem); }
 
+/* móvil estrecho: pies de foto en una sola línea limpia (sin etiquetas partidas en tres) */
+@media (max-width:599px){
+  .hm-mosaico .hm-t-cap em{ display:none; }
+  .hm-mosaico .hm-row:first-child .hm-t:first-child .hm-t-cap em,
+  .hm-mosaico .hm-row:nth-child(2) .hm-t:nth-child(3) .hm-t-cap em,
+  .hm-mosaico .hm-row--ancha .hm-t:first-child .hm-t-cap em{ display:block; }
+  .hm-cat-cap{ flex-direction:column; align-items:flex-start; gap:12px; }
+  .hm-cat-cap .hm-go{ padding-bottom:0; }
+}
+
 @media (prefers-reduced-motion:reduce){
   .hm-mundo, .hm-mundo img, .hm-t img, .hm-cat-p img, .hm-go i{ transition:none; }
 }
