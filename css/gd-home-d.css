@@ -20,32 +20,23 @@
 .hm-go{ display:inline-flex; align-items:center; gap:12px; font-family:var(--body); font-weight:500; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
 .hm-go i{ display:block; width:22px; height:1px; background:currentColor; transition:width .45s var(--gd-ease); }
 
-/* ---------- APERTURA ---------- */
-.hm-open{ padding-top:clamp(64px,8vw,132px); overflow:hidden; }
+/* ---------- APERTURA · una sola línea editorial sobre las tres imágenes (sin lista ni bloque aparte) ---------- */
 .hm-open-h{
-  margin:0; font-family:var(--display); font-weight:400; font-size:clamp(2.7rem,7.3vw,8.4rem); line-height:.96; letter-spacing:-.035em;
+  margin:0 0 clamp(20px,2.2vw,36px); font-family:var(--display); font-weight:400; font-size:clamp(1.9rem,3.3vw,4.4rem); line-height:1.04; letter-spacing:-.03em;
   color:var(--lino); text-wrap:balance;
 }
-.hm-open-h span{ display:block; }
-.hm-open-h em{ display:block; font-style:normal; color:var(--accent); }
-.hm-open-list{ list-style:none; margin:clamp(36px,4.6vw,76px) 0 0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--line); }
-.hm-open-list li{
-  display:flex; align-items:baseline; gap:14px; padding:clamp(16px,1.8vw,26px) 16px clamp(16px,1.8vw,26px) 0;
-  font-family:var(--body); font-weight:400; font-size:clamp(.86rem,1vw,1rem); letter-spacing:.14em; text-transform:uppercase; line-height:1.4; color:var(--text);
+.hm-open-h em{ font-style:normal; color:var(--accent); }
+@media (max-width:899px){
+  .hm-open-h{ margin-bottom:clamp(22px,6vw,34px); font-size:clamp(2.5rem,11.5vw,3.6rem); line-height:.98; }
+  .hm-open-h span, .hm-open-h em{ display:block; }
 }
-.hm-open-list li::before{ content:''; flex:none; width:20px; height:1px; background:var(--accent); transform:translateY(-.3em); }
-@media (min-width:900px){
-  .hm-open-list{ grid-template-columns:repeat(4,minmax(0,1fr)); }
-  .hm-open-list li + li{ border-left:1px solid var(--line); padding-left:clamp(16px,1.8vw,28px); }
-}
-.hm-open-marcas{ margin-top:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:clamp(14px,1.6vw,22px); overflow:hidden; }
+.hm-open-marcas{ margin-top:clamp(18px,2vw,30px); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:clamp(14px,1.6vw,22px); overflow:hidden; }
 .hm-open-marcas .gd-marcas-wall{ margin-top:0; gap:0; }
 .hm-open-marcas .gd-marcas-logo{ width:clamp(110px,10vw,156px); height:clamp(42px,4.4vw,60px); }
 .hm-open-marcas .gd-marcas-logo img{ opacity:.8; }
-.hm-open{ padding-bottom:clamp(36px,4vw,64px); }
 
 /* ---------- TRES MUNDOS · entre las dos líneas, a la altura de la pantalla ---------- */
-.hm-triptico{ padding-bottom:clamp(8px,1vw,16px); }
+.hm-triptico{ padding-block:clamp(36px,4vw,64px) clamp(8px,1vw,16px); }
 .hm-mundos{ display:flex; gap:2px; height:clamp(520px,calc(100svh - 190px),900px); background:rgba(201,162,74,.5); color:#DED8CB; }
 .hm-mundo{
   position:relative; display:block; flex:1 1 0; min-width:0; overflow:hidden; text-decoration:none; color:#DED8CB; isolation:isolate;
