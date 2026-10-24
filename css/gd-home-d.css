@@ -157,6 +157,34 @@
 .hm-cta-h em{ font-style:normal; color:var(--accent); }
 .hm-cta-p{ margin:0 auto clamp(26px,3vw,40px); max-width:40ch; font-size:clamp(1rem,1.2vw,1.15rem); line-height:1.6; color:var(--text-dim); }
 
+/* ==========================================================================
+   ESCALA TIPOGRÁFICA DEL BLOQUE — misma lógica en escritorio y móvil
+   · etiquetas en versalitas: 12 px en móvil, 13 px a 1920 px (nunca por debajo de 12)
+   · nombres y pies de foto: 15–17 px · subtítulos: 16–20 px
+   Se aplica solo dentro del Home; los componentes del sitio no cambian en otras páginas.
+   ========================================================================== */
+:root{
+  --hm-t-label:clamp(.76rem,.68rem + .12vw,.88rem);
+  --hm-t-small:clamp(.95rem,.88rem + .2vw,1.1rem);
+  --hm-t-sub:clamp(1rem,.9rem + .3vw,1.28rem);
+}
+.hm-go{ font-size:var(--hm-t-label); }
+.hm-mundo-s{ font-size:var(--hm-t-sub); }
+.hm-t-cap b{ font-size:clamp(.95rem,.88rem + .22vw,1.14rem); }
+.hm-t-cap em{ font-size:var(--hm-t-label); letter-spacing:.12em; }
+.hm-stat span{ font-size:var(--hm-t-label); letter-spacing:.14em; }
+.hm-hint{ font-size:var(--hm-t-label); }
+body .hm-bar .gd-link, body .hm-metodo .gd-link{ font-size:var(--hm-t-label); }
+body .hm-escena .gd-prod-cat, body .hm-escena .gdt-quick{ font-size:var(--hm-t-label); }
+body .hm-escena .gd-prod-name{ font-size:var(--hm-t-small); }
+body .hm-escena .gd-prod-price{ font-size:var(--hm-t-small); }
+@media (min-width:900px){ body .hm-escena .gd-shop-bar button{ font-size:var(--hm-t-label); } }
+body .hm-metodo .gd-eyebrow, body #estudio .gd-eyebrow{ font-size:var(--hm-t-label); }
+body .hm-metodo .gd-ba-hint, body .hm-metodo .gd-ba-meta, body .hm-metodo .gd-ba-tag{ font-size:var(--hm-t-label); }
+body .hm-metodo .gd-ba-tab{ font-size:clamp(.82rem,.76rem + .16vw,.95rem); }
+body #estudio .gd-estudio-firma span{ font-size:var(--hm-t-label); }
+body .hm-cta .gd-btn{ font-size:clamp(.8rem,.74rem + .14vw,.92rem); }
+
 @media (prefers-reduced-motion:reduce){
   .hm-mundo, .hm-mundo img, .hm-t img, .hm-cat-p img, .hm-go i{ transition:none; }
 }
