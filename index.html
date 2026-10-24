@@ -1372,7 +1372,7 @@
 </style>
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261018a">
-<link rel="stylesheet" href="css/gd-home-d.css?v=20261026d">
+<link rel="stylesheet" href="css/gd-home-d.css?v=20261026f">
 <script src="js/gd-tema.js?v=20261018a"></script>
 
 <!-- intro de marca: se decide antes de pintar, para que nunca haya un parpadeo del telón -->
@@ -1417,17 +1417,19 @@
       <li>Mobiliario propio</li>
       <li>Portafolio verificable</li>
     </ul>
-  </div>
-  <div class="hm-open-marcas reveal d2">
-    <div class="gd-marcas-wall" data-marcas="retail">
-      <div class="gd-marcas-row" id="marcasRow1"><div class="gd-marcas-track" id="marcasTrack1"></div></div>
+    <div class="hm-open-marcas reveal d2">
+      <div class="gd-marcas-wall" data-marcas="retail">
+        <div class="gd-marcas-row" id="marcasRow1"><div class="gd-marcas-track" id="marcasTrack1"></div></div>
+      </div>
     </div>
   </div>
   <p class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Marcas con las que hemos colaborado: El Corte Inglés, Pycca, Enchantée Paris, Zara, Walon, Baby Club Chic, Hotel Unión Cusco, Mássimo Café, Casa Grande, Casacor, Expodeco.</p>
 </section>
 
 <!-- ============ TRES MUNDOS: pantalla completa ============ -->
-<section class="hm-mundos gd-oscuro" id="universos" aria-label="Retail, hogar y Navidad">
+<section class="hm-triptico" id="universos" aria-label="Retail, hogar y Navidad">
+  <div class="gd-in">
+  <div class="hm-mundos gd-oscuro">
   <a class="hm-mundo" href="retail/proyectos" data-cursor="Ver">
     <img loading="lazy" decoding="async" src="images/home/mundo-retail.webp" srcset="images/home/mundo-retail-m.webp 900w, images/home/mundo-retail.webp 1320w" sizes="(min-width:900px) 45vw, 84vw" width="1320" height="1760" alt="Muro de nichos con marcos de latón y tres maniquíes vestidos en lino, camel y carbón, sobre una isla de exhibición en roble">
     <span class="hm-mundo-body">
@@ -1452,6 +1454,8 @@
       <span class="hm-go">Ver colección<i></i></span>
     </span>
   </a>
+  </div>
+  </div>
 </section>
 
 <!-- ============ OBRA: mosaico alineado, filas a ras ============ -->
@@ -1527,8 +1531,7 @@
         <a class="gd-link" href="catalogo/navidad/#piezas">Ver toda la colección<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
     </header>
-  </div>
-  <div class="hm-escena-img reveal-scale">
+    <div class="hm-escena-img reveal-scale">
     <div class="gd-shop hm-shop-d">
       <img class="gd-shop-img" loading="lazy" decoding="async" src="images/campana/navidad-banner-2026-1920.webp" srcset="images/campana/navidad-banner-2026-1280.webp 1280w, images/campana/navidad-banner-2026-1920.webp 1920w" sizes="100vw" width="1920" height="1072" alt="Aparador navideño de Giandeco con espejo dorado y guirnalda iluminada. Sobre el aparador, piezas de la colección 2026: Papá Noel, reno dorado, casitas y árbol de porcelana iluminados, cascanueces, portavelas negros y arreglo de pino y berries; mesa servida en primer plano">
       <button class="gd-shop-dot" style="left:34.9%; top:48.2%" data-prod="portavela-negro"></button>
@@ -1551,40 +1554,53 @@
       <button class="gd-shop-dot" style="left:89.2%; top:43.2%" data-prod="arreglo-pino-berries"></button>
     </div>
     <p class="hm-hint" aria-hidden="true"><i></i>Toque un punto para ver la pieza</p>
-  </div>
-  <div class="gd-in">
+    </div>
     <div class="gd-grid es-carrusel" id="navProds"></div>
   </div>
 </section>
 
-<!-- ============ MÉTODO: boceto y obra, lado a lado ============ -->
-<section class="hm-metodo" id="metodo" aria-labelledby="metT">
-  <div class="gd-in hm-metodo-grid">
-    <div class="hm-metodo-panel">
-      <h2 class="hm-h reveal" id="metT">Del boceto <em>a la obra</em></h2>
-      <div class="gd-ba-tabs hm-tabs reveal d1" role="tablist" aria-label="Proyectos">
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="true" data-ba="0">Zona Tienda</button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="1">Lounge Bar</button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="2">Salón de Eventos</button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="3">Feria Casacor</button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="4">Feria Expodeco</button>
+<!-- ============ MÉTODO: del boceto a la obra (sección del sitio, sin cambios de diseño) ============ -->
+<section class="hm-metodo" id="metodo">
+  <div class="gd-in">
+    <div class="gd-ba-head">
+      <div>
+        <p class="gd-eyebrow reveal">Método</p>
+        <h2 class="gd-h2 reveal d1" style="margin-bottom:12px;">Del boceto a la obra</h2>
+        <p class="gd-body reveal d2" style="margin-bottom:0;">Cada proyecto se dibuja en acuarela antes de levantarse. Lo que se aprueba en papel es lo que se monta en obra.</p>
+        <a class="gd-link reveal d2" href="proyectos/expodeco-2024" style="margin-top:18px;">Ver un proceso completo<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
-      <div class="gd-ba-caption hm-metodo-cap reveal d2">
-        <p id="baCaption">Zona de tienda integrada a un espacio de arte: mobiliario bajo para no tapar la pared de fondo y luz cálida dirigida a la exhibición.</p>
-        <span class="gd-ba-meta" id="baMeta">Retail · Lima</span>
+      <div class="reveal d2" style="display:flex; flex-direction:column; gap:14px; align-items:flex-start;">
+        <div class="gd-ba-tabs" role="tablist" aria-label="Proyectos">
+          <button class="gd-ba-tab" type="button" role="tab" aria-selected="true" data-ba="0">Zona Tienda</button>
+          <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="1">Lounge Bar</button>
+          <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="2">Salón de Eventos</button>
+          <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="3">Feria Casacor</button>
+          <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="4">Feria Expodeco</button>
+        </div>
+        <span class="gd-ba-hint">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7L4 12l4 5M16 7l4 5-4 5M12 4v16"/></svg>
+          Arrastre para comparar
+        </span>
       </div>
-      <a class="gd-link reveal d3" href="proyectos/expodeco-2024">Ver un proceso completo<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
-    <div class="hm-metodo-stage reveal-scale d1">
-      <span class="gd-ba-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7L4 12l4 5M16 7l4 5-4 5M12 4v16"/></svg>Arrastre para comparar</span>
-      <div class="gd-ba-frame" id="baFrame">
-        <img loading="lazy" decoding="async" id="baImgA" src="images/proceso/zonatienda-boceto.jpg" alt="Boceto en acuarela de la zona de tienda">
-        <img loading="lazy" decoding="async" id="baImgB" class="gd-ba-after" src="images/proceso/zonatienda-obra.jpg" alt="Zona de tienda ya montada">
-        <span class="gd-ba-tag is-a">Boceto</span>
-        <span class="gd-ba-tag is-b">Obra</span>
-        <input class="gd-ba-range" id="baRange" type="range" min="0" max="100" value="50" step="0.5" aria-label="Comparar boceto y obra terminada">
-        <div class="gd-ba-handle" id="baHandle" aria-hidden="true"><span class="gd-ba-grip"><svg viewBox="0 0 24 24"><path d="M9 7l-4 5 4 5M15 7l4 5-4 5"/></svg></span></div>
+
+    <div class="gd-ba-frame reveal-scale" id="baFrame">
+      <img loading="lazy" decoding="async" id="baImgA" src="images/proceso/zonatienda-boceto.jpg" alt="Boceto en acuarela de la zona de tienda">
+      <img loading="lazy" decoding="async" id="baImgB" class="gd-ba-after" src="images/proceso/zonatienda-obra.jpg" alt="Zona de tienda ya montada">
+      <span class="gd-ba-tag is-a">Boceto</span>
+      <span class="gd-ba-tag is-b">Obra</span>
+      <input class="gd-ba-range" id="baRange" type="range" min="0" max="100" value="50" step="0.5"
+             aria-label="Comparar boceto y obra terminada">
+      <div class="gd-ba-handle" id="baHandle" aria-hidden="true">
+        <span class="gd-ba-grip">
+          <svg viewBox="0 0 24 24"><path d="M9 7l-4 5 4 5M15 7l4 5-4 5"/></svg>
+        </span>
       </div>
+    </div>
+
+    <div class="gd-ba-caption">
+      <p id="baCaption">Zona de tienda integrada a un espacio de arte: mobiliario bajo para no tapar la pared de fondo y luz cálida dirigida a la exhibición.</p>
+      <span class="gd-ba-meta" id="baMeta">Retail · Lima</span>
     </div>
   </div>
 </section>
@@ -1609,14 +1625,29 @@
   </div>
 </section>
 
-<!-- ============ AUTORÍA ============ -->
-<section class="hm-estudio" id="estudio" aria-labelledby="estT">
-  <div class="hm-estudio-foto reveal-scale">
-    <img loading="lazy" decoding="async" src="images/estudio/gian.jpg" width="1000" height="1249" alt="Gian Jiménez, fundador y director de diseño de Giandeco">
-  </div>
-  <div class="hm-estudio-txt">
-    <blockquote class="gd-quote hm-quote reveal" id="estT">«Resuelvo el espacio primero. <em>El diseño llega después.</em>»</blockquote>
-    <p class="hm-firma reveal d1"><b>Gian Jiménez</b><span>Fundador y director de diseño</span></p>
+<!-- ============ AUTORÍA / EL ESTUDIO (sección del sitio, sin cambios de diseño) ============ -->
+<section class="gd-sec" id="estudio">
+  <div class="gd-in">
+    <div class="gd-estudio-grid">
+      <div class="gd-estudio-foto reveal-scale">
+        <img loading="lazy" decoding="async" src="images/estudio/gian.jpg" alt="Gian Jiménez, fundador y director de diseño de Giandeco">
+      </div>
+      <div>
+        <p class="gd-eyebrow reveal">Autoría</p>
+        <h2 class="gd-h2 reveal d1">Gian firma cada proyecto</h2>
+        <p class="gd-body reveal d2">Toda propuesta llega con la razón detrás: por qué esa altura de mueble, ese recorrido, ese punto de luz.</p>
+        <blockquote class="gd-quote reveal d3">«Resuelvo el espacio primero. El diseño llega después.»</blockquote>
+        <div class="gd-estudio-firma reveal d3">
+          <b>Luis Giancarlo Jiménez Sánchez</b>
+          <span>Fundador · Director de diseño</span>
+        </div>
+        <div class="gd-valores reveal d4">
+          <div class="gd-valor"><b>Criterio</b><span>Si no se explica, no se presenta.</span></div>
+          <div class="gd-valor"><b>Oficio</b><span>Material, medida y acabado especificados.</span></div>
+          <div class="gd-valor"><b>Palabra</b><span>Fecha de entrega y presupuesto se sostienen.</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

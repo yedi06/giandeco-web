@@ -1,7 +1,8 @@
 /* ==========================================================================
    HOME · CAPÍTULOS
-   Todo lo que sigue al video del hero. Poca letra, mucha imagen y un solo borde de
-   alineación: el de la cabecera (--gd-gut / --gd-max), con las imágenes a ras.
+   Todo lo que sigue al video del hero. Poca letra, mucha imagen y UN solo par de líneas
+   de alineación: las de la cabecera (--gd-gut / --gd-max). Textos e imágenes —tríptico,
+   mosaico, escena de Navidad, método, catálogo y autoría— nacen y terminan en esas dos líneas.
    Variables del sistema (--bg, --text, --accent…) donde el bloque puede pasar a tema
    claro; colores fijos solo en las «islas» oscuras (.gd-oscuro).
    Escritorio desde 900 px; por debajo, versión móvil.
@@ -37,14 +38,15 @@
   .hm-open-list{ grid-template-columns:repeat(4,minmax(0,1fr)); }
   .hm-open-list li + li{ border-left:1px solid var(--line); padding-left:clamp(16px,1.8vw,28px); }
 }
-.hm-open-marcas{ margin-top:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:clamp(14px,1.6vw,22px); }
+.hm-open-marcas{ margin-top:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:clamp(14px,1.6vw,22px); overflow:hidden; }
 .hm-open-marcas .gd-marcas-wall{ margin-top:0; gap:0; }
 .hm-open-marcas .gd-marcas-logo{ width:clamp(110px,10vw,156px); height:clamp(42px,4.4vw,60px); }
 .hm-open-marcas .gd-marcas-logo img{ opacity:.8; }
-.hm-open + .hm-mundos{ margin-top:0; }
+.hm-open{ padding-bottom:clamp(36px,4vw,64px); }
 
-/* ---------- TRES MUNDOS · pantalla completa ---------- */
-.hm-mundos{ display:flex; gap:2px; height:clamp(560px,calc(100svh - 150px),960px); background:rgba(201,162,74,.5); color:#DED8CB; }
+/* ---------- TRES MUNDOS · entre las dos líneas, a la altura de la pantalla ---------- */
+.hm-triptico{ padding-bottom:clamp(8px,1vw,16px); }
+.hm-mundos{ display:flex; gap:2px; height:clamp(520px,calc(100svh - 190px),900px); background:rgba(201,162,74,.5); color:#DED8CB; }
 .hm-mundo{
   position:relative; display:block; flex:1 1 0; min-width:0; overflow:hidden; text-decoration:none; color:#DED8CB; isolation:isolate;
   transition:flex .95s cubic-bezier(.16,1,.3,1);
@@ -58,17 +60,19 @@
 .hm-mundos:has(.hm-mundo:hover) .hm-mundo, .hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo{ flex:.8 1 0; }
 .hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover, .hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo:focus-visible{ flex:1.7 1 0; }
 .hm-mundo:focus-visible{ outline:2px solid #C9A24A; outline-offset:-4px; }
-.hm-mundo-body{ position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding:clamp(24px,3vw,56px); }
-.hm-mundo-k{ font-family:var(--display); font-weight:400; font-size:clamp(3rem,5.8vw,6.2rem); line-height:.95; letter-spacing:-.03em; color:#DED8CB; }
+.hm-mundo-body{ position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding:clamp(22px,2.6vw,48px); }
+.hm-mundo-k{ font-family:var(--display); font-weight:400; font-size:clamp(2.8rem,5vw,5.6rem); line-height:.95; letter-spacing:-.03em; color:#DED8CB; }
 .hm-mundo-s{ font-size:clamp(.95rem,1.1vw,1.1rem); line-height:1.4; color:rgba(222,216,203,.86); margin-bottom:10px; }
 .hm-mundo:hover .hm-go i, .hm-mundo:focus-visible .hm-go i{ width:44px; }
 @media (max-width:899px){
+  /* móvil: el primer panel arranca en la línea izquierda; los siguientes asoman por la derecha */
   .hm-mundos{
-    height:auto; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;
+    height:auto; gap:var(--hm-g); background:none; margin-inline:calc(var(--gd-gut) * -1); padding-inline:var(--gd-gut); scroll-padding-inline:var(--gd-gut);
+    overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;
   }
   .hm-mundos::-webkit-scrollbar{ display:none; }
-  .hm-mundo{ flex:0 0 84vw; aspect-ratio:4/5; scroll-snap-align:start; transition:none; }
-  .hm-mundos:has(.hm-mundo:hover) .hm-mundo, .hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover{ flex:0 0 84vw; }
+  .hm-mundo{ flex:0 0 min(78vw,420px); aspect-ratio:4/5; scroll-snap-align:start; transition:none; }
+  .hm-mundos:has(.hm-mundo:hover) .hm-mundo, .hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover{ flex:0 0 min(78vw,420px); }
   .hm-mundo-k{ font-size:clamp(2.6rem,12vw,3.6rem); }
 }
 
@@ -114,7 +118,7 @@
   padding-block:clamp(64px,8vw,132px) clamp(56px,7vw,112px); color:#DED8CB;
   background:radial-gradient(ellipse 70% 40% at 15% 0%,rgba(201,162,74,.12),transparent 65%), radial-gradient(ellipse 55% 40% at 100% 100%,rgba(122,38,34,.22),transparent 70%), #100e0b;
 }
-.hm-escena-img{ position:relative; max-width:2000px; margin:0 auto clamp(32px,4vw,64px); }
+.hm-escena-img{ position:relative; margin:0 0 clamp(32px,4vw,64px); }
 .hm-escena .gd-shop{ border-radius:0; background:#0c0b09; }
 .hm-shop-m{ display:none; }
 .hm-hint{
@@ -130,43 +134,13 @@
 @media (max-width:899px){
   .hm-shop-d{ display:none; }
   .hm-shop-m{ display:block; }
-  .hm-hint{ font-size:.62rem; padding:8px 12px; }
+  /* móvil: la imagen es pequeña y sus botones tapan la pista; la pista pasa debajo, en la línea izquierda */
+  .hm-hint{ position:static; transform:none; margin-top:12px; padding:0; font-size:.64rem; background:none; backdrop-filter:none; -webkit-backdrop-filter:none; color:rgba(222,216,203,.78); }
 }
 .hm-escena .gd-prod-thumb{ background:#1a1713; }
 
-/* ---------- MÉTODO · boceto y obra ---------- */
-.hm-metodo{ padding-block:clamp(64px,8vw,132px); background:var(--bg-raised); border-block:1px solid var(--line); }
-.hm-metodo-grid{ display:grid; gap:clamp(28px,4vw,72px); }
-.hm-metodo-grid > *{ min-width:0; }
-.hm-metodo-panel{ display:flex; flex-direction:column; align-items:flex-start; gap:clamp(22px,2.4vw,36px); }
-.hm-tabs{ display:flex; flex-direction:column; width:100%; gap:0; border-top:1px solid var(--line); }
-.hm-tabs .gd-ba-tab{
-  display:block; width:100%; text-align:left; padding:clamp(13px,1.3vw,18px) 4px clamp(13px,1.3vw,18px) 0;
-  border:0; border-bottom:1px solid var(--line); border-radius:0; background:none; color:var(--text-dim); cursor:pointer;
-  font-family:var(--display); font-weight:400; font-size:clamp(1.3rem,1.8vw,1.8rem); letter-spacing:-.005em; line-height:1.15;
-  transition:color .25s, padding-left .4s var(--gd-ease);
-}
-.hm-tabs .gd-ba-tab:hover{ color:var(--text); background:none; border-color:var(--line); }
-.hm-tabs .gd-ba-tab[aria-selected="true"]{ background:none; border-color:var(--accent); color:var(--accent); padding-left:16px; }
-.hm-metodo-cap{ margin:0; flex-direction:column; gap:10px; justify-content:flex-start; min-height:5.4em; }
-.hm-metodo-cap p{ max-width:46ch; }
-.hm-metodo-stage{
-  position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
-  min-height:clamp(420px,84svh,840px); padding:clamp(16px,2vw,32px); background:var(--panel);
-}
-.hm-metodo-stage .gd-ba-hint{ align-self:flex-end; }
-.hm-metodo-stage .gd-ba-frame{ width:auto; height:clamp(340px,calc(84svh - 100px),740px); max-width:100%; margin-inline:auto; }
-@media (min-width:980px){
-  .hm-metodo-grid{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); align-items:center; }
-}
-@media (max-width:979px){
-  .hm-tabs{ flex-direction:row; overflow-x:auto; gap:8px; border-top:0; scrollbar-width:none; margin-inline:calc(var(--gd-gut) * -1); padding-inline:var(--gd-gut); width:auto; max-width:100vw; }
-  .hm-tabs::-webkit-scrollbar{ display:none; }
-  .hm-tabs .gd-ba-tab{ flex:none; width:auto; border:1px solid var(--line); padding:10px 16px; font-family:var(--body); font-size:.8rem; letter-spacing:.04em; white-space:nowrap; }
-  .hm-tabs .gd-ba-tab[aria-selected="true"]{ background:var(--accent); color:#0A0A09; border-color:var(--accent); padding-left:16px; }
-  .hm-metodo-stage{ min-height:0; padding:12px; }
-  .hm-metodo-stage .gd-ba-frame{ width:100%; height:auto; }
-}
+/* ---------- MÉTODO · la sección del sitio, tal cual (estilos .gd-ba-* en index.html); aquí solo el aire ---------- */
+.hm-metodo{ padding-block:clamp(64px,8vw,132px); }
 
 /* ---------- CATÁLOGO · dos escenas ---------- */
 .hm-cat{ padding-block:clamp(64px,8vw,132px); }
@@ -185,22 +159,6 @@
 .hm-cat-cap .hm-go{ color:#C9A24A; padding-bottom:.5em; }
 .hm-cat-p:hover .hm-go i, .hm-cat-p:focus-visible .hm-go i{ width:44px; }
 
-/* ---------- AUTORÍA ---------- */
-.hm-estudio{ display:grid; grid-template-columns:minmax(0,1fr); background:var(--bg); }
-.hm-estudio-foto{ position:relative; overflow:hidden; aspect-ratio:4/5; background:#12110f; }
-.hm-estudio-foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 22%; }
-.hm-estudio-txt{ display:flex; flex-direction:column; justify-content:center; gap:clamp(24px,3vw,44px); padding:clamp(40px,7vw,96px) var(--gd-gut); }
-.hm-quote{ margin:0 !important; font-size:clamp(2.2rem,4.9vw,5.2rem) !important; line-height:1.1; max-width:16ch; }
-.hm-quote em{ font-style:italic; color:var(--accent); }
-.hm-firma{ margin:0; display:flex; flex-direction:column; gap:6px; padding-top:clamp(18px,2vw,28px); border-top:1px solid var(--line); max-width:340px; }
-.hm-firma b{ font-family:var(--body); font-weight:500; font-size:1.05rem; color:var(--lino); }
-.hm-firma span{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint); }
-@media (min-width:900px){
-  .hm-estudio{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); min-height:clamp(520px,74svh,780px); }
-  .hm-estudio-foto{ aspect-ratio:auto; }
-  .hm-estudio-txt{ padding-right:max(var(--gd-gut), calc((100vw - var(--gd-max)) / 2 + var(--gd-gut))); padding-left:clamp(40px,6vw,120px); }
-}
-
 /* ---------- CIERRE ---------- */
 .hm-cta{ padding-block:clamp(88px,11vw,180px); }
 .hm-cta .gd-in{ max-width:1000px; }
@@ -209,5 +167,5 @@
 .hm-cta-p{ margin:0 auto clamp(26px,3vw,40px); max-width:40ch; font-size:clamp(1rem,1.2vw,1.15rem); line-height:1.6; color:var(--text-dim); }
 
 @media (prefers-reduced-motion:reduce){
-  .hm-mundo, .hm-mundo img, .hm-t img, .hm-cat-p img, .hm-go i, .hm-tabs .gd-ba-tab{ transition:none; }
+  .hm-mundo, .hm-mundo img, .hm-t img, .hm-cat-p img, .hm-go i{ transition:none; }
 }
