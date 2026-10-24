@@ -34,6 +34,38 @@
     requestAnimationFrame(tick);
   })();
 
+  /* ---------- hero: tres tomas por tienda, en fundido lento ---------- */
+  (function(){
+    var panels = $$('.rd-half[data-show]'); if(!panels.length) return;
+    var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var D = panels.map(function(p){ return { el:p, imgs:$$('.rd-sl', p), cnt:p.querySelector('.rd-cnt'), i:0, pausa:false }; });
+    function carga(im){ if(im && !im.getAttribute('src') && im.getAttribute('data-src')) im.src = im.getAttribute('data-src'); }
+    function ve(d, n){
+      var im = d.imgs[n]; carga(im);
+      function run(){
+        d.imgs.forEach(function(x, k){ x.classList.toggle('is-on', k === n); });
+        d.i = n;
+        if(d.cnt) d.cnt.textContent = '0' + (n + 1) + ' / 0' + d.imgs.length;
+      }
+      if(im.complete && im.naturalWidth) run(); else im.addEventListener('load', run, { once:true });
+    }
+    D.forEach(function(d){
+      d.el.addEventListener('mouseenter', function(){ d.pausa = true; });
+      d.el.addEventListener('mouseleave', function(){ d.pausa = false; });
+      d.el.addEventListener('focusin', function(){ d.pausa = true; });
+      d.el.addEventListener('focusout', function(){ d.pausa = false; });
+    });
+    function reposo(){ D.forEach(function(d){ d.imgs.forEach(carga); }); }
+    if(document.readyState === 'complete') (window.requestIdleCallback || function(f){ setTimeout(f, 800); })(reposo);
+    else window.addEventListener('load', function(){ (window.requestIdleCallback || function(f){ setTimeout(f, 800); })(reposo); });
+    if(reducido) return;
+    D.forEach(function(d, k){
+      setTimeout(function(){
+        setInterval(function(){ if(!d.pausa && !document.hidden) ve(d, (d.i + 1) % d.imgs.length); }, 5600);
+      }, 2800 * k + 2400);
+    });
+  })();
+
   /* ---------- plano ---------- */
   var Z = [
     { name:'Vitrina y entrada', tienda:'Ferrehome', img:'vitrina', oy:'45%', alt:'Vitrina de cristal con casitas de jengibre y nieve en Ferrehome',
