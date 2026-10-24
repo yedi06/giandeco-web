@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="css/giandeco.css?v=20261020e">
 <link rel="stylesheet" href="css/gd-tienda.css?v=20261018c">
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
-<link rel="stylesheet" href="css/gd-retail-d.css?v=20261020a">
+<link rel="stylesheet" href="css/gd-retail-d.css?v=20261024a">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261018a">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -52,8 +52,18 @@
     </div>
   </div>
   <div class="rd-halves">
-    <a class="rd-half" href="#casos"><img src="images/retail-navidad/isla.webp" alt="Mesa de Navidad borgoña y dorado en SuperHome" style="object-position:50% 60%" fetchpriority="high" decoding="async" width="1200" height="1500"><span class="rd-chip"><span class="rd-wm">SuperHome</span></span></a>
-    <a class="rd-half" href="#casos"><img src="images/retail-navidad/arbol.webp" alt="Árbol rojo y blanco con Papá Noel en Ferrehome" style="object-position:42% 40%" fetchpriority="high" decoding="async" width="1200" height="1500"><span class="rd-chip"><span class="rd-wm">Ferrehome</span></span></a>
+    <a class="rd-half" href="#casos" data-show>
+      <img class="rd-sl is-on" src="images/retail-navidad/hero-sh-1.webp" alt="Nacimiento blanco y dorado con renos sobre una mesa servida, frente a la pared de estantes de SuperHome" style="object-position:50% 55%" fetchpriority="high" decoding="async" width="960" height="1280">
+      <img class="rd-sl" data-src="images/retail-navidad/hero-sh-2.webp" alt="Mesa navideña borgoña y dorado con velas, rosas y florales en SuperHome" style="object-position:50% 60%" decoding="async" width="960" height="1280">
+      <img class="rd-sl" data-src="images/retail-navidad/hero-sh-3.webp" alt="Nacimiento blanco y oro sobre nieve y camino de mesa dorado en SuperHome" style="object-position:50% 45%" decoding="async" width="960" height="1280">
+      <span class="rd-chip"><span class="rd-wm">SuperHome</span><span class="rd-cnt" aria-hidden="true">01 / 03</span></span>
+    </a>
+    <a class="rd-half" href="#casos" data-show>
+      <img class="rd-sl is-on" src="images/retail-navidad/hero-fh-1.webp" alt="Árbol rojo y blanco con Papá Noel al pie en Ferrehome" style="object-position:46% 45%" fetchpriority="high" decoding="async" width="960" height="1280">
+      <img class="rd-sl" data-src="images/retail-navidad/hero-fh-2.webp" alt="Árbol de jengibre con cintas de yute y galletas en Ferrehome" style="object-position:55% 40%" decoding="async" width="960" height="1280">
+      <img class="rd-sl" data-src="images/retail-navidad/hero-fh-3.webp" alt="Vitrina de cristal con casitas de jengibre y nieve en Ferrehome" style="object-position:50% 45%" decoding="async" width="960" height="1280">
+      <span class="rd-chip"><span class="rd-wm">Ferrehome</span><span class="rd-cnt" aria-hidden="true">01 / 03</span></span>
+    </a>
   </div>
 </section>
 
@@ -75,28 +85,75 @@
     <div class="rd-g12 rd-plano-grid">
       <div class="rd-plano-col">
         <div class="rd-plano">
-          <svg viewBox="0 0 520 640" aria-hidden="true">
+          <svg viewBox="0 0 520 640" aria-hidden="true" class="rd-svg">
             <defs>
-              <pattern id="rdGr" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1a1814" stroke-width="1"/></pattern>
+              <pattern id="rdG1" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#16140f" stroke-width=".8"/></pattern>
+              <pattern id="rdG2" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#211e17" stroke-width="1"/></pattern>
               <pattern id="rdHt" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V8" stroke="#2c2820" stroke-width="1.4"/></pattern>
+              <pattern id="rdPo" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V6" stroke="#5d5444" stroke-width="1.7"/></pattern>
+              <marker id="rdAr" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l5.5 3L1 7z" fill="#C9A24A"/></marker>
             </defs>
-            <rect width="520" height="640" fill="url(#rdGr)"/>
-            <rect x="10" y="10" width="500" height="620" fill="none" stroke="#6b6253" stroke-width="4"/>
-            <rect x="16" y="16" width="488" height="608" fill="none" stroke="#2f2a22" stroke-width="1"/>
-            <rect x="226" y="626" width="68" height="8" fill="#0f0e0c"/>
-            <path d="M226 630 A68 68 0 0 1 294 562" fill="none" stroke="#6b6253" stroke-width="1" stroke-dasharray="3 4"/>
-            <text x="260" y="606" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" letter-spacing="3" fill="#6b6253">ENTRADA</text>
-            <g fill="url(#rdHt)" stroke="#4a443a" stroke-width="1">
-              <rect x="56" y="190" width="96" height="16"/><rect x="56" y="232" width="96" height="16"/><rect x="56" y="274" width="96" height="16"/>
-              <rect x="56" y="316" width="96" height="16"/><rect x="56" y="358" width="96" height="16"/><rect x="56" y="400" width="96" height="16"/>
+            <rect width="520" height="640" fill="url(#rdG1)"/><rect width="520" height="640" fill="url(#rdG2)"/>
+
+            <!-- muros con poché -->
+            <path fill="url(#rdPo)" fill-rule="evenodd" stroke="#8a7e68" stroke-width="1.3" d="M6 6H514V634H6Z M20 20H500V620H20Z"/>
+            <rect x="227" y="612" width="66" height="26" fill="#0f0e0c"/><path d="M226 620V634M294 620V634" stroke="#8a7e68" stroke-width="1.3"/>
+            <path d="M226 620V552" stroke="#C9A24A" stroke-width="1.6"/><path d="M226 552A68 68 0 0 1 294 620" fill="none" stroke="#6b6253" stroke-dasharray="3 4"/>
+            <text x="260" y="630" text-anchor="middle" font-family="Jost, sans-serif" font-size="7.5" letter-spacing="3" fill="#8d877a">ENTRADA</text>
+
+            <!-- 1 · vitrina corrida con casitas -->
+            <g stroke="#7a6f5c" fill="none"><rect x="26" y="524" width="468" height="34"/><path d="M104 524v34M182 524v34M260 524v34M338 524v34M416 524v34"/><path d="M26 541h468" stroke-dasharray="2 5"/></g>
+            <g stroke="#C9A24A" stroke-width=".9" fill="none" opacity=".75"><path d="M59 538v-7l6-5 6 5v7z"/><path d="M137 538v-7l6-5 6 5v7z"/><path d="M293 538v-7l6-5 6 5v7z"/><path d="M371 538v-7l6-5 6 5v7z"/><path d="M449 538v-7l6-5 6 5v7z"/></g>
+            <text x="28" y="519" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">VITRINA CORRIDA</text>
+
+            <!-- góndolas -->
+            <g fill="url(#rdHt)" stroke="#4a443a" stroke-width="1"><rect x="56" y="206" width="96" height="16"/><rect x="56" y="246" width="96" height="16"/><rect x="56" y="286" width="96" height="16"/><rect x="56" y="326" width="96" height="16"/><rect x="56" y="366" width="96" height="16"/><rect x="56" y="406" width="96" height="16"/></g>
+            <rect x="24" y="190" width="10" height="250" fill="none" stroke="#4a443a" stroke-dasharray="4 4"/>
+            <text x="104" y="196" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">GÓNDOLAS</text>
+
+            <!-- 3 · árbol de marca -->
+            <g stroke="#7a6f5c" fill="none"><circle cx="86" cy="92" r="52"/><circle cx="86" cy="92" r="36" stroke-dasharray="3 4"/><circle cx="86" cy="92" r="18"/>
+              <path d="M86 56v-0M86 74v-18M86 110v18M68 92H50M104 92h18M73 79L61 67M99 79l12-12M73 105l-12 12M99 105l12 12" stroke-width=".8"/></g>
+            <g fill="#C9A24A" opacity=".8"><circle cx="86" cy="50" r="1.7"/><circle cx="116" cy="62" r="1.7"/><circle cx="128" cy="92" r="1.7"/><circle cx="116" cy="122" r="1.7"/><circle cx="86" cy="134" r="1.7"/><circle cx="56" cy="122" r="1.7"/><circle cx="44" cy="92" r="1.7"/><circle cx="56" cy="62" r="1.7"/></g>
+            <circle cx="86" cy="92" r="3" fill="#7a6f5c"/>
+            <text x="86" y="162" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">ÁRBOL DE MARCA</text>
+
+            <!-- 4 · pared de estantes -->
+            <g stroke="#7a6f5c" fill="none"><path d="M178 38h316M178 58h316M178 78h316"/><path d="M178 38v40M282 38v40M386 38v40M494 38v40" stroke-width="1.2"/><path d="M200 38v20M240 58v20M310 38v20M350 58v20M420 38v20M462 58v20"/></g>
+            <g fill="#C9A24A" opacity=".7"><rect x="206" y="50" width="10" height="8"/><rect x="258" y="70" width="8" height="8"/><rect x="326" y="50" width="12" height="8"/><rect x="366" y="70" width="10" height="8"/><rect x="436" y="50" width="9" height="8"/><rect x="472" y="70" width="12" height="8"/></g>
+            <text x="336" y="32" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">PARED Y GÓNDOLA</text>
+
+            <!-- 2 · isla central -->
+            <g stroke="#7a6f5c" fill="none"><rect x="192" y="292" width="134" height="74" rx="2"/><rect x="204" y="323" width="110" height="12" fill="url(#rdHt)" stroke="#4a443a"/>
+              <circle cx="214" cy="306" r="8"/><circle cx="259" cy="306" r="8"/><circle cx="304" cy="306" r="8"/><circle cx="214" cy="352" r="8"/><circle cx="259" cy="352" r="8"/><circle cx="304" cy="352" r="8"/>
+              <rect x="206" y="274" width="16" height="10" rx="2"/><rect x="251" y="274" width="16" height="10" rx="2"/><rect x="296" y="274" width="16" height="10" rx="2"/>
+              <rect x="206" y="374" width="16" height="10" rx="2"/><rect x="251" y="374" width="16" height="10" rx="2"/><rect x="296" y="374" width="16" height="10" rx="2"/></g>
+            <g stroke="#C9A24A" fill="none" opacity=".8"><circle cx="259" cy="329" r="9"/><circle cx="237" cy="329" r="2.2"/><circle cx="281" cy="329" r="2.2"/></g>
+            <text x="259" y="268" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">ISLA CENTRAL</text>
+
+            <!-- 6 · taller -->
+            <rect x="374" y="178" width="116" height="122" fill="none" stroke="#4a443a" stroke-dasharray="4 4"/>
+            <g stroke="#7a6f5c" fill="none"><rect x="384" y="208" width="96" height="62" rx="2"/><circle cx="400" cy="288" r="6"/><circle cx="432" cy="288" r="6"/><circle cx="464" cy="288" r="6"/><circle cx="432" cy="190" r="8" stroke="#C9A24A"/><path d="M398 226h64M398 250h64" stroke-dasharray="2 4"/></g>
+            <text x="432" y="172" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">TALLER EN VIVO</text>
+
+            <!-- 5 · caja y rincón foto -->
+            <g stroke="#7a6f5c" fill="none"><path d="M376 430h112v28h-80v36h-32z"/><rect x="446" y="436" width="26" height="14"/><circle cx="470" cy="486" r="8"/><path d="M450 508A30 30 0 0 1 490 470" stroke-dasharray="3 4"/></g>
+            <text x="432" y="424" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#8d877a">CAJA Y RINCÓN FOTO</text>
+
+            <!-- recorrido del cliente -->
+            <g fill="none" stroke="#C9A24A" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="5 6" marker-end="url(#rdAr)" class="rd-flow" opacity=".9">
+              <path d="M260 606V396"/>
+              <path d="M330 329H352Q372 329 372 309V252Q372 232 386 232"/>
+              <path d="M432 200V150Q432 114 396 114H196Q150 114 136 100"/>
             </g>
-            <rect x="22" y="170" width="12" height="270" fill="none" stroke="#4a443a" stroke-dasharray="4 4"/>
-            <g stroke="#7a6f5c" fill="none"><rect x="26" y="520" width="468" height="40"/><path d="M104 520v40M182 520v40M260 520v40M338 520v40M416 520v40"/><path d="M26 540h468" stroke-dasharray="2 5"/></g>
-            <g stroke="#7a6f5c" fill="none"><circle cx="86" cy="92" r="50"/><circle cx="86" cy="92" r="34" stroke-dasharray="3 4"/><circle cx="86" cy="92" r="18"/><circle cx="86" cy="92" r="3" fill="#7a6f5c"/></g>
-            <g stroke="#7a6f5c" fill="none"><path d="M178 38h310M178 58h310M178 78h310"/><path d="M200 38v20M240 58v20M284 38v20M330 58v20M372 38v20M420 58v20M462 38v20"/></g>
-            <g stroke="#7a6f5c" fill="none"><rect x="192" y="292" width="134" height="74" rx="2"/><circle cx="214" cy="278" r="6"/><circle cx="259" cy="278" r="6"/><circle cx="304" cy="278" r="6"/><circle cx="214" cy="380" r="6"/><circle cx="259" cy="380" r="6"/><circle cx="304" cy="380" r="6"/><path d="M200 300h118M200 358h118" stroke-dasharray="2 4"/></g>
-            <g stroke="#7a6f5c" fill="none"><rect x="384" y="208" width="96" height="62" rx="2"/><circle cx="400" cy="294" r="6"/><circle cx="432" cy="294" r="6"/><circle cx="464" cy="294" r="6"/><circle cx="432" cy="188" r="8"/></g>
-            <g stroke="#7a6f5c" fill="none"><path d="M376 430h112v28h-80v36h-32z"/><circle cx="470" cy="486" r="8"/></g>
+            <text x="268" y="470" font-family="Jost, sans-serif" font-size="7" letter-spacing="2.4" fill="#C9A24A" opacity=".85">RECORRIDO</text>
+
+            <!-- cuadro de rotulación -->
+            <text x="32" y="582" font-family="Jost, sans-serif" font-size="7.5" letter-spacing="3" fill="#8d877a">PLANTA TIPO</text>
+            <text x="32" y="596" font-family="Jost, sans-serif" font-size="7.5" letter-spacing="3" fill="#6b6253">MONTAJE NAVIDAD 2026</text>
+            <path d="M32 604h64M32 601v6M64 602v4M96 601v6" stroke="#6b6253" stroke-width="1"/>
+            <g transform="translate(466 594)" stroke="#8a7e68" fill="none"><circle r="13"/><path d="M0-17v-3" /><path d="M0-10L4 6 0 3-4 6z" fill="#C9A24A" stroke="#C9A24A"/></g>
+            <text x="466" y="572" text-anchor="middle" font-family="Jost, sans-serif" font-size="7.5" letter-spacing="1" fill="#8d877a">N</text>
           </svg>
         </div>
         <div class="rd-legend" role="group" aria-label="Zonas de la tienda"></div>
@@ -130,17 +187,17 @@
 <!-- ==================== 4 · CASOS DE NAVIDAD ==================== -->
 <section id="casos" class="rd-sec rd-claro rd-casos">
   <div class="gd-in">
-    <h2 class="rd-h2">Dos tiendas reales, este mes</h2>
+    <h2 class="rd-h2">Montaje de 2 tiendas</h2>
     <div class="rd-g12 rd-casos-grid">
       <div class="rd-caso">
-        <a class="rd-caso-img" href="retail/navidad"><img src="images/retail-navidad/caso-superhome.webp" alt="Tres cortes de SuperHome: mesa borgoña, nacimiento y girasoles" loading="lazy" decoding="async" width="1800" height="1200"></a>
+        <a class="rd-caso-img rd-mos" href="retail/navidad" aria-label="Ver el montaje completo de SuperHome"><span class="m m1"><img src="images/retail-navidad/caso-sh-1.webp" alt="Mesa de nacimiento blanco y dorado con renos frente a los estantes de SuperHome" loading="lazy" decoding="async" width="1000" height="1000"></span><span class="m m2"><img src="images/retail-navidad/caso-sh-2.webp" alt="Florales rojos y blancos con bayas y piñas en la mesa borgoña de SuperHome" loading="lazy" decoding="async" width="700" height="700"></span><span class="m m3"><img src="images/retail-navidad/caso-sh-3.webp" alt="Mesa de girasoles y cristal con camino de mesa en SuperHome" loading="lazy" decoding="async" width="700" height="700"></span></a>
         <span class="rd-chip"><span class="rd-wm">SuperHome</span></span>
         <h3 class="rd-h3">Tres mesas que venden la cena</h3>
         <p>Borgoña y dorado, nacimiento blanco y oro, y girasoles para fuera de temporada. Más un taller en vivo con Gian.</p>
         <a class="rd-link" href="retail/navidad">Ver el montaje completo <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
       <div class="rd-caso">
-        <a class="rd-caso-img" href="proyectos/ferrehome"><img src="images/retail-navidad/caso-ferrehome.webp" alt="Tres cortes de Ferrehome: árbol de jengibre, árbol rojo y blanco y vitrina de casitas" loading="lazy" decoding="async" width="1800" height="1200"></a>
+        <a class="rd-caso-img rd-mos" href="proyectos/ferrehome" aria-label="Ver el montaje completo de Ferrehome"><span class="m m1"><img src="images/retail-navidad/caso-fh-1.webp" alt="Mesa de cascanueces con torre de postres y bolas navideñas en Ferrehome" loading="lazy" decoding="async" width="1000" height="1000"></span><span class="m m2"><img src="images/retail-navidad/caso-fh-2.webp" alt="Galletas de jengibre y cintas de yute en el árbol de Ferrehome" loading="lazy" decoding="async" width="700" height="700"></span><span class="m m3"><img src="images/retail-navidad/caso-fh-3.webp" alt="Rincón con ciervos blancos, Papá Noel y flores rojas en Ferrehome" loading="lazy" decoding="async" width="700" height="700"></span></a>
         <span class="rd-chip"><span class="rd-wm">Ferrehome</span></span>
         <h3 class="rd-h3">Cinco rincones en todo el recorrido</h3>
         <p>Árbol de jengibre, árbol rojo y blanco, mesa de cascanueces, vitrina de casitas y un rincón junto a caja.</p>
@@ -182,7 +239,7 @@
       </div>
       <div class="rd-sv-media">
           <div class="rd-sv-pic"><img class="ph" src="images/work/enchantee.jpg" alt="Vitrina de Enchantée Paris con maniquíes y styling" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/enchantee-paris.png" alt="" style="--h:22px" decoding="async"></div>
-          <div class="rd-sv-pic"><img class="ph" src="images/work/pycca.jpg" alt="Árbol de la campaña Christmas Chalet en Pycca" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/pycca.png" alt="" style="--h:30px" decoding="async"></div>
+          <div class="rd-sv-pic"><img class="ph" src="images/retail-navidad/camp-portal.webp" alt="Portal navideño con guirnalda roja a la entrada de SuperHome y mesa de bienvenida al fondo del pasillo" style="object-position:50% 22%" loading="lazy" decoding="async" width="1000" height="1250"><span class="rd-chip"><span class="rd-wm">SuperHome</span></span></div>
           <div class="rd-sv-pic"><img class="ph" src="images/proyectos/walon-puntahermosa.jpg" alt="Fachada y piso de venta de Walon Punta Hermosa" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/walon.png" alt="" style="--h:44px" decoding="async"></div>
           <div class="rd-sv-pic"><img class="ph" src="images/work/corteingles.jpg" alt="Ambiente de exhibición en El Corte Inglés" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/el-corte-ingles.png" alt="" style="--h:38px" decoding="async"></div>
           <div class="rd-sv-pic"><img class="ph" src="images/work/walonfiguritas.jpg" alt="Gráfica en vinilo Figuritas del Barrio de Walon" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/walon.png" alt="" style="--h:44px" decoding="async"></div>
@@ -216,7 +273,7 @@
           <span class="t"><span class="rd-h3">Walon Figuritas del Barrio</span><span>Una misma campaña en tiendas de todo el país, con vitrinas de fútbol y coleccionismo.</span></span>
         </a>
         <a class="rd-loc" style="--o:4" href="proyectos/walon-punta-hermosa">
-          <span class="ph" style="--ar:4/3"><img class="pic" src="images/proyectos/walon-puntahermosa.jpg" alt="Walon Punta Hermosa — primera tienda boutique de la marca" style="object-position:50% 58%" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/walon.png" alt="" style="--h:44px" decoding="async"></span>
+          <span class="ph" style="--ar:5/6"><img class="pic" src="images/proyectos/walon-puntahermosa.jpg" alt="Fachada de Walon Punta Hermosa, primera tienda boutique de la marca, con su letrero negro y el piso de venta" style="object-position:50% 40%" width="997" height="1080" loading="lazy" decoding="async"><img class="lg" src="images/retail-navidad/logos/walon.png" alt="" style="--h:44px" decoding="async"></span>
           <span class="t"><span class="rd-h3">Walon Punta Hermosa</span><span>De un espacio vacío al primer formato boutique de la marca.</span></span>
         </a>
       </div>
@@ -269,7 +326,7 @@
 
 <div id="gdFooter"></div>
 <script src="js/giandeco.js?v=20261024a"></script>
-<script src="js/gd-retail-d.js?v=20261020a"></script>
+<script src="js/gd-retail-d.js?v=20261024a"></script>
 <script src="js/gd-tienda.js?v=20261021a" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-chat.js?v=20261018b" defer></script>
