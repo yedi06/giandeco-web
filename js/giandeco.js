@@ -89,15 +89,15 @@ window.GD_WA = WA_MSG;
    2b. ILUMINACIÓN  (fichas reales de 07_Luminarias)
    -------------------------------------------------------------------------- */
 var ILUMINACION = {
-  'amaris':     { nombre:'Lámpara LED Amaris',   cat:'Colgante lineal',    precio:'S/ 550.00',   img:'images/iluminacion/amaris-1.jpg',     nota:'Home suspendido de líneas onduladas, 105 cm. Estructura ABS y silicón, 60W 220V, altura regulable, luz LED cálida.' },
-  'basilea':    { nombre:'Lámpara Basilea',      cat:'Colgante múltiple',  precio:'S/ 480.00',   img:'images/iluminacion/basilea-1.jpg',    nota:'Estructura metálica y vidrio nacarado, 6 luces con socket E27 estándar. Acabado negro mate y cobre antiguo.' },
-  'bristol':    { nombre:'Lámpara Bristol',      cat:'Colgante múltiple',  precio:'S/ 380.00',   img:'images/iluminacion/bristol-1.jpg',    nota:'Estructura metálica con brazos movibles y socket E27 estándar. Acabado negro mate y oro viejo.' },
-  'lara':       { nombre:'Lámpara Lara Black',   cat:'Colgante individual',precio:'S/ 480.00',   img:'images/iluminacion/lara-1.jpg',        nota:'Aro circular en estructura metálica y acrílico, 38W 165/265V. Altura regulable, luz cálida.' },
-  'longer':     { nombre:'Lámpara Longer',       cat:'Colgante lineal',    precio:'S/ 1,300.00', img:'images/iluminacion/longer-1.jpg',      nota:'Paneles verticales en cascada, estructura de aluminio y silicón. Luz LED tricolor, altura regulable, acabado negro mate.' },
-  'mady-white': { nombre:'Lámpara Mady White',   cat:'Colgante individual',precio:'S/ 180.00',   img:'images/iluminacion/mady-white-1.jpg', nota:'Domo en estructura metálica y capuchón de madera, socket E27 estándar. Altura regulable, color blanco bone.' },
-  'stratto':    { nombre:'Lámpara Stratto',      cat:'Colgante múltiple',  precio:'S/ 480.00',   img:'images/iluminacion/stratto-1.jpg',     nota:'Estructura metálica, 6 luces con socket E27 estándar. Incluye focos LED.' },
-  'villa':      { nombre:'Lámpara Villa',        cat:'Colgante individual',precio:'S/ 250.00',   img:'images/iluminacion/villa-1.jpg',       nota:'Farolillo en estructura metálica, incluye foco LED. Acabado negro y madera avejentada.' },
-  'spazio':     { nombre:'Lámpara Spazio',       cat:'Colgante lineal',    precio:'S/ 120.00',   img:'images/iluminacion/spazio-1.jpg',      nota:'Batería de cilindros en aluminio, 8W/220V. Altura regulable, luz LED cálida y blanca.' }
+  'amaris':     { nombre:'Lámpara LED Amaris',   cat:'Colgante lineal',    precio:'S/ 572.00',   img:'images/iluminacion/amaris-hd.webp',     nota:'Home suspendido de líneas onduladas, 105 cm. Estructura ABS y silicón, 60W 220V 50/60 Hz, altura regulable, luz LED cálida.' },
+  'basilea':    { nombre:'Lámpara Basilea',      cat:'Colgante múltiple',  precio:'S/ 495.00',   img:'images/iluminacion/basilea-hd.webp',    nota:'Estructura metálica y vidrio nacarado, 6 luces con socket E27 estándar. Acabado negro mate y cobre antiguo.' },
+  'bristol':    { nombre:'Lámpara Bristol',      cat:'Colgante múltiple',  precio:'S/ 395.00',   img:'images/iluminacion/bristol-hd.webp',    nota:'Estructura metálica con brazos movibles y socket E27 estándar. Acabado negro mate y oro viejo.' },
+  'lara':       { nombre:'Lámpara Lara Black',   cat:'Colgante individual',precio:'S/ 495.00',   img:'images/iluminacion/lara-hd.webp',        nota:'Aro circular en estructura metálica y acrílico, 38W 165/265V 50/60 Hz. Altura regulable, luz cálida.' },
+  'longer':     { nombre:'Lámpara Longer',       cat:'Colgante lineal',    precio:'S/ 1,352.00', img:'images/iluminacion/longer-hd.webp',      nota:'Paneles verticales en cascada, estructura de aluminio y silicón. Luz LED tricolor, altura regulable, acabado negro mate.' },
+  'mady-white': { nombre:'Lámpara Mady White',   cat:'Colgante individual',precio:'S/ 187.00',   img:'images/iluminacion/mady-white-hd.webp', nota:'Domo en estructura metálica y capuchón color cobre, socket E27 estándar. Altura regulable, color blanco bone.' },
+  'stratto':    { nombre:'Lámpara Stratto',      cat:'Colgante múltiple',  precio:'S/ 495.00',   img:'images/iluminacion/stratto-hd.webp',     nota:'Estructura metálica, 6 luces con socket E27 estándar. Incluye focos LED.' },
+  'villa':      { nombre:'Lámpara Villa',        cat:'Colgante individual',precio:'S/ 260.00',   img:'images/iluminacion/villa-hd.webp',       nota:'Farolillo en estructura metálica, incluye foco LED. Acabado negro y madera avejentada.' },
+  'spazio':     { nombre:'Lámpara Spazio',       cat:'Colgante lineal',    precio:'S/ 125.00',   img:'images/iluminacion/spazio-hd.webp',      nota:'Batería de cilindros en aluminio, 8W/220V. Altura regulable, luz LED cálida y blanca.' }
 };
 window.GD_ILUMINACION = ILUMINACION;
 
