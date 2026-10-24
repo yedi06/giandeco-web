@@ -1372,7 +1372,7 @@
 </style>
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261018a">
-<link rel="stylesheet" href="css/gd-home-d.css?v=20261026b">
+<link rel="stylesheet" href="css/gd-home-d.css?v=20261026d">
 <script src="js/gd-tema.js?v=20261018a"></script>
 
 <!-- intro de marca: se decide antes de pintar, para que nunca haya un parpadeo del telón -->
@@ -1403,154 +1403,179 @@
 </section>
 <!-- ================ fin del bloque header / navegación / banner ================ -->
 
-<!-- ==================== EL RECORRIDO ====================
-     Todo lo que sigue al video: un paseo numerado (declaración → tres mundos → obra →
-     método → Navidad → catálogo → autoría → cita). Los textos y enlaces son los del sitio. -->
+<!-- ==================== HOME · CAPÍTULOS ====================
+     Todo lo que sigue al video. Poca letra, mucha imagen, un solo borde de alineación
+     (el de la cabecera). Los textos y enlaces son los del sitio. -->
 
-<!-- ============ 01 · DECLARACIÓN ============ -->
-<section class="hm-sec hm-decl" id="declaracion" aria-labelledby="declT">
+<!-- ============ APERTURA: la frase, lo que hacemos y con quién ============ -->
+<section class="hm-open" id="declaracion" aria-labelledby="declT">
   <div class="gd-in">
-    <p class="hm-eyebrow reveal"><span>01</span>Estudio de diseño comercial · Lima</p>
-    <div class="hm-decl-grid">
-      <h2 class="hm-decl-h reveal d1" id="declT">Un espacio no se decora.<br><em>Se diseña para vender.</em></h2>
-      <div class="hm-decl-side reveal d2">
-        <p>Interiores, mobiliario, iluminación y visual merchandising bajo una sola dirección, con la opción de ejecutarlo. Un interlocutor, menos días cerrados.</p>
-        <a class="gd-link" href="quienes-somos">Conozca el estudio<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <h2 class="hm-open-h reveal" id="declT"><span>Un espacio no se decora.</span> <em>Se diseña para vender.</em></h2>
+    <ul class="hm-open-list reveal d1">
+      <li>Interiores y visual merchandising juntos</li>
+      <li>Diseño y ejecución</li>
+      <li>Mobiliario propio</li>
+      <li>Portafolio verificable</li>
+    </ul>
+  </div>
+  <div class="hm-open-marcas reveal d2">
+    <div class="gd-marcas-wall" data-marcas="retail">
+      <div class="gd-marcas-row" id="marcasRow1"><div class="gd-marcas-track" id="marcasTrack1"></div></div>
+    </div>
+  </div>
+  <p class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Marcas con las que hemos colaborado: El Corte Inglés, Pycca, Enchantée Paris, Zara, Walon, Baby Club Chic, Hotel Unión Cusco, Mássimo Café, Casa Grande, Casacor, Expodeco.</p>
+</section>
+
+<!-- ============ TRES MUNDOS: pantalla completa ============ -->
+<section class="hm-mundos gd-oscuro" id="universos" aria-label="Retail, hogar y Navidad">
+  <a class="hm-mundo" href="retail/proyectos" data-cursor="Ver">
+    <img loading="lazy" decoding="async" src="images/home/mundo-retail.webp" srcset="images/home/mundo-retail-m.webp 900w, images/home/mundo-retail.webp 1320w" sizes="(min-width:900px) 45vw, 84vw" width="1320" height="1760" alt="Muro de nichos con marcos de latón y tres maniquíes vestidos en lino, camel y carbón, sobre una isla de exhibición en roble">
+    <span class="hm-mundo-body">
+      <span class="hm-mundo-k">Retail</span>
+      <span class="hm-mundo-s">Tiendas que venden más</span>
+      <span class="hm-go">Ver proyectos<i></i></span>
+    </span>
+  </a>
+  <a class="hm-mundo" href="hogar/espacios" data-cursor="Ver">
+    <img loading="lazy" decoding="async" src="images/home/mundo-hogar.webp" srcset="images/home/mundo-hogar-m.webp 900w, images/home/mundo-hogar.webp 1320w" sizes="(min-width:900px) 45vw, 84vw" width="1320" height="1760" alt="Sala de paredes verde oliva con galería de cuadros, cortinas de terciopelo petróleo y un sofá curvo crema">
+    <span class="hm-mundo-body">
+      <span class="hm-mundo-k">Hogar</span>
+      <span class="hm-mundo-s">Su casa, con el mismo criterio</span>
+      <span class="hm-go">Ver espacios<i></i></span>
+    </span>
+  </a>
+  <a class="hm-mundo" href="catalogo/navidad/" data-cursor="Ver">
+    <img loading="lazy" decoding="async" src="images/home/mundo-navidad.webp" srcset="images/home/mundo-navidad-m.webp 900w, images/home/mundo-navidad.webp 1320w" sizes="(min-width:900px) 45vw, 84vw" width="1320" height="1760" alt="Rincón navideño con árbol iluminado, cascanueces, casa de jengibre, Papá Noel y reno dorado junto a una ventana en arco">
+    <span class="hm-mundo-body">
+      <span class="hm-mundo-k">Navidad</span>
+      <span class="hm-mundo-s">Colección 2026, pieza por pieza</span>
+      <span class="hm-go">Ver colección<i></i></span>
+    </span>
+  </a>
+</section>
+
+<!-- ============ OBRA: mosaico alineado, filas a ras ============ -->
+<section class="hm-obra" id="trabajo" aria-labelledby="obrasT">
+  <div class="gd-in">
+    <header class="hm-bar">
+      <h2 class="hm-h reveal" id="obrasT">Obra que <em>se reconoce</em></h2>
+      <a class="gd-link reveal d1" href="proyectos/">Ver los catorce proyectos<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </header>
+    <div class="hm-mosaico">
+      <div class="hm-row">
+        <a class="hm-t reveal" href="proyectos/el-corte-ingles" data-cursor="Ver" style="--ar:1.25">
+          <img loading="lazy" decoding="async" src="images/home/obra-corteingles.webp" width="1385" height="1500" style="object-position:50% 36%" alt="Zona de sala del departamento de decoración de El Corte Inglés, con sofá bouclé, mesa de centro ovalada y plantas">
+          <span class="hm-t-cap"><b>El Corte Inglés</b><em>Retail departamental</em></span>
+        </a>
+        <a class="hm-t reveal d1" href="proyectos/pycca-ecuador" data-cursor="Ver" style="--ar:.9">
+          <img loading="lazy" decoding="async" src="images/home/obra-pycca.webp" width="997" height="1081" style="object-position:50% 40%" alt="Campaña navideña de Pycca Ecuador con un árbol decorado en blanco y dorado entre estanterías">
+          <span class="hm-t-cap"><b>Pycca Ecuador</b><em>Campaña estacional</em></span>
+        </a>
+        <a class="hm-t reveal d2" href="proyectos/enchantee-paris" data-cursor="Ver" style="--ar:.9">
+          <img loading="lazy" decoding="async" src="images/home/obra-enchantee.webp" width="1383" height="1500" style="object-position:50% 38%" alt="Vitrina de Enchantée Paris con maniquíes vestidos en la entrada de la tienda">
+          <span class="hm-t-cap"><b>Enchantée Paris</b><em>Moda · vitrinismo</em></span>
+        </a>
       </div>
-    </div>
-    <dl class="hm-cifras reveal d3">
-      <div><dt>Proyectos documentados</dt><dd><b data-n="14">14</b></dd></div>
-      <div><dt>De ellos, retail</dt><dd><b data-n="10">10</b></dd></div>
-      <div><dt>Países · Perú y Ecuador</dt><dd><b data-n="2">2</b></dd></div>
-      <div><dt>Presencia reciente</dt><dd class="is-txt">Expodeco · Casacor</dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- ============ 02 · TRES MUNDOS ============ -->
-<section class="hm-sec hm-mundos gd-oscuro" id="universos" aria-labelledby="mundosT">
-  <div class="gd-in hm-mundos-head">
-    <p class="hm-eyebrow reveal"><span>02</span>Tres mundos, un solo criterio</p>
-    <h2 class="hm-h2 reveal d1" id="mundosT">Del local comercial <em>a su casa</em></h2>
-  </div>
-  <div class="hm-mundos-row">
-    <a class="hm-mundo" href="retail/proyectos" data-cursor="Ver">
-      <img loading="lazy" decoding="async" src="images/home/mundo-retail.webp" srcset="images/home/mundo-retail-m.webp 900w, images/home/mundo-retail.webp 1320w" sizes="(min-width:900px) 45vw, 100vw" width="1320" height="1760" alt="Muro de nichos con marcos de latón y tres maniquíes vestidos en lino, camel y carbón, sobre una isla de exhibición en roble">
-      <span class="hm-mundo-body">
-        <span class="hm-mundo-n">01 · Retail</span>
-        <h3>Tiendas que venden más</h3>
-        <p>Layout, mobiliario, iluminación y vitrina en una sola dirección. Diez proyectos retail documentados.</p>
-        <span class="hm-go">Ver proyectos retail<i></i></span>
-      </span>
-    </a>
-    <a class="hm-mundo" href="hogar/espacios" data-cursor="Ver">
-      <img loading="lazy" decoding="async" src="images/home/mundo-hogar.webp" srcset="images/home/mundo-hogar-m.webp 900w, images/home/mundo-hogar.webp 1320w" sizes="(min-width:900px) 45vw, 100vw" width="1320" height="1760" alt="Sala de paredes verde oliva con galería de cuadros, cortinas de terciopelo petróleo y un sofá curvo crema">
-      <span class="hm-mundo-body">
-        <span class="hm-mundo-n">02 · Hogar</span>
-        <h3>Su casa, con el mismo criterio</h3>
-        <p>Primero el recorrido, después el estilo.</p>
-        <span class="hm-go">Ver espacios<i></i></span>
-      </span>
-    </a>
-    <a class="hm-mundo" href="catalogo/compra-espacio/" data-cursor="Ver">
-      <img loading="lazy" decoding="async" src="images/campana/navidad-comedor.jpg" width="1273" height="1500" style="object-position:50% 45%" alt="Comedor ambientado con la colección Navidad 2026 de Giandeco: aparador con casa de jengibre, cascanueces y renos dorados, guirnalda iluminada y velas">
-      <span class="hm-mundo-body">
-        <span class="hm-mundo-n">03 · Catálogo</span>
-        <h3>Piezas para comprar</h3>
-        <p>Ambientes montados con piezas que puede comprar, una por una.</p>
-        <span class="hm-go">Comprar el espacio<i></i></span>
-      </span>
-    </a>
-  </div>
-</section>
-
-<!-- ============ 03 · OBRA ============ -->
-<section class="hm-sec hm-obras" id="trabajo" aria-labelledby="obrasT">
-  <div class="gd-in">
-    <div class="hm-head">
-      <p class="hm-eyebrow reveal"><span>03</span>Obra</p>
-      <h2 class="hm-h2 reveal d1" id="obrasT">Obras que se reconocen <em>sin explicación</em></h2>
-      <p class="hm-lead reveal d2">El Corte Inglés, Pycca y Enchantée Paris, entre catorce proyectos documentados en Perú y Ecuador.</p>
-    </div>
-
-    <div class="hm-obras-grid">
-      <a class="hm-obra hm-obra--a reveal" href="proyectos/el-corte-ingles" data-cursor="Ver" style="--r:7/6">
-        <span class="hm-obra-img"><img loading="lazy" decoding="async" src="images/home/obra-corteingles.webp" width="1385" height="1500" style="object-position:50% 38%" alt="Zona de sala del departamento de decoración de El Corte Inglés, con sofá bouclé, mesa de centro ovalada y plantas"></span>
-        <span class="hm-obra-cap"><i>01</i><b>El Corte Inglés</b><em>Retail departamental</em><span class="hm-go">Ver proyecto<i></i></span></span>
-      </a>
-      <a class="hm-obra hm-obra--b reveal d1" href="proyectos/pycca-ecuador" data-cursor="Ver" style="--r:4/5">
-        <span class="hm-obra-img"><img loading="lazy" decoding="async" src="images/home/obra-pycca.webp" width="997" height="1081" style="object-position:50% 40%" alt="Campaña navideña de Pycca Ecuador con un árbol decorado en blanco y dorado entre estanterías"></span>
-        <span class="hm-obra-cap"><i>02</i><b>Pycca Ecuador</b><em>Campaña estacional</em><span class="hm-go">Ver proyecto<i></i></span></span>
-      </a>
-      <a class="hm-obra hm-obra--c reveal" href="proyectos/enchantee-paris" data-cursor="Ver" style="--r:4/5">
-        <span class="hm-obra-img"><img loading="lazy" decoding="async" src="images/home/obra-enchantee.webp" width="1383" height="1500" style="object-position:50% 38%" alt="Vitrina de Enchantée Paris con maniquíes vestidos en la entrada de la tienda"></span>
-        <span class="hm-obra-cap"><i>03</i><b>Enchantée Paris</b><em>Moda · vitrinismo</em><span class="hm-go">Ver proyecto<i></i></span></span>
-      </a>
-      <a class="hm-obra hm-obra--d reveal d1" href="proyectos/expodeco-2024" data-cursor="Ver" style="--r:7/6">
-        <span class="hm-obra-img"><img loading="lazy" decoding="async" src="images/home/obra-expodeco.webp" width="1500" height="1370" style="object-position:50% 50%" alt="Showroom de Expodeco 2024 con muro de revestimientos ondulados, vegetación colgante y mobiliario negro"></span>
-        <span class="hm-obra-cap"><i>04</i><b>Expodeco 2024</b><em>Feria de decoración</em><span class="hm-go">Ver proyecto<i></i></span></span>
-      </a>
-    </div>
-
-    <div class="hm-mas reveal">
-      <div class="hm-mas-head">
-        <h3 class="hm-mas-t">Más obra</h3>
-        <div class="hm-mas-ctl">
-          <button type="button" class="hm-arrow" data-dir="-1" aria-label="Anteriores"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button>
-          <button type="button" class="hm-arrow" data-dir="1" aria-label="Siguientes"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
-          <a class="gd-link" href="proyectos/">Ver los catorce proyectos<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <div class="hm-row">
+        <a class="hm-t reveal" href="proyectos/expodeco-2024" data-cursor="Ver" style="--ar:1">
+          <img loading="lazy" decoding="async" src="images/home/obra-expodeco.webp" width="1500" height="1370" alt="Showroom de Expodeco 2024 con muro de revestimientos ondulados, vegetación colgante y mobiliario negro">
+          <span class="hm-t-cap"><b>Expodeco 2024</b><em>Feria de decoración</em></span>
+        </a>
+        <a class="hm-t reveal d1" href="proyectos/casacor-2025" data-cursor="Ver" style="--ar:.72">
+          <img loading="lazy" decoding="async" src="images/home/obra-casacor.webp" width="1365" height="2048" alt="Sala de Casacor 2025 con cornisa azul, cortinas petróleo y galería de cuadros">
+          <span class="hm-t-cap"><b>Casacor 2025</b><em>Feria de diseño</em></span>
+        </a>
+        <a class="hm-t reveal d2" href="proyectos/walon-figuritas" data-cursor="Ver" style="--ar:1">
+          <img loading="lazy" decoding="async" src="images/home/obra-walonfig.webp" width="1385" height="1500" style="object-position:50% 40%" alt="Isla con maniquí deportivo en la campaña Figuritas del Barrio de Walon">
+          <span class="hm-t-cap"><b>Walon · Figuritas del Barrio</b><em>Campaña nacional</em></span>
+        </a>
+        <div class="hm-t hm-stat reveal d3" style="--ar:1" role="group" aria-label="El estudio en cifras">
+          <div class="hm-stat-in">
+            <b data-n="14">14</b>
+            <span>proyectos documentados</span>
+            <i aria-hidden="true"></i>
+            <span>10 retail · Perú y Ecuador</span>
+          </div>
         </div>
       </div>
-      <div class="hm-mas-row" id="hmMas" tabindex="0" aria-label="Más proyectos del estudio">
-        <a class="hm-mas-card" href="proyectos/convivir-con-el-arte" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/convivir.jpg" width="1200" height="1800" style="object-position:50% 40%" alt="Sala con techo azul profundo y zócalo verde oliva en el proyecto Convivir con el Arte"></span><b>Convivir con el Arte</b><span class="k">Arte e interiorismo</span></a>
-        <a class="hm-mas-card" href="proyectos/casacor-2025" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/home/obra-casacor.webp" width="1365" height="2048" style="object-position:50% 50%" alt="Sala de Casacor 2025 con cornisa azul, cortinas petróleo y galería de cuadros"></span><b>Casacor 2025</b><span class="k">Feria de diseño</span></a>
-        <a class="hm-mas-card" href="proyectos/walon-figuritas" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/home/obra-walonfig.webp" width="1385" height="1500" style="object-position:50% 40%" alt="Isla con maniquí deportivo en la campaña Figuritas del Barrio de Walon"></span><b>Walon — Figuritas del Barrio</b><span class="k">Campaña nacional</span></a>
-        <a class="hm-mas-card" href="proyectos/hotel-union-cusco" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/unioncusco.jpg" width="1600" height="879" style="object-position:30% 50%" alt="Restaurante del Hotel Unión Cusco con mesas servidas junto a un ventanal"></span><b>Hotel Unión Cusco</b><span class="k">Hotelería · restaurante</span></a>
-        <a class="hm-mas-card" href="proyectos/baby-club" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/babyclub.jpg" width="997" height="1080" style="object-position:50% 45%" alt="Fachada y vitrinas de la boutique infantil Baby Club Chic"></span><b>Baby Club</b><span class="k">Boutique infantil</span></a>
-        <a class="hm-mas-card" href="proyectos/walon-punta-hermosa" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/walonpuntahermosa.jpg" width="997" height="1080" style="object-position:50% 55%" alt="Tienda boutique de deporte Walon en Punta Hermosa con mobiliario de metal negro y madera"></span><b>Walon Punta Hermosa</b><span class="k">Tienda boutique · deporte</span></a>
-        <a class="hm-mas-card" href="proyectos/massimo-cafe" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/massimo.jpg" width="1600" height="774" style="object-position:40% 50%" alt="Salón del Mássimo Café con muro de cuadros y sofás rojos"></span><b>Mássimo Café</b><span class="k">Gastronomía · concepto</span></a>
-        <a class="hm-mas-card" href="proyectos/casa-grande" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/casagrande.jpg" width="1000" height="542" style="object-position:50% 50%" alt="Dormitorio ambientado para Casa Grande con cama, banqueta azul y lámparas"></span><b>Casa Grande</b><span class="k">Mobiliario y decoración</span></a>
-        <a class="hm-mas-card" href="proyectos/ferrehome" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/ferrehome.jpg" width="1000" height="750" style="object-position:50% 45%" alt="Mesa del bazar de decoración Ferrehome con cojines, textiles y objetos"></span><b>Ferrehome</b><span class="k">Bazar de decoración</span></a>
-        <a class="hm-mas-card" href="catalogo/compra-espacio/sala-estar" data-cursor="Ver"><span class="im"><img loading="lazy" decoding="async" src="images/work/zarasala.jpg" width="960" height="640" style="object-position:50% 45%" alt="Sala ambientada para el departamento hogar de Zara con sofá curvo y velas"></span><b>Zara — Sala</b><span class="k">Visual merchandising · hogar</span></a>
+      <div class="hm-row hm-row--ancha">
+        <a class="hm-t reveal" href="proyectos/massimo-cafe" data-cursor="Ver" style="--ar:1.9">
+          <img loading="lazy" decoding="async" src="images/work/massimo.jpg" width="1600" height="774" style="object-position:40% 50%" alt="Salón del Mássimo Café con muro de cuadros y sofás rojos">
+          <span class="hm-t-cap"><b>Mássimo Café</b><em>Gastronomía · concepto</em></span>
+        </a>
+        <a class="hm-t reveal d1" href="proyectos/hotel-union-cusco" data-cursor="Ver" style="--ar:1.75">
+          <img loading="lazy" decoding="async" src="images/work/unioncusco.jpg" width="1600" height="879" style="object-position:30% 50%" alt="Restaurante del Hotel Unión Cusco con mesas servidas junto a un ventanal">
+          <span class="hm-t-cap"><b>Hotel Unión Cusco</b><em>Hotelería · restaurante</em></span>
+        </a>
+        <a class="hm-t reveal d2" href="catalogo/compra-espacio/sala-estar" data-cursor="Ver" style="--ar:1.5">
+          <img loading="lazy" decoding="async" src="images/work/zarasala.jpg" width="960" height="640" style="object-position:50% 45%" alt="Sala ambientada para el departamento hogar de Zara con sofá curvo y velas">
+          <span class="hm-t-cap"><b>Zara · Sala</b><em>Visual merchandising · hogar</em></span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ MARCAS ============ -->
-<section class="hm-sec gd-marcas hm-marcas" id="marcas">
+<!-- ============ NAVIDAD: la escena a todo ancho, cada pieza se compra ============
+     Puntos de compra (.gd-shop-dot) y fichas: los monta js/giandeco.js. Piezas de la fila: GD_NAVIDAD. -->
+<section class="hm-escena gd-nav gd-oscuro" id="navidad" aria-labelledby="navT">
   <div class="gd-in">
-    <p class="hm-eyebrow hm-eyebrow--c reveal">Con quiénes hemos colaborado</p>
-    <h2 class="hm-marcas-h reveal d1">Marcas con las que hemos colaborado</h2>
+    <header class="hm-bar">
+      <h2 class="hm-h reveal" id="navT">Navidad, <em>pieza por pieza</em></h2>
+      <div class="hm-bar-links reveal d1">
+        <a class="gd-link" href="retail/navidad">Navidad para tiendas<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="gd-link" href="catalogo/navidad/#piezas">Ver toda la colección<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </header>
   </div>
-  <div class="gd-marcas-wall reveal d2">
-    <div class="gd-marcas-row" id="marcasRow1"><div class="gd-marcas-track" id="marcasTrack1"></div></div>
-    <div class="gd-marcas-row gd-marcas-row--rev" id="marcasRow2"><div class="gd-marcas-track" id="marcasTrack2"></div></div>
+  <div class="hm-escena-img reveal-scale">
+    <div class="gd-shop hm-shop-d">
+      <img class="gd-shop-img" loading="lazy" decoding="async" src="images/campana/navidad-banner-2026-1920.webp" srcset="images/campana/navidad-banner-2026-1280.webp 1280w, images/campana/navidad-banner-2026-1920.webp 1920w" sizes="100vw" width="1920" height="1072" alt="Aparador navideño de Giandeco con espejo dorado y guirnalda iluminada. Sobre el aparador, piezas de la colección 2026: Papá Noel, reno dorado, casitas y árbol de porcelana iluminados, cascanueces, portavelas negros y arreglo de pino y berries; mesa servida en primer plano">
+      <button class="gd-shop-dot" style="left:34.9%; top:48.2%" data-prod="portavela-negro"></button>
+      <button class="gd-shop-dot" style="left:39.7%; top:55.4%" data-prod="arbol-iluminado"></button>
+      <button class="gd-shop-dot" style="left:46.1%; top:52.6%" data-prod="papa-noel"></button>
+      <button class="gd-shop-dot" style="left:54.3%; top:55.4%" data-prod="reno-recostado"></button>
+      <button class="gd-shop-dot" style="left:60.3%; top:56.0%" data-prod="casa-iluminada-mediana"></button>
+      <button class="gd-shop-dot" style="left:66.4%; top:59.1%" data-prod="casa-iluminada-pequena"></button>
+      <button class="gd-shop-dot" style="left:72.2%; top:54.3%" data-prod="cascanueces-musicales"></button>
+      <button class="gd-shop-dot" style="left:79.7%; top:58.2%" data-prod="cascanueces-mecedores"></button>
+      <button class="gd-shop-dot" style="left:91.9%; top:43.7%" data-prod="arreglo-pino-berries"></button>
+    </div>
+    <div class="gd-shop hm-shop-m">
+      <img class="gd-shop-img" loading="lazy" decoding="async" src="images/campana/navidad-banner-movil-2026-780.webp" srcset="images/campana/navidad-banner-movil-2026-780.webp 780w, images/campana/navidad-banner-movil-2026-1280.webp 1280w" sizes="100vw" width="1280" height="960" alt="Aparador navideño de Giandeco con espejo y guirnalda iluminada: Papá Noel, reno dorado, casitas y árbol iluminados, cascanueces y arreglo de pino y berries de la colección Navidad 2026">
+      <button class="gd-shop-dot" style="left:13.4%; top:47.7%" data-prod="portavela-negro"></button>
+      <button class="gd-shop-dot" style="left:28.3%; top:53.2%" data-prod="papa-noel"></button>
+      <button class="gd-shop-dot" style="left:39.2%; top:54.9%" data-prod="reno-recostado"></button>
+      <button class="gd-shop-dot" style="left:63.0%; top:53.8%" data-prod="cascanueces-musicales"></button>
+      <button class="gd-shop-dot" style="left:73.0%; top:57.6%" data-prod="cascanueces-mecedores"></button>
+      <button class="gd-shop-dot" style="left:89.2%; top:43.2%" data-prod="arreglo-pino-berries"></button>
+    </div>
+    <p class="hm-hint" aria-hidden="true"><i></i>Toque un punto para ver la pieza</p>
   </div>
-  <p class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">El Corte Inglés, Pycca, Enchantée Paris, Zara, Walon, Baby Club Chic, Hotel Unión Cusco, Mássimo Café, Casa Grande, Casacor, Expodeco.</p>
+  <div class="gd-in">
+    <div class="gd-grid es-carrusel" id="navProds"></div>
+  </div>
 </section>
 
-<!-- ============ 04 · MÉTODO ============ -->
-<section class="hm-sec hm-metodo" id="metodo" aria-labelledby="metT">
+<!-- ============ MÉTODO: boceto y obra, lado a lado ============ -->
+<section class="hm-metodo" id="metodo" aria-labelledby="metT">
   <div class="gd-in hm-metodo-grid">
-    <div class="hm-metodo-txt">
-      <p class="hm-eyebrow reveal"><span>04</span>Método</p>
-      <h2 class="hm-h2 reveal d1" id="metT">Del boceto <em>a la obra</em></h2>
-      <p class="hm-lead reveal d2">Cada proyecto se dibuja en acuarela antes de levantarse. Lo que se aprueba en papel es lo que se monta en obra.</p>
-      <div class="gd-ba-tabs hm-tabs reveal d2" role="tablist" aria-label="Proyectos">
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="true" data-ba="0"><b>Zona Tienda</b><em>Retail · Lima</em></button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="1"><b>Lounge Bar</b><em>Hostelería · Lima</em></button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="2"><b>Salón de Eventos</b><em>Eventos · Lima</em></button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="3"><b>Feria Casacor</b><em>Feria de diseño · Lima</em></button>
-        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="4"><b>Feria Expodeco</b><em>Feria de decoración · Lima</em></button>
+    <div class="hm-metodo-panel">
+      <h2 class="hm-h reveal" id="metT">Del boceto <em>a la obra</em></h2>
+      <div class="gd-ba-tabs hm-tabs reveal d1" role="tablist" aria-label="Proyectos">
+        <button class="gd-ba-tab" type="button" role="tab" aria-selected="true" data-ba="0">Zona Tienda</button>
+        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="1">Lounge Bar</button>
+        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="2">Salón de Eventos</button>
+        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="3">Feria Casacor</button>
+        <button class="gd-ba-tab" type="button" role="tab" aria-selected="false" data-ba="4">Feria Expodeco</button>
       </div>
-      <div class="gd-ba-caption hm-metodo-cap reveal d3">
+      <div class="gd-ba-caption hm-metodo-cap reveal d2">
         <p id="baCaption">Zona de tienda integrada a un espacio de arte: mobiliario bajo para no tapar la pared de fondo y luz cálida dirigida a la exhibición.</p>
         <span class="gd-ba-meta" id="baMeta">Retail · Lima</span>
       </div>
       <a class="gd-link reveal d3" href="proyectos/expodeco-2024">Ver un proceso completo<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
-    <div class="hm-metodo-media reveal-scale d1">
+    <div class="hm-metodo-stage reveal-scale d1">
       <span class="gd-ba-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7L4 12l4 5M16 7l4 5-4 5M12 4v16"/></svg>Arrastre para comparar</span>
       <div class="gd-ba-frame" id="baFrame">
         <img loading="lazy" decoding="async" id="baImgA" src="images/proceso/zonatienda-boceto.jpg" alt="Boceto en acuarela de la zona de tienda">
@@ -1564,109 +1589,46 @@
   </div>
 </section>
 
-<!-- ============ DIFERENCIADORES ============ -->
-<section class="hm-sec hm-dif" id="servicios" aria-labelledby="difT">
+<!-- ============ CATÁLOGO: dos escenas, mueblería e iluminación ============ -->
+<section class="hm-cat gd-claro" id="catalogo" aria-labelledby="catT">
   <div class="gd-in">
-    <div class="hm-head hm-head--solo">
-      <p class="hm-eyebrow reveal">Qué nos hace distintos</p>
-      <h2 class="hm-h2 hm-h2--s reveal d1" id="difT">Cuatro argumentos propios</h2>
-    </div>
-    <div class="hm-dif-grid">
-      <article class="hm-dif-it reveal"><i>01</i><h3>Interiores y visual merchandising juntos</h3><p>El layout y la exhibición se deciden a la vez: dónde va el producto y cómo se mueve el cliente.</p></article>
-      <article class="hm-dif-it reveal d1"><i>02</i><h3>Diseño y ejecución</h3><p>Entregamos el proyecto o lo levantamos completo. Menos terceros, menos días con el local cerrado.</p></article>
-      <article class="hm-dif-it reveal d2"><i>03</i><h3>Mobiliario propio</h3><p>Si el catálogo no exhibe bien su producto, diseñamos la pieza: material, medida y acabado.</p></article>
-      <article class="hm-dif-it reveal d3"><i>04</i><h3>Portafolio verificable</h3><p>El Corte Inglés, Pycca y Enchantée Paris: nombres que un comité reconoce sin explicación.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 05 · NAVIDAD 2026 ============
-     Las piezas reales del catálogo (GD_NAVIDAD): tarjetas, categorías y total salen de los datos. -->
-<section class="hm-sec gd-nav hm-nav gd-oscuro" id="navidad" aria-labelledby="navT">
-  <div class="gd-in gd-nav-grid">
-    <div class="gd-nav-head">
-      <p class="hm-eyebrow reveal"><span>05</span>Colección Navidad 2026</p>
-      <h2 class="hm-h2 reveal d1" id="navT">Navidad, <em>pieza por pieza</em></h2>
-      <p class="hm-lead reveal d2"><span id="navTotal">Veintiséis</span> piezas con precio y ficha, para su casa o su tienda.</p>
-      <nav class="gd-nav-chips reveal d2" id="navChips" aria-label="Categorías de la colección de Navidad"></nav>
-    </div>
-
-    <div class="gd-nav-prods">
-      <div class="gd-grid es-carrusel" id="navProds"></div>
-    </div>
-
-    <a class="gd-nav-foto reveal-scale" href="catalogo/navidad/#piezas" data-cursor="Ver">
-      <img loading="lazy" decoding="async" src="images/home/mundo-navidad.webp" srcset="images/home/mundo-navidad-m.webp 900w, images/home/mundo-navidad.webp 1320w" sizes="(min-width:900px) 40vw, 100vw" width="1320" height="1760" alt="Rincón navideño con árbol iluminado, cascanueces, casa de jengibre, Papá Noel y reno dorado junto a una ventana en arco">
-      <span class="gd-nav-foto-cap"><span class="gd-eyebrow">Ambientación de referencia</span><b>Las piezas, en su lugar</b><span class="gd-nav-foto-mas">Elija cada una con su precio →</span></span>
-    </a>
-
-    <div class="gd-nav-acc">
-      <a class="gd-btn gd-btn-primary" href="catalogo/navidad/#piezas">Ver toda la colección<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      <a class="gd-link" href="catalogo/navidad/#comedor">Comprar el comedor de la colección<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      <a class="gd-link" href="retail/navidad">Navidad para tiendas: montaje de campaña<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <header class="hm-bar">
+      <h2 class="hm-h reveal" id="catT">Mueblería <em>e iluminación</em></h2>
+      <a class="gd-link reveal d1" href="catalogo/">Ver todo el catálogo<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </header>
+    <div class="hm-cat-row">
+      <a class="hm-cat-p reveal" href="catalogo/muebleria" data-cursor="Ver">
+        <img loading="lazy" decoding="async" src="images/campana/muebleria-2026-1280.webp" srcset="images/campana/muebleria-2026-1280.webp 1280w, images/campana/muebleria-2026-1920.webp 1920w" sizes="(min-width:900px) 50vw, 100vw" width="1920" height="1080" alt="Sala-comedor en penumbra con panel de TV en madera, mesa ovalada, sillas tapizadas y lámpara de latón colgante">
+        <span class="hm-cat-cap"><b>Mueblería</b><span class="hm-go">Ver colección<i></i></span></span>
+      </a>
+      <a class="hm-cat-p reveal d1" href="catalogo/iluminacion" data-cursor="Ver">
+        <img loading="lazy" decoding="async" src="images/campana/iluminacion-2026-1280.webp" srcset="images/campana/iluminacion-2026-1280.webp 1280w, images/campana/iluminacion-2026-1920.webp 1920w" sizes="(min-width:900px) 50vw, 100vw" width="1920" height="1080" alt="Comedor íntimo con mesa redonda de madera, sillas tapizadas y una lámpara circular de luz cálida">
+        <span class="hm-cat-cap"><b>Iluminación</b><span class="hm-go">Ver colección<i></i></span></span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ============ 06 · CATÁLOGO ============
-     Piezas reales con precio, desde GD_PRODUCTOS y GD_ILUMINACION. -->
-<section class="hm-sec gd-catalogo gd-claro hm-cat" id="catalogo" aria-labelledby="catT">
-  <div class="gd-in hm-cat-grid">
-    <div class="hm-cat-head">
-      <p class="hm-eyebrow reveal"><span>06</span>Catálogo</p>
-      <h2 class="hm-h2 reveal d1" id="catT">Mueblería <em>e iluminación</em></h2>
-      <p class="hm-lead reveal d2">Lo que especificamos en obra, por pieza y con precio.</p>
-      <div class="hm-cat-links reveal d3">
-        <a class="gd-btn gd-btn-ghost" href="catalogo/muebleria">Mueblería</a>
-        <a class="gd-btn gd-btn-ghost" href="catalogo/iluminacion">Iluminación</a>
-      </div>
-      <a class="gd-link reveal d3" href="catalogo/">Ver todo el catálogo<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="gd-grid hm-cat-prods" id="catProds"></div>
+<!-- ============ AUTORÍA ============ -->
+<section class="hm-estudio" id="estudio" aria-labelledby="estT">
+  <div class="hm-estudio-foto reveal-scale">
+    <img loading="lazy" decoding="async" src="images/estudio/gian.jpg" width="1000" height="1249" alt="Gian Jiménez, fundador y director de diseño de Giandeco">
+  </div>
+  <div class="hm-estudio-txt">
+    <blockquote class="gd-quote hm-quote reveal" id="estT">«Resuelvo el espacio primero. <em>El diseño llega después.</em>»</blockquote>
+    <p class="hm-firma reveal d1"><b>Gian Jiménez</b><span>Fundador y director de diseño</span></p>
   </div>
 </section>
 
-<!-- ============ 07 · AUTORÍA ============ -->
-<section class="hm-sec hm-estudio" id="estudio" aria-labelledby="estT">
-  <div class="gd-in">
-    <div class="gd-estudio-grid">
-      <div class="gd-estudio-foto reveal-scale">
-        <img loading="lazy" decoding="async" src="images/estudio/gian.jpg" alt="Gian Jiménez, fundador y director de diseño de Giandeco">
-      </div>
-      <div>
-        <p class="hm-eyebrow reveal"><span>07</span>Autoría</p>
-        <h2 class="hm-h2 reveal d1" id="estT">Gian firma <em>cada proyecto</em></h2>
-        <p class="hm-lead reveal d2">Toda propuesta llega con la razón detrás: por qué esa altura de mueble, ese recorrido, ese punto de luz.</p>
-        <blockquote class="gd-quote hm-quote reveal d3">«Resuelvo el espacio primero. El diseño llega después.»</blockquote>
-        <div class="gd-estudio-firma reveal d3">
-          <b>Luis Giancarlo Jiménez Sánchez</b>
-          <span>Fundador · Director de diseño</span>
-        </div>
-        <div class="gd-valores reveal d4">
-          <div class="gd-valor"><b>Criterio</b><span>Si no se explica, no se presenta.</span></div>
-          <div class="gd-valor"><b>Oficio</b><span>Material, medida y acabado especificados.</span></div>
-          <div class="gd-valor"><b>Palabra</b><span>Fecha de entrega y presupuesto se sostienen.</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 08 · CITA ============ -->
-<section class="hm-sec gd-cta hm-cta" id="contacto" aria-labelledby="ctaT">
+<!-- ============ CIERRE ============ -->
+<section class="hm-cta gd-cta gd-oscuro" id="contacto" aria-labelledby="ctaT">
   <div class="gd-cta-media" aria-hidden="true"></div>
   <div class="gd-in">
-    <p class="hm-eyebrow hm-eyebrow--c reveal"><span>08</span>Siguiente paso</p>
-    <h2 class="hm-h2 hm-h2--cta reveal d1" id="ctaT">¿Cuándo toca <em>renovar su local?</em></h2>
-    <p class="hm-lead hm-lead--c reveal d2">Cuéntenos qué local es, qué vende y en qué fecha necesita reabrir. Respondemos con un diagnóstico de espacio y un alcance claro: proyecto, o proyecto más ejecución.</p>
-    <div class="gd-cta-btns reveal d3">
+    <h2 class="hm-cta-h reveal" id="ctaT">¿Cuándo toca <em>renovar su local?</em></h2>
+    <p class="hm-cta-p reveal d1">Cuéntenos qué local es y en qué fecha necesita reabrir.</p>
+    <div class="gd-cta-btns reveal d2">
       <a class="gd-btn gd-btn-primary" href="contacto">Escribir al estudio<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       <a class="gd-btn gd-btn-ghost" href="https://wa.me/51920775559" rel="noopener">Escribir por WhatsApp</a>
-      <a class="gd-btn gd-btn-ghost" href="#trabajo">Ver el portafolio</a>
-    </div>
-    <div class="gd-cta-datos reveal d4">
-      <span>Estudio de diseño comercial — <b>Lima, Perú</b></span>
-      <span>Asesoría <b>con cita previa</b></span>
     </div>
   </div>
 </section>
@@ -1677,18 +1639,6 @@
     <p class="gd-seo-texto">Giandeco Studio Design es un estudio de diseño de interiores y visual merchandising en <strong>Lima, Perú</strong>, especializado en proyectos <strong>retail</strong> para marcas como El Corte Inglés, Pycca, Walon y Enchantée Paris. Además del diseño comercial, desarrolla interiorismo residencial (<strong>Hogar</strong>) y una línea propia de mobiliario y decoración (<strong>Catálogo</strong>). Bajo la dirección de Gian Jiménez, el estudio diseña y, cuando el proyecto lo requiere, ejecuta el proyecto completo: layout comercial, mobiliario a medida, iluminación y visual merchandising, con presencia en ferias como Expodeco y Casacor.</p>
   </div>
 </section>
-
-<!-- índice lateral del recorrido (escritorio) -->
-<nav class="hm-rail" id="hmRail" aria-label="Secciones de la página">
-  <a href="#declaracion" data-s="declaracion"><span>Declaración</span><i></i></a>
-  <a href="#universos" data-s="universos"><span>Tres mundos</span><i></i></a>
-  <a href="#trabajo" data-s="trabajo"><span>Obra</span><i></i></a>
-  <a href="#metodo" data-s="metodo"><span>Método</span><i></i></a>
-  <a href="#navidad" data-s="navidad"><span>Navidad</span><i></i></a>
-  <a href="#catalogo" data-s="catalogo"><span>Catálogo</span><i></i></a>
-  <a href="#estudio" data-s="estudio"><span>Autoría</span><i></i></a>
-  <a href="#contacto" data-s="contacto"><span>Contacto</span><i></i></a>
-</nav>
 
 <!-- ==================== FOOTER ==================== -->
 <!-- pie común del sitio: lo monta js/giandeco.js -->
@@ -2185,5 +2135,5 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <script src="js/gd-tienda.js?v=20261021a" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
-<script src="js/gd-home-d.js?v=20261026a" defer></script>
+<script src="js/gd-home-d.js?v=20261026c" defer></script>
 <script src="js/gd-chat.js?v=20261018b" defer></script>
