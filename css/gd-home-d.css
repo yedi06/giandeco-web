@@ -71,17 +71,30 @@
 .hm-triptico{ padding-block:clamp(36px,4vw,64px) clamp(8px,1vw,16px); }
 .hm-mundos{ display:flex; gap:2px; height:clamp(520px,calc(100svh - 190px),900px); background:rgba(201,162,74,.5); color:#DED8CB; }
 .hm-mundo{
-  position:relative; display:block; flex:1 1 0; min-width:0; overflow:hidden; text-decoration:none; color:#DED8CB; isolation:isolate;
+  /* ancho del panel en reposo (un tercio): la foto principal se queda SIEMPRE a este tamaño, sin zoom */
+  --hm-rw:calc((min(100vw,var(--gd-max)) - 2 * var(--gd-gut) - 4px) / 3);
+  position:relative; display:block; flex:1 1 0; min-width:0; overflow:hidden; text-decoration:none; color:#DED8CB; isolation:isolate; background:#0A0A09;
   transition:flex .95s cubic-bezier(.16,1,.3,1);
 }
-.hm-mundo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform 1.6s cubic-bezier(.16,1,.3,1); }
+@supports (width:1cqw){ .hm-mundo{ --hm-rw:calc((100cqw - 4px) / 3); } }
+.hm-mundos{ container-type:inline-size; }
+/* Foto principal: tamaño fijo y centrada. Al ensanchar el panel no se estira: se revelan, a los lados, dos detalles del mismo universo. */
+.hm-mundo > img{ position:absolute; top:0; left:calc(50% - var(--hm-rw) / 2); width:var(--hm-rw); max-width:none; height:100%; object-fit:cover; z-index:-2; box-shadow:0 0 0 1px rgba(201,162,74,.55); }
+.hm-mundo > img.hm-side{ width:calc(var(--hm-rw) * .34); filter:brightness(.74) saturate(.88) contrast(1.03); box-shadow:none; background:#0A0A09; }
+.hm-mundo > img.hm-side--l{ left:auto; right:calc(50% + var(--hm-rw) / 2 + 1px); }
+.hm-mundo > img.hm-side--r{ left:calc(50% + var(--hm-rw) / 2 + 1px); }
 .hm-mundo::after{
   content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
   background:linear-gradient(to top,rgba(10,10,9,.92) 0%,rgba(10,10,9,.55) 26%,rgba(10,10,9,.16) 46%,rgba(10,10,9,0) 60%);
 }
-.hm-mundo:hover img, .hm-mundo:focus-visible img{ transform:scale(1.05); }
-.hm-mundos:has(.hm-mundo:hover) .hm-mundo, .hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo{ flex:.8 1 0; }
-.hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover, .hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo:focus-visible{ flex:1.7 1 0; }
+.hm-mundos-dots{ display:none; }
+/* el panel se ensancha con el puntero (solo dispositivos con ratón) y con el teclado; en pantallas táctiles el toque abre directo */
+.hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo{ flex:.8 1 0; }
+.hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo:focus-visible{ flex:1.7 1 0; }
+@media (hover:hover) and (pointer:fine){
+  .hm-mundos:has(.hm-mundo:hover) .hm-mundo{ flex:.8 1 0; }
+  .hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover{ flex:1.7 1 0; }
+}
 .hm-mundo:focus-visible{ outline:2px solid #C9A24A; outline-offset:-4px; }
 .hm-mundo-body{ position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding:clamp(22px,2.6vw,48px); }
 .hm-mundo-k{ font-family:var(--display); font-weight:400; font-size:clamp(2.8rem,5vw,5.6rem); line-height:.95; letter-spacing:-.03em; color:#DED8CB; text-shadow:0 2px 24px rgba(10,10,9,.5); }
@@ -95,6 +108,12 @@
   }
   .hm-mundos::-webkit-scrollbar{ display:none; }
   .hm-mundo{ flex:0 0 min(78vw,420px); aspect-ratio:4/5; scroll-snap-align:start; transition:none; }
+  .hm-mundo > img{ left:0; width:100%; box-shadow:none; }
+  .hm-mundo > img.hm-side{ display:none; }
+  /* indicador del carrusel: dónde está y cuántos paneles hay */
+  .hm-mundos-dots{ display:flex; gap:8px; margin-top:16px; }
+  .hm-mundos-dots i{ display:block; width:18px; height:2px; background:rgba(222,216,203,.28); transition:width .35s var(--gd-ease), background .35s var(--gd-ease); }
+  .hm-mundos-dots i.is-on{ width:36px; background:#C9A24A; }
   .hm-mundos:has(.hm-mundo:hover) .hm-mundo, .hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover{ flex:0 0 min(78vw,420px); }
   .hm-mundo-k{ font-size:clamp(2.6rem,12vw,3.6rem); }
 }

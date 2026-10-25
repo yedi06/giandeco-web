@@ -26,3 +26,47 @@
   }, { threshold: .6 });
   els.forEach(function(el){ io.observe(el); });
 })();
+
+/* ==========================================================================
+   TRES MUNDOS · carga de los detalles laterales
+   Los detalles que se revelan al ensanchar un panel viven fuera del recorte,
+   así que el lazy nativo no los trae; los cargamos al acercarse la sección.
+   (solo escritorio: en móvil no se muestran)
+   ========================================================================== */
+(function(){
+  'use strict';
+  var caja = document.querySelector('.hm-mundos');
+  if(!caja) return;
+  var lados = Array.prototype.slice.call(caja.querySelectorAll('img[data-src]'));
+  if(!lados.length || (window.matchMedia && !window.matchMedia('(min-width:900px)').matches)) return;
+  function cargar(){
+    lados.forEach(function(i){ var s = i.getAttribute('data-src'); if(s){ i.src = s; i.removeAttribute('data-src'); } });
+  }
+  if(!('IntersectionObserver' in window)){ cargar(); return; }
+  var io = new IntersectionObserver(function(es){
+    if(es[0].isIntersecting){ cargar(); io.disconnect(); }
+  }, { rootMargin: '700px 0px' });
+  io.observe(caja);
+})();
+
+/* ==========================================================================
+   TRES MUNDOS · indicador del carrusel en móvil
+   ========================================================================== */
+(function(){
+  'use strict';
+  var pista = document.querySelector('.hm-mundos');
+  var puntos = pista ? Array.prototype.slice.call(document.querySelectorAll('.hm-mundos-dots i')) : [];
+  if(!pista || !puntos.length) return;
+  var paneles = pista.querySelectorAll('.hm-mundo'), espera = false;
+  function marcar(){
+    espera = false;
+    if(!paneles.length) return;
+    var paso = paneles[0].getBoundingClientRect().width + 2;
+    var max = pista.scrollWidth - pista.clientWidth;
+    var i = max > 0 && pista.scrollLeft >= max - 4 ? paneles.length - 1 : Math.round(pista.scrollLeft / paso);
+    i = Math.max(0, Math.min(paneles.length - 1, i));
+    puntos.forEach(function(p, k){ p.classList.toggle('is-on', k === i); });
+  }
+  pista.addEventListener('scroll', function(){ if(!espera){ espera = true; requestAnimationFrame(marcar); } }, { passive: true });
+  window.addEventListener('resize', marcar);
+})();
