@@ -268,13 +268,19 @@ body .hm-cta .gd-btn{ font-size:clamp(.8rem,.74rem + .14vw,.92rem); }
   .hm-obra, .hm-escena, .hm-metodo, body #estudio{ padding-block:var(--hm-sec); }
   .hm-cat{ padding-block:calc(var(--hm-sec) * 1.4); }
   .hm-cta{ padding-block:calc(var(--hm-sec) * 2); }
+  /* cierre: mismo borde izquierdo que el resto de secciones (antes centrado) y botones del mismo ancho */
+  .hm-cta .gd-in{ text-align:left; }
+  .hm-cta-h{ text-align:left; }
+  .hm-cta-p{ margin-left:0; margin-right:0; max-width:34ch; text-align:left; }
+  .hm-cta .gd-cta-btns{ flex-direction:column; align-items:stretch; justify-content:flex-start; gap:12px; }
+  .hm-cta .gd-cta-btns .gd-btn{ width:100%; justify-content:center; }
   .hm-escena-img{ margin-bottom:24px; }
   .hm-mundos-dots{ margin-top:14px; }
 
   /* rótulos + títulos de sección: misma escala, mismo espacio */
   .hm-eb{ display:block; margin:0 0 10px; }
   .hm-cat .hm-eb{ color:var(--bronce-texto); }
-  .hm-h, body .hm-metodo .gd-h2, body #estudio .gd-h2{ font-size:var(--hm-h-m); line-height:1.06; letter-spacing:-.02em; }
+  .hm-h, .hm-open-h, .hm-cta-h, body .hm-metodo .gd-h2, body #estudio .gd-h2{ font-size:var(--hm-h-m); line-height:1.06; letter-spacing:-.02em; }
   .hm-bar{ flex-direction:column; align-items:flex-start; gap:14px; margin-bottom:20px; }
   .hm-bar-links{ gap:10px 24px; }
   body .hm-metodo .gd-eyebrow, body #estudio .gd-eyebrow{ margin-bottom:10px; }
