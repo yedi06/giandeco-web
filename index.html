@@ -1372,7 +1372,7 @@
 </style>
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261018a">
-<link rel="stylesheet" href="css/gd-home-d.css?v=20261026o">
+<link rel="stylesheet" href="css/gd-home-d.css?v=20261026p">
 <script src="js/gd-tema.js?v=20261018a"></script>
 
 <!-- intro de marca: se decide antes de pintar, para que nunca haya un parpadeo del telón -->
@@ -1409,6 +1409,7 @@
 
 <!-- ============ APERTURA + TRES MUNDOS: la frase sobre las tres imágenes, y debajo las marcas ============ -->
 <section class="hm-triptico" id="universos" aria-labelledby="declT">
+  <span id="hogar" class="hm-alias" aria-hidden="true"></span><span id="servicios" class="hm-alias" aria-hidden="true"></span>
   <div class="gd-in">
     <div class="hm-mundos-wrap">
       <h2 class="hm-open-h reveal" id="declT"><span>Un espacio no se decora.</span> <em>Se diseña para vender.</em></h2>
@@ -1446,29 +1447,29 @@
       </div>
       <div class="gd-marcas-row hm-marcas-row">
         <div class="gd-marcas-track">
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/el-corte-ingles.png" width="214" height="200" alt="El Corte Inglés" class="is-nativo"></span><span class="hm-marca-rol">Retail departamental</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/pycca.png" width="900" height="200" alt="Pycca"></span><span class="hm-marca-rol">Campaña estacional</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/zara.png" width="476" height="200" alt="Zara"></span><span class="hm-marca-rol">Visual merchandising</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/walon.png" width="214" height="200" alt="Walon"></span><span class="hm-marca-rol">Campaña nacional</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/enchantee-paris.png" width="602" height="200" style="transform:translateY(-24%)" alt="Enchantée Paris"></span><span class="hm-marca-rol">Moda · vitrinismo</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casacor.png" width="290" height="200" style="transform:translateY(22%) scale(1.45)" alt="Casacor"></span><span class="hm-marca-rol">Feria de diseño</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/hotel-union-cusco.png" width="976" height="200" alt="Hotel Unión Cusco"></span><span class="hm-marca-rol">Hotelería</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/baby-club-chic.png" width="783" height="200" alt="Baby Club Chic"></span><span class="hm-marca-rol">Retail</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/massimo-cafe.png" width="212" height="200" alt="Mássimo Café"></span><span class="hm-marca-rol">Gastronomía</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/expodeco.png" width="190" height="200" alt="Expodeco"></span><span class="hm-marca-rol">Feria de decoración</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casa-grande.png" width="685" height="200" alt="Casa Grande"></span><span class="hm-marca-rol">Mobiliario</span></span>
+          <a class="gd-marcas-item" href="proyectos/el-corte-ingles" data-cursor="Ver" aria-label="El Corte Inglés: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/el-corte-ingles.png" width="214" height="200" alt="El Corte Inglés" class="is-nativo"></span><span class="hm-marca-rol">Retail departamental</span></a>
+          <a class="gd-marcas-item" href="proyectos/pycca-ecuador" data-cursor="Ver" aria-label="Pycca Ecuador: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/pycca.png" width="900" height="200" alt="Pycca"></span><span class="hm-marca-rol">Campaña estacional</span></a>
+          <a class="gd-marcas-item" href="catalogo/compra-espacio/sala-estar" data-cursor="Ver" aria-label="Zara · Sala: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/zara.png" width="476" height="200" alt="Zara"></span><span class="hm-marca-rol">Visual merchandising</span></a>
+          <a class="gd-marcas-item" href="proyectos/walon-figuritas" data-cursor="Ver" aria-label="Walon · Figuritas del Barrio: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/walon.png" width="214" height="200" alt="Walon"></span><span class="hm-marca-rol">Campaña nacional</span></a>
+          <a class="gd-marcas-item" href="proyectos/enchantee-paris" data-cursor="Ver" aria-label="Enchantée Paris: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/enchantee-paris.png" width="602" height="200" style="transform:translateY(-24%)" alt="Enchantée Paris"></span><span class="hm-marca-rol">Moda · vitrinismo</span></a>
+          <a class="gd-marcas-item" href="proyectos/casacor-2025" data-cursor="Ver" aria-label="Casacor 2025: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casacor.png" width="290" height="200" style="transform:translateY(22%) scale(1.45)" alt="Casacor"></span><span class="hm-marca-rol">Feria de diseño</span></a>
+          <a class="gd-marcas-item" href="proyectos/hotel-union-cusco" data-cursor="Ver" aria-label="Hotel Unión Cusco: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/hotel-union-cusco.png" width="976" height="200" alt="Hotel Unión Cusco"></span><span class="hm-marca-rol">Hotelería</span></a>
+          <a class="gd-marcas-item" href="proyectos/baby-club" data-cursor="Ver" aria-label="Baby Club: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/baby-club-chic.png" width="783" height="200" alt="Baby Club Chic"></span><span class="hm-marca-rol">Retail</span></a>
+          <a class="gd-marcas-item" href="proyectos/massimo-cafe" data-cursor="Ver" aria-label="Mássimo Café: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/massimo-cafe.png" width="212" height="200" alt="Mássimo Café"></span><span class="hm-marca-rol">Gastronomía</span></a>
+          <a class="gd-marcas-item" href="proyectos/expodeco-2024" data-cursor="Ver" aria-label="Expodeco 2024: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/expodeco.png" width="190" height="200" alt="Expodeco"></span><span class="hm-marca-rol">Feria de decoración</span></a>
+          <a class="gd-marcas-item" href="proyectos/casa-grande" data-cursor="Ver" aria-label="Casa Grande: ver el proyecto"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casa-grande.png" width="685" height="200" alt="Casa Grande"></span><span class="hm-marca-rol">Mobiliario</span></a>
           <span class="hm-marcas-dup" aria-hidden="true" style="display:contents">
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/el-corte-ingles.png" width="214" height="200" alt="" class="is-nativo"></span><span class="hm-marca-rol">Retail departamental</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/pycca.png" width="900" height="200" alt=""></span><span class="hm-marca-rol">Campaña estacional</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/zara.png" width="476" height="200" alt=""></span><span class="hm-marca-rol">Visual merchandising</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/walon.png" width="214" height="200" alt=""></span><span class="hm-marca-rol">Campaña nacional</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/enchantee-paris.png" width="602" height="200" style="transform:translateY(-24%)" alt=""></span><span class="hm-marca-rol">Moda · vitrinismo</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casacor.png" width="290" height="200" style="transform:translateY(22%) scale(1.45)" alt=""></span><span class="hm-marca-rol">Feria de diseño</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/hotel-union-cusco.png" width="976" height="200" alt=""></span><span class="hm-marca-rol">Hotelería</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/baby-club-chic.png" width="783" height="200" alt=""></span><span class="hm-marca-rol">Retail</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/massimo-cafe.png" width="212" height="200" alt=""></span><span class="hm-marca-rol">Gastronomía</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/expodeco.png" width="190" height="200" alt=""></span><span class="hm-marca-rol">Feria de decoración</span></span>
-          <span class="gd-marcas-item"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casa-grande.png" width="685" height="200" alt=""></span><span class="hm-marca-rol">Mobiliario</span></span>
+          <a class="gd-marcas-item" href="proyectos/el-corte-ingles" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/el-corte-ingles.png" width="214" height="200" alt="" class="is-nativo"></span><span class="hm-marca-rol">Retail departamental</span></a>
+          <a class="gd-marcas-item" href="proyectos/pycca-ecuador" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/pycca.png" width="900" height="200" alt=""></span><span class="hm-marca-rol">Campaña estacional</span></a>
+          <a class="gd-marcas-item" href="catalogo/compra-espacio/sala-estar" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/zara.png" width="476" height="200" alt=""></span><span class="hm-marca-rol">Visual merchandising</span></a>
+          <a class="gd-marcas-item" href="proyectos/walon-figuritas" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/walon.png" width="214" height="200" alt=""></span><span class="hm-marca-rol">Campaña nacional</span></a>
+          <a class="gd-marcas-item" href="proyectos/enchantee-paris" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/enchantee-paris.png" width="602" height="200" style="transform:translateY(-24%)" alt=""></span><span class="hm-marca-rol">Moda · vitrinismo</span></a>
+          <a class="gd-marcas-item" href="proyectos/casacor-2025" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casacor.png" width="290" height="200" style="transform:translateY(22%) scale(1.45)" alt=""></span><span class="hm-marca-rol">Feria de diseño</span></a>
+          <a class="gd-marcas-item" href="proyectos/hotel-union-cusco" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/hotel-union-cusco.png" width="976" height="200" alt=""></span><span class="hm-marca-rol">Hotelería</span></a>
+          <a class="gd-marcas-item" href="proyectos/baby-club" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/baby-club-chic.png" width="783" height="200" alt=""></span><span class="hm-marca-rol">Retail</span></a>
+          <a class="gd-marcas-item" href="proyectos/massimo-cafe" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/massimo-cafe.png" width="212" height="200" alt=""></span><span class="hm-marca-rol">Gastronomía</span></a>
+          <a class="gd-marcas-item" href="proyectos/expodeco-2024" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/expodeco.png" width="190" height="200" alt=""></span><span class="hm-marca-rol">Feria de decoración</span></a>
+          <a class="gd-marcas-item" href="proyectos/casa-grande" data-cursor="Ver" tabindex="-1" aria-hidden="true"><span class="gd-marcas-logo"><img decoding="async" src="images/marcas/casa-grande.png" width="685" height="200" alt=""></span><span class="hm-marca-rol">Mobiliario</span></a>
           </span>
         </div>
       </div>
@@ -1512,14 +1513,14 @@
           <img loading="lazy" decoding="async" src="images/home/obra-walonfig.webp" width="1385" height="1500" style="object-position:50% 40%" alt="Isla con maniquí deportivo en la campaña Figuritas del Barrio de Walon">
           <span class="hm-t-cap"><b>Walon · Figuritas del Barrio</b><em>Campaña nacional</em></span>
         </a>
-        <div class="hm-t hm-stat reveal d3" style="--ar:1" role="group" aria-label="El estudio en cifras">
+        <a class="hm-t hm-stat reveal d3" href="proyectos/" data-cursor="Ver" style="--ar:1" aria-label="Catorce proyectos documentados: ver todos los proyectos">
           <div class="hm-stat-in">
             <b data-n="14">14</b>
             <span>proyectos documentados</span>
             <i aria-hidden="true"></i>
             <span class="hm-stat-p">10 retail<span class="hm-flags hm-flags--sm"><span class="hm-flag hm-flag--pe" role="img" aria-label="Perú" title="Perú"></span><span class="hm-flag hm-flag--ec" role="img" aria-label="Ecuador" title="Ecuador"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="12" fill="#FFD100"/><rect y="12" width="24" height="6" fill="#0B4EA2"/><rect y="18" width="24" height="6" fill="#E4002B"/><path d="M8 8.3c1.4-1.4 2.7-1.2 4 0 1.3-1.2 2.6-1.4 4 0-1.4-.5-2.7-.2-4 .7-1.3-.9-2.6-1.2-4-.7z" fill="#3B2A18"/><ellipse cx="12" cy="12.6" rx="3.5" ry="4.3" fill="#7CC4E8" stroke="#6B4F2A" stroke-width=".6"/><path d="M8.7 14.4 11.2 10.6 12 11.7 12.9 10.2 15.3 14.4z" fill="#8A6A48"/><path d="M10.8 11.2 11.2 10.6 11.6 11.1 11 11.3zM12.6 10.9 12.9 10.2 13.2 10.8z" fill="#fff"/><path d="M8.7 14.4h6.6c-.3 1.5-1.8 2.6-3.3 2.6s-3-1.1-3.3-2.6z" fill="#2F8F5B"/></svg></span></span></span>
           </div>
-        </div>
+        </a>
       </div>
       <div class="hm-row hm-row--ancha">
         <a class="hm-t reveal" href="proyectos/massimo-cafe" data-cursor="Ver" style="--ar:1.9">
@@ -1649,7 +1650,7 @@
   <div class="gd-in">
     <div class="gd-estudio-grid">
       <div class="gd-estudio-foto reveal-scale">
-        <img loading="lazy" decoding="async" src="images/estudio/gian.jpg" alt="Gian Jiménez, fundador y director de diseño de Giandeco">
+        <a href="quienes-somos" data-cursor="Ver" aria-label="Conozca al estudio y a su fundador"><img loading="lazy" decoding="async" src="images/estudio/gian.jpg" alt="Gian Jiménez, fundador y director de diseño de Giandeco"></a>
       </div>
       <div>
         <p class="gd-eyebrow reveal">Autoría</p>
@@ -1665,6 +1666,7 @@
           <div class="gd-valor"><b>Oficio</b><span>Material, medida y acabado especificados.</span></div>
           <div class="gd-valor"><b>Palabra</b><span>Fecha de entrega y presupuesto se sostienen.</span></div>
         </div>
+        <a class="gd-link reveal d4" href="quienes-somos" style="margin-top:clamp(22px,2.4vw,36px)">Conozca al estudio<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
     </div>
   </div>
