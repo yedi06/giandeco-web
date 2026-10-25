@@ -251,6 +251,59 @@ body .hm-cta .gd-btn{ font-size:clamp(.8rem,.74rem + .14vw,.92rem); }
   .hm-cat-cap .hm-go{ padding-bottom:0; }
 }
 
+/* ==========================================================================
+   MÓVIL · UN SOLO RITMO Y UNA SOLA ESCALA DE ENCABEZADOS
+   · mismo aire arriba y abajo en todas las secciones (--hm-sec); entre dos secciones
+     oscuras queda un único hueco de 2 × --hm-sec, sin sumar rellenos de más
+   · tres tamaños de título: frase de apertura y cierre · título de sección · franja de marcas
+   · cada título de sección lleva su rótulo en versalitas y sus enlaces en una fila
+   ========================================================================== */
+.hm-eb{ display:none; }
+@media (max-width:899px){
+  :root{ --hm-sec:clamp(32px,9vw,48px); --hm-h-m:clamp(1.8rem,8.3vw,2.3rem); }
+
+  /* ritmo vertical */
+  .hm-triptico{ padding-block:var(--hm-sec); }
+  .hm-marcas{ margin-top:calc(var(--hm-sec) * 1.75); }
+  .hm-obra, .hm-escena, .hm-metodo, body #estudio{ padding-block:var(--hm-sec); }
+  .hm-cat{ padding-block:calc(var(--hm-sec) * 1.4); }
+  .hm-cta{ padding-block:calc(var(--hm-sec) * 2); }
+  .hm-escena-img{ margin-bottom:24px; }
+  .hm-mundos-dots{ margin-top:14px; }
+
+  /* rótulos + títulos de sección: misma escala, mismo espacio */
+  .hm-eb{ display:block; margin:0 0 10px; }
+  .hm-cat .hm-eb{ color:var(--bronce-texto); }
+  .hm-h, body .hm-metodo .gd-h2, body #estudio .gd-h2{ font-size:var(--hm-h-m); line-height:1.06; letter-spacing:-.02em; }
+  .hm-bar{ flex-direction:column; align-items:flex-start; gap:14px; margin-bottom:20px; }
+  .hm-bar-links{ gap:10px 24px; }
+  body .hm-metodo .gd-eyebrow, body #estudio .gd-eyebrow{ margin-bottom:10px; }
+  .gd-ba-head{ margin-bottom:24px; gap:20px; }
+
+  /* franja de marcas: título secundario + rótulo con las banderas en una fila */
+  .hm-marcas-t{ font-size:clamp(1.3rem,6vw,1.6rem); }
+  .hm-marcas-head{ flex-direction:column; align-items:flex-start; gap:12px; margin-bottom:8px; }
+
+  /* autoría: retrato sin marco desplazado (se salía de la línea derecha) y valores en lista */
+  body #estudio .gd-estudio-foto::before{ display:none; }
+  body #estudio .gd-estudio-grid{ gap:28px; }
+  body #estudio .gd-estudio-firma{ margin-top:28px; padding-top:20px; }
+  body #estudio .gd-valores{ grid-template-columns:1fr; gap:14px; margin-top:28px; }
+  body #estudio .gd-valor{ display:grid; grid-template-columns:86px minmax(0,1fr); gap:14px; align-items:baseline; }
+  body #estudio .gd-valor b{ margin:0; }
+}
+@media (max-width:599px){
+  .hm-marcas-s > span:first-child{ display:inline; }
+  .hm-mosaico .hm-stat{ aspect-ratio:auto; height:152px; }
+}
+@media (max-width:359px){
+  .hm-marcas-s > span:first-child{ display:none; }
+}
+/* tableta vertical: la cifra no necesita media pantalla de alto */
+@media (min-width:600px) and (max-width:899px){
+  .hm-mosaico .hm-stat{ aspect-ratio:7/2; }
+}
+
 @media (prefers-reduced-motion:reduce){
   .hm-mundo, .hm-mundo img, .hm-t img, .hm-cat-p img, .hm-go i{ transition:none; }
 }
