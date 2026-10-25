@@ -32,7 +32,7 @@
 }
 /* ---------- MARCAS · título + logos en movimiento continuo, con lo que hicimos para cada una; sin líneas ---------- */
 .hm-marcas{ margin-top:clamp(56px,6.4vw,112px); }
-.hm-marcas-head{ margin-bottom:clamp(14px,1.8vw,28px); align-items:baseline; }
+.hm-marcas-head{ margin-bottom:clamp(14px,1.8vw,28px); align-items:center; }
 .hm-marcas-t{
   margin:0; font-family:var(--display); font-weight:400; font-size:clamp(1.55rem,2.5vw,3rem); line-height:1.08; letter-spacing:-.025em;
   color:var(--lino); text-wrap:balance;
@@ -45,9 +45,21 @@
 .hm-marcas .gd-marcas-logo{ width:clamp(112px,9.5vw,176px); height:clamp(44px,4vw,66px); }
 .hm-marcas .gd-marcas-logo img{ opacity:.86; }
 .hm-marcas .gd-marcas-logo img.is-nativo{ transform:scale(1.55); opacity:.92; }
+.hm-marcas-s{ display:inline-flex; align-items:center; gap:clamp(14px,1.4vw,22px); }
+/* banderas: medallas circulares con aro de latón, en CSS puro (sin emoji ni imágenes) */
+.hm-flags{ display:inline-flex; align-items:center; gap:clamp(10px,.9vw,14px); --hm-fl:clamp(24px,1.7vw,30px); --hm-fl-gap:var(--bg,#0A0A09); }
+.hm-flags--sm{ --hm-fl:clamp(20px,1.3vw,24px); --hm-fl-gap:#0c0b09; margin-left:10px; vertical-align:middle; }
+.hm-flag{
+  display:block; flex:none; width:var(--hm-fl); height:var(--hm-fl); border-radius:50%;
+  box-shadow:inset 0 0 0 1px rgba(10,10,9,.18), 0 0 0 3px var(--hm-fl-gap), 0 0 0 4px rgba(201,162,74,.7);
+}
+.hm-flag--pe{ background:linear-gradient(90deg,#D91023 0 33.34%,#F4F1EA 33.34% 66.67%,#D91023 66.67% 100%); }
+.hm-flag--ec{ overflow:hidden; }
+.hm-flag--ec svg{ display:block; width:100%; height:100%; }
+.hm-stat-p{ display:inline-flex; align-items:center; }
 .hm-marca-rol{ font-family:var(--body); font-weight:400; font-size:var(--hm-t-label,.76rem); letter-spacing:.14em; text-transform:uppercase; text-align:center; color:var(--text-dim); }
 @media (max-width:599px){
-  .hm-marcas-s{ display:none; }
+  .hm-marcas-s > span:first-child{ display:none; }
 }
 
 /* ---------- TRES MUNDOS · entre las dos líneas, a la altura de la pantalla ---------- */
