@@ -30,10 +30,25 @@
   .hm-open-h{ margin-bottom:clamp(22px,6vw,34px); font-size:clamp(2.5rem,11.5vw,3.6rem); line-height:.98; }
   .hm-open-h span, .hm-open-h em{ display:block; }
 }
-.hm-open-marcas{ margin-top:clamp(18px,2vw,30px); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:clamp(14px,1.6vw,22px); overflow:hidden; }
-.hm-open-marcas .gd-marcas-wall{ margin-top:0; gap:0; }
-.hm-open-marcas .gd-marcas-logo{ width:clamp(110px,10vw,156px); height:clamp(42px,4.4vw,60px); }
-.hm-open-marcas .gd-marcas-logo img{ opacity:.8; }
+/* ---------- MARCAS · título + logos en movimiento continuo, con lo que hicimos para cada una; sin líneas ---------- */
+.hm-marcas{ margin-top:clamp(56px,6.4vw,112px); }
+.hm-marcas-head{ margin-bottom:clamp(14px,1.8vw,28px); align-items:baseline; }
+.hm-marcas-t{
+  margin:0; font-family:var(--display); font-weight:400; font-size:clamp(1.55rem,2.5vw,3rem); line-height:1.08; letter-spacing:-.025em;
+  color:var(--lino); text-wrap:balance;
+}
+.hm-marcas-t em{ font-style:normal; color:var(--accent); }
+.hm-marcas-s{ margin:0; font-family:var(--body); font-weight:500; font-size:var(--hm-t-label,.76rem); letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim); }
+.hm-marcas-row{ padding-block:clamp(6px,1vw,14px); }
+.hm-marcas .gd-marcas-track{ animation-duration:80s; }
+.hm-marcas .gd-marcas-item{ flex-direction:column; justify-content:flex-start; gap:clamp(12px,1.2vw,18px); padding-inline:clamp(26px,3.4vw,64px); }
+.hm-marcas .gd-marcas-logo{ width:clamp(112px,9.5vw,176px); height:clamp(44px,4vw,66px); }
+.hm-marcas .gd-marcas-logo img{ opacity:.86; }
+.hm-marcas .gd-marcas-logo img.is-nativo{ transform:scale(1.55); opacity:.92; }
+.hm-marca-rol{ font-family:var(--body); font-weight:400; font-size:var(--hm-t-label,.76rem); letter-spacing:.14em; text-transform:uppercase; text-align:center; color:var(--text-dim); }
+@media (max-width:599px){
+  .hm-marcas-s{ display:none; }
+}
 
 /* ---------- TRES MUNDOS · entre las dos líneas, a la altura de la pantalla ---------- */
 .hm-triptico{ padding-block:clamp(36px,4vw,64px) clamp(8px,1vw,16px); }
@@ -107,7 +122,8 @@
 /* ---------- NAVIDAD · la escena a todo ancho ---------- */
 .hm-escena{
   padding-block:clamp(64px,8vw,132px) clamp(56px,7vw,112px); color:#DED8CB;
-  background:radial-gradient(ellipse 70% 40% at 15% 0%,rgba(201,162,74,.12),transparent 65%), radial-gradient(ellipse 55% 40% at 100% 100%,rgba(122,38,34,.22),transparent 70%), #100e0b;
+  /* mismo ébano liso y mismo fino rayado que el fondo de la página: sin degradados de colores */
+  background:#0A0A09 repeating-linear-gradient(90deg,rgba(222,216,203,.025) 0,rgba(222,216,203,.025) 1px,transparent 1px,transparent 22px);
 }
 .hm-escena-img{ position:relative; margin:0 0 clamp(32px,4vw,64px); }
 .hm-escena .gd-shop{ border-radius:0; background:#0c0b09; }
