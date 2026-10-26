@@ -84,6 +84,10 @@ function rejilla(D, lista, o){
   return filtros + '<div class="pj-grid">' + lista.map(function(p, i){ return card(D, p, { grande:o.destacarPrimero && i === 0, sub:o.sub, usadas:usadas }); }).join('') + '</div>';
 }
 
+/* clase de la galería según nº de fotos extra: 1·2·3 (la primera a todo el ancho) y, desde 4,
+   una rejilla pareja (x2 / x3) para no dejar huecos ni recortar en panorámico fotos verticales */
+function claseGal(n){ if(n <= 3) return n; if(n % 3 === 0) return 'x3'; if(n % 2 === 0) return 'x2'; return 3; }
+
 /* ---------- ficha de proyecto ---------- */
 function ficha(D, p){
   var L = D.LINEAS[p.lineas[0]], portada = p.galeria[0], resto = p.galeria.slice(1);
@@ -103,14 +107,14 @@ function ficha(D, p){
       '<div><dt>Tipo</dt><dd>' + esc(D.TIPOS[p.tipo]) + '</dd></div>' +
       (p.navidad ? '<div><dt>Temporada</dt><dd><a href="retail/navidad">Navidad</a></dd></div>' : '') + '</dl></div></section>';
   // 3. galería (si hay más de una foto)
-  if(resto.length) h += '<section class="pj-galeria" aria-label="Galería"><div class="gd-in"><div class="pj-gal pj-gal-' + Math.min(resto.length, 3) + '">' +
+  if(resto.length) h += '<section class="pj-galeria" aria-label="Galería"><div class="gd-in"><div class="pj-gal pj-gal-' + claseGal(resto.length) + '">' +
     resto.map(function(g){ return '<button type="button" class="pj-foto" data-ampliar aria-label="Ampliar: ' + esc(g.alt) + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async"></button>'; }).join('') + '</div></div></section>';
   // 4. proceso (boceto → obra)
   if(p.proceso && p.proceso.length) h += '<section class="gd-sec pj-proceso"><div class="gd-in"><p class="pj-etq">Proceso</p><h2 class="pj-h2">Del papel a la obra</h2>' +
     '<ol class="pj-pasos">' + p.proceso.map(function(g, i){
       // si la foto de esta etapa ya está en la galería, fondo de marca en vez de repetirla
       var media = enGaleria[limpia(g.src)] ? '<span class="pj-foto pj-foto-fondo"><span class="gd-fondo" role="img" aria-label="' + esc(g.etapa || g.alt) + '"></span></span>'
-        : '<button type="button" class="pj-foto" data-ampliar aria-label="Ampliar: ' + esc(g.alt) + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async"></button>';
+        : '<button type="button" class="pj-foto" data-ampliar aria-label="Ampliar: ' + esc(g.alt) + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async"' + (g.ajuste ? ' style="object-fit:' + esc(g.ajuste) + ';background:#0d0c0a"' : '') + '></button>';
       return '<li>' + media + '<span><b>0' + (i + 1) + '</b>' + esc(g.etapa || '') + '</span></li>'; }).join('') + '</ol></div></section>';
   // 5. qué hicimos y resultado
   h += '<section class="gd-sec pj-texto"><div class="gd-in pj-texto-grid">' +

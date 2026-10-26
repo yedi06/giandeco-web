@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
 <meta charset="UTF-8">
 <base href="/"><script>if(/\.github\.io$/.test(location.hostname))document.querySelector("base").href="/"+location.pathname.split("/")[1]+"/";window.addEventListener("click",function(e){if(e.defaultPrevented)return;var a=e.target.closest&&e.target.closest("a[href^='#']");if(a&&a.getAttribute("href").length>1){e.preventDefault();location.hash=a.getAttribute("href")}})</script>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="js/gd-acceso.js?v=20261018a"></script>
-<title>Decoración — Próximamente · Giandeco Studio Design</title>
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261018c">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decoración — Catálogo · Giandeco Studio Design</title>
+<meta name="description" content="Decoración para casa y tienda en Lima: jarrones, arreglos florales, marcos, cojines y piezas de acento elegidas por Giandeco. Consulte por WhatsApp.">
 <meta name="theme-color" content="#0A0A09">
 <!-- favicon -->
 <link rel="icon" href="favicon.ico?v=1" sizes="32x32">
@@ -16,47 +14,128 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
 <link rel="manifest" href="site.webmanifest?v=1">
 <!-- /favicon -->
-<meta name="robots" content="noindex">
+<!-- seo -->
+<link rel="canonical" href="https://giandeco.com/catalogo/decoracion">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Giandeco Studio Design">
+<meta property="og:locale" content="es_PE">
+<meta property="og:title" content="Decoración — Catálogo · Giandeco Studio Design">
+<meta property="og:description" content="Decoración para casa y tienda en Lima: jarrones, arreglos florales, marcos, cojines y piezas de acento elegidas por Giandeco. Consulte por WhatsApp.">
+<meta property="og:url" content="https://giandeco.com/catalogo/decoracion">
+<meta property="og:image" content="https://giandeco.com/images/material/decoracion-hero-estantes.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://giandeco.com/"},{"@type":"ListItem","position":2,"name":"Catálogo","item":"https://giandeco.com/catalogo/"},{"@type":"ListItem","position":3,"name":"Decoración","item":"https://giandeco.com/catalogo/decoracion"}]}</script>
+<!-- /seo -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/giandeco.css?v=20261025a">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261018c">
+<link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
+<link rel="stylesheet" href="css/gd-tema.css?v=20261018a">
+<script src="js/gd-tema.js?v=20261018a"></script>
 <style>
-  :root{
-    --ebano:#0A0A09; --laton:#C9A24A; --lino:#DED8CB; --text-dim:#B9B3A6;
-    --display:'Bodoni Moda', Georgia, serif; --body:'Jost', system-ui, sans-serif;
-  }
-  *{ box-sizing:border-box; }
-  body{
-    margin:0; min-height:100svh; background:var(--ebano); color:var(--lino);
-    font-family:var(--body); font-weight:300; -webkit-font-smoothing:antialiased;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding: 10vh 24px;
-    background-image: radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201,162,74,0.08), transparent);
-  }
-  .mark{ height:56px; width:auto; margin-bottom:56px; }
-  .eyebrow{
-    font-family:var(--body); font-weight:500; font-size:.7rem; letter-spacing:.24em;
-    text-transform:uppercase; color:var(--laton); margin:0 0 18px;
-  }
-  h1{
-    font-family:var(--display); font-weight:400; font-size:clamp(2.2rem,6vw,3.4rem);
-    margin:0 0 22px; letter-spacing:-.01em;
-  }
-  p{ max-width:46ch; color:var(--text-dim); font-size:1rem; line-height:1.7; margin:0 0 40px; }
-  a.back{
-    display:inline-flex; align-items:center; gap:10px; text-decoration:none;
-    font-family:var(--body); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--lino); padding-bottom:4px; border-bottom:1px solid rgba(222,216,203,.28);
-    transition: color .25s ease, border-color .25s ease, gap .25s ease;
-  }
-  a.back:hover{ color:var(--laton); border-color:var(--laton); gap:14px; }
-  a.back svg{ width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:1.5; transform:rotate(180deg); }
+  .dc-grid{ display:grid; gap:clamp(28px,4vw,64px); grid-template-columns:1fr; align-items:center; }
+  @media (min-width:900px){ .dc-grid{ grid-template-columns:1.05fr 1fr; } }
+  .dc-fig{ margin:0; border-radius:2px; overflow:hidden; box-shadow:0 40px 80px -30px rgba(0,0,0,.6); }
+  .dc-fig img{ display:block; width:100%; height:auto; }
+  .dc-fig figcaption{ padding:12px 16px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); background:rgba(10,10,9,.55); }
+  .dc-h2{ font-family:var(--display); font-weight:400; font-size:clamp(1.9rem,3vw,2.5rem); color:var(--lino); margin:0 0 14px; line-height:1.08; }
+  .dc-intro{ color:var(--text-dim); font-size:.98rem; line-height:1.75; margin:0; max-width:54ch; }
+  .dc-lista{ list-style:none; margin:26px 0 0; padding:0; }
+  .dc-lista li{ padding:16px 0; border-top:1px solid var(--line); }
+  .dc-lista li:last-child{ border-bottom:1px solid var(--line); }
+  .dc-lista b{ display:block; font-family:var(--display); font-weight:400; font-size:1.2rem; color:var(--lino); margin-bottom:4px; }
+  .dc-lista span{ color:var(--text-dim); font-size:.93rem; line-height:1.65; }
+  .dc-pasos{ display:grid; gap:var(--sp-40); grid-template-columns:1fr; margin-top:clamp(32px,4vw,52px); }
+  @media (min-width:800px){ .dc-pasos{ grid-template-columns:repeat(3,1fr); } }
+  .dc-marker{ width:46px; height:46px; border-radius:50%; background:var(--bronce); border:1px solid var(--bronce); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:1.05rem; margin-bottom:18px; }
+  .dc-paso h3{ font-family:var(--body); font-weight:500; font-size:1.05rem; color:var(--ebano); margin:0 0 8px; }
+  .dc-paso p{ margin:0; color:var(--grafito); font-size:.92rem; line-height:1.65; max-width:38ch; }
+  .dc-rel{ display:grid; gap:14px; grid-template-columns:1fr; margin-top:22px; }
+  @media (min-width:800px){ .dc-rel{ grid-template-columns:repeat(3,1fr); } }
+  .dc-rel a{ display:block; padding:22px 22px 24px; border:1px solid var(--line); border-radius:2px; text-decoration:none; color:var(--lino); transition:border-color .3s ease, transform .35s var(--gd-ease); }
+  .dc-rel a:hover{ border-color:var(--accent); transform:translateY(-4px); }
+  .dc-rel b{ display:block; font-family:var(--display); font-weight:400; font-size:1.25rem; margin-bottom:6px; }
+  .dc-rel span{ display:block; color:var(--text-dim); font-size:.9rem; line-height:1.6; }
+  .dc-cta{ margin-top:var(--sp-40); display:flex; flex-wrap:wrap; gap:12px; }
 </style>
+</head>
+<body data-mundo="catalogo" data-seccion="decoracion">
 
-<img decoding="async" class="mark" src="img/logo-negativo.svg" alt="Giandeco Studio Design">
-<p class="eyebrow">Catálogo · Próximamente</p>
-<h1>Decoración</h1>
-<p>Objetos, textiles y piezas de acento que rematan un espacio con el mismo criterio de obra. La colección está en curaduría antes de publicarse.</p>
-<a class="back" href="./#catalogo">
-  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-  Volver al catálogo
-</a>
-<script src="js/gd-tienda.js?v=20261021a" defer></script>
+<div id="gdHeader"></div>
+
+<section class="gd-hero is-corto">
+  <div class="gd-hero-panel">
+    <p class="gd-hero-eyebrow reveal-left"><i></i>Catálogo · Decoración</p>
+    <h1 class="reveal-left d1">El detalle que deja el espacio <em>terminado</em></h1>
+    <p class="reveal-left d2">Jarrones, flores, marcos, cojines y piezas de acento. Los elegimos con el mismo criterio con el que montamos una tienda: escala, color y luz antes que el objeto.</p>
+    <div class="gd-hero-cta reveal-left d3"><a class="gd-btn gd-btn-primary" href="https://wa.me/51920775559?text=Hola%20Giandeco%2C%20quiero%20consultar%20por%20piezas%20de%20decoraci%C3%B3n." target="_blank" rel="noopener">Consultar por WhatsApp
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+  </div>
+  <div class="gd-hero-media">
+    <div class="gd-curtain"><img decoding="async" fetchpriority="high" class="gd-kb-img" src="images/material/decoracion-hero-estantes.webp" width="960" height="1280" alt="Estantes de decoración con jarrones, arreglos florales, marcos, libros y cojines de nudo en el bazar Ferrehome"></div>
+    <div class="gd-hero-cap">
+      <span><b>Bazar Ferrehome</b><span>Decoración para el hogar</span></span>
+      <span class="gd-scroll-cue" aria-hidden="true">Desplace<i></i></span>
+    </div>
+  </div>
+</section>
+
+<section class="gd-sec" style="padding-top:clamp(40px,5vw,64px);">
+  <div class="gd-in">
+    <div class="dc-grid">
+      <div class="reveal">
+        <p class="gd-eyebrow">Qué puede consultar</p>
+        <h2 class="dc-h2">Piezas que se eligen por ambiente</h2>
+        <p class="dc-intro">Trabajamos la decoración como remate de obra: cada pieza se escoge para el espacio donde va, no por separado. Estas son las familias que seleccionamos y montamos en nuestros espacios.</p>
+        <ul class="dc-lista">
+          <li><b>Jarrones y arreglos florales</b><span>Cerámica, cristal y vidrio soplado, con flores de acabado natural para mesas, repisas y entradas.</span></li>
+          <li><b>Marcos, cuadros y libros de apoyo</b><span>Para dar altura y ritmo a una repisa o a una pared de galería.</span></li>
+          <li><b>Cojines, mantas y caminos de mesa</b><span>Textiles que suman color y textura a una sala, un comedor o una mesa servida.</span></li>
+          <li><b>Piezas de acento</b><span>Dorados, figuras y objetos de cristal para el punto focal de cada ambiente.</span></li>
+        </ul>
+      </div>
+      <figure class="dc-fig reveal-scale">
+        <img decoding="async" loading="lazy" src="images/material/decoracion-tablero-ferrehome.webp" width="1222" height="1287" alt="Tablero de diseño del bazar Ferrehome: arreglos florales, cojines de terciopelo, figuras doradas, textiles de colores y paleta en crema, borgoña, azul y dorado">
+        <figcaption>Tablero de diseño · Bazar Ferrehome</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="gd-sec gd-claro">
+  <div class="gd-in">
+    <p class="gd-eyebrow reveal">Cómo se cotiza</p>
+    <h2 class="gd-h2 reveal d1">De su consulta a la pieza en su espacio</h2>
+    <div class="dc-pasos">
+      <div class="dc-paso reveal d0"><div class="dc-marker">01</div><h3>Cuéntenos el espacio</h3><p>Envíe por WhatsApp fotos y medidas del lugar y qué ambiente quiere resolver.</p></div>
+      <div class="dc-paso reveal d1"><div class="dc-marker">02</div><h3>Le proponemos una selección</h3><p>Piezas, colores y escalas que funcionen juntas, para que decida con la imagen clara.</p></div>
+      <div class="dc-paso reveal d2"><div class="dc-marker">03</div><h3>Coordinamos entrega y montaje</h3><p>Acordamos plazos y, si lo desea, ambientamos el espacio con el estudio.</p></div>
+    </div>
+    <div class="dc-cta">
+      <a class="gd-btn gd-btn-primary" href="https://wa.me/51920775559?text=Hola%20Giandeco%2C%20quiero%20cotizar%20piezas%20de%20decoraci%C3%B3n%20para%20mi%20espacio." target="_blank" rel="noopener">Cotizar por WhatsApp
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="gd-btn gd-btn-ghost" href="contacto">Escribir al estudio</a>
+    </div>
+  </div>
+</section>
+
+<section class="gd-sec">
+  <div class="gd-in">
+    <p class="gd-eyebrow reveal">Siga explorando</p>
+    <div class="dc-rel reveal">
+      <a href="catalogo/navidad/"><b>Navidad</b><span>Piezas de temporada con ficha, precio y compra en línea.</span></a>
+      <a href="catalogo/compra-espacio/"><b>Compra el espacio</b><span>Ambientes completos montados por el estudio.</span></a>
+      <a href="proyectos/ferrehome"><b>Proyecto Ferrehome</b><span>Cómo convertimos un pasillo de ferretería en un bazar de decoración.</span></a>
+    </div>
+  </div>
+</section>
+
+<div id="gdFooter"></div>
+<script src="js/giandeco.js?v=20261025a"></script>
+<script src="js/gd-tienda.js?v=20261025a" defer></script>
+<script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-chat.js?v=20261018b" defer></script>
+</body>
+</html>

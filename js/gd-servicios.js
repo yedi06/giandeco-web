@@ -21,7 +21,7 @@
 var S = [
  { slug:'retail/servicios/escaparatismo', linea:'retail', nombre:'Escaparatismo y vitrinas',
    frase:'Vitrinas y displays que detienen al que pasa.',
-   portada:{ src:'images/hero/hero-retail.jpg', alt:'Vitrina con maniquíes y estructuras de exhibición iluminadas' },
+   portada:{ src:'images/material/escaparatismo-vitrina-jengibre.webp', alt:'Vitrina de Navidad con casitas de jengibre, tren y árboles nevados sobre nieve de algodón en repisa de cristal' },
    intro:'El escaparate es la venta silenciosa: muestra lo que vende su marca y cuenta una historia — un outfit, una escena, una temporada. Trabajamos las dos formas: la vitrina hacia la calle y el display interior.',
    incluye:['Concepto de temporada y guion visual', 'Styling de maniquíes: outfits, capas y accesorios', 'Ángulos de lectura desde el flujo peatonal', 'Utilería, pódiums e iluminación focalizada'],
    proyectos:['walon-figuritas', 'enchantee-paris', 'el-corte-ingles'] },

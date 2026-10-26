@@ -32,7 +32,7 @@ var P = [
   "nombre": "El Corte Inglés",
   "cat": "Retail departamental",
   "reto": "Crear una experiencia de compra que se sintiera de lujo sin perder claridad de recorrido.",
-  "hice": "Curé y monté los ambientes de exhibición combinando mobiliario de diseño, textiles e iluminación puntual sobre paletas neutras. Construí escenarios principales e islotes comerciales con letras corpóreas y niveles arquitectónicos que dirigieron el tráfico a las zonas de mayor conversión.",
+  "hice": "Curamos y montamos los ambientes de exhibición combinando mobiliario de diseño, textiles e iluminación puntual sobre paletas neutras. Construimos escenarios principales e islotes comerciales con letras corpóreas y niveles arquitectónicos que dirigieron el tráfico a las zonas de mayor conversión.",
   "res": "Mayor ticket promedio, más tráfico y más seguidores en el área infantil.",
   "sub": "Ambientes de exhibición de lujo",
   "slug": "el-corte-ingles",
@@ -52,7 +52,7 @@ var P = [
   "nombre": "Pycca Ecuador",
   "cat": "Campaña estacional",
   "reto": "Coordinar una campaña estacional replicable en distintas tiendas del país.",
-  "hice": "Concebí y ejecuté las campañas estacionales coordinando paleta, composición e iluminación comercial de punta a punta. Monté espacios modelo para validar zonificación y puntos calientes antes de replicarlos a nivel nacional, y formé a los equipos de tienda en lineamientos visuales.",
+  "hice": "Concebimos y ejecutamos las campañas estacionales coordinando paleta, composición e iluminación comercial de punta a punta. Montamos espacios modelo para validar zonificación y puntos calientes antes de replicarlos a nivel nacional, y formamos a los equipos de tienda en lineamientos visuales.",
   "res": "Más ventas, más tráfico y reconocimiento de marca a nivel nacional.",
   "sub": "Colección navideña Christmas Chalet",
   "slug": "pycca-ecuador",
@@ -73,7 +73,7 @@ var P = [
   "nombre": "Walon Punta Hermosa",
   "cat": "Tienda boutique · deporte",
   "reto": "Convertir un espacio vacío en la primera tienda boutique de la marca.",
-  "hice": "Diseñé la tienda desde cero. Estructuré zonas de circulación intuitivas por categoría (training, vóley, fútbol, urban), ubiqué la caja en un punto estratégico de control visual e implementé maniquíes isla, mesas promocionales y exhibidores tipo torre en el eje principal.",
+  "hice": "Diseñamos la tienda desde cero. Estructuramos zonas de circulación intuitivas por categoría (training, vóley, fútbol, urban), ubicamos la caja en un punto estratégico de control visual e implementamos maniquíes isla, mesas promocionales y exhibidores tipo torre en el eje principal.",
   "res": "Más tráfico en tienda y el nacimiento del primer formato boutique de la marca.",
   "sub": "La primera boutique de la marca",
   "slug": "walon-punta-hermosa",
@@ -92,7 +92,7 @@ var P = [
   "nombre": "Walon Figuritas del Barrio",
   "cat": "Campaña nacional · red de tiendas",
   "reto": "Llevar una misma campaña a tiendas de todo el país sin perder impacto local.",
-  "hice": "Concebí e implementé la campaña visual nacional inspirada en la cultura del fútbol y el coleccionismo de figuritas: vitrinas con maniquíes en pleno movimiento deportivo, iluminación LED integrada, pódiums con césped sintético y estructuras tipo carta de figurita enmarcando las prendas clave.",
+  "hice": "Concebimos e implementamos la campaña visual nacional inspirada en la cultura del fútbol y el coleccionismo de figuritas: vitrinas con maniquíes en pleno movimiento deportivo, iluminación LED integrada, pódiums con césped sintético y estructuras tipo carta de figurita enmarcando las prendas clave.",
   "res": "Más ventas en tienda y atención inmediata del público.",
   "sub": "Fútbol y coleccionismo en vitrina",
   "slug": "walon-figuritas",
@@ -112,7 +112,7 @@ var P = [
   "nombre": "Enchantée Paris",
   "cat": "Moda · vitrinismo",
   "reto": "Capturar tráfico de pasillo en un centro comercial y derivarlo a un nivel superior de tienda.",
-  "hice": "Curé el styling de vitrina combinando estampados, capas y accesorios sobre maniquíes en puntos elevados de alto tráfico. Desarrollé el material gráfico promocional, incluida la tipografía en vinilo, e instalé vitrinas island display en los pasillos del centro comercial.",
+  "hice": "Curamos el styling de vitrina combinando estampados, capas y accesorios sobre maniquíes en puntos elevados de alto tráfico. Desarrollamos el material gráfico promocional, incluida la tipografía en vinilo, e instalamos vitrinas island display en los pasillos del centro comercial.",
   "res": "Mayor posicionamiento de marca, más ventas y más tráfico.",
   "sub": "Capturar el tráfico del pasillo",
   "slug": "enchantee-paris",
@@ -131,7 +131,7 @@ var P = [
   "nombre": "Baby Club",
   "cat": "Boutique infantil",
   "reto": "Vender moda infantil sin saturar visualmente un espacio pequeño.",
-  "hice": "Dirigí la experiencia visual completa equilibrando una estética neoclásica con un recorrido intuitivo. Curé utilería náutica y clásica para complementar los outfits sin saturar, agrupé por familias de color en pasteles y tierras, e integré nichos retroiluminados para resaltar texturas y calzado.",
+  "hice": "Dirigimos la experiencia visual completa equilibrando una estética neoclásica con un recorrido intuitivo. Curamos utilería náutica y clásica para complementar los outfits sin saturar, agrupamos por familias de color en pasteles y tierras, e integramos nichos retroiluminados para resaltar texturas y calzado.",
   "res": "Mayor reconocimiento de marca, más ventas y más tráfico.",
   "sub": "Vender sin saturar",
   "slug": "baby-club",
@@ -150,7 +150,7 @@ var P = [
   "nombre": "Ferrehome",
   "cat": "Bazar de decoración y ferretería",
   "reto": "Convertir un pasillo de ferretería en un bazar de decoración para el hogar sin perder identidad de marca.",
-  "hice": "Distribuí el recorrido por categoría: accesorios de baño de la línea Pureza by Ferrehome sobre pared exhibidora con iluminación dirigida, menaje de cocina, cortinas y textiles, y una zona de temporada navideña. Organicé mesas de mostrador con vajilla, velas y piezas de decoración para sostener la marca dentro del punto de venta.",
+  "hice": "Distribuimos el recorrido por categoría: accesorios de baño de la línea Pureza by Ferrehome sobre pared exhibidora con iluminación dirigida, menaje de cocina, cortinas y textiles, y una zona de temporada navideña. Organizamos mesas de mostrador con vajilla, velas y piezas de decoración para sostener la marca dentro del punto de venta.",
   "res": "Un bazar de decoración con identidad de marca propia dentro del local.",
   "sub": "Del pasillo a la vitrina de marca",
   "slug": "ferrehome",
@@ -162,6 +162,30 @@ var P = [
    {
     "src": "images/proyectos/ferrehome-1.jpg",
     "alt": "Exhibición de decoración en Ferrehome"
+   },
+   {
+    "src": "images/material/ferrehome-bazar-mesa-te.webp",
+    "alt": "Mesa de té servida y repisas con flores y objetos de decoración en el bazar Ferrehome"
+   },
+   {
+    "src": "images/material/ferrehome-bazar-banos-pureza.webp",
+    "alt": "Pared exhibidora de accesorios de baño Pureza by Ferrehome con iluminación LED dirigida"
+   },
+   {
+    "src": "images/material/ferrehome-bazar-menaje-nicho.webp",
+    "alt": "Nicho iluminado con menaje de cocina, vajilla y textiles de baño en el bazar Ferrehome"
+   },
+   {
+    "src": "images/material/ferrehome-bazar-repisas-deco.webp",
+    "alt": "Repisas de madera con jarrones, flores, marcos y cojines en el bazar Ferrehome"
+   },
+   {
+    "src": "images/material/ferrehome-navidad-arbol-rojo-blanco.webp",
+    "alt": "Árbol de Navidad rojo y blanco con Papá Noel en la zona de temporada de Ferrehome"
+   },
+   {
+    "src": "images/material/ferrehome-tablero-diseno.webp",
+    "alt": "Tablero de diseño del bazar Ferrehome: flores, cojines de terciopelo, figuras doradas y paleta en crema, borgoña, azul y dorado"
    }
   ],
   "espacio": "catalogo/compra-espacio/bazar-ferrehome"
@@ -170,7 +194,7 @@ var P = [
   "nombre": "Mássimo Café",
   "cat": "Gastronomía · concepto integral",
   "reto": "Diferenciar un café de barrio con identidad propia frente a la competencia.",
-  "hice": "Desarrollé el concepto integral inspirado en los pubs y salones vintage europeos, fusionando maderas cálidas con acentos industriales sobre terracota, verde oliva y tonos amaderados. Planifiqué los dos niveles del local creando microambientes distintos, de la barra a las zonas de alta permanencia.",
+  "hice": "Desarrollamos el concepto integral inspirado en los pubs y salones vintage europeos, fusionando maderas cálidas con acentos industriales sobre terracota, verde oliva y tonos amaderados. Planificamos los dos niveles del local creando microambientes distintos, de la barra a las zonas de alta permanencia.",
   "res": "Mayor afluencia de clientes y referente de decoración bohemia en la zona.",
   "sub": "Esencia Bohemia",
   "slug": "massimo-cafe",
@@ -180,8 +204,28 @@ var P = [
   "tipo": "gastronomia",
   "destacado": true,
   "proceso": [
-   { "src": "images/proceso/lounge-boceto.jpg", "alt": "Boceto del lounge de Mássimo Café", "etapa": "Boceto del lounge" },
-   { "src": "images/proceso/lounge-obra.jpg", "alt": "Lounge de Mássimo Café terminado, con muro de cuadros y sofá de terciopelo", "etapa": "Lounge terminado" }
+   {
+    "src": "images/material/massimo-tablero-concepto.webp",
+    "alt": "Tablero de concepto de Mássimo Café: paleta, materiales y referencias de pub vintage",
+    "ajuste": "contain",
+    "etapa": "Tablero de concepto"
+   },
+   {
+    "src": "images/material/massimo-corte-arquitectonico.webp",
+    "alt": "Corte arquitectónico a escala 1:25 de la pared de cuadros de Mássimo Café",
+    "ajuste": "contain",
+    "etapa": "Corte arquitectónico"
+   },
+   {
+    "src": "images/proceso/lounge-boceto.jpg",
+    "alt": "Boceto del lounge de Mássimo Café",
+    "etapa": "Boceto del lounge"
+   },
+   {
+    "src": "images/proceso/lounge-obra.jpg",
+    "alt": "Lounge de Mássimo Café terminado, con muro de cuadros y sofá de terciopelo",
+    "etapa": "Lounge terminado"
+   }
   ],
   "galeria": [
    {
@@ -199,7 +243,7 @@ var P = [
   "nombre": "Hotel Unión Cusco",
   "cat": "Hotelería · restaurante",
   "reto": "Que el restaurante del hotel contara una historia de identidad local, no solo sirviera mesas.",
-  "hice": "Renové integralmente el restaurante bajo el concepto Raíces, centrado en el origen, la artesanía local y la gastronomía inmersiva. Combiné lencería blanca de alta gama con textiles tradicionales y vajilla artesanal, y diseñé repisas y escaleras en madera rústica para exhibir insumos locales y licores de la casa.",
+  "hice": "Renovamos integralmente el restaurante bajo el concepto Raíces, centrado en el origen, la artesanía local y la gastronomía inmersiva. Combinamos lencería blanca de alta gama con textiles tradicionales y vajilla artesanal, y diseñamos repisas y escaleras en madera rústica para exhibir insumos locales y licores de la casa.",
   "res": "Interés nacional e internacional. Hoy es referente frente a la competencia.",
   "sub": "Concepto Raíces",
   "slug": "hotel-union-cusco",
@@ -215,11 +259,19 @@ var P = [
    },
    {
     "src": "images/espacios/hotelcusco-1.jpg",
-    "alt": "Detalle de mesa en el Hotel Unión Cusco"
+    "alt": "Patio central del Hotel Unión Cusco con fuente de piedra, calefactores y mobiliario de terraza"
    },
    {
     "src": "images/espacios/hotelcusco-2.jpg",
-    "alt": "Repisas de madera con insumos locales en el Hotel Unión Cusco"
+    "alt": "Patio del Hotel Unión Cusco con fuente, sombrilla y balcones de madera en tonos rojos"
+   },
+   {
+    "src": "images/material/hotelcusco-patio-fachada.webp",
+    "alt": "Patio del Hotel Unión Cusco con fachada de tejas y balcones de madera"
+   },
+   {
+    "src": "images/material/hotelcusco-patio-fuente.webp",
+    "alt": "Fuente de piedra y araucaria en el patio del Hotel Unión Cusco"
    }
   ]
  },
@@ -227,7 +279,7 @@ var P = [
   "nombre": "Casa Grande",
   "cat": "Mobiliario y decoración",
   "reto": "Que el cliente se imaginara viviendo en los ambientes exhibidos, no solo viendo muebles.",
-  "hice": "Creé ambientes inmersivos tipo vignette dentro del piso de venta, recreando dormitorios, salas y comedores completos. Apliqué paletas por zona combinando maderas nobles, terciopelos, lino y metalizados, y sumé curaduría de arte mural, plantas e iluminación de acento.",
+  "hice": "Creamos ambientes inmersivos tipo vignette dentro del piso de venta, recreando dormitorios, salas y comedores completos. Aplicamos paletas por zona combinando maderas nobles, terciopelos, lino y metalizados, y sumamos curaduría de arte mural, plantas e iluminación de acento.",
   "res": "Más ventas, más afluencia de clientes y más movimiento en redes sociales.",
   "sub": "Ambientes que se habitan con la mirada",
   "slug": "casa-grande",
@@ -268,6 +320,10 @@ var P = [
    {
     "src": "images/universos/hogar.jpg",
     "alt": "Vista general de Convivir con el Arte"
+   },
+   {
+    "src": "images/material/convivir-sala-estar.webp",
+    "alt": "Zona de estar de Convivir con el Arte con sofás curvos, mesas redondas, cortinas azul petróleo y cuadros de gran formato"
    }
   ],
   "proceso": [
@@ -307,7 +363,7 @@ var P = [
   "nombre": "Casacor 2025",
   "cat": "Feria de diseño de interiores",
   "reto": "Presentar en un stand que se visita una sola vez el mismo nivel de detalle de un proyecto permanente.",
-  "hice": "Diseñé un ambiente de sala completo para el recorrido de Casacor: cornisa con iluminación indirecta LED, revestimiento texturado, curaduría de cuadros con luz dirigida y una paleta de azules y verdes sobre lino. Cada rincón pensado para leerse en segundos y sostenerse de cerca en fotografía.",
+  "hice": "Diseñamos un ambiente de sala completo para el recorrido de Casacor: cornisa con iluminación indirecta LED, revestimiento texturado, curaduría de cuadros con luz dirigida y una paleta de azules y verdes sobre lino. Cada rincón pensado para leerse en segundos y sostenerse de cerca en fotografía.",
   "res": "Presencia en la feria de diseño de interiores de referencia del país.",
   "sub": "",
   "slug": "casacor-2025",
@@ -341,8 +397,8 @@ var P = [
     "etapa": "Boceto en acuarela"
    },
    {
-    "src": "images/proceso/casacor-obra.jpg",
-    "alt": "La sala de Casacor terminada",
+    "src": "images/material/casacor-obra-terminada.webp",
+    "alt": "Sala de Casacor terminada: arte de gran formato con luminarias de cuadro, zócalo texturizado verde y puertas blancas hacia el salón rojo",
     "etapa": "Obra terminada"
    }
   ],
@@ -352,7 +408,7 @@ var P = [
   "nombre": "Expodeco 2024",
   "cat": "Feria de decoración",
   "reto": "Montar en un stand de feria la propuesta completa de Decopapel, marca de revestimientos y papel mural.",
-  "hice": "Concebí el recorrido del stand por categoría: muro de exhibición de rollos y revestimientos, arco fotográfico iluminado, vegetación colgante y zona lounge con mobiliario curado — pensado para funcionar como showroom, no solo como stand de feria.",
+  "hice": "Concebimos el recorrido del stand por categoría: muro de exhibición de rollos y revestimientos, arco fotográfico iluminado, vegetación colgante y zona lounge con mobiliario curado — pensado para funcionar como showroom, no solo como stand de feria.",
   "res": "Presencia en la feria de decoración de referencia del país.",
   "sub": "",
   "slug": "expodeco-2024",

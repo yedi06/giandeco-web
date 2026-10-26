@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/giandeco.css?v=20261020e">
+<link rel="stylesheet" href="css/giandeco.css?v=20261025a">
 <link rel="stylesheet" href="css/gd-tienda.css?v=20261018c">
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261018a">
@@ -90,18 +90,28 @@
   </div>
 </section>
 
+<section class="gd-sec gd-claro">
+  <div class="gd-in" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px;">
+    <div>
+      <p class="gd-eyebrow reveal">Criterio de casa</p>
+      <h2 class="gd-h2 reveal d1">Decisiones que se notan al vivirlas</h2>
+    </div>
+    <a class="gd-btn gd-btn-ghost reveal d2" href="hogar/blog">Leer el blog de hogar</a>
+  </div>
+</section>
+
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261024a"></script>
-<script src="js/gd-proyectos.js?v=20261018a"></script>
-<script src="js/gd-servicios.js?v=20261018a"></script>
-<script src="js/gd-proyectos-ui.js?v=20261018a"></script>
+<script src="js/giandeco.js?v=20261025a"></script>
+<script src="js/gd-proyectos.js?v=20261025a"></script>
+<script src="js/gd-servicios.js?v=20261025a"></script>
+<script src="js/gd-proyectos-ui.js?v=20261025a"></script>
 <script>
 (function(){ var SV = window.GD_SERVICIOS; window.GD_U = window.GD_PJ.vistas();
   document.getElementById('hgServicios').innerHTML = SV.de('hogar').map(function(s, i){ return window.GD_PJ.tarjetaServicio(SV, s, i, window.GD_U); }).join(''); })();
 (function(){ var D = window.GD_PROYECTOS, L = window.GD_PJ.elegir(D.de('hogar'), 4, window.GD_U);
   document.getElementById('hgProyectos').innerHTML = '<div class="pj-grid es-4">' + L.map(function(p){ return window.GD_PJ.card(D, p, { usadas:window.GD_U }); }).join('') + '</div>'; })();
 </script>
-<script src="js/gd-tienda.js?v=20261021a" defer></script>
+<script src="js/gd-tienda.js?v=20261025a" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-chat.js?v=20261018b" defer></script>
 </body>

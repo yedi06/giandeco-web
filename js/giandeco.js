@@ -36,11 +36,9 @@ var SITIO = {
       { key:'navidad',    label:'Navidad',            href:'catalogo/navidad/' },
       { key:'muebleria',  label:'Mueblería',          href:'catalogo/muebleria/' },
       { key:'iluminacion',label:'Iluminación',        href:'catalogo/iluminacion/' },
+      { key:'decoracion', label:'Decoración',         href:'catalogo/decoracion' },
+      { key:'papel-mural',label:'Papel Mural',        href:'catalogo/papel-mural' },
       { key:'espacio',    label:'Compra el espacio',  href:'catalogo/compra-espacio/' }
-    ],
-    pronto:[
-      { label:'Decoración',  href:'catalogo/decoracion' },
-      { label:'Papel Mural', href:'catalogo/papel-mural' }
     ]
   }
 };
@@ -105,32 +103,32 @@ window.GD_ILUMINACION = ILUMINACION;
    2c. NAVIDAD — colección 2026  (fichas reales de 08_Navidad)
    -------------------------------------------------------------------------- */
 var NAVIDAD = {
-  'tren-jengibre':          { nombre:'Tren de jengibre',                    cat:'Jengibre',    precio:'S/ 72.30',  img:'images/navidad/tren-jengibre-1.jpg',           nota:'Pieza decorativa de temporada, colección jengibre.' },
-  'casa-jengibre':          { nombre:'Casa de jengibre',                    cat:'Jengibre',    precio:'S/ 146.90', img:'images/navidad/casa-jengibre-1.jpg',           nota:'Casa de jengibre iluminada, con figuras y detalles glaseados.' },
-  'cascanueces-musicales':  { nombre:'Cascanueces musicales',               cat:'Cascanueces', precio:'S/ 76.00',  img:'images/navidad/cascanueces-musicales-1.jpg',   nota:'Se venden por unidad. Disponible en 3 modelos.' },
-  'cascanueces-mecedores':  { nombre:'Cascanueces mecedores',               cat:'Cascanueces', precio:'S/ 58.70',  img:'images/navidad/cascanueces-mecedores-1.jpg',   nota:'Se venden por unidad. Disponible en 3 modelos.' },
-  'perritos-cascanueces':   { nombre:'Muñecos perritos cascanueces',        cat:'Cascanueces', precio:'S/ 54.10',  img:'images/navidad/perritos-cascanueces-1.jpg',    nota:'Se venden por unidad. Disponible en 3 modelos.' },
-  'reno-recostado':         { nombre:'Adorno reno navideño recostado',      cat:'Adornos',     precio:'S/ 60.20',  img:'images/navidad/reno-recostado-1.jpg',          nota:'Material de poliresina.' },
-  'reno-de-pie':            { nombre:'Adorno reno navideño de pie',         cat:'Adornos',     precio:'S/ 75.80',  img:'images/navidad/reno-de-pie-1.jpg',             nota:'Material de poliresina.' },
-  'reno-recostado-plato':   { nombre:'Adorno reno recostado con plato',     cat:'Adornos',     precio:'S/ 104.20', img:'images/navidad/reno-recostado-plato-1.jpg',    nota:'Material de poliresina.' },
-  'reno-de-pie-plato':      { nombre:'Adorno reno de pie con plato',        cat:'Adornos',     precio:'S/ 116.30', img:'images/navidad/reno-de-pie-plato-1.jpg',       nota:'Material de poliresina.' },
-  'papa-noel':              { nombre:'Papá Noel',                          cat:'Figuras',     precio:'S/ 74.00',  img:'images/navidad/papa-noel-1.jpg',               nota:'20 cm de alto.' },
-  'bombonera-caja-regalo':  { nombre:'Bombonera navideña caja de regalo',   cat:'Bomboneras',  precio:'S/ 48.10',  img:'images/navidad/bombonera-caja-regalo-1.jpg',   nota:'22 cm. Se vende por unidad, disponible en 2 modelos.' },
-  'bombonera-casita':       { nombre:'Bombonera navideña casita',           cat:'Bomboneras',  precio:'S/ 57.20',  img:'images/navidad/bombonera-casita-1.jpg',        nota:'28 cm. Se vende por unidad, disponible en 2 modelos.' },
-  'portavela-dorado':       { nombre:'Portavela dorado',                    cat:'Portavelas',  precio:'S/ 54.00',  img:'images/navidad/portavela-dorado-1.jpg',        nota:'Set de 3 unidades.' },
-  'portavela-negro':        { nombre:'Portavela negro',                    cat:'Portavelas',  precio:'S/ 54.00',  img:'images/navidad/portavela-negro-1.jpg',         nota:'Set de 3 unidades.' },
-  'venado-mediano':         { nombre:'Venado transparente mediano',        cat:'Adornos',     precio:'S/ 16.00',  img:'images/navidad/venado-mediano-1.jpg',          nota:'Se vende por unidad. Material de acrílico.' },
-  'venado-pequeno':         { nombre:'Venado transparente pequeño',        cat:'Adornos',     precio:'S/ 16.00',  img:'images/navidad/venado-pequeno-1.jpg',          nota:'Se vende por unidad. Material de acrílico.' },
-  'casa-musical':           { nombre:'Adorno casa musical',                cat:'Figuras',     precio:'S/ 110.50', img:'images/navidad/casa-musical-1.jpg',            nota:'Pieza decorativa de temporada.' },
-  'taza-cascanuez-roja':    { nombre:'Taza cascanuez roja',                cat:'Mesa',        precio:'S/ 67.90',  img:'images/navidad/taza-cascanuez-roja-1.jpg',     nota:'Set de tres tazas.' },
-  'taza-cascanuez':         { nombre:'Taza cascanuez',                     cat:'Mesa',        precio:'S/ 67.90',  img:'images/navidad/taza-cascanuez-1.jpg',          nota:'Set de tres tazas.' },
-  'arbol-iluminado':        { nombre:'Árbol navideño iluminado',           cat:'Iluminados',  precio:'S/ 62.30',  img:'images/navidad/arbol-iluminado-1.jpg',         nota:'Material de porcelana.' },
-  'casa-iluminada-mediana': { nombre:'Casa navideña iluminada mediana',    cat:'Iluminados',  precio:'S/ 40.80',  img:'images/navidad/casa-iluminada-mediana-1.jpg',  nota:'Material de porcelana.' },
-  'muneco-nieve':           { nombre:'Muñeco de nieve iluminado',          cat:'Iluminados',  precio:'S/ 30.00',  img:'images/navidad/muneco-nieve-1.jpg',            nota:'Material de porcelana.' },
-  'casa-iluminada-pequena': { nombre:'Casa navideña iluminada pequeña',    cat:'Iluminados',  precio:'S/ 40.80',  img:'images/navidad/casa-iluminada-pequena-1.jpg',  nota:'Material de porcelana.' },
-  'arreglo-pino-berries':   { nombre:'Arreglo pino y berries',             cat:'Decoración',  precio:'S/ 34.00',  img:'images/navidad/arreglo-pino-berries-1.jpg',    nota:'Arreglo decorativo de temporada.' },
-  'farol-124':              { nombre:'Farol 1.24 m',                       cat:'Farol',       precio:'S/ 245.00', img:'images/navidad/farol-124-1.jpg',               nota:'1.24 m de alto.' },
-  'farol-157':              { nombre:'Farol 1.57 m',                       cat:'Farol',       precio:'S/ 260.00', img:'images/navidad/farol-157-1.jpg',               nota:'1.57 m de alto.' }
+  'tren-jengibre':          { nombre:'Tren de jengibre',                    cat:'Jengibre',    precio:'S/ 72.30',  img:'images/navidad/tren-jengibre-1.jpg',           nota:'Tren con casita «Cake Shop» en jengibre glaseado, dulces y piruletas. Colección jengibre.' },
+  'casa-jengibre':          { nombre:'Casa de jengibre',                    cat:'Jengibre',    precio:'S/ 146.90', img:'images/navidad/casa-jengibre-1.jpg',           nota:'Casa de jengibre iluminada: techo nevado, dulces de colores y figuras glaseadas.' },
+  'cascanueces-musicales':  { nombre:'Cascanueces musicales',               cat:'Cascanueces', precio:'S/ 76.00',  img:'images/navidad/cascanueces-musicales-1.jpg',   nota:'Cascanueces con uniforme de colores sobre base redonda. Se venden por unidad. Disponible en 3 modelos.' },
+  'cascanueces-mecedores':  { nombre:'Cascanueces mecedores',               cat:'Cascanueces', precio:'S/ 58.70',  img:'images/navidad/cascanueces-mecedores-1.jpg',   nota:'Cascanueces sobre caballito mecedor, con uniforme azul, rojo o verde. Se venden por unidad. Disponible en 3 modelos.' },
+  'perritos-cascanueces':   { nombre:'Muñecos perritos cascanueces',        cat:'Cascanueces', precio:'S/ 54.10',  img:'images/navidad/perritos-cascanueces-1.jpg',    nota:'Muñecos con uniforme de cascanueces, corona o sombrero de copa. Se venden por unidad. Disponible en 3 modelos.' },
+  'reno-recostado':         { nombre:'Adorno reno navideño recostado',      cat:'Adornos',     precio:'S/ 60.20',  img:'images/navidad/reno-recostado-1.jpg',          nota:'Reno dorado recostado con esfera de cristal entre las astas. Material de poliresina.' },
+  'reno-de-pie':            { nombre:'Adorno reno navideño de pie',         cat:'Adornos',     precio:'S/ 75.80',  img:'images/navidad/reno-de-pie-1.jpg',             nota:'Reno dorado de pie con esfera de cristal sobre las astas. Material de poliresina.' },
+  'reno-recostado-plato':   { nombre:'Adorno reno recostado con plato',     cat:'Adornos',     precio:'S/ 104.20', img:'images/navidad/reno-recostado-plato-1.jpg',    nota:'Reno dorado recostado con esfera de cristal y plato dorado sobre el lomo. Material de poliresina.' },
+  'reno-de-pie-plato':      { nombre:'Adorno reno de pie con plato',        cat:'Adornos',     precio:'S/ 116.30', img:'images/navidad/reno-de-pie-plato-1.jpg',       nota:'Reno dorado de pie con esfera de cristal y plato dorado sobre el lomo. Material de poliresina.' },
+  'papa-noel':              { nombre:'Papá Noel',                          cat:'Figuras',     precio:'S/ 74.00',  img:'images/navidad/papa-noel-1.jpg',               nota:'Papá Noel de traje rojo y blanco, con saco verde y regalo en la mano. 20 cm de alto.' },
+  'bombonera-caja-regalo':  { nombre:'Bombonera navideña caja de regalo',   cat:'Bomboneras',  precio:'S/ 48.10',  img:'images/navidad/bombonera-caja-regalo-1.jpg',   nota:'Bombonera en forma de caja de regalo, blanca con diseños rojos y lazo. 22 cm. Se vende por unidad, disponible en 2 modelos.' },
+  'bombonera-casita':       { nombre:'Bombonera navideña casita',           cat:'Bomboneras',  precio:'S/ 57.20',  img:'images/navidad/bombonera-casita-1.jpg',        nota:'Bombonera en forma de casita blanca con grecas rojas y puerta verde. 28 cm. Se vende por unidad, disponible en 2 modelos.' },
+  'portavela-dorado':       { nombre:'Portavela dorado',                    cat:'Portavelas',  precio:'S/ 54.00',  img:'images/navidad/portavela-dorado-1.jpg',        nota:'Set de 3 portavelas dorados de distinta altura, de diseño esbelto.' },
+  'portavela-negro':        { nombre:'Portavela negro',                    cat:'Portavelas',  precio:'S/ 54.00',  img:'images/navidad/portavela-negro-1.jpg',         nota:'Set de 3 portavelas negros de distinta altura, de diseño esbelto.' },
+  'venado-mediano':         { nombre:'Venado transparente mediano',        cat:'Adornos',     precio:'S/ 16.00',  img:'images/navidad/venado-mediano-1.jpg',          nota:'Venado transparente de acabado cristalino que capta la luz del árbol. Se vende por unidad. Material de acrílico.' },
+  'venado-pequeno':         { nombre:'Venado transparente pequeño',        cat:'Adornos',     precio:'S/ 16.00',  img:'images/navidad/venado-pequeno-1.jpg',          nota:'Venado transparente con reflejos tornasolados. Se vende por unidad. Material de acrílico.' },
+  'casa-musical':           { nombre:'Adorno casa musical',                cat:'Figuras',     precio:'S/ 110.50', img:'images/navidad/casa-musical-1.jpg',            nota:'Casa de cristal con marco negro y una escena de Papá Noel entre pinos nevados. Pieza decorativa de temporada.' },
+  'taza-cascanuez-roja':    { nombre:'Taza cascanuez roja',                cat:'Mesa',        precio:'S/ 67.90',  img:'images/navidad/taza-cascanuez-roja-1.jpg',     nota:'Set de tres tazas apilables que forman un cascanueces de uniforme rojo y dorado.' },
+  'taza-cascanuez':         { nombre:'Taza cascanuez',                     cat:'Mesa',        precio:'S/ 67.90',  img:'images/navidad/taza-cascanuez-1.jpg',          nota:'Set de tres tazas apilables que forman un cascanueces de abrigo marrón y detalles rojos.' },
+  'arbol-iluminado':        { nombre:'Árbol navideño iluminado',           cat:'Iluminados',  precio:'S/ 62.30',  img:'images/navidad/arbol-iluminado-1.jpg',         nota:'Árbol blanco calado con estrellas por las que sale la luz. Material de porcelana.' },
+  'casa-iluminada-mediana': { nombre:'Casa navideña iluminada mediana',    cat:'Iluminados',  precio:'S/ 40.80',  img:'images/navidad/casa-iluminada-mediana-1.jpg',  nota:'Casa blanca con ventanas que brillan con luz cálida. Material de porcelana.' },
+  'muneco-nieve':           { nombre:'Muñeco de nieve iluminado',          cat:'Iluminados',  precio:'S/ 30.00',  img:'images/navidad/muneco-nieve-1.jpg',            nota:'Muñeco de nieve blanco con gorro y bufanda, calado con estrellas por las que sale la luz. Material de porcelana.' },
+  'casa-iluminada-pequena': { nombre:'Casa navideña iluminada pequeña',    cat:'Iluminados',  precio:'S/ 40.80',  img:'images/navidad/casa-iluminada-pequena-1.jpg',  nota:'Casa blanca con ventanas que brillan con luz cálida, en formato pequeño. Material de porcelana.' },
+  'arreglo-pino-berries':   { nombre:'Arreglo pino y berries',             cat:'Decoración',  precio:'S/ 34.00',  img:'images/navidad/arreglo-pino-berries-1.jpg',    nota:'Arreglo de ramas de pino con piñas y bayas rojas en macetero con acabado de corteza.' },
+  'farol-124':              { nombre:'Farol 1.24 m',                       cat:'Farol',       precio:'S/ 245.00', img:'images/navidad/farol-124-1.jpg',               nota:'Farol de calle navideño con linterna roja que guarda una escena y letrero «Feliz Navidad». 1.24 m de alto.' },
+  'farol-157':              { nombre:'Farol 1.57 m',                       cat:'Farol',       precio:'S/ 260.00', img:'images/navidad/farol-157-1.jpg',               nota:'Farol de calle navideño con linterna roja, corona y letrero «Feliz Navidad». 1.57 m de alto.' }
 };
 window.GD_NAVIDAD = NAVIDAD;
 
@@ -306,7 +304,7 @@ function footerHTML(){
       '</div>' +
       // el blog sale del menú y queda aquí, junto al resto del estudio
       col('Estudio', [{ label:'Retail', href:'retail/' }, { label:'Navidad para retail', href:'retail/navidad' }, { label:'Hogar', href:'hogar/' },
-        { label:'Proyectos', href:'retail/proyectos' }, { label:'Quiénes somos', href:'quienes-somos' }, { label:'Blog', href:'retail/blog' }]) +
+        { label:'Proyectos', href:'retail/proyectos' }, { label:'Quiénes somos', href:'quienes-somos' }, { label:'Blog de retail', href:'retail/blog' }, { label:'Blog de hogar', href:'hogar/blog' }]) +
       col('Catálogo', SITIO.catalogo.secciones.map(function(s){ return { label:s.key==='home'?'Ver catálogo':s.label, href:s.href }; })) +
       '<div class="gd-footer-col"><h4>Contacto</h4>' +
         '<ul class="gd-footer-contact">' +
@@ -395,7 +393,7 @@ Object.keys(SITIO).forEach(function(k){
 });
 PAGINAS.forEach(function(p){ INDICE.push({ label:p.label, href:p.href }); });
 // el blog ya no está en el menú, pero se sigue encontrando en la búsqueda
-INDICE.push({ label:'Retail · Blog', href:'retail/blog' }, { label:'Hogar · Blog', href:'hogar/blog' }, { label:'Retail · Navidad para tiendas (montaje de campaña)', href:'retail/navidad' });
+INDICE.push({ label:'Retail · Blog', href:'retail/blog' }, { label:'Hogar · Blog', href:'hogar/blog' }, { label:'Retail · Navidad para tiendas (montaje de campaña)', href:'retail/navidad' }, { label:'Retail · Montajes de Navidad 2026 (galería de fotos)', href:'retail/montajes-2026' });
 [[PRODUCTOS,'Mueblería'],[ILUMINACION,'Iluminación'],[NAVIDAD,'Navidad']].forEach(function(L){
   Object.keys(L[0]).forEach(function(k){
     var p = L[0][k];
@@ -512,7 +510,8 @@ function ampliarFoto(img){
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarFoto(); });
   }
   var grande = luz.querySelector('img');
-  grande.src = img.currentSrc || img.src; grande.alt = img.alt;
+  var fuente = img.closest && img.closest('[data-full]');   // miniatura con versión grande aparte
+  grande.src = (fuente && fuente.getAttribute('data-full')) || img.currentSrc || img.src; grande.alt = img.alt;
   luz.querySelector('.gd-luz-cap').textContent = 'Producción Giandeco';
   luz._vuelve = document.activeElement;
   luz.classList.add('is-open'); luz.setAttribute('aria-hidden', 'false');
