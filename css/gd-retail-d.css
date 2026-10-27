@@ -6,7 +6,7 @@
    Los colores van fijos (ébano, latón, lino, humo): la página es oscura y clara
    por bandas, igual que la maqueta aprobada.
    ========================================================================== */
-.rd{ background:#0A0A09; color:#DED8CB; font-family:var(--body); font-weight:300; overflow-x:clip; }
+.rd{ background:#0A0A09 repeating-linear-gradient(90deg,rgba(222,216,203,.025) 0,rgba(222,216,203,.025) 1px,transparent 1px,transparent 22px); color:#DED8CB; font-family:var(--body); font-weight:300; overflow-x:clip; }
 .rd a{ color:inherit; text-decoration:none; }
 .rd button{ font-family:var(--body); }
 .rd [hidden]{ display:none !important; }
@@ -388,7 +388,7 @@
 .rd-nuevo b{ font-family:var(--display); font-weight:400; font-size:17px; line-height:1.2; color:#DED8CB; }
 .rd-nuevo svg{ width:16px; height:16px; fill:none; stroke:#C9A24A; stroke-width:1.5; }
 
-.rd-pab{ background:#12110f; padding-block:clamp(48px,7vw,104px); overflow:hidden; }
+.rd-pab{ background:#0A0A09 repeating-linear-gradient(90deg,rgba(222,216,203,.025) 0,rgba(222,216,203,.025) 1px,transparent 1px,transparent 22px); padding-block:clamp(48px,7vw,104px); overflow:hidden; }
 .rd-pab-in{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); align-items:center; gap:clamp(32px,4.5vw,72px); }
 .rd-pab-txt{ display:flex; flex-direction:column; align-items:flex-start; gap:22px; padding-left:max(var(--gd-gut), calc((100vw - var(--gd-max)) / 2 + var(--gd-gut))); }
 .rd-pab-txt .rd-chip{ background:#0A0A09; }
