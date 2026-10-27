@@ -87,7 +87,15 @@
 .rd-lg.is-on svg{ display:block; }
 
 .rd-stage-col{ grid-column:6 / span 7; display:flex; flex-direction:column; gap:32px; min-width:0; }
-.rd-stage{ position:relative; aspect-ratio:16/10; overflow:hidden; background:#12110f; }
+.rd-stage{ position:relative; aspect-ratio:1/1; overflow:hidden; background:#12110f; }
+/* escritorio ancho: la foto vertical a la izquierda y el detalle de la zona a su lado, sin recortar la foto a un marco apaisado */
+@media (min-width:1200px){
+  .rd-stage-col{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr); column-gap:32px; row-gap:32px; align-items:stretch; }
+  .rd-stage{ aspect-ratio:3/4; grid-column:1; grid-row:1; }
+  .rd-stage-col .rd-zdet{ grid-column:2; grid-row:1; display:flex; flex-direction:column; justify-content:space-between; gap:28px; }
+  .rd-stage-col .rd-zdet .rd-h3{ font-size:clamp(1.7rem,2.2vw,2.2rem); }
+  .rd-sum{ grid-column:1 / -1; }
+}
 .rd-stage img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .7s ease; }
 .rd-stage img.is-cur{ opacity:1; }
 .rd-stage::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(10,10,9,.7) 0%,rgba(10,10,9,0) 40%); pointer-events:none; }
@@ -240,7 +248,7 @@
   .rd-lg i{ width:auto; font-size:15px; }
   .rd-lg svg{ width:14px; height:14px; }
   .rd-stage-col{ gap:12px; }
-  .rd-stage{ aspect-ratio:16/11; }
+  .rd-stage{ aspect-ratio:5/6; }
   .rd-stage .rd-chip{ left:12px; top:12px; }
   .rd-stage-n{ left:16px; bottom:8px; font-size:56px; }
   .rd-arrows{ right:12px; bottom:12px; gap:8px; }
