@@ -62,10 +62,8 @@
    -------------------------------------------------------------------------- */
 :root[data-tema="claro"] body{
   background: var(--bg);
-  /* trama de plano (lámina 35): líneas verticales de 1 px cada 22 px, ahora en ébano */
-  background-image:
-    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(138,111,60,.07), transparent),
-    repeating-linear-gradient(90deg, rgba(10,10,9,.035) 0, rgba(10,10,9,.035) 1px, transparent 1px, transparent 22px);
+    background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(138,111,60,.07), transparent);
   color: var(--text);
 }
 /* la cortina que abre cada foto toma el color de la página, no un bloque negro */

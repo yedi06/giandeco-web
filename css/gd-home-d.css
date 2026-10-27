@@ -161,8 +161,8 @@
 /* ---------- NAVIDAD · la escena a todo ancho ---------- */
 .hm-escena{
   padding-block:clamp(64px,8vw,132px) clamp(56px,7vw,112px); color:#DED8CB;
-  /* mismo ébano liso y mismo fino rayado que el fondo de la página: sin degradados de colores */
-  background:#0A0A09 repeating-linear-gradient(90deg,rgba(222,216,203,.025) 0,rgba(222,216,203,.025) 1px,transparent 1px,transparent 22px);
+  /* mismo ébano liso que el fondo de la página: sin degradados de colores ni rayado */
+  background:#0A0A09;
 }
 .hm-escena-img{ position:relative; margin:0 0 clamp(32px,4vw,64px); }
 .hm-escena .gd-shop{ border-radius:0; background:#0c0b09; }

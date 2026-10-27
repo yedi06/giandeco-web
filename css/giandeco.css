@@ -60,8 +60,7 @@ body{
   margin:0;
   background: var(--bg);
   background-image:
-    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,162,74,.06), transparent),
-    repeating-linear-gradient(90deg, rgba(222,216,203,.025) 0, rgba(222,216,203,.025) 1px, transparent 1px, transparent 22px);
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,162,74,.06), transparent);
   color: var(--text);
   font-family: var(--body);
   font-weight:300;
@@ -785,7 +784,6 @@ img{ max-width:100%; display:block; }
 .gd-pieza-thumb.is-slot{
   display:grid; place-items:center; text-align:center; padding:12px; border:1px dashed rgba(201,162,74,.32);
   background:
-    repeating-linear-gradient(90deg, rgba(222,216,203,.05) 0 1px, transparent 1px 22px),
     radial-gradient(130% 130% at 20% 0%, rgba(201,162,74,.13), transparent 62%),
     linear-gradient(155deg, #1c1a16, #0A0A09);
 }
@@ -814,7 +812,6 @@ img{ max-width:100%; display:block; }
   position:relative; aspect-ratio:4/3; border-radius:2px; overflow:hidden;
   border:1px dashed rgba(201,162,74,.35); text-decoration:none;
   background:
-    repeating-linear-gradient(90deg, rgba(222,216,203,.05) 0 1px, transparent 1px 22px),
     radial-gradient(130% 130% at 20% 0%, rgba(201,162,74,.16), transparent 62%),
     linear-gradient(155deg, #1c1a16, #0A0A09);
   display:grid; place-items:center; text-align:center; padding:14px;
@@ -1140,8 +1137,6 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
     linear-gradient(160deg, #1d1a15 0%, #0E0D0B 100%); }
 .gd-fondo::before{ content:'G'; font-family:var(--display); font-weight:400; font-size:clamp(64px, 14vw, 150px); line-height:1;
   color:transparent; background:linear-gradient(170deg, rgba(222,196,140,.42), rgba(201,162,74,.08)); -webkit-background-clip:text; background-clip:text; }
-.gd-fondo::after{ content:''; position:absolute; inset:0;
-  background:repeating-linear-gradient(90deg, rgba(222,216,203,.025) 0 1px, transparent 1px 26px); }
 .pj-card-img .gd-fondo, .gd-esp-thumb .gd-fondo{ border-radius:inherit; }
 .gd-esp-thumb:has(.gd-fondo), .pj-card-img:has(.gd-fondo){ background:#0E0D0B; }
 .pj-foto-fondo{ position:relative; aspect-ratio:4/3; cursor:default; }
