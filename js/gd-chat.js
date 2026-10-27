@@ -218,7 +218,24 @@
   +   '.gdc-badge{top:-3px;right:-3px}'
   + '}';
 
-  + ':root[data-tema="claro"] .gdc-grip i{background:#6F6A63}';
+  /* ---------- acabado final del lanzador: color según el tema ----------
+     oscuro: burbuja de latón con icono ébano (se despega del fondo negro); claro: burbuja ébano con icono latón (se despega del lino).
+     El contador toma el color opuesto a la burbuja, separado por un aro del color de la página. */
+  css += ''
+  + '.gdc-seal{width:58px;height:58px;color:#0A0A09;background:linear-gradient(145deg,#E2C275 0%,#C9A24A 52%,#A9822F 100%);'
+  +   'box-shadow:0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,236,190,.28) inset,0 0 22px rgba(201,162,74,.22)}'
+  + '.gdc:hover .gdc-seal{background:linear-gradient(145deg,#ECCF86 0%,#D3AC55 52%,#B58B34 100%);box-shadow:0 14px 30px rgba(0,0,0,.55),0 0 0 1px rgba(255,236,190,.4) inset,0 0 28px rgba(201,162,74,.32);transform:translateY(-2px)}'
+  + '.gdc.is-open .gdc-seal{background:linear-gradient(145deg,#E2C275 0%,#C9A24A 52%,#A9822F 100%);box-shadow:0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,236,190,.28) inset}'
+  + '.gdc-x{color:#0A0A09}'
+  + '.gdc-badge{background:#0A0A09;color:#F4F1EA;box-shadow:0 0 0 2px #C9A24A}'
+  + '.gdc-grip i{background:#948D80}'
+  + ':root[data-tema="claro"] .gdc-seal{color:#C9A24A;background:linear-gradient(145deg,#1d1a14 0%,#0A0A09 70%);box-shadow:0 10px 24px rgba(10,10,9,.28),0 2px 6px rgba(10,10,9,.2),inset 0 0 0 1.5px #C9A24A}'
+  + ':root[data-tema="claro"] .gdc:hover .gdc-seal{background:linear-gradient(145deg,#26221a 0%,#14120e 70%);box-shadow:0 14px 30px rgba(10,10,9,.34),0 2px 6px rgba(10,10,9,.22),inset 0 0 0 1.5px #E2C275}'
+  + ':root[data-tema="claro"] .gdc.is-open .gdc-seal{background:linear-gradient(145deg,#1d1a14 0%,#0A0A09 70%);box-shadow:0 10px 24px rgba(10,10,9,.28),inset 0 0 0 1.5px #C9A24A}'
+  + ':root[data-tema="claro"] .gdc-x{color:#C9A24A}'
+  + ':root[data-tema="claro"] .gdc-badge{background:#C9A24A;color:#0A0A09;box-shadow:0 0 0 2px var(--bg,#F4F1EA)}'
+  + ':root[data-tema="claro"] .gdc-grip i{background:#6F6A63}'
+  + '@media (max-width:640px){.gdc-seal{width:54px;height:54px}}';
   var st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
