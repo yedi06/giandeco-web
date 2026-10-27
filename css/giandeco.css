@@ -180,12 +180,8 @@ img{ max-width:100%; display:block; }
 .gd-kb-img{ transform-origin:56% 42%; animation: gdKenBurns 26s ease-in-out infinite alternate; will-change:transform; }
 @keyframes gdKenBurns{ from{ transform:scale(1); } to{ transform:scale(1.09); } }
 
-.scroll-progress{
-  position:fixed; top:0; left:0; height:2px; width:100%;
-  transform: scaleX(0); transform-origin: left center; will-change: transform;
-  background: linear-gradient(90deg, var(--accent), #e6c688);
-  box-shadow:0 0 10px rgba(201,162,74,.45); z-index:80;
-}
+/* barra de progreso de lectura: retirada (no va con el diseño) */
+.scroll-progress{ display:none !important; }
 
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal-left, .reveal-scale{ transition:none; opacity:1; transform:none; }

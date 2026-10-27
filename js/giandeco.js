@@ -355,7 +355,6 @@ if(!esHome){
   if(fhost){ fhost.outerHTML = footerHTML(); }
   else { body.insertAdjacentHTML('beforeend', footerHTML()); }
 
-  body.insertAdjacentHTML('afterbegin', '<div class="scroll-progress" id="scrollProgress"></div>');
 }
 
 /* --------------------------------------------------------------------------
