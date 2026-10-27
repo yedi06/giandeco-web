@@ -827,3 +827,85 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 })();
 
 })();
+
+/* ==========================================================================
+   PUNTOS DE COMPRA solo en fotos grandes y panorámicas · la pista desaparece con ellos
+   Criterio: la parte visible de la foto mide 700 px o más de ancho y es claramente apaisada (≥ 1.45).
+   En fotos pequeñas, verticales o en el teléfono no se ponen puntos: las piezas están en la fila de productos.
+   ========================================================================== */
+(function(){
+  'use strict';
+  function visible(shop){
+    var r = shop.getBoundingClientRect(), w = r.width, h = r.height, el = shop.parentElement;
+    while(el && el !== document.body){
+      var cs = getComputedStyle(el);
+      if(cs.overflowX === 'auto' || cs.overflowX === 'scroll' || cs.overflowX === 'hidden'){ w = Math.min(w, el.clientWidth || w); }
+      el = el.parentElement;
+    }
+    w = Math.min(w, window.innerWidth);
+    return { w:w, h:h };
+  }
+  function evaluar(){
+    var tiene = false, shops = document.querySelectorAll('.gd-shop');
+    shops.forEach(function(shop){
+      if(!shop.querySelector('.gd-shop-dot')) return;
+      if(shop.offsetParent === null && getComputedStyle(shop).position !== 'fixed'){ return; }
+      var v = visible(shop), img = shop.querySelector('.gd-shop-img');
+      var rr = img ? img.getBoundingClientRect() : null;
+      var apaisada = rr && rr.height ? (shop.getBoundingClientRect().width / rr.height >= 1.45 || rr.width / rr.height >= 1.45) : v.w / v.h >= 1.45;
+      shop.classList.toggle('sin-puntos', !(v.w >= 700 && apaisada));
+    });
+    // pistas ("seleccione cualquier punto…"): solo si hay una foto con puntos visibles a su alcance
+    document.querySelectorAll('.hm-hint, .gd-shop-hint, .ctb-tip').forEach(function(h){
+      var scope = h.parentElement, hallado = null, n = 0;
+      while(scope && n < 6 && !(hallado = scope.querySelector('.gd-shop'))){ scope = scope.parentElement; n++; }
+      if(!scope) return;
+      var activa = false;
+      scope.querySelectorAll('.gd-shop').forEach(function(sh){ if(sh.offsetParent !== null && !sh.classList.contains('sin-puntos') && sh.querySelector('.gd-shop-dot')) activa = true; });
+      h.hidden = !activa;
+    });
+  }
+  var t;
+  function pronto(){ clearTimeout(t); t = setTimeout(evaluar, 120); }
+  window.addEventListener('resize', pronto);
+  window.addEventListener('orientationchange', pronto);
+  window.addEventListener('load', evaluar);
+  document.addEventListener('load', function(e){ if(e.target && e.target.matches && e.target.matches('.gd-shop-img')) pronto(); }, true);
+  if(document.readyState !== 'loading') evaluar(); else document.addEventListener('DOMContentLoaded', evaluar);
+})();
+
+/* ==========================================================================
+   CARRUSELES DE PRODUCTOS · avanzan solos cuando los vecinos quedan fuera de vista
+   Se detienen al tocar, al pasar el puntero o con el foco, y si la persona prefiere menos movimiento.
+   ========================================================================== */
+(function(){
+  'use strict';
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var PASO_MS = 3600, PAUSA_MS = 9000;
+  function montar(c){
+    if(c.__gdAuto) return; c.__gdAuto = true;
+    var enVista = false, pausado = false, tim = null, reanuda = null;
+    function desborda(){ return c.scrollWidth > c.clientWidth + 12; }
+    function avanzar(){
+      if(pausado || !enVista || document.hidden || !desborda()) return;
+      var hijo = c.children[0]; if(!hijo) return;
+      var gap = parseFloat(getComputedStyle(c).columnGap) || 14;
+      var paso = hijo.getBoundingClientRect().width + gap;
+      var max = c.scrollWidth - c.clientWidth;
+      if(c.scrollLeft >= max - 6) c.scrollTo({ left:0, behavior:'smooth' });
+      else c.scrollTo({ left:Math.min(max, c.scrollLeft + paso), behavior:'smooth' });
+    }
+    function pausar(){ pausado = true; clearTimeout(reanuda); reanuda = setTimeout(function(){ pausado = false; }, PAUSA_MS); }
+    ['touchstart','pointerdown','wheel','keydown','focusin'].forEach(function(ev){ c.addEventListener(ev, pausar, { passive:true }); });
+    c.addEventListener('mouseenter', function(){ pausado = true; clearTimeout(reanuda); });
+    c.addEventListener('mouseleave', function(){ pausar(); });
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ enVista = es[0].isIntersecting; }, { threshold:.35 }).observe(c);
+    } else enVista = true;
+    tim = setInterval(avanzar, PASO_MS);
+  }
+  function buscar(){ document.querySelectorAll('.gd-grid.es-carrusel').forEach(montar); }
+  // los productos se pintan por script: se vigila hasta que el carrusel tenga contenido
+  var intentos = 0, v = setInterval(function(){ buscar(); if(++intentos > 12) clearInterval(v); }, 600);
+  if(document.readyState !== 'loading') buscar(); else document.addEventListener('DOMContentLoaded', buscar);
+})();

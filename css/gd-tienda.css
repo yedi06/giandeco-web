@@ -671,7 +671,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
    en vez de dos o tres renglones de botones que empujan los productos abajo */
 @media (max-width:899px){
   body .mb-filtros, body .nv-filtros, body .pr-filtros{
-    flex-wrap:nowrap; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x proximity;
+    flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:auto; scroll-snap-type:x proximity;
     margin-inline:calc(-1 * var(--gd-gut)); padding-inline:var(--gd-gut); scroll-padding-inline:var(--gd-gut);
     scrollbar-width:none; -webkit-overflow-scrolling:touch;
   }
@@ -687,7 +687,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   /* :not() iguala la especificidad de la regla de dos columnas de giandeco.css */
   body .gd-grid.es-carrusel:not(.gd-grid-2):not(.gd-grid-3){
     display:grid; grid-auto-flow:column; grid-template-columns:none; grid-auto-columns:44%; gap:22px 14px;
-    overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scrollbar-width:none;
+    overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none;
     margin-inline:calc(-1 * var(--gd-gut)); padding-inline:var(--gd-gut); scroll-padding-inline:var(--gd-gut);
   }
   body .gd-grid.es-carrusel::-webkit-scrollbar{ display:none; }

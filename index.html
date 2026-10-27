@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giandeco Studio Design · Visual merchandising e interiorismo en Lima</title>
 <meta name="description" content="Estudio de diseño comercial en Lima: visual merchandising, diseño de tiendas e interiorismo con producción y montaje propios.">
-<link rel="stylesheet" href="css/giandeco.css?v=20261026t">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261018c">
+<link rel="stylesheet" href="css/giandeco.css?v=20261026u">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261026u">
 <!-- la portada del hero es el LCP: se pide ya, solo la que corresponde a la pantalla -->
 <link rel="preload" as="image" type="image/webp" href="images/hero/hero-home-poster-mobile.webp" media="(orientation: portrait) and (max-width: 1024px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="images/hero/hero-home-poster-desktop.webp" media="(orientation: landscape), (min-width: 1025px)" fetchpriority="high">
@@ -1372,7 +1372,7 @@
 </style>
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
-<link rel="stylesheet" href="css/gd-home-d.css?v=20261026r">
+<link rel="stylesheet" href="css/gd-home-d.css?v=20261026u">
 <script src="js/gd-tema.js?v=20261018a"></script>
 
 <!-- intro de marca: se decide antes de pintar, para que nunca haya un parpadeo del telón -->
@@ -1414,6 +1414,14 @@
     <div class="hm-mundos-wrap">
       <h2 class="hm-open-h reveal" id="declT"><span>Un espacio no se decora.</span> <em>Se diseña para vender.</em></h2>
       <div class="hm-mundos gd-oscuro">
+  <a class="hm-mundo" href="catalogo/navidad/" data-cursor="Ver">
+    <picture><source media="(max-width:899px)" srcset="images/home/mundo-navidad-ext-m.webp" width="753" height="941"><img loading="lazy" decoding="async" src="images/home/mundo-navidad-ext.webp" width="1672" height="941" alt="Árbol de Navidad con renos blancos, flores rojas y cintas junto a una figura de Papá Noel, en un salón con ventanal"></picture>
+    <span class="hm-mundo-body">
+      <span class="hm-mundo-k">Navidad</span>
+      <span class="hm-mundo-s">Colección 2026, pieza por pieza</span>
+      <span class="hm-go">Ver colección<i></i></span>
+    </span>
+  </a>
   <a class="hm-mundo" href="retail/proyectos" data-cursor="Ver">
     <picture><source media="(max-width:899px)" srcset="images/home/mundo-retail-ext-m.webp" width="753" height="941"><img loading="lazy" decoding="async" src="images/home/mundo-retail-ext.webp" width="1672" height="941" alt="Muro de nichos con marcos de latón y tres maniquíes vestidos en lino, camel y carbón, sobre una isla de exhibición en roble"></picture>
     <span class="hm-mundo-body">
@@ -1430,16 +1438,14 @@
       <span class="hm-go">Ver espacios<i></i></span>
     </span>
   </a>
-  <a class="hm-mundo" href="catalogo/navidad/" data-cursor="Ver">
-    <picture><source media="(max-width:899px)" srcset="images/home/mundo-navidad-ext-m.webp" width="753" height="941"><img loading="lazy" decoding="async" src="images/home/mundo-navidad-ext.webp" width="1672" height="941" alt="Árbol de Navidad con renos blancos, flores rojas y cintas junto a una figura de Papá Noel, en un salón con ventanal"></picture>
-    <span class="hm-mundo-body">
-      <span class="hm-mundo-k">Navidad</span>
-      <span class="hm-mundo-s">Colección 2026, pieza por pieza</span>
-      <span class="hm-go">Ver colección<i></i></span>
-    </span>
-  </a>
       </div>
-      <div class="hm-mundos-dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></div>
+      <div class="hm-mundos-nav">
+        <p class="hm-mundos-cnt" aria-live="polite"><b>01</b> / 03</p>
+        <div class="hm-mundos-btns">
+          <button type="button" class="hm-mundos-btn is-prev" aria-label="Anterior" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button>
+          <button type="button" class="hm-mundos-btn is-next" aria-label="Siguiente"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
+        </div>
+      </div>
     </div>
     <div class="hm-marcas reveal d1">
       <div class="hm-bar hm-marcas-head">
@@ -1576,7 +1582,7 @@
       <button class="gd-shop-dot" style="left:73.0%; top:57.6%" data-prod="cascanueces-mecedores"></button>
       <button class="gd-shop-dot" style="left:89.2%; top:43.2%" data-prod="arreglo-pino-berries"></button>
     </div>
-    <p class="hm-hint" aria-hidden="true"><i></i>Toque un punto para ver la pieza</p>
+    <p class="hm-hint" aria-hidden="true"><i></i>Seleccione cualquier punto para ver la pieza</p>
     </div>
     <div class="gd-grid es-carrusel" id="navProds"></div>
   </div>
@@ -2151,7 +2157,7 @@
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();
 </script>
-<script src="js/giandeco.js?v=20261026t"></script>
+<script src="js/giandeco.js?v=20261026u"></script>
 <script>
 /* Home: piezas reales del catálogo en la campaña de Navidad y en la fila de mueblería e iluminación */
 document.addEventListener('DOMContentLoaded', function(){
@@ -2189,7 +2195,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
-<script src="js/gd-tienda.js?v=20261025a" defer></script>
+<script src="js/gd-tienda.js?v=20261026u" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
-<script src="js/gd-home-d.js?v=20261026d" defer></script>
+<script src="js/gd-home-d.js?v=20261026u" defer></script>
 <script src="js/gd-chat.js?v=20261026a" defer></script>

@@ -50,23 +50,32 @@
 })();
 
 /* ==========================================================================
-   TRES MUNDOS · indicador del carrusel en móvil
+   TRES MUNDOS · flechas del carrusel en móvil (‹ ›) con contador
    ========================================================================== */
 (function(){
   'use strict';
   var pista = document.querySelector('.hm-mundos');
-  var puntos = pista ? Array.prototype.slice.call(document.querySelectorAll('.hm-mundos-dots i')) : [];
-  if(!pista || !puntos.length) return;
+  var nav = document.querySelector('.hm-mundos-nav');
+  if(!pista || !nav) return;
+  var ant = nav.querySelector('.is-prev'), sig = nav.querySelector('.is-next'), cnt = nav.querySelector('.hm-mundos-cnt');
   var paneles = pista.querySelectorAll('.hm-mundo'), espera = false;
+  function paso(){ return paneles[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(pista).columnGap) || 2); }
+  function indice(){
+    var max = pista.scrollWidth - pista.clientWidth;
+    var i = max > 0 && pista.scrollLeft >= max - 4 ? paneles.length - 1 : Math.round(pista.scrollLeft / paso());
+    return Math.max(0, Math.min(paneles.length - 1, i));
+  }
   function marcar(){
     espera = false;
     if(!paneles.length) return;
-    var paso = paneles[0].getBoundingClientRect().width + 2;
-    var max = pista.scrollWidth - pista.clientWidth;
-    var i = max > 0 && pista.scrollLeft >= max - 4 ? paneles.length - 1 : Math.round(pista.scrollLeft / paso);
-    i = Math.max(0, Math.min(paneles.length - 1, i));
-    puntos.forEach(function(p, k){ p.classList.toggle('is-on', k === i); });
+    var i = indice();
+    ant.disabled = i <= 0; sig.disabled = i >= paneles.length - 1;
+    if(cnt) cnt.innerHTML = '<b>0' + (i + 1) + '</b> / 0' + paneles.length;
   }
+  function ir(d){ var i = Math.max(0, Math.min(paneles.length - 1, indice() + d)); pista.scrollTo({ left: i * paso(), behavior: 'smooth' }); }
+  ant.addEventListener('click', function(){ ir(-1); });
+  sig.addEventListener('click', function(){ ir(1); });
   pista.addEventListener('scroll', function(){ if(!espera){ espera = true; requestAnimationFrame(marcar); } }, { passive: true });
   window.addEventListener('resize', marcar);
+  marcar();
 })();

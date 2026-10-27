@@ -88,7 +88,7 @@
   content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
   background:linear-gradient(to top,rgba(10,10,9,.92) 0%,rgba(10,10,9,.55) 26%,rgba(10,10,9,.16) 46%,rgba(10,10,9,0) 60%);
 }
-.hm-mundos-dots{ display:none; }
+.hm-mundos-nav{ display:none; }
 /* el panel se ensancha con el puntero (solo dispositivos con ratón) y con el teclado; en pantallas táctiles el toque abre directo */
 .hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo{ flex:.8 1 0; }
 .hm-mundos:has(.hm-mundo:focus-visible) .hm-mundo:focus-visible{ flex:1.7 1 0; }
@@ -105,15 +105,21 @@
   /* móvil: el primer panel arranca en la línea izquierda; los siguientes asoman por la derecha */
   .hm-mundos{
     height:auto; gap:var(--hm-g); background:none; margin-inline:calc(var(--gd-gut) * -1); padding-inline:var(--gd-gut); scroll-padding-inline:var(--gd-gut);
-    overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;
+    overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:auto; -webkit-overflow-scrolling:touch;
   }
   .hm-mundos::-webkit-scrollbar{ display:none; }
   .hm-mundo{ flex:0 0 min(78vw,420px); aspect-ratio:4/5; scroll-snap-align:start; transition:none; }
   .hm-mundo > picture > img, .hm-mundo > img{ left:0; width:100%; aspect-ratio:auto; transform:none; }
   /* indicador del carrusel: dónde está y cuántos paneles hay */
-  .hm-mundos-dots{ display:flex; gap:8px; margin-top:16px; }
-  .hm-mundos-dots i{ display:block; width:18px; height:2px; background:rgba(222,216,203,.28); transition:width .35s var(--gd-ease), background .35s var(--gd-ease); }
-  .hm-mundos-dots i.is-on{ width:36px; background:#C9A24A; }
+  .hm-mundos-nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:18px; }
+  .hm-mundos-cnt{ font-family:var(--display); font-style:italic; font-size:1rem; letter-spacing:.06em; color:rgba(222,216,203,.7); }
+  .hm-mundos-cnt b{ font-weight:400; color:#C9A24A; }
+  .hm-mundos-btns{ display:flex; gap:12px; }
+  .hm-mundos-btn{ display:grid; place-items:center; width:48px; height:48px; padding:0; border-radius:50%; border:1px solid rgba(201,162,74,.7); background:transparent; color:#C9A24A; cursor:pointer; transition:background .3s var(--gd-ease), color .3s var(--gd-ease), border-color .3s var(--gd-ease), opacity .3s; -webkit-tap-highlight-color:transparent; }
+  .hm-mundos-btn svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .hm-mundos-btn:active:not(:disabled), .hm-mundos-btn.is-next:not(:disabled){ background:#C9A24A; color:#0A0A09; border-color:#C9A24A; }
+  .hm-mundos-btn:disabled{ opacity:.3; cursor:default; }
+  .hm-mundos-btn:focus-visible{ outline:2px solid #C9A24A; outline-offset:3px; }
   .hm-mundos:has(.hm-mundo:hover) .hm-mundo, .hm-mundos:has(.hm-mundo:hover) .hm-mundo:hover{ flex:0 0 min(78vw,420px); }
   .hm-mundo-k{ font-size:clamp(2.6rem,12vw,3.6rem); }
 }
@@ -172,7 +178,10 @@
   font-family:var(--body); font-weight:500; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap; color:#DED8CB;
   background:rgba(10,10,9,.62); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); pointer-events:none;
 }
-.hm-hint i{ width:7px; height:7px; border-radius:50%; background:#C9A24A; box-shadow:0 0 0 4px rgba(201,162,74,.25); }
+.hm-hint i{ position:relative; flex:none; width:16px; height:16px; border-radius:50%; border:1px solid #C9A24A; background:none; }
+.hm-hint i::before, .hm-hint i::after{ content:''; position:absolute; left:50%; top:50%; background:#C9A24A; transform:translate(-50%,-50%); }
+.hm-hint i::before{ width:6px; height:1px; }
+.hm-hint i::after{ width:1px; height:6px; }
 @media (min-width:900px){
   .hm-escena #navProds{ grid-template-columns:repeat(6,minmax(0,1fr)); gap:clamp(24px,2.4vw,36px) var(--hm-g); }
   .hm-escena #navProds > :nth-child(n+7){ display:none; }
@@ -275,7 +284,7 @@ body .hm-cta .gd-btn{ font-size:clamp(.8rem,.74rem + .14vw,.92rem); }
   .hm-cta .gd-cta-btns{ flex-direction:column; align-items:stretch; justify-content:flex-start; gap:12px; }
   .hm-cta .gd-cta-btns .gd-btn{ width:100%; justify-content:center; }
   .hm-escena-img{ margin-bottom:24px; }
-  .hm-mundos-dots{ margin-top:14px; }
+  .hm-mundos-nav{ margin-top:14px; }
 
   /* rótulos + títulos de sección: misma escala, mismo espacio */
   .hm-eb{ display:block; margin:0 0 10px; }
