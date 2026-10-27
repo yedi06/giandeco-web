@@ -80,11 +80,10 @@
 }
 @supports (width:1cqw){ .hm-mundo{ --hm-rw:calc((100cqw - 4px) / 3); } }
 .hm-mundos{ container-type:inline-size; }
-/* Foto principal: tamaño fijo y centrada. Al ensanchar el panel no se estira: se revelan, a los lados, dos detalles del mismo universo. */
-.hm-mundo > img{ position:absolute; top:0; left:calc(50% - var(--hm-rw) / 2); width:var(--hm-rw); max-width:none; height:100%; object-fit:cover; z-index:-2; box-shadow:0 0 0 1px rgba(201,162,74,.55); }
-.hm-mundo > img.hm-side{ width:calc(var(--hm-rw) * .34); filter:brightness(.74) saturate(.88) contrast(1.03); box-shadow:none; background:#0A0A09; }
-.hm-mundo > img.hm-side--l{ left:auto; right:calc(50% + var(--hm-rw) / 2 + 1px); }
-.hm-mundo > img.hm-side--r{ left:calc(50% + var(--hm-rw) / 2 + 1px); }
+/* Foto del panel: ya viene ensanchada (16:9), a la altura del panel y centrada. En reposo se ve el centro (la composición de siempre);
+   al ensanchar el panel no se estira ni se recorta distinto: se descubre el resto de la misma foto a los lados. */
+.hm-mundo picture{ display:contents; }
+.hm-mundo > picture > img, .hm-mundo > img{ position:absolute; top:0; left:50%; height:100%; width:auto; min-width:100%; max-width:none; aspect-ratio:16/9; transform:translateX(-50%); object-fit:cover; z-index:-2; }
 .hm-mundo::after{
   content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
   background:linear-gradient(to top,rgba(10,10,9,.92) 0%,rgba(10,10,9,.55) 26%,rgba(10,10,9,.16) 46%,rgba(10,10,9,0) 60%);
@@ -110,8 +109,7 @@
   }
   .hm-mundos::-webkit-scrollbar{ display:none; }
   .hm-mundo{ flex:0 0 min(78vw,420px); aspect-ratio:4/5; scroll-snap-align:start; transition:none; }
-  .hm-mundo > img{ left:0; width:100%; box-shadow:none; }
-  .hm-mundo > img.hm-side{ display:none; }
+  .hm-mundo > picture > img, .hm-mundo > img{ left:0; width:100%; aspect-ratio:auto; transform:none; }
   /* indicador del carrusel: dónde está y cuántos paneles hay */
   .hm-mundos-dots{ display:flex; gap:8px; margin-top:16px; }
   .hm-mundos-dots i{ display:block; width:18px; height:2px; background:rgba(222,216,203,.28); transition:width .35s var(--gd-ease), background .35s var(--gd-ease); }
