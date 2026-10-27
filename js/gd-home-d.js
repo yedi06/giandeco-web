@@ -78,4 +78,17 @@
   pista.addEventListener('scroll', function(){ if(!espera){ espera = true; requestAnimationFrame(marcar); } }, { passive: true });
   window.addEventListener('resize', marcar);
   marcar();
+
+  /* avance automático en móvil: pasa de panel en panel, vuelve al primero y se detiene si la persona lo toca */
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var enVista = false, pausado = false, espera2 = null;
+  function pausar(){ pausado = true; clearTimeout(espera2); espera2 = setTimeout(function(){ pausado = false; }, 9000); }
+  ['touchstart', 'pointerdown', 'wheel', 'keydown', 'focusin'].forEach(function(ev){ pista.addEventListener(ev, pausar, { passive: true }); });
+  nav.addEventListener('pointerdown', pausar, { passive: true });
+  if('IntersectionObserver' in window) new IntersectionObserver(function(es){ enVista = es[0].isIntersecting; }, { threshold: .5 }).observe(pista); else enVista = true;
+  setInterval(function(){
+    if(pausado || !enVista || document.hidden || pista.scrollWidth <= pista.clientWidth + 12) return;
+    var i = indice();
+    pista.scrollTo({ left: (i >= paneles.length - 1 ? 0 : i + 1) * paso(), behavior: 'smooth' });
+  }, 4200);
 })();
