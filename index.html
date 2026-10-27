@@ -1226,6 +1226,19 @@
   /* escritorio: el video ocupa toda la primera impresión (decisión de marca).
      Teléfono: asoma la sección siguiente para que se entienda que hay más. */
   @media (max-width:899px){ .gd-hero{ height:76vh; height:76svh; min-height:420px; } }
+  /* pie del hero (2026-10-27, aprobado por Gian): una línea y una acción, abajo a la
+     izquierda, sobre un velo que solo oscurece el borde inferior; el video sigue mandando */
+  .hm-hero-pie{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding-bottom:clamp(22px,4vw,48px); pointer-events:none; }
+  .hm-hero-pie::before{ content:""; position:absolute; inset:-160px 0 0; z-index:-1; background:linear-gradient(to top, rgba(10,9,6,.82), rgba(10,9,6,.4) 50%, transparent); }
+  .hm-hero-frase{ text-shadow:0 1px 14px rgba(10,9,6,.5); }
+  .hm-hero-pie .gd-in{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 40px; }
+  .hm-hero-frase{ margin:0; max-width:34ch; font-family:var(--body); font-weight:300; font-size:clamp(1rem,1.35vw,1.2rem); line-height:1.5; color:#DED8CB; text-wrap:balance; }
+  .hm-hero-pie .gd-link{ pointer-events:auto; min-height:44px; color:#DED8CB; border-bottom-color:rgba(222,216,203,.4); }
+  .hm-hero-pie .gd-link:hover{ color:#C9A24A; border-bottom-color:#C9A24A; }
+  /* con la intro de marca, el pie entra después de que sube el telón */
+  html.gd-intro-on:not(.gd-intro-out) .hm-hero-pie{ opacity:0; }
+  .hm-hero-pie{ transition:opacity .9s ease 1.2s; }
+  @media (prefers-reduced-motion: reduce){ .hm-hero-pie{ transition:none; } }
 
   /* --- tres universos --- */
   .gd-universos{ padding-top:clamp(48px,7vw,96px); }
@@ -1398,6 +1411,12 @@
       <video class="gd-hero-video" id="heroVideo" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"
         data-desktop-webm="images/hero/hero-home-desktop.webm" data-desktop-mp4="images/hero/hero-home-desktop.mp4"
         data-mobile-webm="images/hero/hero-home-mobile.webm" data-mobile-mp4="images/hero/hero-home-mobile.mp4"></video>
+    </div>
+  </div>
+  <div class="hm-hero-pie">
+    <div class="gd-in">
+      <p class="hm-hero-frase">Espacios que saben vender: interiores y visual merchandising para marcas retail en Lima.</p>
+      <a class="gd-link" href="contacto#ctSolicitud">Agendar visita técnica<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
   </div>
 </section>
@@ -2198,4 +2217,4 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="js/gd-tienda.js?v=20261026u" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-home-d.js?v=20261026w" defer></script>
-<script src="js/gd-chat.js?v=20261026a" defer></script>
+<script src="js/gd-chat.js?v=20261027a" defer></script>

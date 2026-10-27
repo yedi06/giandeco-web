@@ -1,0 +1,129 @@
+/* ==========================================================================
+   GIANDECO — FICHAS DE PROYECTO (complemento de giandeco.css)
+   · Lámina: proyectos con una sola fotografía. La foto se muestra a su
+     tamaño real (nunca estirada), montada como lámina, y la historia del
+     caso se cuenta en tres decisiones y la paleta tomada de la propia foto.
+   · Comparador boceto → obra dentro de la ficha (mismo gesto que el home).
+   · Transición entre páginas: la tarjeta del listado se convierte en la
+     portada de la ficha (View Transitions; sin soporte, se navega normal).
+   Todo el movimiento respeta prefers-reduced-motion.
+   ========================================================================== */
+
+/* ---------- 1. lámina: foto + encabezado del caso ---------- */
+.pjl{ padding-top:calc(var(--h-marca) + clamp(28px,5vw,48px)); padding-bottom:clamp(64px,9vw,120px); }
+@media (min-width:900px){ .pjl{ padding-top:calc(var(--h-total) + clamp(32px,4vw,64px)); } }
+.pjl-grid{ display:grid; gap:clamp(32px,5vw,48px); }
+@media (min-width:900px){
+  .pjl-grid{ grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(48px,7vw,128px); align-items:end; }
+}
+.pjl-foto{ margin:0; width:100%; max-width:620px; }
+/* lámina horizontal: la foto apaisada toma más ancho y el texto se ciñe */
+@media (min-width:900px){ .pjl.es-horizontal .pjl-grid{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); } }
+.pjl.es-horizontal .pjl-foto{ max-width:980px; }
+/* passe-partout: la foto montada como lámina de portafolio */
+.pjl-marco{ display:block; width:100%; padding:clamp(10px,1.1vw,16px); background:var(--bg-raised); border:1px solid var(--line); border-radius:2px; cursor:zoom-in; overflow:hidden; }
+.pjl-marco img{ width:100%; height:auto; transition:transform .9s var(--gd-ease); }
+.pjl-marco:hover img{ transform:scale(1.02); }
+.pjl-marco:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+.pjl-foto figcaption{ display:flex; justify-content:space-between; gap:16px; margin-top:12px; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); }
+.pjl-foto figcaption span:last-child{ display:inline-flex; align-items:center; gap:8px; }
+.pjl-foto figcaption svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.5; }
+
+.pjl-txt h1{ font-family:var(--display); font-weight:400; color:var(--lino); font-size:clamp(2.6rem,5.4vw,4.6rem); line-height:1; letter-spacing:-.02em; margin:0 0 12px; text-wrap:balance; }
+.pjl-txt .gd-eyebrow{ margin-bottom:18px; }
+.pjl-sub{ margin:0 0 clamp(36px,5vw,64px); font-family:var(--script); font-style:italic; font-weight:300; font-size:clamp(1.25rem,2vw,1.6rem); color:var(--text-dim); }
+.pjl-txt .pj-lead{ max-width:30ch; }
+.pjl-datos{ display:flex; flex-wrap:wrap; gap:16px 48px; margin-top:clamp(32px,4vw,48px); padding-top:20px; border-top:1px solid var(--line); }
+.pjl-datos dt{ font-size:.7rem; }
+
+/* ---------- 2. la historia: tres decisiones ---------- */
+.pjl-historia{ background:var(--bg-raised); }
+.pjl-historia .pj-h2{ max-width:18ch; margin-bottom:clamp(40px,5vw,64px); }
+.pjl-pasos{ list-style:none; margin:0; padding:0; display:grid; gap:40px; counter-reset:paso; }
+@media (min-width:900px){ .pjl-pasos{ grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(32px,4vw,64px); } }
+@media (min-width:600px) and (max-width:899px){ .pjl-pasos.es-4{ grid-template-columns:1fr 1fr; } }
+@media (min-width:900px){ .pjl-pasos.es-4{ grid-template-columns:repeat(4, minmax(0,1fr)); gap:clamp(28px,3vw,48px); } }
+.pjl-pasos li{ position:relative; padding-top:28px; }
+/* filete de latón que se dibuja al entrar: detalle de oficio, no adorno */
+.pjl-pasos li::before{ content:''; position:absolute; top:0; left:0; right:0; height:1px; background:var(--line); }
+.pjl-pasos li::after{ content:''; position:absolute; top:0; left:0; width:56px; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform 1.1s var(--gd-ease) .2s; }
+.pjl-pasos li.is-visible::after{ transform:scaleX(1); }
+.pjl-num{ display:block; font-family:var(--display); font-weight:400; font-size:2.4rem; line-height:1; color:var(--accent); margin-bottom:20px; font-variant-numeric:lining-nums; }
+.pjl-pasos h3{ font-family:var(--body); font-weight:500; font-size:1.08rem; line-height:1.3; color:var(--lino); margin:0 0 10px; }
+.pjl-pasos p{ margin:0; color:var(--text-dim); font-size:.98rem; line-height:1.7; max-width:38ch; }
+
+/* ---------- 3. cierre: paleta del espacio + resultado ---------- */
+.pjl-cierre-grid{ display:grid; gap:56px; }
+@media (min-width:900px){ .pjl-cierre-grid{ grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(48px,7vw,128px); align-items:end; } }
+.pjl-paleta ul{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:6px; }
+.pjl-paleta li{ display:grid; gap:10px; }
+.pjl-paleta i{ display:block; height:clamp(96px,11vw,148px); border-radius:2px; box-shadow:inset 0 0 0 1px rgba(222,216,203,.08); }
+.pjl-paleta small{ font-size:.7rem; letter-spacing:.08em; color:var(--text-faint); font-variant-numeric:tabular-nums; }
+.pjl-nota{ margin:14px 0 0; font-size:.8rem; color:var(--text-faint); }
+.pjl-cierre .pj-res-txt{ font-size:clamp(1.7rem,3vw,2.4rem); max-width:22ch; margin:0; }
+
+/* ---------- 4. comparador boceto → obra ---------- */
+.pjb{ margin:clamp(40px,5vw,64px) 0 0; }
+.pjb-frame{ position:relative; width:100%; overflow:hidden; border-radius:2px; background:var(--panel); cursor:ew-resize; touch-action:pan-y; user-select:none; }
+@media (min-width:760px){ .pjb-frame{ width:auto; height:min(74svh, 720px); max-width:100%; margin-inline:auto; } }
+.pjb-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.pjb-obra{ clip-path:inset(0 0 0 var(--pjb, 50%)); }
+.pjb-linea{ position:absolute; top:0; bottom:0; left:var(--pjb, 50%); width:2px; margin-left:-1px; background:var(--accent); z-index:3; pointer-events:none; box-shadow:0 0 0 1px rgba(10,9,6,.35); }
+.pjb-grip{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:48px; height:48px; border-radius:50%; background:rgba(10,9,6,.66); border:1px solid var(--accent); display:grid; place-items:center; }
+.pjb-grip svg{ width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:1.5; }
+.pjb-tag{ position:absolute; bottom:16px; z-index:4; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:var(--lino); background:rgba(10,9,6,.6); padding:7px 13px; border-radius:2px; }
+.pjb-tag.is-a{ left:16px; } .pjb-tag.is-b{ right:16px; }
+.pjb-range{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; z-index:5; margin:0; }
+.pjb-range:focus-visible ~ .pjb-linea{ box-shadow:0 0 0 2px var(--lino); }
+.pjb-pie{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 40px; margin-top:16px; }
+.pjb-pie p{ margin:0; color:var(--text-dim); font-size:.92rem; line-height:1.6; max-width:60ch; }
+.pjb-pie span{ display:inline-flex; align-items:center; gap:8px; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-faint); }
+.pjb-pie svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.5; }
+
+/* ---------- 4b. índice de proyectos: filas de una apaisada y una vertical ---------- */
+.pj-card-num{ font-family:var(--display); font-size:1.05rem; color:var(--accent); font-variant-numeric:lining-nums; margin-bottom:2px; }
+.pj-grid.es-indice{ grid-template-columns:1fr; gap:40px; }
+.pj-grid.es-indice .pj-card.es-ancha .pj-card-img{ aspect-ratio:3/2; }
+.pj-grid.es-indice .pj-card.es-alta .pj-card-img{ aspect-ratio:4/5; }
+@media (min-width:600px) and (max-width:899px){
+  .pj-grid.es-indice{ grid-template-columns:1fr 1fr; grid-auto-flow:dense; gap:36px 16px; }
+  .pj-grid.es-indice .pj-card.es-ancha{ grid-column:span 2; }
+}
+@media (min-width:900px){
+  .pj-grid.es-indice{ grid-template-columns:repeat(12, minmax(0,1fr)); gap:clamp(48px,5vw,80px) clamp(16px,2vw,32px); }
+  .pj-grid.es-indice .pj-card.es-ancha{ grid-column:span 8; }
+  .pj-grid.es-indice .pj-card.es-alta{ grid-column:span 4; }
+  /* la última fila junta las dos verticales que quedan */
+  .pj-grid.es-indice .pj-card.es-alta:nth-last-child(-n+2){ grid-column:span 6; }
+  .pj-grid.es-indice .pj-card .pj-card-img{ aspect-ratio:auto; height:clamp(340px,34vw,600px); }
+  .pj-grid.es-indice .pj-card-nom{ font-size:clamp(1.05rem,1.4vw,1.3rem); }
+}
+/* filtrado: rejilla pareja, sin huecos */
+@media (min-width:900px){
+  .pj-grid.es-indice.is-filtrado .pj-card{ grid-column:span 4 !important; }
+  .pj-grid.es-indice.is-filtrado .pj-card .pj-card-img{ height:auto; aspect-ratio:4/5; }
+}
+@media (min-width:600px) and (max-width:899px){ .pj-grid.es-indice.is-filtrado .pj-card{ grid-column:auto; } .pj-grid.es-indice.is-filtrado .pj-card .pj-card-img{ aspect-ratio:4/5; } }
+
+/* ---------- 5. transición tarjeta → portada ---------- */
+.pjl-marco img, .pj-hero > img{ view-transition-name:pj-portada; }
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{ navigation:auto; }
+  ::view-transition-group(pj-portada){ animation-duration:.62s; animation-timing-function:cubic-bezier(.16,1,.3,1); }
+  ::view-transition-old(root), ::view-transition-new(root){ animation-duration:.32s; }
+}
+
+/* ---------- tema claro ----------
+   la lámina es la portada: sigue siendo isla oscura (como .pj-hero en gd-tema.css),
+   así el encabezado transparente se lee igual que en el resto del sitio */
+:root[data-tema="claro"] .pjl{
+  --bg:#0A0A09; --bg-raised:#171613; --panel:#1c1a16; --line:#2a2621;
+  --text:#DED8CB; --text-dim:#B9B3A6; --text-faint:#948D80; --accent:#C9A24A; --lino:#DED8CB;
+  background:var(--bg); color:var(--text); color-scheme:dark;
+}
+:root[data-tema="claro"] .pjl-paleta i{ box-shadow:inset 0 0 0 1px rgba(10,10,9,.08); }
+
+@media (prefers-reduced-motion: reduce){
+  .pjl-marco img{ transition:none; }
+  .pjl-pasos li::after{ transition:none; transform:scaleX(1); }
+}

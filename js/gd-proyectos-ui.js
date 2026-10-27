@@ -170,9 +170,11 @@ if(typeof document !== 'undefined'){
   document.addEventListener('click', function(e){
     var f = e.target.closest && e.target.closest('[data-pj-tipo]');
     if(f){
-      var cont = f.closest('.pj-filtros'), grid = cont.nextElementSibling, t = f.getAttribute('data-pj-tipo');
+      // un filtro puede agrupar varios tipos: data-pj-tipo="tiendas,campanas"
+      var cont = f.closest('.pj-filtros'), grid = cont.nextElementSibling, t = f.getAttribute('data-pj-tipo'), tipos = t ? t.split(',') : [];
       cont.querySelectorAll('button').forEach(function(b){ var on = b === f; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-      grid.querySelectorAll('.pj-card').forEach(function(c){ c.hidden = !!t && c.getAttribute('data-tipo') !== t; });
+      grid.querySelectorAll('.pj-card').forEach(function(c){ c.hidden = !!t && tipos.indexOf(c.getAttribute('data-tipo')) === -1; });
+      grid.classList.toggle('is-filtrado', !!t);   // el índice editorial vuelve a una rejilla pareja
       return;
     }
     var a = e.target.closest && e.target.closest('[data-ampliar]');

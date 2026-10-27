@@ -155,6 +155,8 @@ function lista(){
     if(a.valor === null) return 1; if(b.valor === null) return -1;
     return S.orden === 'asc' ? a.valor - b.valor : b.valor - a.valor;
   });
+  // lo agotado va al final en cualquier orden (sort estable: el resto conserva su orden)
+  l.sort(function(a, b){ return (a.stock <= 0) - (b.stock <= 0); });
   return l;
 }
 function activos(){ return (S.cat?1:0) + (S.uso?1:0) + (S.tono?1:0) + (S.rangos.length?1:0) + (S.ofertas?1:0) + (S.luz?1:0); }

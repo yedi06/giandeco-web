@@ -251,11 +251,11 @@
   root.className = 'gdc';
   root.innerHTML =
       '<span class="gdc-grip" aria-hidden="true" title="Arrastre para mover"><i></i><i></i><i></i><i></i><i></i><i></i></span>'
-    + '<button class="gdc-btn" type="button" aria-label="Abrir chat con Giandeco, 1 mensaje" aria-expanded="false" aria-controls="gdcPanel">'
+    + '<button class="gdc-btn" type="button" aria-label="Abrir chat con Giandeco" aria-expanded="false" aria-controls="gdcPanel">'
     +   '<span class="gdc-seal" aria-hidden="true">'
     +     /* icono de conversación: burbuja al frente y otra asomando detrás */
           '<svg class="gdc-g" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 8.5h13v10.5H8l-5.5 4z"/><path d="M7 4.5h14.5V15"/></svg>'
-    +     '<svg class="gdc-x" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12"/></svg><span class="gdc-badge">1</span></span>'
+    +     '<svg class="gdc-x" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12"/></svg></span>'
     + '</button>';
 
   var LOGO = '<span class="gdc-ava" aria-hidden="true"><img src="images/firma/logo-giandeco-oficial.png" alt=""></span>';
@@ -454,11 +454,27 @@
 
   // ---------- entrada ----------
   place();
+  // en celular se aparta mientras haya en pantalla una acción principal (botón de
+  // WhatsApp, envío de formulario, filtro del catálogo): no la tapa ni compite con ella
+  var enPantalla = [], movil = window.matchMedia('(max-width: 900px)');
+  if('IntersectionObserver' in window){
+    var vigia = new IntersectionObserver(function(es){
+      es.forEach(function(x){
+        var i = enPantalla.indexOf(x.target);
+        if(x.isIntersecting && i < 0) enPantalla.push(x.target);
+        if(!x.isIntersecting && i >= 0) enPantalla.splice(i, 1);
+      });
+      visible();
+    });
+    var vigilar = function(){ Array.prototype.forEach.call(document.querySelectorAll('.gd-btn-primary, .ct-envio, .ctl-pill'), function(el){ vigia.observe(el); }); };
+    vigilar();
+    setTimeout(vigilar, 1500);   // el catálogo arma sus controles después de cargar
+  }
   // no compite con el hero: el sello entra cuando el visitante ya empezó a bajar
   function visible(){
     var th = window.innerHeight * 0.55;
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    var show = isOpen || window.scrollY > th || max < th;
+    var show = isOpen || ((window.scrollY > th || max < th) && !(movil.matches && enPantalla.length));
     if(show !== root.classList.contains('is-in')){ if(show) place(); root.classList.toggle('is-in', show); }
   }
   window.addEventListener('scroll', visible, { passive: true });

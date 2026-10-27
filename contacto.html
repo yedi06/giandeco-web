@@ -55,6 +55,10 @@
   }
   .ct-tipo input:checked + span{ border-color:var(--accent); color:var(--accent); background:rgba(201,162,74,.08); }
   .ct-tipo input:focus-visible + span{ outline:2px solid var(--accent); outline-offset:2px; }
+  .gd-field label small{ font-size:inherit; text-transform:none; letter-spacing:0; color:var(--text-faint); }
+  .ct-envio{ display:flex; flex-wrap:wrap; align-items:center; gap:16px 28px; }
+  .ct-envio .gd-link{ background:none; border-width:0 0 1px; cursor:pointer; min-height:44px; }
+  #ctSolicitud{ scroll-margin-top:calc(var(--h-total) + 24px); }
 </style>
 </head>
 <body data-pagina="contacto">
@@ -66,11 +70,17 @@
     <p class="gd-hero-eyebrow reveal-left"><i></i>Lima y Callao</p>
     <h1 class="reveal-left d1">Conversemos su <em>espacio</em></h1>
     <p class="reveal-left d2">Cuéntenos qué local es, qué vende y para cuándo lo necesita. Respondemos con un diagnóstico y un alcance claro.</p>
+    <div class="gd-hero-cta reveal-left d3">
+      <a class="gd-btn gd-btn-primary" href="https://wa.me/51920775559?text=Hola%20Giandeco%2C%20quiero%20conversar%20sobre%20un%20proyecto." target="_blank" rel="noopener">Escribir por WhatsApp
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="gd-btn gd-btn-ghost" href="#ctSolicitud">Solicitar visita técnica</a>
+    </div>
+    <div class="gd-hero-pie reveal-left d3"><span><b>+51 920 775 559</b></span><span data-emp="horarioCap">Lunes a sábado, de 9:00 a. m. a 6:00 p. m.</span></div>
   </div>
   <div class="gd-hero-media">
-    <div class="gd-curtain"><img decoding="async" class="gd-kb-img" src="images/shift/expodeco-showroom.jpg" alt="Showroom montado por Giandeco"></div>
+    <div class="gd-curtain"><img decoding="async" class="gd-kb-img" src="images/portadas/contacto-1280.webp" srcset="images/portadas/contacto-860.webp 860w, images/portadas/contacto-1280.webp 1280w" sizes="(min-width:900px) 52vw, 100vw" width="1280" height="1589" alt="Mesa del estudio lista para una primera reunión: dos cafés, cuaderno con un boceto, planos y muestras de materiales"></div>
     <div class="gd-hero-cap">
-      <span><b>Showroom montado</b><span>Expodeco 2024</span></span>
+      <span><b>Primera reunión</b><span>Visitas con cita previa</span></span>
       <span class="gd-scroll-cue" aria-hidden="true">Desplace<i></i></span>
     </div>
   </div>
@@ -80,7 +90,7 @@
   <div class="gd-in ct-grid">
 
     <!-- FORMULARIO -->
-    <div>
+    <div id="ctSolicitud">
       <p class="gd-eyebrow reveal">Cuéntenos</p>
       <h2 class="gd-h2 reveal d1" style="font-size:clamp(2rem,3vw,2.4rem);">Solicitar visita técnica</h2>
 
@@ -96,12 +106,12 @@
         </div>
         <div class="gd-form gd-form-2" style="gap:var(--sp-24);">
           <div class="gd-field">
-            <label for="ctCorreo">Correo electrónico</label>
-            <input type="email" id="ctCorreo" name="correo" required placeholder="nombre@empresa.com" autocomplete="email">
+            <label for="ctCorreo">Correo electrónico <small>(opcional)</small></label>
+            <input type="email" id="ctCorreo" name="correo" placeholder="nombre@empresa.com" autocomplete="email">
           </div>
           <div class="gd-field">
-            <label for="ctTel">Teléfono o WhatsApp</label>
-            <input type="tel" id="ctTel" name="telefono" required placeholder="+51 999 999 999" autocomplete="tel">
+            <label for="ctTel">Teléfono o WhatsApp <small>(opcional)</small></label>
+            <input type="tel" id="ctTel" name="telefono" placeholder="+51 999 999 999" autocomplete="tel">
           </div>
         </div>
         <div class="gd-field">
@@ -116,11 +126,12 @@
           <label for="ctMensaje">Cuéntenos del proyecto o asunto</label>
           <textarea id="ctMensaje" name="mensaje" required placeholder="Qué local es, qué vende, metros aproximados y en qué fecha necesita reabrir."></textarea>
         </div>
-        <div>
-          <button class="gd-btn gd-btn-primary" type="submit">Enviar solicitud
+        <div class="ct-envio">
+          <button class="gd-btn gd-btn-primary" type="submit">Enviar por WhatsApp
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+          <button class="gd-link" type="submit" data-via="correo">Prefiero enviarlo por correo</button>
         </div>
-        <p class="gd-form-nota">Al enviar se abre WhatsApp con el mensaje ya redactado. Sus datos no se almacenan en esta web.</p>
+        <p class="gd-form-nota">Se abre WhatsApp o su correo con el mensaje ya redactado. Sus datos no se almacenan en esta web.</p>
       </form>
     </div>
 
@@ -168,13 +179,19 @@
     e.preventDefault();
     if(!form.checkValidity()){ form.reportValidity(); return; }
     var d = new FormData(form);
+    var porCorreo = e.submitter && e.submitter.getAttribute('data-via') === 'correo';
+    // solo se incluyen los datos opcionales que se llenaron
     var texto =
       'Hola Giandeco, quiero solicitar una visita técnica.\n\n' +
       'Nombre: ' + d.get('nombre') + '\n' +
-      'Correo: ' + d.get('correo') + '\n' +
-      'Teléfono: ' + d.get('telefono') + '\n' +
+      (d.get('correo') ? 'Correo: ' + d.get('correo') + '\n' : '') +
+      (d.get('telefono') ? 'Teléfono: ' + d.get('telefono') + '\n' : '') +
       'Tipo: ' + d.get('tipo') + '\n\n' +
       'Proyecto: ' + d.get('mensaje');
+    if(porCorreo){
+      location.href = 'mailto:contacto@giandeco.com?subject=' + encodeURIComponent('Solicitud de visita técnica — ' + d.get('nombre')) + '&body=' + encodeURIComponent(texto);
+      return;
+    }
     ok.classList.add('is-visible');
     ok.scrollIntoView({ behavior:'smooth', block:'center' });
     window.open('https://wa.me/51920775559?text=' + encodeURIComponent(texto), '_blank', 'noopener');
@@ -183,6 +200,6 @@
 </script>
 <script src="js/gd-tienda.js?v=20261026u" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
-<script src="js/gd-chat.js?v=20261026a" defer></script>
+<script src="js/gd-chat.js?v=20261027a" defer></script>
 </body>
 </html>

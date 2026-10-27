@@ -64,6 +64,12 @@
   .gd-claro .qs-persona h3{ color: var(--ebano); }
   .gd-claro .qs-persona b{ color: var(--bronce-texto); }
   .gd-claro .qs-persona p{ color: var(--grafito); }
+  /* el oficio de cada uno, en imagen: obra, materia y plano */
+  .qs-oficio{ margin:0 0 var(--sp-24); }
+  .qs-oficio img{ width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-radius:2px; }
+  .qs-oficio figcaption{ margin-top:10px; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--grafito); }
+  .qs-persona .qs-oficio + h3{ margin-top:0; }
+  .qs-equipo .qs-persona{ border-top:none; padding-top:0; }
 
   /* misión / visión */
   .qs-mv{ display:grid; gap:var(--sp-40); grid-template-columns:1fr; }
@@ -77,12 +83,12 @@
   @media (min-width:720px){ .qs-marcas{ grid-template-columns:repeat(4,1fr); } }
   .qs-marca{ background:var(--bg); padding:26px 18px; text-align:center; transition:background-color .3s ease; }
   .qs-marca:hover{ background:var(--bg-raised); }
-  .qs-marca-logo{ display:flex; align-items:center; justify-content:center; height:30px; margin:0 auto 12px; }
-  .qs-marca-logo img{ max-width:100%; max-height:100%; width:auto; height:auto; display:block; filter: grayscale(1) brightness(0) invert(1); opacity:.78; transition:opacity .3s ease; }
+  .qs-marca-logo{ display:flex; align-items:center; justify-content:center; height:46px; margin:0 auto 14px; }
+  .qs-marca-logo img{ max-width:100%; max-height:100%; width:auto; display:block; filter: grayscale(1) brightness(0) invert(1); opacity:.78; transition:opacity .3s ease; }
   .qs-marca-logo img.is-nativo{ filter:none; opacity:.9; }
   .qs-marca:hover .qs-marca-logo img{ opacity:1; }
   .qs-marca b{ display:block; font-family:var(--body); font-weight:400; font-size:.98rem; color:var(--text-dim); margin-bottom:5px; }
-  .qs-marca span{ font-family:var(--body); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); }
+  .qs-marca span{ font-family:var(--body); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); }
 </style>
 </head>
 <body data-pagina="nosotros">
@@ -96,9 +102,9 @@
     <p class="reveal-left d2">Diseñamos espacios comerciales con criterio de venta. El que escucha en la primera reunión es el mismo que firma el plano y aparece en obra.</p>
   </div>
   <div class="gd-hero-media">
-    <div class="gd-curtain"><img decoding="async" class="gd-kb-img" src="images/shift/casacor-detalle.jpg" alt="Detalle de material en un montaje de Giandeco"></div>
+    <div class="gd-curtain"><img decoding="async" class="gd-kb-img" src="images/estudio/gian-retrato.jpg" width="1122" height="1402" style="object-position:50% 22%" alt="Luis Giancarlo Jiménez Sánchez, fundador de Giandeco Studio Design"></div>
     <div class="gd-hero-cap">
-      <span><b>Detalle de material</b><span>Casacor 2025</span></span>
+      <span><b>Luis Giancarlo Jiménez</b><span>Fundador · Director de proyectos</span></span>
       <span class="gd-scroll-cue" aria-hidden="true">Desplace<i></i></span>
     </div>
   </div>
@@ -108,8 +114,8 @@
 <section class="gd-sec">
   <div class="gd-in qs-historia">
     <figure class="qs-foto reveal-scale gd-curtain" style="margin:0;">
-      <img decoding="async" src="images/estudio/gian-retrato.jpg" alt="Gian Carlo Jiménez Sánchez, fundador de Giandeco Studio Design">
-      <figcaption><b>Luis Giancarlo Jiménez Sánchez</b>Fundador · Director de proyectos</figcaption>
+      <img decoding="async" loading="lazy" src="images/proceso/casacor-boceto.jpg" width="1311" height="1200" alt="Boceto en acuarela de la sala presentada en Casacor 2025">
+      <figcaption><b>Del boceto a la obra</b>Acuarela de la sala de Casacor 2025</figcaption>
     </figure>
 
     <div>
@@ -143,16 +149,19 @@
 
     <div class="qs-equipo" style="margin-top:var(--sp-40);">
       <div class="qs-persona reveal">
+        <figure class="qs-oficio"><img src="images/proceso/expodeco-obra.jpg" width="1304" height="1206" alt="Stand de Expodeco 2024 terminado, con muro de revestimientos, vegetación colgante y zona lounge" loading="lazy" decoding="async"><figcaption>La obra · Expodeco 2024</figcaption></figure>
         <h3>Gian</h3>
         <b>Fundador y director de proyectos</b>
         <p>Dirige cada encargo de principio a fin. El que escucha en la primera reunión es el mismo que firma el plano y el que aparece en obra.</p>
       </div>
       <div class="qs-persona reveal d1">
+        <figure class="qs-oficio"><img src="images/servicios/decoracion-y-ambientacion-1280.webp" width="1280" height="714" alt="Paleta de materiales: roble, travertino, latón cepillado, lino y terciopelos oliva y petróleo" loading="lazy" decoding="async"><figcaption>La materia · paleta de acabados</figcaption></figure>
         <h3>Martha</h3>
         <b>Diseñadora de interiores</b>
         <p>Concepto, paleta de materiales y selección de mobiliario. Traduce el pliego de necesidades en un ambiente que se sostiene.</p>
       </div>
       <div class="qs-persona reveal d2">
+        <figure class="qs-oficio"><img src="images/proceso/expodeco-tecnico.jpg" width="1536" height="1024" alt="Plano técnico a escala 1:25 del stand de Expodeco 2024, con vista frontal y planta" loading="lazy" decoding="async"><figcaption>El plano · Expodeco 2024</figcaption></figure>
         <h3>Lucía</h3>
         <b>Arquitecta</b>
         <p>Planos, distribución y coordinación de especialidades. Se encarga de que lo dibujado se pueda construir.</p>
@@ -185,18 +194,18 @@
     <h2 class="gd-h2 reveal d1" style="margin-bottom:var(--sp-40);">Marcas y espacios</h2>
 
     <div class="qs-marcas reveal d2">
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" class="is-nativo" src="images/marcas/el-corte-ingles.png" alt="El Corte Inglés" loading="lazy"></span><span>Retail departamental</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/pycca.png" alt="Pycca" loading="lazy"></span><span>Campaña nacional · Ecuador</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/zara.png" alt="Zara" loading="lazy"></span><span>Visual merchandising</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/walon.png" alt="Walon" loading="lazy"></span><span>Tienda, campaña y evento</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/enchantee-paris.png" alt="Enchantée Paris" loading="lazy"></span><span>Vitrinismo · moda</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/baby-club-chic.png" alt="Baby Club Chic" loading="lazy"></span><span>Boutique infantil</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/massimo-cafe.png" alt="Mássimo Café" loading="lazy"></span><span>Gastronomía</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/hotel-union-cusco.png" alt="Hotel Unión Cusco" loading="lazy"></span><span>Hotelería</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/casa-grande.png" alt="Casa Grande" loading="lazy"></span><span>Mobiliario y decoración</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/el-corte-ingles-mono.png" style="height:40px" width="353" height="200" alt="El Corte Inglés" loading="lazy"></span><span>Retail departamental</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/pycca.png" style="height:25px" alt="Pycca" loading="lazy"></span><span>Campaña nacional · Ecuador</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/zara.png" style="height:35px" alt="Zara" loading="lazy"></span><span>Visual merchandising</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/walon.png" style="height:44px" alt="Walon" loading="lazy"></span><span>Tienda, campaña y evento</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/enchantee-paris.png" style="height:22px" alt="Enchantée Paris" loading="lazy"></span><span>Vitrinismo · moda</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/baby-club-chic.png" style="height:25px" alt="Baby Club Chic" loading="lazy"></span><span>Boutique infantil</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/massimo-cafe.png" style="height:38px" alt="Mássimo Café" loading="lazy"></span><span>Gastronomía</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/hotel-union-cusco.png" style="height:25px" alt="Hotel Unión Cusco" loading="lazy"></span><span>Hotelería</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/casa-grande.png" style="height:29px" alt="Casa Grande" loading="lazy"></span><span>Mobiliario y decoración</span></div>
       <div class="qs-marca"><b>Convivir con el Arte</b><span>Arte e interiorismo</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/casacor.png" alt="Casacor" loading="lazy"></span><span>Feria de diseño · 2025</span></div>
-      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/expodeco.png" alt="Expodeco" loading="lazy"></span><span>Feria de decoración · 2024</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/casacor.png" style="height:30px" alt="Casacor" loading="lazy"></span><span>Feria de diseño · 2025</span></div>
+      <div class="qs-marca"><span class="qs-marca-logo"><img decoding="async" src="images/marcas/recorte/expodeco.png" style="height:39px" alt="Expodeco" loading="lazy"></span><span>Feria de decoración · 2024</span></div>
     </div>
 
     <div style="margin-top:var(--sp-40); display:flex; flex-wrap:wrap; gap:12px;">
@@ -211,6 +220,6 @@
 <script src="js/giandeco.js?v=20261026u"></script>
 <script src="js/gd-tienda.js?v=20261026u" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
-<script src="js/gd-chat.js?v=20261026a" defer></script>
+<script src="js/gd-chat.js?v=20261027a" defer></script>
 </body>
 </html>

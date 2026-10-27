@@ -248,8 +248,7 @@ var P = [
   "sub": "Concepto Raíces",
   "slug": "hotel-union-cusco",
   "lineas": [
-   "retail",
-   "hogar"
+   "retail"
   ],
   "tipo": "gastronomia",
   "galeria": [
@@ -270,8 +269,8 @@ var P = [
     "alt": "Patio del Hotel Unión Cusco con fachada de tejas y balcones de madera"
    },
    {
-    "src": "images/material/hotelcusco-patio-fuente.webp",
-    "alt": "Fuente de piedra y araucaria en el patio del Hotel Unión Cusco"
+    "src": "images/material/hotelcusco-patio-faroles.webp",
+    "alt": "Patio del Hotel Unión Cusco con faroles de hierro, fuente de piedra y terraza con cojines de colores"
    }
   ]
  },
@@ -348,7 +347,7 @@ var P = [
   "sub": "",
   "slug": "walon-35-anos",
   "lineas": [
-   "hogar"
+   "retail"
   ],
   "tipo": "eventos",
   "href": "proyectos/walon-35-anos",
@@ -388,6 +387,14 @@ var P = [
    {
     "src": "images/shift/casacor-detalle.jpg",
     "alt": "Detalle de material en Casacor 2025"
+   },
+   {
+    "src": "images/material/casacor-sala-cortinas.webp",
+    "alt": "Sala de Casacor 2025 con techo azul, cortinas de terciopelo petróleo y sofá curvo frente a dos mesas redondas"
+   },
+   {
+    "src": "images/material/casacor-sala-puerta.webp",
+    "alt": "Rincón de Casacor 2025 con retrato de gran formato, cuadros con luz dirigida y puerta abierta hacia el salón rojo"
    }
   ],
   "proceso": [
