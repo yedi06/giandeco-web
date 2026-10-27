@@ -18,7 +18,7 @@
 }
 .hm-h em{ font-style:normal; color:var(--accent); }
 .hm-go{ display:inline-flex; align-items:center; gap:12px; font-family:var(--body); font-weight:500; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
-.hm-go i{ display:block; width:22px; height:1px; background:currentColor; transition:width .45s var(--gd-ease); }
+.hm-go i{ display:none; }
 
 /* ---------- APERTURA · una sola línea editorial sobre las tres imágenes (sin lista ni bloque aparte) ---------- */
 .hm-open-h{
