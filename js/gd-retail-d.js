@@ -70,22 +70,22 @@
   var Z = [
     { name:'Vitrina y entrada', tienda:'Ferrehome', img:'zona-vitrina', oy:'42%', alt:'Vitrina de cristal con casitas de jengibre, árboles nevados y una taza de cascanueces sobre nieve de algodón en Ferrehome',
       desc:'Detiene al que pasa. Casitas de jengibre, nieve y luz en una vitrina de cristal, a la vista desde la vereda.',
-      items:['Vitrina de casitas','Nieve y luz cálida','Piezas héroe de su inventario'], l:'4%', t:'80%', w:'92%', h:'9%', r:'2px' },
+      items:['Vitrina de casitas','Nieve y luz cálida','Piezas héroe de su inventario'], l:'6.9%', t:'86.9%', w:'33.8%', h:'6.9%', r:'2px' },
     { name:'Isla central', tienda:'SuperHome', img:'zona-isla', oy:'50%', alt:'Mesa servida borgoña y dorado con velas doradas, rosas, un reno de paja y vajilla navideña en SuperHome',
       desc:'La mesa que se vende completa: vajilla, copas, velas y florales armados como una cena servida.',
-      items:['Mesa escenográfica con su vajilla','Florales y velas','Paleta borgoña y dorado'], l:'33%', t:'42%', w:'34%', h:'19%', r:'2px' },
+      items:['Mesa escenográfica con su vajilla','Florales y velas','Paleta borgoña y dorado'], l:'34.6%', t:'47%', w:'30.8%', h:'14%', r:'2px' },
     { name:'Árbol de marca', tienda:'Ferrehome', img:'arbol-n', oy:'56%', alt:'Árbol rojo y blanco con renos blancos, Papá Noel y regalos al pie, junto al ventanal de Ferrehome',
       desc:'Un árbol temático a lo largo del recorrido: rojo y blanco, con Papá Noel y regalos al pie, visible desde el ingreso.',
-      items:['Árbol temático de marca','Papá Noel y regalos al pie','Guía de reposición'], l:'6%', t:'6%', w:'21%', h:'17%', r:'50%' },
-    { name:'Pared y góndola', tienda:'SuperHome', img:'zona-pared', oy:'50%', alt:'Nacimiento blanco y dorado con renos blancos y árboles dorados sobre una mesa, frente a la estantería de SuperHome',
-      desc:'El producto de la estantería hecho escena. Un nacimiento blanco y oro como pieza héroe de la pared.',
-      items:['Nacimiento como pieza héroe','Agrupación por color','Producto de la propia góndola'], l:'33%', t:'4%', w:'62%', h:'11%', r:'2px' },
+      items:['Árbol temático de marca','Papá Noel y regalos al pie','Guía de reposición'], l:'7.7%', t:'8.1%', w:'20%', h:'16.3%', r:'50%' },
+    { name:'Mesa de nacimiento', tienda:'SuperHome', img:'zona-pared', oy:'50%', alt:'Nacimiento blanco y dorado con renos blancos y árboles dorados sobre una mesa, frente a la estantería de SuperHome',
+      desc:'Una segunda mesa con una sola historia: un nacimiento blanco y oro con renos y árboles dorados, armado frente a las estanterías de la tienda.',
+      items:['Nacimiento como pieza héroe','Renos y árboles dorados','Paleta blanco y oro'], l:'45.4%', t:'8.4%', w:'48.1%', h:'10.3%', r:'2px' },
     { name:'Rincón de caja', tienda:'Ferrehome', img:'zona-rincon', oy:'50%', alt:'Rincón con dos renos blancos, un Papá Noel con gorro rojo y un florero de bayas sobre una bandeja de bambú en una mesa de vidrio',
       desc:'Un rincón de foto junto a caja: renos blancos, un Papá Noel y un florero de bayas sobre una mesa de vidrio. El cliente se queda y lo comparte.',
-      items:['Rincón foto','Mesa de vidrio con piezas héroe','Pensado para redes'], l:'70%', t:'64%', w:'24%', h:'16%', r:'2px' },
+      items:['Rincón foto','Mesa de vidrio con piezas héroe','Pensado para redes'], l:'67.3%', t:'76%', w:'25.8%', h:'17.8%', r:'2px' },
     { name:'Taller en tienda', tienda:'SuperHome', img:'taller', oy:'30%', alt:'Gian arma una mesa navideña en vivo durante el taller en SuperHome',
       desc:'Gian arma la mesa en vivo, con la tienda abierta. Es el evento que trae gente nueva al local.',
-      items:['Taller dirigido por Gian','Mesa servida en vivo','Contenido para redes'], l:'70%', t:'24%', w:'24%', h:'30%', r:'2px' }
+      items:['Taller dirigido por Gian','Mesa servida en vivo','Contenido para redes'], l:'70.4%', t:'32.8%', w:'22.3%', h:'14.1%', r:'2px' }
   ];
   var cur = 1, sel = [false, true, false, false, false, false];
   var base = 'images/retail-navidad/';
