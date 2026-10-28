@@ -605,7 +605,6 @@ function montar(){
       '<header class="gdt-head"><div><span class="gdt-eyebrow">Vista rápida</span></div>' +
         '<button type="button" class="gdt-x" data-gv-cerrar aria-label="Cerrar">&times;</button></header>' +
       '<div class="gdt-body gv-body" id="gvBody"></div>' +
-      '<footer class="gdt-foot gv-foot" id="gvFoot"></footer>' +
     '</aside>');
   var vista = document.getElementById('gdtVista'), gvKey = null, gvQty = 1, gvAntes = null, gvMapa = null;
   var CATALOGO_ESCRITORIO = window.matchMedia('(min-width:900px)');
@@ -668,12 +667,13 @@ function montar(){
   }
   function pintarVista(){
     var p = CAT[gvKey]; if(!p) return;
-    var consulta = p.valor === null, agotado = p.stock <= 0;
-    document.getElementById('gvBody').innerHTML = gvGaleria(p, agotado, consulta) + gvCabecera(p, agotado, consulta) + gvVariantes(p) + gvDetalle(p);
-    document.getElementById('gvFoot').innerHTML = gvPie(p, agotado, consulta);
-    document.getElementById('gvBody').scrollTop = 0;
+    var consulta = p.valor === null, agotado = p.stock <= 0, cuerpo = document.getElementById('gvBody');
+    cuerpo.innerHTML = '<div class="gv-grid">' +
+      '<div class="gv-col-foto">' + gvGaleria(p, agotado, consulta) + '</div>' +
+      '<div class="gv-col-info">' + gvCabecera(p, agotado, consulta) + gvVariantes(p) +
+        '<div class="gv-buy">' + gvPie(p, agotado, consulta) + '</div>' + gvDetalle(p) + '</div></div>';
+    cuerpo.scrollTop = 0;
   }
-
   /* --- abrir, cerrar y teclado (Esc cierra; Tab no se escapa del panel) --- */
   function abrirVista(key){
     if(!CAT[key] || !vista) return;

@@ -177,7 +177,7 @@ var CHEV = '<svg class="ctl-chev" viewBox="0 0 12 12" aria-hidden="true"><path d
 var CHEV_R = '<svg class="ctl-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m4.5 3 3 3-3 3"/></svg>';
 var X = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg>';
 var ICO_FILTRO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg>';
-var MAS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+var OJO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 
 /* ---------- esqueleto ---------- */
 raiz.classList.add('ctl');
@@ -252,7 +252,7 @@ function tarjeta(p){
     '<div class="ctl-ph">' +
       '<a href="' + esc(p.href) + '" tabindex="-1" aria-hidden="true"><img loading="lazy" decoding="async" src="' + esc(p.img) + '" alt=""></a>' +
       (badge ? '<span class="ctl-bdg' + (p.antes ? ' is-of' : '') + '">' + badge + '</span>' : '') +
-      (p.stock > 0 && window.GD_TIENDA ? '<button type="button" class="ctl-add" data-gdt-add="' + p.k + '" aria-label="Añadir ' + esc(p.nombre) + ' a la bolsa">' + MAS + '</button>' : '') +
+      (p.stock > 0 && window.GD_TIENDA ? '<button type="button" class="ctl-add" data-gdt-add="' + p.k + '" aria-label="Vista rápida de ' + esc(p.nombre) + '">' + OJO + '<span>Vista rápida</span></button>' : '') +
     '</div>' +
     '<a class="ctl-card-a" href="' + esc(p.href) + '">' +
       '<span class="ctl-cat">' + esc(p.cat) + '</span>' +
