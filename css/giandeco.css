@@ -1173,11 +1173,14 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 .gd-esp-card.es-escena .gd-esp-cat{ display:block; }
 .gd-esp-card.es-escena .gd-link{ margin-top:14px; }
 .ce-shop-tip{ display:none; }
+.ce-piezas{ display:none; }
 @media (max-width:719px){
-  .ce-shop-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-inline:calc(var(--gd-gut) * -1); padding-inline:var(--gd-gut); scrollbar-width:none; }
-  .ce-shop-wrap::-webkit-scrollbar{ display:none; }
-  .ce-shop{ width:1400px; max-width:none; }
-  .ce-shop-tip{ display:block; margin:0 0 14px; font-family:var(--body); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); }
+  .ce-shop-wrap{ overflow:hidden; margin-inline:0; padding-inline:0; border-radius:2px; }
+  .ce-shop{ width:170%; max-width:none; margin-left:-22%; }
+  .ce-shop-tip{ display:none; }
+  .ce-piezas{ display:block; margin:6px 0 22px; }
+  .ce-piezas-t{ margin:0 0 12px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); }
+  .ce-solo-pc{ display:none; }
 }
 /* franja de imagen en Ayuda, Legal y Seguimiento (foto del Material, solo ambiente) */
 .cu-banda{ margin:0 0 clamp(22px,3vw,36px); border-radius:2px; overflow:hidden; aspect-ratio:16/3; background:#14120e; }

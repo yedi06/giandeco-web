@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/giandeco.css?v=20261029d">
+<link rel="stylesheet" href="css/giandeco.css?v=20261029h">
 <link rel="stylesheet" href="css/gd-tienda.css?v=20261026u">
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
@@ -77,8 +77,9 @@
          <button class="gd-shop-dot" style="left:65.3%; top:48%" data-prod="arreglo-pino-berries"></button>
          <button class="gd-shop-dot" style="left:70.7%; top:49.3%" data-prod="farol-124"></button></div>
         </div>
+        <div class="ce-piezas" id="cePiezas"></div>
         <p class="ce-shop-tip">Deslice la imagen para recorrer el espacio</p>
-        <span class="gd-esp-cat">Navidad elegante junto al fuego · toque un punto para ver cada pieza</span>
+        <span class="gd-esp-cat">Navidad elegante junto al fuego<span class="ce-solo-pc"> · toque un punto para ver cada pieza</span></span>
         <h2 class="gd-esp-nombre">Navidad elegante junto al fuego</h2>
         <a class="gd-link" href="catalogo/navidad/#piezas">Ver la colección Navidad<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
@@ -136,5 +137,6 @@
 <script src="js/gd-tienda.js?v=20261026u" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-chat.js?v=20261027a" defer></script>
+<script>(function(){function go(){var T=window.GD_TIENDA,box=document.getElementById("cePiezas");if(!T||!box||!T.CAT)return;var ks=[].slice.call(document.querySelectorAll(".ce-shop .gd-shop-dot")).map(function(d){return d.getAttribute("data-prod")}).filter(function(k){return T.CAT[k]});if(!ks.length)return;box.innerHTML="<p class=\"ce-piezas-t\">Piezas de esta escena</p><div class=\"gd-grid es-carrusel\">"+ks.map(function(k){return T.card(k)}).join("")+"</div>"}if(document.readyState==="complete")go();else window.addEventListener("load",go)})();</script>
 </body>
 </html>
