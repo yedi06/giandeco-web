@@ -594,6 +594,135 @@ function montar(){
   cajon = document.getElementById('gdtDrawer'); velo = document.getElementById('gdtScrim');
   velo.addEventListener('click', cerrar);
 
+  /* ==========================================================================
+     VISTA RÁPIDA
+     Panel a la derecha con toda la información de la pieza y la compra siempre
+     a la vista. Se abre al tocar una tarjeta de producto y, en el catálogo,
+     solo en escritorio (en el teléfono la tarjeta lleva a la ficha).
+     ========================================================================== */
+  document.body.insertAdjacentHTML('beforeend',
+    '<aside class="gdt-drawer gdt-vista" id="gdtVista" role="dialog" aria-modal="true" aria-label="Vista rápida" aria-hidden="true">' +
+      '<header class="gdt-head"><div><span class="gdt-eyebrow">Vista rápida</span></div>' +
+        '<button type="button" class="gdt-x" data-gv-cerrar aria-label="Cerrar">&times;</button></header>' +
+      '<div class="gdt-body gv-body" id="gvBody"></div>' +
+      '<footer class="gdt-foot gv-foot" id="gvFoot"></footer>' +
+    '</aside>');
+  var vista = document.getElementById('gdtVista'), gvKey = null, gvQty = 1, gvAntes = null, gvMapa = null;
+  var CATALOGO_ESCRITORIO = window.matchMedia('(min-width:900px)');
+  velo.addEventListener('click', cerrarVista);
+
+  /* --- resolución de la pieza a partir del enlace de la tarjeta --- */
+  function limpiarHref(h){ return String(h || '').split('#')[0].split('?')[0].replace(/^\/+/, '').replace(/\.html$/, ''); }
+  function keyDeHref(h){
+    if(!gvMapa){ gvMapa = {}; Object.keys(CAT).forEach(function(k){ gvMapa[limpiarHref(url(k))] = k; }); }
+    return gvMapa[limpiarHref(h)] || null;
+  }
+
+  /* --- contenido: cada bloque es una función pequeña y se compone en pintarVista --- */
+  function gvGaleria(p, agotado, consulta){
+    var imgs = p.gal.slice(0, 4);
+    return '<div class="gv-foto"><img id="gvImg" src="' + esc(imgs[0]) + '" alt="' + esc(p.nombre) + '">' +
+        (agotado ? '<span class="gd-prod-badge">Agotado</span>' : consulta ? '<span class="gd-prod-badge">A consultar</span>' : '') + '</div>' +
+      (imgs.length > 1 ? '<div class="gv-thumbs">' + imgs.map(function(g, i){
+        return '<button type="button" class="gv-th' + (i === 0 ? ' is-active' : '') + '" data-gv-src="' + esc(g) + '" aria-label="Ver foto ' + (i + 1) + '"><img src="' + esc(g) + '" alt=""></button>';
+      }).join('') + '</div>' : '');
+  }
+  function gvCabecera(p, agotado, consulta){
+    var instala = p.linea !== 'navidad';
+    var nota = consulta ? '' : (CFG.PRECIOS_CON_IGV ? 'Incluye IGV' : '') + (instala ? (CFG.PRECIOS_CON_IGV ? ' · ' : '') + 'No incluye envío ni instalación' : '');
+    return '<span class="gv-cat">' + esc(p.cat) + '</span>' +
+      '<h2 class="gv-nom">' + esc(p.nombre) + '</h2>' +
+      '<p class="gv-pre"><b>' + esc(consulta ? 'Precio a consultar' : p.precio) + '</b>' + (nota ? '<span>' + nota + '</span>' : '') + '</p>' +
+      '<p class="gv-stock' + (agotado ? ' es-agotado' : '') + '">' + (agotado ? 'Agotado' : p.stock === 1 ? 'Última unidad disponible' : p.stock + ' unidades disponibles') + '</p>';
+  }
+  function gvVariantes(p){
+    var fam = familia(gvKey); if(fam.length < 2) return '';
+    return '<div class="gv-var"><span class="gv-var-t">' + esc(p.fam) + ' · <b>' + esc(p.v) + '</b></span><div class="gv-var-row">' + fam.map(function(k){
+      return '<button type="button" class="gv-chip' + (k === gvKey ? ' is-active' : '') + '" data-gv-var="' + k + '" aria-pressed="' + (k === gvKey) + '">' + esc(CAT[k].v) + '</button>';
+    }).join('') + '</div></div>';
+  }
+  function gvDetalle(p){
+    var L = LINEAS[p.linea], instala = p.linea !== 'navidad';
+    var rasgos = (p.nota || '').split(/\.\s+/).map(function(x){ return x.replace(/\.$/, '').trim(); }).filter(Boolean);
+    var filas = [['Línea', '<a href="' + L.href + '">' + esc(L.label) + '</a>'], ['Categoría', esc(p.cat)]];
+    if(p.v) filas.push(['Variante', esc(p.v)]);
+    filas.push(['Referencia', esc(gvKey.toUpperCase())]);
+    return '<section class="gv-sec"><h3 class="gv-h">Descripción</h3>' +
+        (rasgos.length > 1 ? '<ul class="gv-lista">' + rasgos.map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('') + '</ul>' : '<p>' + esc(p.nota) + '</p>') + '</section>' +
+      '<section class="gv-sec"><h3 class="gv-h">Ficha técnica</h3><dl class="gv-dl">' + filas.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl></section>' +
+      '<section class="gv-sec"><h3 class="gv-h">Envío y pago</h3><ul class="gv-lista">' +
+        '<li>' + esc(instala ? COND : 'Enviamos a todo el Perú por agencia de transporte; el flete lo paga el cliente a la agencia.') + '</li>' +
+        (instala ? '<li>Armado e instalación opcional, a cargo del estudio; se cotiza según la pieza.</li>' : '') +
+        '<li>Pago con tarjeta, Yape o depósito. Un asesor de Giandeco responde por WhatsApp.</li>' +
+      '</ul></section>';
+  }
+  function gvPie(p, agotado, consulta){
+    if(agotado) return '<a class="gd-btn gd-btn-primary" target="_blank" rel="noopener" href="' + wa('Hola Giandeco, avísenme cuando vuelva a estar disponible: ' + p.nombre + '.') + '">Avíseme cuando vuelva' + FLECHA + '</a>' + gvEnlaces(p, true);
+    return '<div class="gv-comprar"><span class="gdt-qty" role="group" aria-label="Cantidad"><button type="button" data-gv-q="-1" aria-label="Quitar una">−</button><b id="gvQty">' + gvQty + '</b><button type="button" data-gv-q="1" aria-label="Añadir una">+</button></span>' +
+        '<button type="button" class="gd-btn gd-btn-primary" data-gv-add>' + (consulta ? 'Añadir para cotizar' : 'Añadir a la bolsa') + FLECHA + '</button></div>' +
+      (consulta ? '' : '<button type="button" class="gd-btn gd-btn-ghost" data-gv-ya>Comprar ahora</button>') + gvEnlaces(p, false);
+  }
+  function gvEnlaces(p, sinWa){
+    return '<div class="gv-enlaces"><a href="' + url(gvKey) + '">Ver ficha completa' + FLECHA + '</a>' +
+      (sinWa ? '' : '<a target="_blank" rel="noopener" href="' + wa('Hola Giandeco, tengo una consulta sobre la pieza: ' + p.nombre + ' (' + p.precio + ').') + '">Consultar por WhatsApp</a>') + '</div>';
+  }
+  function pintarVista(){
+    var p = CAT[gvKey]; if(!p) return;
+    var consulta = p.valor === null, agotado = p.stock <= 0;
+    document.getElementById('gvBody').innerHTML = gvGaleria(p, agotado, consulta) + gvCabecera(p, agotado, consulta) + gvVariantes(p) + gvDetalle(p);
+    document.getElementById('gvFoot').innerHTML = gvPie(p, agotado, consulta);
+    document.getElementById('gvBody').scrollTop = 0;
+  }
+
+  /* --- abrir, cerrar y teclado (Esc cierra; Tab no se escapa del panel) --- */
+  function abrirVista(key){
+    if(!CAT[key] || !vista) return;
+    if(gvKey !== key) gvQty = 1;
+    gvKey = key; gvAntes = document.activeElement; pintarVista();
+    vista.classList.add('is-open'); velo.classList.add('is-open'); vista.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    vista.querySelector('.gdt-x').focus();
+  }
+  function cerrarVista(){
+    if(!vista || !vista.classList.contains('is-open')) return;
+    vista.classList.remove('is-open'); velo.classList.remove('is-open'); vista.setAttribute('aria-hidden', 'true');
+    document.documentElement.style.overflow = '';
+    if(gvAntes && gvAntes.focus) gvAntes.focus();
+  }
+  document.addEventListener('keydown', function(e){
+    if(!vista.classList.contains('is-open')) return;
+    if(e.key === 'Escape'){ cerrarVista(); return; }
+    if(e.key !== 'Tab') return;
+    var f = [].slice.call(vista.querySelectorAll('a[href],button:not([disabled])')).filter(function(x){ return x.offsetParent !== null; });
+    if(!f.length) return;
+    var a = f[0], z = f[f.length - 1];
+    if(e.shiftKey && document.activeElement === a){ e.preventDefault(); z.focus(); }
+    else if(!e.shiftKey && document.activeElement === z){ e.preventDefault(); a.focus(); }
+  });
+
+  /* --- clics: controles del panel y entradas (tarjetas y botón "+" del catálogo) --- */
+  document.addEventListener('click', function(e){
+    var c = e.target.closest('[data-gv-cerrar],[data-gv-var],[data-gv-src],[data-gv-q],[data-gv-add],[data-gv-ya]');
+    if(c){
+      e.preventDefault();
+      if(c.hasAttribute('data-gv-cerrar')) cerrarVista();
+      else if(c.hasAttribute('data-gv-var')){ gvKey = c.getAttribute('data-gv-var'); gvQty = 1; pintarVista(); }
+      else if(c.hasAttribute('data-gv-src')){ document.getElementById('gvImg').src = c.getAttribute('data-gv-src'); vista.querySelectorAll('.gv-th').forEach(function(x){ x.classList.toggle('is-active', x === c); }); }
+      else if(c.hasAttribute('data-gv-q')){ gvQty = Math.max(1, Math.min(CAT[gvKey].stock, 99, gvQty + parseInt(c.getAttribute('data-gv-q'), 10))); document.getElementById('gvQty').textContent = gvQty; }
+      else if(c.hasAttribute('data-gv-add')){ if(carrito.addKey(gvKey, gvQty)){ cerrarVista(); abrir(); } }
+      else if(c.hasAttribute('data-gv-ya')){ if(carrito.addKey(gvKey, gvQty)) location.href = 'checkout'; }
+      return;
+    }
+    // en el catálogo, el botón "+" abre la vista rápida en lugar de añadir a ciegas (solo escritorio, que es donde existe)
+    var mas = e.target.closest('.ctl-add[data-gdt-add]');
+    if(mas && CATALOGO_ESCRITORIO.matches){ e.preventDefault(); e.stopImmediatePropagation(); abrirVista(mas.getAttribute('data-gdt-add')); return; }
+    // tarjetas: abren la vista rápida; con ctrl, cmd o clic medio siguen el enlace. En el catálogo, solo en escritorio.
+    var a = e.target.closest('.gdt-card a.gd-prod, .ctl-card a[href]');
+    if(!a || e.defaultPrevented || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    if(a.closest('.ctl-card') && !CATALOGO_ESCRITORIO.matches) return;
+    var k = keyDeHref(a.getAttribute('href'));
+    if(k){ e.preventDefault(); abrirVista(k); }
+  });
   // el header ya trae el botón de carrito: se conecta, y a su lado entra la cuenta
   document.querySelectorAll('button[aria-label="Carrito"]').forEach(function(b){
     b.classList.add('gdt-cart-btn'); b.setAttribute('aria-label', 'Su bolsa');
