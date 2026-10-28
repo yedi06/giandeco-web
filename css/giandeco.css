@@ -1176,7 +1176,7 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 @media (max-width:719px){
   .ce-shop-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-inline:calc(var(--gd-gut) * -1); padding-inline:var(--gd-gut); scrollbar-width:none; }
   .ce-shop-wrap::-webkit-scrollbar{ display:none; }
-  .ce-shop{ width:1000px; max-width:none; }
+  .ce-shop{ width:1400px; max-width:none; }
   .ce-shop-tip{ display:block; margin:0 0 14px; font-family:var(--body); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); }
 }
 /* franja de imagen en Ayuda, Legal y Seguimiento (foto del Material, solo ambiente) */
