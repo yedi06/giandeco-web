@@ -34,6 +34,38 @@ window.addEventListener('pageswap', function(e){
   e.viewTransition.skipTransition();
 });
 
+/* ---------- 1b. centro de servicios: la tarjeta abre su detalle aquí mismo ----------
+   sin JS todos los detalles se leen seguidos; con JS se ve uno a la vez y la dirección
+   (#escaparatismo…) abre el que corresponde, también desde las direcciones antiguas */
+Array.prototype.forEach.call(document.querySelectorAll('[data-sv-centro]'), function(c){
+  var tarjetas = Array.prototype.slice.call(c.querySelectorAll('[data-sv-abrir]'));
+  if(!tarjetas.length) return;
+  c.classList.add('js-sv');
+  function abrir(id, desplazar){
+    var p = document.getElementById(id);
+    if(!p || !c.contains(p)) return false;
+    Array.prototype.forEach.call(c.querySelectorAll('.sv-panel'), function(x){ x.classList.toggle('is-open', x === p); });
+    tarjetas.forEach(function(t){ t.setAttribute('aria-expanded', t.getAttribute('data-sv-abrir') === id ? 'true' : 'false'); });
+    if(desplazar) p.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block:'start' });
+    return true;
+  }
+  tarjetas.forEach(function(t){
+    t.addEventListener('click', function(ev){
+      ev.preventDefault();
+      var id = t.getAttribute('data-sv-abrir');
+      abrir(id, true);
+      try{ history.replaceState(null, '', '#' + id); }catch(err){}
+    });
+  });
+  Array.prototype.forEach.call(c.querySelectorAll('.sv-panel-volver'), function(v){
+    v.addEventListener('click', function(ev){ ev.preventDefault(); c.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block:'start' }); });
+  });
+  var h = decodeURIComponent(location.hash.slice(1));
+  if(!(h && abrir(h, true))) abrir(tarjetas[0].getAttribute('data-sv-abrir'), false);
+  // enlaces dentro de la misma página (#decoracion-y-ambientacion…) abren su detalle
+  window.addEventListener('hashchange', function(){ abrir(decodeURIComponent(location.hash.slice(1)), true); });
+});
+
 /* ---------- 2. comparador boceto → obra ---------- */
 Array.prototype.forEach.call(document.querySelectorAll('.pjb-frame'), function(frame){
   var range = frame.querySelector('.pjb-range');

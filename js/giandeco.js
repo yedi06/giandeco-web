@@ -303,7 +303,7 @@ function footerHTML(){
         '<p>Visual merchandising y diseño de espacios comerciales. Remodelamos su local, montamos la campaña y ejecutamos la obra bajo una sola dirección.</p>' +
       '</div>' +
       // el blog sale del menú y queda aquí, junto al resto del estudio
-      col('Estudio', [{ label:'Retail', href:'retail/' }, { label:'Navidad para retail', href:'retail/navidad' }, { label:'Hogar', href:'hogar/' },
+      col('Estudio', [{ label:'Retail', href:'retail/' }, { label:'Navidad para retail', href:'retail/#plano' }, { label:'Hogar', href:'hogar/' },
         { label:'Proyectos', href:'retail/proyectos' }, { label:'Quiénes somos', href:'quienes-somos' }, { label:'Blog de retail', href:'retail/blog' }, { label:'Blog de hogar', href:'hogar/blog' }]) +
       col('Catálogo', SITIO.catalogo.secciones.map(function(s){ return { label:s.key==='home'?'Ver catálogo':s.label, href:s.href }; })) +
       '<div class="gd-footer-col"><h4>Contacto</h4>' +
@@ -392,7 +392,7 @@ Object.keys(SITIO).forEach(function(k){
 });
 PAGINAS.forEach(function(p){ INDICE.push({ label:p.label, href:p.href }); });
 // el blog ya no está en el menú, pero se sigue encontrando en la búsqueda
-INDICE.push({ label:'Retail · Blog', href:'retail/blog' }, { label:'Hogar · Blog', href:'hogar/blog' }, { label:'Retail · Navidad para tiendas (montaje de campaña)', href:'retail/navidad' }, { label:'Retail · Montajes de Navidad 2026 (galería de fotos)', href:'retail/montajes-2026' });
+INDICE.push({ label:'Retail · Blog', href:'retail/blog' }, { label:'Hogar · Blog', href:'hogar/blog' }, { label:'Retail · Navidad para tiendas (montaje de campaña)', href:'retail/' }, { label:'Retail · Montajes de Navidad 2026 (galería de fotos)', href:'retail/montajes-2026' });
 [[PRODUCTOS,'Mueblería'],[ILUMINACION,'Iluminación'],[NAVIDAD,'Navidad']].forEach(function(L){
   Object.keys(L[0]).forEach(function(k){
     var p = L[0][k];

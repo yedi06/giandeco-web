@@ -12,6 +12,7 @@
      navidad     true si es un proyecto de Navidad (sale en /retail-navidad)
      destacado   true para la home y las portadas
      galeria     [{ src, alt }] — la primera es la portada
+     forma       'ancha' si la portada es apaisada (en el índice ocupa más ancho)
      proceso     [{ src, alt, etapa }] opcional: boceto, plano, obra…
      reto, hice, res  textos reales del caso (una o dos frases cada uno)
      href        si el proyecto ya tiene una página propia más completa,
@@ -154,6 +155,7 @@ var P = [
   "res": "Un bazar de decoración con identidad de marca propia dentro del local.",
   "sub": "Del pasillo a la vitrina de marca",
   "slug": "ferrehome",
+  "forma": "ancha",
   "lineas": [
    "retail"
   ],
@@ -198,6 +200,7 @@ var P = [
   "res": "Mayor afluencia de clientes y referente de decoración bohemia en la zona.",
   "sub": "Esencia Bohemia",
   "slug": "massimo-cafe",
+  "forma": "ancha",
   "lineas": [
    "retail"
   ],
@@ -247,6 +250,7 @@ var P = [
   "res": "Interés nacional e internacional. Hoy es referente frente a la competencia.",
   "sub": "Concepto Raíces",
   "slug": "hotel-union-cusco",
+  "forma": "ancha",
   "lineas": [
    "retail"
   ],
@@ -282,6 +286,7 @@ var P = [
   "res": "Más ventas, más afluencia de clientes y más movimiento en redes sociales.",
   "sub": "Ambientes que se habitan con la mirada",
   "slug": "casa-grande",
+  "forma": "ancha",
   "lineas": [
    "retail",
    "hogar"
@@ -346,6 +351,7 @@ var P = [
   "res": "Fuerte repercusión en redes y cobertura de influencers.",
   "sub": "",
   "slug": "walon-35-anos",
+  "forma": "ancha",
   "lineas": [
    "retail"
   ],
@@ -366,6 +372,7 @@ var P = [
   "res": "Presencia en la feria de diseño de interiores de referencia del país.",
   "sub": "",
   "slug": "casacor-2025",
+  "forma": "ancha",
   "lineas": [
    "hogar"
   ],

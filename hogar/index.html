@@ -32,6 +32,31 @@
 <link rel="stylesheet" href="css/gd-tienda.css?v=20261026u">
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
+<style>
+  /* espacios: la foto que el texto promete, al lado del texto */
+  .hg-esp{ display:grid; gap:clamp(32px,5vw,72px); align-items:center; }
+  @media (min-width:900px){ .hg-esp{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); } }
+  .hg-esp-foto{ position:relative; display:block; overflow:hidden; border-radius:2px; text-decoration:none; }
+  .hg-esp-foto img{ width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; transition:transform .9s var(--gd-ease); }
+  .hg-esp-foto:hover img{ transform:scale(1.03); }
+  .hg-esp-foto:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+  .hg-esp-pie{ position:absolute; left:0; right:0; bottom:0; padding:48px 20px 18px; background:linear-gradient(to top, rgba(10,9,6,.78), transparent);
+    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(222,216,203,.78); }
+  .hg-esp-pie b{ display:block; margin-bottom:4px; font-family:var(--body); font-weight:500; font-size:1rem; letter-spacing:0; text-transform:none; color:#DED8CB; }
+  /* criterio: los artículos del blog, no solo un botón */
+  .hg-crit{ display:grid; gap:clamp(32px,5vw,72px); align-items:start; }
+  @media (min-width:900px){ .hg-crit{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); } }
+  .hg-crit .gd-h2{ margin-bottom:28px; }
+  .hg-crit-lista{ list-style:none; margin:0; padding:0; border-top:1px solid rgba(10,9,6,.14); }
+  .hg-crit-lista a{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:6px 24px; padding:22px 0; border-bottom:1px solid rgba(10,9,6,.14); text-decoration:none; color:var(--ebano); }
+  .hg-crit-meta{ grid-column:1; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bronce-texto); }
+  .hg-crit-t{ grid-column:1; font-family:var(--display); font-size:clamp(1.3rem,2vw,1.6rem); line-height:1.2; }
+  .hg-crit-lista svg{ grid-column:2; grid-row:1 / span 2; width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.5; transition:transform .3s var(--gd-ease); }
+  .hg-crit-lista a:hover .hg-crit-t{ color:var(--bronce-texto); }
+  .hg-crit-lista a:hover svg{ transform:translateX(4px); }
+  .hg-crit-lista a:focus-visible{ outline:2px solid var(--bronce-texto); outline-offset:4px; }
+  @media (prefers-reduced-motion: reduce){ .hg-esp-foto img, .hg-crit-lista svg{ transition:none; } }
+</style>
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
 <body data-mundo="hogar" data-seccion="home">
@@ -69,14 +94,20 @@
 
 <!-- ==================== ESPACIOS CON PUNTOS ==================== -->
 <section class="gd-sec gd-claro">
-  <div class="gd-in">
+  <div class="gd-in hg-esp">
+    <a class="hg-esp-foto reveal-scale" href="catalogo/compra-espacio/sala-estar">
+      <img src="images/espacios/zara-sala-1.jpg" width="960" height="640" alt="Sala con sofá curvo en lino y mesa de centro dorada" loading="lazy" decoding="async">
+      <span class="hg-esp-pie"><b>Sala de estar · paleta dorada</b>Sala principal · 7 piezas</span>
+    </a>
+    <div>
     <p class="gd-eyebrow reveal">Espacios</p>
     <h2 class="gd-h2 reveal d1">Ambientes que puede llevarse tal cual</h2>
-    <p class="gd-body reveal d2">Toque un punto sobre la foto y pida esa pieza.</p>
+    <p class="gd-body reveal d2">En cada espacio, toque un punto sobre la foto y pida esa pieza.</p>
     <div style="margin-top:var(--sp-40); display:flex; flex-wrap:wrap; gap:12px;">
       <a class="gd-btn gd-btn-primary" href="hogar/espacios">Explorar espacios
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       <a class="gd-btn gd-btn-ghost" href="catalogo/muebleria/">Ver mueblería</a>
+    </div>
     </div>
   </div>
 </section>
@@ -91,12 +122,17 @@
 </section>
 
 <section class="gd-sec gd-claro">
-  <div class="gd-in" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px;">
+  <div class="gd-in hg-crit">
     <div>
       <p class="gd-eyebrow reveal">Criterio de casa</p>
       <h2 class="gd-h2 reveal d1">Decisiones que se notan al vivirlas</h2>
+      <a class="gd-btn gd-btn-ghost reveal d2" href="hogar/blog">Leer el blog de hogar</a>
     </div>
-    <a class="gd-btn gd-btn-ghost reveal d2" href="hogar/blog">Leer el blog de hogar</a>
+    <ol class="hg-crit-lista reveal d1">
+        <li><a href="hogar/blog#art-01"><span class="hg-crit-meta">Distribución · 3 min</span><span class="hg-crit-t">Primero el recorrido, después el estilo</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+        <li><a href="hogar/blog#art-02"><span class="hg-crit-meta">Mobiliario · 3 min</span><span class="hg-crit-t">La altura del mueble no es un detalle</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+        <li><a href="hogar/blog#art-03"><span class="hg-crit-meta">Iluminación · 3 min</span><span class="hg-crit-t">2700 K: por qué la luz cálida</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+    </ol>
   </div>
 </section>
 
@@ -112,10 +148,10 @@
 </section>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261026u"></script>
-<script src="js/gd-proyectos.js?v=20261027b"></script>
-<script src="js/gd-servicios.js?v=20261027a"></script>
-<script src="js/gd-proyectos-ui.js?v=20261027b"></script>
+<script src="js/giandeco.js?v=20261027e"></script>
+<script src="js/gd-proyectos.js?v=20261027e"></script>
+<script src="js/gd-servicios.js?v=20261027f"></script>
+<script src="js/gd-proyectos-ui.js?v=20261027e"></script>
 <script>
 (function(){ var SV = window.GD_SERVICIOS; window.GD_U = window.GD_PJ.vistas();
   document.getElementById('hgServicios').innerHTML = SV.de('hogar').map(function(s, i){ return window.GD_PJ.tarjetaServicio(SV, s, i, window.GD_U); }).join(''); })();

@@ -63,16 +63,47 @@ function elegir(lista, n, usadas){
 function card(D, p, o){
   o = o || {};
   var g = p.galeria[0];
-  return '<a class="pj-card' + (o.grande ? ' es-grande' : '') + '" href="' + D.url(p) + '" data-tipo="' + p.tipo + '">' +
+  return '<a class="pj-card' + (o.grande ? ' es-grande' : '') + (o.clase ? ' ' + o.clase : '') + '" href="' + D.url(p) + '" data-tipo="' + p.tipo + '">' +
     '<span class="pj-card-img">' + foto(g, o.usadas, p.nombre) + '</span>' +
-    '<span class="pj-card-txt"><span class="pj-card-cat">' + esc(D.TIPOS[p.tipo] || p.cat) + '</span>' +
+    '<span class="pj-card-txt">' + (o.num ? '<span class="pj-card-num" aria-hidden="true">' + (o.num < 10 ? '0' : '') + o.num + '</span>' : '') +
+    '<span class="pj-card-cat">' + esc(D.TIPOS[p.tipo] || p.cat) + '</span>' +
     '<span class="pj-card-nom">' + esc(p.nombre) + '</span>' +
     (o.sub && p.sub ? '<span class="pj-card-sub">' + esc(p.sub) + '</span>' : '') + '</span></a>';
+}
+
+/* ---------- índice editorial: filas de una portada ancha y una alta, numeradas ----------
+   lo que sobra: dos altas comparten fila; una alta sola va con un enlace al índice completo */
+var GRUPOS = [
+  { tipos:'tiendas,mobiliario', nombre:'Tiendas y mobiliario' }, { tipos:'campanas,eventos', nombre:'Campañas y eventos' },
+  { tipos:'gastronomia', nombre:'Hostelería' }, { tipos:'interiorismo,ferias', nombre:'Interiorismo y ferias' }
+];
+function indice(D, lista, o){
+  var usadas = vistas(o.usadas), anchas = lista.filter(function(p){ return p.forma === 'ancha'; }),
+      altas = lista.filter(function(p){ return p.forma !== 'ancha'; }), filas = [], k = 0;
+  while(anchas.length && altas.length){ var a = anchas.shift(), b = altas.shift(); filas.push(k++ % 2 ? [[a, 'es-ancha'], [b, 'es-alta']] : [[b, 'es-alta'], [a, 'es-ancha']]); }
+  while(anchas.length > 1) filas.push([[anchas.shift(), 'es-par'], [anchas.shift(), 'es-par']]);
+  while(altas.length > 1) filas.push([[altas.shift(), 'es-par'], [altas.shift(), 'es-par']]);
+  var sola = anchas.concat(altas)[0], n = 0;
+  var h = filas.map(function(f){ return f.map(function(x){ return card(D, x[0], { usadas:usadas, clase:x[1], num:++n }); }).join(''); }).join('');
+  // la entrada al índice muestra tres proyectos que no están en esta lista
+  var otros = D.lista.filter(function(p){ return lista.indexOf(p) === -1; }).slice(0, 3);
+  if(sola) h += card(D, sola, { usadas:usadas, clase:'es-alta', num:++n }) +
+    '<a class="pj-indice-mas" href="proyectos/">' +
+      (otros.length ? '<span class="pj-indice-fotos" aria-hidden="true">' + otros.map(function(p){ return '<img src="' + esc(p.galeria[0].src) + '" alt="" loading="lazy" decoding="async">'; }).join('') + '</span>' : '') +
+      '<span>Índice completo</span><b>Ver los ' + D.lista.length + ' proyectos de Retail y Hogar</b>' + FLECHA + '</a>';
+  var filtros = '';
+  if(o.filtros && lista.length > 6){
+    var g = GRUPOS.map(function(x){ var t = x.tipos.split(','); return { tipos:x.tipos, nombre:x.nombre, n:lista.filter(function(p){ return t.indexOf(p.tipo) !== -1; }).length }; }).filter(function(x){ return x.n; });
+    if(g.length > 1) filtros = '<div class="pj-filtros" role="group" aria-label="Filtrar proyectos"><button type="button" class="is-on" aria-pressed="true" data-pj-tipo="">Todos <b>' + lista.length + '</b></button>' +
+      g.map(function(x){ return '<button type="button" aria-pressed="false" data-pj-tipo="' + x.tipos + '">' + esc(x.nombre) + ' <b>' + x.n + '</b></button>'; }).join('') + '</div>';
+  }
+  return filtros + '<div class="pj-grid es-indice">' + h + '</div>';
 }
 
 /* ---------- rejilla con filtros por tipo (solo los tipos que existen) ---------- */
 function rejilla(D, lista, o){
   o = o || {};
+  if(o.indice) return indice(D, lista, o);
   var tipos = [];
   lista.forEach(function(p){ if(tipos.indexOf(p.tipo) === -1) tipos.push(p.tipo); });
   var filtros = o.filtros && tipos.length > 1
@@ -105,7 +136,7 @@ function ficha(D, p){
     '<div><p class="pj-etq">El encargo</p><p class="pj-lead">' + esc(p.reto) + '</p></div>' +
     '<dl class="pj-datos"><div><dt>Línea</dt><dd>' + p.lineas.map(function(l){ return '<a href="' + D.LINEAS[l].href + '">' + D.LINEAS[l].label + '</a>'; }).join(' · ') + '</dd></div>' +
       '<div><dt>Tipo</dt><dd>' + esc(D.TIPOS[p.tipo]) + '</dd></div>' +
-      (p.navidad ? '<div><dt>Temporada</dt><dd><a href="retail/navidad">Navidad</a></dd></div>' : '') + '</dl></div></section>';
+      (p.navidad ? '<div><dt>Temporada</dt><dd><a href="retail/">Navidad</a></dd></div>' : '') + '</dl></div></section>';
   // 3. galería (si hay más de una foto)
   if(resto.length) h += '<section class="pj-galeria" aria-label="Galería"><div class="gd-in"><div class="pj-gal pj-gal-' + claseGal(resto.length) + '">' +
     resto.map(function(g){ return '<button type="button" class="pj-foto" data-ampliar aria-label="Ampliar: ' + esc(g.alt) + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async"></button>'; }).join('') + '</div></div></section>';
