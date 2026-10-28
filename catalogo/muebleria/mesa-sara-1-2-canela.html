@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261026u">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261028d">
 </head>
 <body data-mundo="catalogo" data-seccion="producto" data-p="mesa-sara-canela">
 
@@ -44,7 +44,7 @@
 
 <div id="gdFooter"></div>
 <script src="js/giandeco.js?v=20261028a"></script>
-<script src="js/gd-tienda.js?v=20261026u"></script>
+<script src="js/gd-tienda.js?v=20261028d"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, esc = T.esc;
@@ -136,7 +136,8 @@
 
   var top = '<section class="pdp-top"><div class="gd-in"><div class="pdp-grid">' +
     '<div class="pdp-gal' + (thumbs ? ' con-thumbs' : '') + '">' + thumbs +
-      '<div class="pdp-plate" id="pdpPlate"><img id="pdpImg" src="' + p.img + '" alt="' + esc(p.nombre) + '" fetchpriority="high"></div>' +
+      '<div class="pdp-plate" id="pdpPlate"><img id="pdpImg" src="' + p.img + '" alt="' + esc(p.nombre) + '" fetchpriority="high">' +
+        (thumbs ? '<button type="button" class="pdp-nav is-prev" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="pdp-nav is-next" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><span class="pdp-count" id="pdpCount" aria-live="polite">1 / ' + p.gal.length + '</span>' : '') + '</div>' +
     '</div>' +
     '<div class="pdp-buy">' +
       '<h1>' + esc(p.nombre) + '</h1>' +
@@ -155,7 +156,7 @@
       (p.stock <= 0 ? '</div>' : '') +
       '<div class="pdp-sub">' +
         '<button type="button" data-gdt-fav="' + key + '" class="' + (T.favs.es(key) ? 'is-on' : '') + '" aria-pressed="' + (T.favs.es(key) ? 'true' : 'false') + '">' + I.cora + 'Guardar</button>' +
-        (consulta ? '' : '<a href="' + waPieza + '" target="_blank" rel="noopener">' + I.chat + 'Hablar con un asesor</a>') +
+        (consulta ? '' : '<a class="pdp-wa" href="' + waPieza + '" target="_blank" rel="noopener">' + I.chat + 'Consultar por WhatsApp</a>') +
       '</div>' +
       // compra segura: abierta por defecto; el cliente puede plegarla
       '<details class="pdp-confianza" open>' +
@@ -251,6 +252,8 @@
           '<p>' + esc(o.texto) + '</p><span class="op-sello">Compra verificada</span></article>';
       }).join('');
     }
+    // sin opiniones todavía: una franja corta y honesta, no un bloque grande vacío
+    if(!pub.length && !mia && !ped) return '<div class="op-vacio"><div><h2 class="op-vacio-t">Opiniones verificadas</h2><p>Esta pieza todavía no tiene opiniones. Cada una se vincula a un número de pedido: solo opina quien compró.</p></div><a class="gd-link" href="cuenta#pedidos">Ir a mis pedidos' + T.FLECHA + '</a></div>';
     var caja;
     if(mia){
       caja = '<div class="op-caja"><p class="pdp-h3">Su opinión</p><p>Recibimos su opinión y está en revisión del estudio. Gracias por tomarse el tiempo.</p>' +
@@ -334,10 +337,37 @@
   root.querySelectorAll('.pdp-thumb').forEach(function(b){
     b.addEventListener('click', function(){
       root.querySelectorAll('.pdp-thumb').forEach(function(x){ x.classList.toggle('is-active', x === b); });
-      img.src = b.getAttribute('data-src');
+      ir([].indexOf.call(root.querySelectorAll('.pdp-thumb'), b));
     });
   });
 
+  /* galería: flechas, contador, teclado y deslizar con el dedo */
+  var cur = 0, nFotos = p.gal.length, thumbsEl = root.querySelectorAll('.pdp-thumb'), cuenta = document.getElementById('pdpCount');
+  var sinMov = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ir(i){
+    if(nFotos < 2) return;
+    cur = (i + nFotos) % nFotos;
+    thumbsEl.forEach(function(x, j){ x.classList.toggle('is-active', j === cur); });
+    if(cuenta) cuenta.textContent = (cur + 1) + ' / ' + nFotos;
+    var src = p.gal[cur];
+    if(sinMov){ img.src = src; return; }
+    img.style.opacity = '0';
+    setTimeout(function(){ img.onload = function(){ img.style.opacity = ''; }; img.src = src; if(img.complete) img.style.opacity = ''; }, 140);
+  }
+  root.querySelectorAll('.pdp-nav').forEach(function(b){ b.addEventListener('click', function(){ ir(cur + (b.classList.contains('is-next') ? 1 : -1)); }); });
+  var galEl = root.querySelector('.pdp-gal');
+  if(nFotos > 1 && galEl){
+    galEl.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight'){ ir(cur + 1); e.preventDefault(); } else if(e.key === 'ArrowLeft'){ ir(cur - 1); e.preventDefault(); }
+    });
+    var x0 = null;
+    plate.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, { passive:true });
+    plate.addEventListener('touchend', function(e){
+      if(x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if(Math.abs(dx) > 40) ir(cur + (dx < 0 ? 1 : -1));
+    }, { passive:true });
+  }
   var qty = 1, add = document.getElementById('pdpAdd'), qtyEl = document.getElementById('pdpQty');
   root.querySelectorAll('[data-pdp-qty]').forEach(function(b){
     b.addEventListener('click', function(){

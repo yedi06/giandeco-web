@@ -373,7 +373,8 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .cu-pago{ font-style:normal; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; border:1px solid var(--line); color:var(--text-dim); }
 .cu-pago.es-ok{ color:#8FB58A; border-color:rgba(143,181,138,.5); }
 .cu-pago.es-pend{ color:#E0A36E; border-color:rgba(224,163,110,.55); }
-.cu-sig{ --sig:var(--line); margin-top:18px; padding:16px 18px; background:var(--bg-raised); border-left:3px solid var(--sig); }
+.cu-sig{ --sig:var(--line); margin-top:18px; padding:16px 18px; background:var(--bg-raised); border:1px solid color-mix(in srgb, var(--sig) 55%, var(--line)); border-radius:2px; }
+.cu-sig > b::before{ content:''; display:inline-block; width:7px; height:7px; margin:0 10px 1px 0; border-radius:50%; background:var(--sig); vertical-align:middle; }
 .cu-sig.es-accion{ --sig:#E0A36E; } .cu-sig.es-espera{ --sig:var(--accent); } .cu-sig.es-ok{ --sig:#8FB58A; } .cu-sig.es-mal{ --sig:#D98A6F; }
 .cu-sig b{ display:block; font-weight:500; color:var(--lino); font-size:1rem; }
 .cu-sig p{ margin:6px 0 0; font-size:.9rem; line-height:1.55; color:var(--text-dim); }
@@ -863,3 +864,44 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .pdp-det-in .gd-quote{ margin:0 0 6px; font-size:1.15rem; }
 .pdp-det-in .pdp-calc{ border-left:none; border-top:1px solid var(--line); padding:20px 0 0; margin-top:6px; }
 @media (prefers-reduced-motion: reduce){ .pdp-confianza-in{ animation:none; } .pdp-confianza-mas::before, .pdp-confianza-mas::after{ transition:none; } }
+/* ==========================================================================
+   LEGALES Y AYUDA — encabezado de documento, sin banda de fotos
+   El texto legal se lee a ~72 caracteres por línea y, en pantallas anchas,
+   lleva un índice lateral (js/gd-legal.js). El libro de reclamaciones es un
+   formulario y conserva todo el ancho.
+   ========================================================================== */
+.cu-top > .lg-lead{ max-width:62ch; }
+.cu-top > .lg-lead + .cu-grid{ margin-top:clamp(28px,4vw,48px); padding-top:clamp(28px,4vw,48px); border-top:1px solid var(--line); }
+.cu-top .lg-prosa:not(.es-libro){ max-width:72ch; }
+.cu-top .lg-prosa h2{ scroll-margin-top:calc(var(--h-total) + 24px); }
+.lg-toc{ display:none; }
+@media (min-width:1280px){
+  .cu-grid.tiene-toc{ grid-template-columns:220px minmax(0,72ch) minmax(190px,1fr); gap:clamp(40px,4vw,72px); }
+  .lg-toc{ display:flex; flex-direction:column; position:sticky; top:calc(var(--h-total) + 16px); justify-self:end; width:100%; max-width:260px; }
+  .lg-toc-t{ margin:0 0 12px; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint); }
+  .lg-toc a{ padding:9px 0 9px 14px; border-left:1px solid var(--line); font-size:.84rem; line-height:1.35; color:var(--text-dim); text-decoration:none; transition:color .2s ease, border-color .2s ease; }
+  .lg-toc a:hover{ color:var(--lino); }
+  .lg-toc a.is-active{ color:var(--accent); border-left-color:var(--accent); }
+}
+@media (prefers-reduced-motion: reduce){ .lg-toc a{ transition:none; } }
+/* ==========================================================================
+   FICHA DE PRODUCTO — galería con flechas, WhatsApp visible, opiniones sin hueco
+   ========================================================================== */
+.pdp-nav{ position:absolute; top:50%; z-index:3; width:44px; height:44px; margin-top:-22px; display:grid; place-items:center; padding:0; border:1px solid rgba(222,216,203,.3); border-radius:50%; background:rgba(10,10,9,.62); color:var(--lino); cursor:pointer; opacity:0; transition:opacity .3s var(--gd-ease), border-color .25s ease, background .25s ease; }
+.pdp-nav.is-prev{ left:14px; } .pdp-nav.is-next{ right:14px; }
+.pdp-nav svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.pdp-plate:hover .pdp-nav, .pdp-nav:focus-visible{ opacity:1; }
+.pdp-nav:hover{ border-color:var(--accent); background:rgba(10,10,9,.82); }
+@media (hover:none){ .pdp-nav{ opacity:1; width:40px; height:40px; margin-top:-20px; } }
+.pdp-count{ position:absolute; right:14px; bottom:14px; z-index:3; padding:5px 10px; border-radius:2px; background:rgba(10,10,9,.62); color:var(--lino); font-size:.7rem; letter-spacing:.14em; font-variant-numeric:tabular-nums; }
+.pdp-plate img{ transition:transform .5s var(--gd-ease), opacity .14s ease; }
+.pdp-sub a.pdp-wa{ padding:9px 14px; border:1px solid rgba(222,216,203,.28); border-radius:2px; color:var(--lino); }
+.pdp-sub a.pdp-wa:hover{ border-color:var(--accent); color:var(--accent); }
+.op-vacio{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 40px; padding:clamp(20px,3vw,32px) 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.op-vacio-t{ margin:0 0 6px; font-family:var(--body); font-weight:500; font-size:1.05rem; color:var(--lino); }
+.op-vacio p{ margin:0; max-width:56ch; color:var(--text-dim); font-size:.94rem; line-height:1.65; }
+@media (prefers-reduced-motion: reduce){ .pdp-nav, .pdp-plate img{ transition:none; } }
+/* ficha: recorrido más corto — menos aire entre bloques y preguntas + opiniones como una sola zona */
+#pdp .gdt-sec{ padding-block:clamp(40px,5.5vw,64px); }
+#pdp #preguntas{ padding-bottom:clamp(24px,3vw,36px); }
+#pdp #preguntas + #opiniones{ border-top:0; padding-top:0; }
