@@ -250,7 +250,9 @@ var EXTRA = {
   'papa-noel': { gal:['images/navidad/papa-noel-ambiente.webp'] },
   'taza-cascanuez': { gal:['images/navidad/taza-cascanuez-ambiente.webp'] },
   'taza-cascanuez-roja': { gal:['images/navidad/taza-cascanuez-roja-ambiente.webp'] },
-  'tren-jengibre': { gal:['images/navidad/tren-jengibre-ambiente.webp'] }
+  'tren-jengibre': { gal:['images/navidad/tren-jengibre-ambiente.webp'] },
+  'cascanueces-mecedores': { gal:['images/navidad/cascanueces-mecedores-ambiente.webp'] },
+  'perritos-cascanueces': { gal:['images/navidad/perritos-cascanueces-ambiente.webp'] }
 };
 
 var CAT = {};
