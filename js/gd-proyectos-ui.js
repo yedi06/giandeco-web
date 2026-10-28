@@ -32,7 +32,7 @@ var MISMA_FOTO = {
   "images/work/zarasala.jpg": "images/espacios/zara-sala-1.jpg",
   "images/shift/expodeco-showroom.jpg": "images/proyectos/expodeco-2.jpg",
   "images/catalogo/navidad.jpg": "images/espacios/zara-navidad-3.jpg",
-  "images/universos/retail.jpg": "images/proyectos/walon-puntahermosa.jpg",
+  "images/universos/retail.jpg": "images/proyectos/walon-puntahermosa-hd.jpg",
   "images/proyectos/walon35-df.jpg": "images/proyectos/walon35-salon.jpg"
   };
 function limpia(src){ var k = String(src || '').split('?')[0]; return MISMA_FOTO[k] || k; }
@@ -74,7 +74,7 @@ function card(D, p, o){
 /* ---------- índice editorial: filas de una portada ancha y una alta, numeradas ----------
    lo que sobra: dos altas comparten fila; una alta sola va con un enlace al índice completo */
 var GRUPOS = [
-  { tipos:'tiendas,mobiliario', nombre:'Tiendas y mobiliario' }, { tipos:'campanas,eventos', nombre:'Campañas y eventos' },
+  { tipos:'tiendas,mobiliario', nombre:'Tiendas y mobiliario' }, { tipos:'campanas,navidad,eventos', nombre:'Campañas, Navidad y eventos' },
   { tipos:'gastronomia', nombre:'Hostelería' }, { tipos:'interiorismo,ferias', nombre:'Interiorismo y ferias' }
 ];
 function indice(D, lista, o){

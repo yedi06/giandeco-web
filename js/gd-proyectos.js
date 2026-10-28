@@ -67,6 +67,14 @@ var P = [
    {
     "src": "images/work/pycca.jpg",
     "alt": "Colección navideña Christmas Chalet en tienda Pycca, con árbol nevado y exhibición de temporada"
+   },
+   {
+    "src": "images/proyectos/pycca-rincon-biofilico.webp",
+    "alt": "Rincón de descanso para PYCCA con muro verde «Disfruta la vida», silla colgante de ratán y puf rosado"
+   },
+   {
+    "src": "images/proyectos/pycca-salon-vegetacion.webp",
+    "alt": "Salón de descanso para PYCCA con sofás de ratán, plantas, arcos verdes y piso de hexágonos"
    }
   ]
  },
@@ -84,7 +92,7 @@ var P = [
   "tipo": "tiendas",
   "galeria": [
    {
-    "src": "images/proyectos/walon-puntahermosa.jpg?v=2",
+    "src": "images/proyectos/walon-puntahermosa-hd.jpg",
     "alt": "Tienda boutique Walon en Punta Hermosa"
    }
   ]
@@ -97,6 +105,7 @@ var P = [
   "res": "Más ventas en tienda y atención inmediata del público.",
   "sub": "Fútbol y coleccionismo en vitrina",
   "slug": "walon-figuritas",
+  "forma": "ancha",
   "lineas": [
    "retail"
   ],
@@ -104,8 +113,8 @@ var P = [
   "destacado": true,
   "galeria": [
    {
-    "src": "images/work/walonfiguritas.jpg",
-    "alt": "Vitrina de la campaña Figuritas del Barrio con maniquí en movimiento y estructura tipo carta"
+    "src": "images/proyectos/walon-figuritas-vitrina.webp",
+    "alt": "Vitrina de Walon con maniquí de fútbol, pelota en pódium y afiche «Figuritas del partido»"
    }
   ]
  },
@@ -435,6 +444,46 @@ var P = [
    {
     "src": "images/espacios/expodeco-1.jpg",
     "alt": "Stand de Decopapel en Expodeco 2024"
+   }
+  ]
+ },
+ {
+  "nombre": "SuperHome · Navidad 2026",
+  "cat": "Navidad · montaje en tienda",
+  "reto": "Tres mesas que venden la cena: borgoña y dorado, nacimiento blanco y oro, y girasoles para fuera de temporada.",
+  "hice": "Montamos cuatro escenas en tienda: la mesa borgoña y dorado, el nacimiento blanco y dorado, la mesa de girasoles y cristal, y la mesa del taller navideño en vivo con Gian.",
+  "res": "",
+  "sub": "Tres mesas que venden la cena",
+  "slug": "superhome-navidad-2026",
+  "lineas": [
+   "retail"
+  ],
+  "tipo": "navidad",
+  "navidad": true,
+  "galeria": [
+   {
+    "src": "images/montajes-2026/borgona-02-g.webp",
+    "alt": "Mesa de Navidad borgoña y dorado en SuperHome"
+   }
+  ]
+ },
+ {
+  "nombre": "Ferrehome · Navidad 2026",
+  "cat": "Navidad · montaje en tienda",
+  "reto": "Cinco rincones en todo el recorrido: árbol de jengibre, árbol rojo y blanco, mesa de cascanueces, vitrina de casitas y un rincón junto a caja.",
+  "hice": "Montamos tres escenas en la tienda: el rincón de jengibre con árbol, corona y vitrina de casitas; la mesa de cascanueces; y los rincones rojo y blanco con Papá Noel y renos.",
+  "res": "",
+  "sub": "Cinco rincones en todo el recorrido",
+  "slug": "ferrehome-navidad-2026",
+  "lineas": [
+   "retail"
+  ],
+  "tipo": "navidad",
+  "navidad": true,
+  "galeria": [
+   {
+    "src": "images/montajes-2026/jengibre-01-g.webp",
+    "alt": "Árbol de jengibre con muñecos y casitas en Ferrehome"
    }
   ]
  }
