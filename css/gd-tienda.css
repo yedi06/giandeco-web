@@ -981,12 +981,17 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .gdt-ojo span{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
 .gdt-ojo:hover{ background:var(--accent); color:var(--ebano); }
 .gdt-ojo:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+/* escritorio: ojo pequeño en la esquina superior derecha; el texto «Vista rápida»
+   se despliega hacia la izquierda solo al pasar el cursor por el ojo */
 @media (hover:hover) and (min-width:900px){
-  .gdt-ojo-zona{ align-items:flex-end; justify-content:center; padding:0 0 28px; }
-  .gdt-ojo{ display:inline-flex; gap:8px; width:auto; padding:0 16px; border-radius:2px; font-family:var(--body); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;
-    opacity:0; transform:translateY(8px); }
-  .gdt-ojo span{ position:static; width:auto; height:auto; overflow:visible; clip:auto; }
+  .gdt-ojo-zona{ padding:10px; }
+  .gdt-ojo{ display:inline-flex; align-items:center; width:auto; min-width:40px; padding:0 11px; border-radius:20px;
+    font-family:var(--body); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;
+    opacity:0; transform:translateY(-4px); }
+  .gdt-ojo span{ position:static; width:auto; height:auto; clip:auto; max-width:0; opacity:0; overflow:hidden;
+    transition:max-width .35s var(--gd-ease, ease), opacity .25s ease, margin .35s var(--gd-ease, ease); }
   .gdt-card:hover .gdt-ojo, .gdt-ojo:focus-visible{ opacity:1; transform:none; }
+  .gdt-ojo:hover span, .gdt-ojo:focus-visible span{ max-width:120px; opacity:1; margin-left:8px; }
 }
 .gdt-card .gd-prod, .ctl-card a[href]{ cursor:pointer; }
 
@@ -1013,4 +1018,4 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   .gv-comprar .gd-btn svg{ display:none; }
   .gv-dl div{ grid-template-columns:96px 1fr; }
 }
-@media (prefers-reduced-motion: reduce){ .gv-th, .gv-chip, .gv-enlaces a, .gdt-ojo{ transition:none; } }
+@media (prefers-reduced-motion: reduce){ .gv-th, .gv-chip, .gv-enlaces a, .gdt-ojo, .gdt-ojo span{ transition:none; } }
