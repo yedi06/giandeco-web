@@ -119,8 +119,15 @@
 .ctl-pre{ font-family: var(--body); font-size:.9rem; color: var(--text-dim); font-variant-numeric: tabular-nums; }
 .ctl-pre s{ margin-left:6px; color: var(--text-faint); }
 .ctl-ph > a{ position:absolute; inset:0; }
-.ctl-add{ display:none; }
+/* vista rápida: en el teléfono, un ojo redondo siempre visible en la esquina de la foto */
+.ctl-add{ display:inline-grid; place-items:center; position:absolute; top:8px; right:8px; z-index:2; width:40px; height:40px; padding:0; border:0; border-radius:50%; cursor:pointer;
+  background: rgba(10,9,6,.78); color:#DED8CB; }
+.ctl-add svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5; }
+.ctl-add span{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+.ctl-add:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 @media (hover:hover) and (min-width:900px){
+  .ctl-add span{ position:static; width:auto; height:auto; overflow:visible; clip:auto; }
+  .ctl-add{ top:auto; right:auto; width:auto; border-radius:2px; }
   .ctl-add{ display:inline-flex; align-items:center; gap:8px; position:absolute; left:50%; bottom:14px; z-index:2; height:40px; padding:0 16px; border-radius:2px; border:0; cursor:pointer;
     background: rgba(10,9,6,.82); color:#DED8CB; font-family: var(--body); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;
     opacity:0; transform: translate(-50%,8px); transition: opacity .3s ease, transform .3s ease, background-color .2s ease, color .2s ease; }

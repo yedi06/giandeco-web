@@ -486,6 +486,7 @@ var opiniones = {
 /* --------------------------------------------------------------------------
    7. TARJETA DE PRODUCTO
    -------------------------------------------------------------------------- */
+var OJO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 function card(key, o){
   var p = CAT[key]; if(!p) return ''; o = o || {};
   return '<article class="gdt-card">' +
@@ -497,6 +498,8 @@ function card(key, o){
       '<span class="gd-prod-name">' + esc(p.nombre) + '</span>' +
       '<span class="gd-prod-price">' + esc(p.precio) + '</span>' +
     '</a>' +
+    // la tarjeta lleva a la ficha; la vista rápida es una opción aparte, sobre la foto
+    '<span class="gdt-ojo-zona"><button type="button" class="gdt-ojo" data-gv-abrir="' + key + '" aria-label="Vista rápida de ' + esc(p.nombre) + '">' + OJO + '<span>Vista rápida</span></button></span>' +
     (o.porque ? '<p class="gdt-card-why">' + esc(o.porque) + '</p>' : '') +
     (o.sinBoton ? '' : p.stock <= 0 ? '<span class="gdt-quick es-agotado">Agotado</span>' : '<button type="button" class="gdt-quick" data-gdt-add="' + key + '">' + (p.valor === null ? 'Añadir para cotizar' : 'Añadir a la bolsa') + '</button>') +
   '</article>';
@@ -596,9 +599,9 @@ function montar(){
 
   /* ==========================================================================
      VISTA RÁPIDA
-     Panel a la derecha con toda la información de la pieza y la compra siempre
-     a la vista. Se abre al tocar una tarjeta de producto y, en el catálogo,
-     solo en escritorio (en el teléfono la tarjeta lleva a la ficha).
+     Panel con toda la información de la pieza y la compra siempre a la vista.
+     Es una opción: se abre solo desde el botón del ojo («Vista rápida») de cada
+     tarjeta. Tocar la tarjeta sigue llevando a la ficha completa del producto.
      ========================================================================== */
   document.body.insertAdjacentHTML('beforeend',
     '<aside class="gdt-drawer gdt-vista" id="gdtVista" role="dialog" aria-modal="true" aria-label="Vista rápida" aria-hidden="true">' +
@@ -606,16 +609,8 @@ function montar(){
         '<button type="button" class="gdt-x" data-gv-cerrar aria-label="Cerrar">&times;</button></header>' +
       '<div class="gdt-body gv-body" id="gvBody"></div>' +
     '</aside>');
-  var vista = document.getElementById('gdtVista'), gvKey = null, gvQty = 1, gvAntes = null, gvMapa = null;
-  var CATALOGO_ESCRITORIO = window.matchMedia('(min-width:900px)');
+  var vista = document.getElementById('gdtVista'), gvKey = null, gvQty = 1, gvAntes = null;
   velo.addEventListener('click', cerrarVista);
-
-  /* --- resolución de la pieza a partir del enlace de la tarjeta --- */
-  function limpiarHref(h){ return String(h || '').split('#')[0].split('?')[0].replace(/^\/+/, '').replace(/\.html$/, ''); }
-  function keyDeHref(h){
-    if(!gvMapa){ gvMapa = {}; Object.keys(CAT).forEach(function(k){ gvMapa[limpiarHref(url(k))] = k; }); }
-    return gvMapa[limpiarHref(h)] || null;
-  }
 
   /* --- contenido: cada bloque es una función pequeña y se compone en pintarVista --- */
   function gvGaleria(p, agotado, consulta){
@@ -713,15 +708,12 @@ function montar(){
       else if(c.hasAttribute('data-gv-ya')){ if(carrito.addKey(gvKey, gvQty)) location.href = 'checkout'; }
       return;
     }
-    // en el catálogo, el botón "+" abre la vista rápida en lugar de añadir a ciegas (solo escritorio, que es donde existe)
-    var mas = e.target.closest('.ctl-add[data-gdt-add]');
-    if(mas && CATALOGO_ESCRITORIO.matches){ e.preventDefault(); e.stopImmediatePropagation(); abrirVista(mas.getAttribute('data-gdt-add')); return; }
-    // tarjetas: abren la vista rápida; con ctrl, cmd o clic medio siguen el enlace. En el catálogo, solo en escritorio.
-    var a = e.target.closest('.gdt-card a.gd-prod, .ctl-card a[href]');
-    if(!a || e.defaultPrevented || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-    if(a.closest('.ctl-card') && !CATALOGO_ESCRITORIO.matches) return;
-    var k = keyDeHref(a.getAttribute('href'));
-    if(k){ e.preventDefault(); abrirVista(k); }
+    // la vista rápida se abre solo desde su botón (el ojo): la tarjeta sigue llevando a la ficha del producto
+    var ojo = e.target.closest('[data-gv-abrir], .ctl-add[data-gdt-add]');
+    if(ojo){
+      e.preventDefault(); e.stopImmediatePropagation();
+      abrirVista(ojo.getAttribute('data-gv-abrir') || ojo.getAttribute('data-gdt-add'));
+    }
   });
   // el header ya trae el botón de carrito: se conecta, y a su lado entra la cuenta
   document.querySelectorAll('button[aria-label="Carrito"]').forEach(function(b){

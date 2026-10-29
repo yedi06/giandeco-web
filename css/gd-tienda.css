@@ -971,12 +971,22 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .gv-dl a{ color:var(--t-text); text-decoration-color:var(--t-accent); text-underline-offset:3px; }
 .gv-dl a:hover{ color:var(--t-accent); }
 
-/* etiqueta "Vista rápida" con un ojo sobre la foto de la tarjeta (solo donde hay mouse) */
+/* botón "Vista rápida" sobre la foto de la tarjeta: es una opción; la tarjeta lleva a la ficha.
+   La zona copia el marco 4:5 de la foto para que el botón quede siempre sobre ella. */
+.gdt-card{ position:relative; }
+.gdt-ojo-zona{ position:absolute; left:0; right:0; top:0; aspect-ratio:4/5; display:flex; align-items:flex-start; justify-content:flex-end; padding:8px; pointer-events:none; }
+.gdt-ojo{ pointer-events:auto; display:inline-grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; cursor:pointer;
+  background:rgba(10,9,6,.78); color:#DED8CB; transition:background-color .2s ease, color .2s ease, opacity .3s ease, transform .3s ease; }
+.gdt-ojo svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5; }
+.gdt-ojo span{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+.gdt-ojo:hover{ background:var(--accent); color:var(--ebano); }
+.gdt-ojo:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 @media (hover:hover) and (min-width:900px){
-  .gdt-card .gd-prod-thumb::after{ content:'Vista rápida'; position:absolute; left:50%; bottom:14px; display:inline-flex; align-items:center; height:40px; padding:0 16px 0 44px; border-radius:2px; white-space:nowrap;
-    background:rgba(10,9,6,.82) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DED8CB' stroke-width='1.5'%3E%3Cpath d='M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") 14px 50%/18px no-repeat;
-    color:#DED8CB; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; opacity:0; transform:translate(-50%,8px); transition:opacity .3s ease, transform .3s ease; pointer-events:none; }
-  .gdt-card .gd-prod:hover .gd-prod-thumb::after, .gdt-card .gd-prod:focus-visible .gd-prod-thumb::after{ opacity:1; transform:translate(-50%,0); }
+  .gdt-ojo-zona{ align-items:flex-end; justify-content:center; padding:0 0 28px; }
+  .gdt-ojo{ display:inline-flex; gap:8px; width:auto; padding:0 16px; border-radius:2px; font-family:var(--body); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;
+    opacity:0; transform:translateY(8px); }
+  .gdt-ojo span{ position:static; width:auto; height:auto; overflow:visible; clip:auto; }
+  .gdt-card:hover .gdt-ojo, .gdt-ojo:focus-visible{ opacity:1; transform:none; }
 }
 .gdt-card .gd-prod, .ctl-card a[href]{ cursor:pointer; }
 
@@ -1003,4 +1013,4 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   .gv-comprar .gd-btn svg{ display:none; }
   .gv-dl div{ grid-template-columns:96px 1fr; }
 }
-@media (prefers-reduced-motion: reduce){ .gv-th, .gv-chip, .gv-enlaces a, .gdt-card .gd-prod-thumb::after{ transition:none; } }
+@media (prefers-reduced-motion: reduce){ .gv-th, .gv-chip, .gv-enlaces a, .gdt-ojo{ transition:none; } }
