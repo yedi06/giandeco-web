@@ -227,8 +227,8 @@ img{ max-width:100%; display:block; }
 @media (max-width:719px){ .sh-promo-t .mv{ display:inline; } }
 .sh-promo-msg{ grid-area:1/1; margin:0; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px 12px; font-size:.86rem; line-height:1.45; letter-spacing:.02em; opacity:0; visibility:hidden; transition:opacity .5s ease, visibility 0s linear .5s; }
 .sh-promo-msg.is-active{ opacity:1; visibility:visible; transition:opacity .5s ease; }
-.sh-promo-ico{ display:inline-grid; place-items:center; width:30px; height:30px; flex:none; border:1px solid rgba(201,162,74,.45); border-radius:50%; color:var(--laton); }
-.sh-promo-ico svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.sh-promo-ico{ display:inline-grid; place-items:center; flex:none; color:var(--laton); }
+.sh-promo-ico svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 .sh-promo-msg b{ font-weight:500; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--laton); }
 .sh-promo-x::before{ content:'·'; margin-right:10px; color:rgba(222,216,203,.4); }
 .sh-promo-msg a{ color:#DED8CB; text-decoration:underline; text-decoration-color:var(--laton); text-underline-offset:3px; transition:color .25s ease; }
@@ -241,8 +241,7 @@ img{ max-width:100%; display:block; }
   .sh-promo-in{ grid-template-columns:1fr; padding-block:6px; }
   .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc{ display:none; }
   .sh-promo-msg{ font-size:.78rem; column-gap:10px; }
-  .sh-promo-ico{ width:26px; height:26px; }
-  .sh-promo-ico svg{ width:14px; height:14px; }
+  .sh-promo-ico svg{ width:18px; height:18px; }
   .sh-promo-msg b{ order:1; }
   .sh-promo-msg a{ order:2; font-size:.7rem; }
   .sh-promo-t{ order:3; flex-basis:100%; }
