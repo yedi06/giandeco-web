@@ -17,6 +17,7 @@
   .pjl-grid{ grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(48px,7vw,128px); align-items:end; }
 }
 .pjl-foto{ margin:0; width:100%; max-width:620px; }
+@media (min-width:900px){ .pjl:not(.es-horizontal) .pjl-foto{ max-width:min(620px, calc((var(--portada-h, 100svh) - var(--h-marca-d) - 150px) * .75)); } }
 /* lámina horizontal: la foto apaisada toma más ancho y el texto se ciñe */
 @media (min-width:900px){ .pjl.es-horizontal .pjl-grid{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); } }
 .pjl.es-horizontal .pjl-foto{ max-width:980px; }

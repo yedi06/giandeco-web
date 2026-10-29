@@ -219,15 +219,17 @@ img{ max-width:100%; display:block; }
    BARRA DE PROMOCIONES — franja fina arriba del header; el header baja con ella
    y se queda en el borde al desplazarse (--promo-top lo calcula js/giandeco.js)
    ========================================================================== */
-:root{ --promo-h:38px; --promo-top:var(--promo-h); }
+:root{ --promo-h:52px; --promo-top:var(--promo-h); --portada-h:calc(100svh - var(--promo-h)); }   /* portada = pantalla menos la barra de promociones: se ve completa desde el primer vistazo */
 .sh-promo{ position:relative; z-index:71; min-height:var(--promo-h); display:flex; align-items:center; background:#14120e; color:#DED8CB; border-bottom:1px solid rgba(222,216,203,.1); font-family:var(--body); }
 .sh-promo-in{ width:100%; max-width:var(--gd-max); margin:0 auto; padding-inline:var(--gd-gut); display:grid; grid-template-columns:28px 1fr 28px; align-items:center; gap:12px; }
 .sh-promo-slides{ display:grid; justify-items:center; text-align:center; }
 .sh-promo-t .mv{ display:none; }
 @media (max-width:719px){ .sh-promo-t .mv{ display:inline; } }
-.sh-promo-msg{ grid-area:1/1; margin:0; display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline; gap:2px 10px; font-size:.8rem; line-height:1.45; letter-spacing:.02em; opacity:0; visibility:hidden; transition:opacity .5s ease, visibility 0s linear .5s; }
+.sh-promo-msg{ grid-area:1/1; margin:0; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px 12px; font-size:.86rem; line-height:1.45; letter-spacing:.02em; opacity:0; visibility:hidden; transition:opacity .5s ease, visibility 0s linear .5s; }
 .sh-promo-msg.is-active{ opacity:1; visibility:visible; transition:opacity .5s ease; }
-.sh-promo-msg b{ font-weight:500; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--laton); }
+.sh-promo-ico{ display:inline-grid; place-items:center; width:30px; height:30px; flex:none; border:1px solid rgba(201,162,74,.45); border-radius:50%; color:var(--laton); }
+.sh-promo-ico svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.sh-promo-msg b{ font-weight:500; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--laton); }
 .sh-promo-x::before{ content:'·'; margin-right:10px; color:rgba(222,216,203,.4); }
 .sh-promo-msg a{ color:#DED8CB; text-decoration:underline; text-decoration-color:var(--laton); text-underline-offset:3px; transition:color .25s ease; }
 .sh-promo-msg a:hover, .sh-promo-msg a:focus-visible{ color:var(--laton); }
@@ -235,10 +237,12 @@ img{ max-width:100%; display:block; }
 .sh-promo-flecha:hover, .sh-promo-flecha:focus-visible{ color:var(--laton); }
 .sh-promo-flecha svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 @media (max-width:719px){
-  :root{ --promo-h:50px; }
+  :root{ --promo-h:60px; }
   .sh-promo-in{ grid-template-columns:1fr; padding-block:6px; }
   .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc{ display:none; }
-  .sh-promo-msg{ font-size:.74rem; column-gap:12px; }
+  .sh-promo-msg{ font-size:.78rem; column-gap:10px; }
+  .sh-promo-ico{ width:26px; height:26px; }
+  .sh-promo-ico svg{ width:14px; height:14px; }
   .sh-promo-msg b{ order:1; }
   .sh-promo-msg a{ order:2; font-size:.7rem; }
   .sh-promo-t{ order:3; flex-basis:100%; }
@@ -472,9 +476,9 @@ img{ max-width:100%; display:block; }
    para monitores muy altos; en cualquier laptop o desktop normal esto es
    100% de la pantalla. Ya no existe una versión "corta": todas las páginas
    entran con el mismo peso visual. */
-.gd-hero{ position:relative; width:100%; background: var(--ebano); display:grid; grid-template-columns:1fr; min-height:100svh; }
+.gd-hero{ position:relative; width:100%; background: var(--ebano); display:grid; grid-template-columns:1fr; min-height:var(--portada-h); }
 @media (min-width:900px){
-  .gd-hero{ grid-template-columns:1fr 1.04fr; min-height:min(100svh,1000px); }
+  .gd-hero{ grid-template-columns:1fr 1.04fr; min-height:min(var(--portada-h),1000px); }
 }
 .gd-hero-panel{
   display:flex; flex-direction:column; justify-content:center; order:2;
@@ -1229,3 +1233,12 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 /* fotos pequeñas, verticales o de teléfono: sin puntos de compra (las piezas van en la fila de productos) */
 .gd-shop.sin-puntos .gd-shop-dot, .gd-shop.sin-puntos .gd-shop-card, .gd-shop.sin-puntos .gd-shop-ver{ display:none !important; }
 .gd-shop-hint[hidden], .hm-hint[hidden], .ctb-tip[hidden]{ display:none !important; }
+
+/* portadas con texto: el espaciado y el título se ajustan a la altura de la pantalla,
+   para que la portada se vea completa en laptops de poca altura sin recortar nada */
+@media (min-width:900px){
+  .gd-hero-panel{ padding-block:calc(var(--h-marca-d) + clamp(8px,2.6svh,40px)) clamp(20px,4.6svh,64px); }
+  .gd-hero.is-corto h1{ font-size:clamp(2rem,min(4.5vw,7.2svh),3.5rem); margin-bottom:clamp(10px,2.2svh,24px); }
+  .gd-hero-panel > p{ margin-bottom:clamp(14px,2.8svh,36px); line-height:1.6; }
+  .gd-hero-eyebrow{ margin-bottom:clamp(10px,2svh,22px); }
+}
