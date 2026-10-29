@@ -28,8 +28,8 @@ var CFG = {
   PRECIOS_CON_IGV: true,
   RECOJO: { activo:true, lugar:'Giandeco', dir:'Ca. Las Bellísimas 170, Urb. Vipol — Callao' },
   ENVIO: [
-    { key:'lima',      label:'Lima Metropolitana', tarifa:null },
-    { key:'callao',    label:'Callao',             tarifa:null },
+    { key:'lima',      label:'Lima Metropolitana', tarifa:15 },
+    { key:'callao',    label:'Callao',             tarifa:15 },
     { key:'provincia', label:'Resto del Perú',     tarifa:null }
   ],
   /* envío por agencia: el cliente elige su agencia de preferencia (opcional)
@@ -427,6 +427,7 @@ var pedidos = {
     m += '\n';
     if(p.subtotal) m += 'Subtotal: ' + fmt(p.subtotal) + (p.cotizar ? ' (+ ' + p.cotizar + ' a cotizar)' : '') + '\n';
     m += 'Entrega: ' + p.entrega.resumen + '\n';
+    if(p.envio != null && p.entrega.tipo === 'envio') m += p.envio ? 'Delivery: ' + fmt(p.envio) + '\n' : 'Delivery: gratis (Envío Cortesía)\n';
     if(p.entrega.armado) m += 'Armado / instalación: sí, cotizar\n';
     if(p.entrega.recibe) m += 'Recibe: ' + p.entrega.recibe + '\n';
     if(p.entrega.horario) m += 'Horario preferido: ' + p.entrega.horario + '\n';
@@ -530,6 +531,46 @@ function lineaHTML(x){
   '</li>';
 }
 
+/* --------------------------------------------------------------------------
+   DELIVERY GRATIS: barra de avance «le faltan S/ X para el delivery gratis»
+   Promoción «Envío Cortesía» (condiciones en legal/promociones): delivery gratis
+   en Lima Metropolitana por compras mayores a S/ 399. En provincias el pedido se
+   recoge en agencia. Se pinta en el cajón de la bolsa y en el checkout.
+   -------------------------------------------------------------------------- */
+var ENVIO_GRATIS = { desde:399, zonas:['lima', 'callao'], lugar:{ lima:'Lima Metropolitana', callao:'Callao' } };
+var ICO_CAMION = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/></svg>';
+/* delivery propio: S/ 15 en Lima Metropolitana y Callao (tarifa en CFG.ENVIO), gratis por compras mayores a S/ 399.
+   Fuera de esas zonas el pedido va por agencia, a cargo del cliente (tarifa null). */
+function envioGratis(zona, subtotal){ return ENVIO_GRATIS.zonas.indexOf(zona) !== -1 && Number(subtotal) > ENVIO_GRATIS.desde; }
+function envioCosto(zona, subtotal){
+  var z = CFG.ENVIO.filter(function(x){ return x.key === zona; })[0];
+  if(!z || z.tarifa == null) return null;                           // por agencia
+  return envioGratis(zona, subtotal) ? 0 : z.tarifa;
+}
+function envioProg(subtotal, o){
+  o = o || {};
+  subtotal = Number(subtotal) || 0;
+  if(subtotal <= 0) return '';                                       // solo piezas a cotizar: no hay monto que medir
+  var desde = ENVIO_GRATIS.desde, ok = subtotal > desde;
+  var tarifa = (CFG.ENVIO.filter(function(x){ return x.key === 'lima'; })[0] || {}).tarifa;
+  var regla = (tarifa != null ? 'Delivery de ' + fmt(tarifa) + ' en Lima Metropolitana y Callao, gratis por compras mayores a ' + fmt(desde) + '. ' : '') + 'Resto del Perú: por agencia, a cargo del cliente.';
+  var nota = '<a href="legal/promociones#envio-cortesia">Ver condiciones</a>';
+  if(o.recojo){                                                       // recoge en Giandeco: no hay delivery que medir
+    return '<div class="gdt-envio"><p class="gdt-envio-t">' + ICO_CAMION + '<span>Recojo en Giandeco, <b>sin costo</b>.</span></p></div>';
+  }
+  if(o.zona && ENVIO_GRATIS.zonas.indexOf(o.zona) === -1){            // provincias: la promoción es de delivery
+    return '<div class="gdt-envio"><p class="gdt-envio-t">' + ICO_CAMION + '<span>Envío por agencia, <b>a cargo del cliente</b>.</span></p>' +
+      '<p class="gdt-envio-n">' + (tarifa != null ? 'El delivery de ' + fmt(tarifa) + ' (gratis desde ' + fmt(desde) + ') aplica en Lima Metropolitana y Callao. ' : '') + nota + '</p></div>';
+  }
+  var lugar = o.zona ? ENVIO_GRATIS.lugar[o.zona] : 'Lima Metropolitana y Callao';
+  var falta = Math.max(0, desde - subtotal), pct = Math.min(100, Math.round(subtotal / desde * 100));
+  var texto = ok ? '<b>Delivery gratis</b> en ' + lugar + '.' :
+    (falta > 0 ? 'Le faltan <b>' + fmt(falta) + '</b> para el delivery gratis en ' + lugar + '.' : 'Añada una pieza más para el delivery gratis en ' + lugar + '.');
+  return '<div class="gdt-envio' + (ok ? ' is-ok' : '') + '"><p class="gdt-envio-t">' + ICO_CAMION + '<span>' + texto + '</span></p>' +
+    '<div class="gdt-envio-bar" role="progressbar" aria-label="Avance hacia el delivery gratis" aria-valuemin="0" aria-valuemax="' + desde + '" aria-valuenow="' + Math.min(desde, Math.round(subtotal)) + '"><i style="width:' + (ok ? 100 : pct) + '%"></i></div>' +
+    '<p class="gdt-envio-n">' + (ok ? 'Promoción Envío Cortesía aplicada. ' : regla + ' ') + nota + '</p></div>';
+}
+
 function pintarCajon(){
   var l = carrito.lineas(), t = carrito.total(l);
   document.querySelectorAll('.gdt-badge').forEach(function(b){ b.textContent = t.piezas; b.hidden = !t.piezas; });
@@ -555,12 +596,12 @@ function pintarCajon(){
         '<button type="button" data-gdt-add="' + c.key + '" data-quieto>Añadir</button></div></div>';
     }
   }
-  cuerpo.innerHTML = '<ul class="gdt-lines">' + l.map(lineaHTML).join('') + '</ul>' + sug;
+  cuerpo.innerHTML = envioProg(t.subtotal) + '<ul class="gdt-lines">' + l.map(lineaHTML).join('') + '</ul>' + sug;
   var soloCot = !t.subtotal;
   pie.innerHTML =
     '<div class="gdt-tot"><span>Subtotal</span><b>' + (soloCot ? 'A cotizar' : fmt(t.subtotal)) + '</b></div>' +
     (t.cotizar && !soloCot ? '<p class="gdt-tot-nota">+ ' + t.cotizar + (t.cotizar === 1 ? ' pieza' : ' piezas') + ' a cotizar por el estudio.</p>' : '') +
-    '<p class="gdt-tot-nota">Envío por agencia a todo el Perú, a cargo del cliente. Armado, a cotizar.</p>' +
+    '<p class="gdt-tot-nota">Delivery en Lima Metropolitana y Callao: ' + fmt((CFG.ENVIO[0] || {}).tarifa || 0) + ', gratis desde ' + fmt(ENVIO_GRATIS.desde) + '. Resto del Perú: por agencia, a cargo del cliente. Armado, a cotizar.</p>' +
     '<a class="gd-btn gd-btn-primary" href="checkout">' + (soloCot ? 'Solicitar cotización' : 'Finalizar pedido') + FLECHA + '</a>' +
     '<button type="button" class="gdt-seguir" data-gdt-cerrar>Seguir viendo</button>';
 }
@@ -787,6 +828,8 @@ window.GD_TIENDA = {
   carrito:carrito, favs:favs, vistos:vistos, sesion:sesion, pedidos:pedidos, opiniones:opiniones,
   abrir:abrir, cerrar:cerrar
 };
+
+window.GD_TIENDA.envioProg = envioProg; window.GD_TIENDA.envioCosto = envioCosto; window.GD_TIENDA.envioGratis = envioGratis;
 
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', montar); else montar();
 

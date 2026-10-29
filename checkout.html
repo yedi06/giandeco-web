@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261029zzzz">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261029a">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261030c">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -44,7 +44,7 @@
 </footer>
 
 <script src="js/giandeco.js?v=20261029w"></script>
-<script src="js/gd-tienda.js?v=20261028q"></script>
+<script src="js/gd-tienda.js?v=20261030c"></script>
 <script src="js/gd-pago.js?v=20261018a"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
 <script>
@@ -155,7 +155,7 @@
     '</div>' + pie(0) + '</section>';
 
   var pasoEntrega =
-    '<section class="co-paso" data-paso="1" hidden><h2 class="co-paso-t">¿Cómo lo recibe?</h2><div class="gd-form">' +
+    '<section class="co-paso" data-paso="1" hidden><h2 class="co-paso-t">¿Cómo lo recibe?</h2><div id="coEnvioProg2"></div><div class="gd-form">' +
       '<div class="gdt-ops">' +
         opcion('ent', 'envio', 'Envío', esc(C.AGENCIA.nota), datos.ent !== 'recojo' || !C.RECOJO.activo) +
         (C.RECOJO.activo ? opcion('ent', 'recojo', 'Recojo en ' + esc(C.RECOJO.lugar), esc(C.RECOJO.dir) + ' · sin costo.', datos.ent === 'recojo') : '') +
@@ -199,6 +199,7 @@
     '<ol class="co-ruta" id="coRuta">' + PASOS.map(function(p, i){ return '<li data-ir="' + i + '"><i>' + (i + 1) + '</i><span>' + p + '</span></li>'; }).join('') + '</ol>' +
     // teléfono: el resumen queda debajo del formulario; esta barra muestra el total en cada paso y lleva a él
     '<button type="button" class="co-mini" id="coMini" aria-controls="coRes"><span>Su bolsa · ' + lineas.reduce(function(a, x){ return a + x.qty; }, 0) + (lineas.reduce(function(a, x){ return a + x.qty; }, 0) === 1 ? ' pieza' : ' piezas') + '</span><b id="coMiniTot"></b><em>Ver detalle</em></button>' +
+    '<div id="coEnvioMini"></div>' +
     '<form class="co-grid" id="coForm" novalidate>' +
     '<div>' + pasoDatos + pasoEntrega + pasoFinal + '</div>' +
     '<aside class="co-res" id="coRes" aria-label="Resumen">' +
@@ -208,6 +209,7 @@
           '<div class="gdt-line-row"><span class="gdt-qty"><b>' + x.qty + '</b></span><span class="gdt-line-price">' + (x.valor === null ? 'A cotizar' : T.fmt(x.valor * x.qty)) + '</span></div></div></li>';
       }).join('') + '</ul>' +
       (hayCupones && !soloCot ? '<div class="co-cupon"><input id="coCupon" type="text" placeholder="Código de descuento" aria-label="Código de descuento" autocomplete="off"><button type="button" id="coCuponBtn">Aplicar</button></div><p class="gdt-err" id="coCuponMsg" style="margin:0 0 8px;"></p>' : '') +
+      '<div id="coEnvioProg"></div>' +
       '<dl class="co-tot" id="coTot"></dl>' +
       '<p class="co-res-nota"><a href="#" data-gdt-abrir style="color:var(--text-dim);">Editar la bolsa</a></p>' +
       '<ul class="co-conf">' +
@@ -294,12 +296,12 @@
   }
   function totales(){
     var ent = radio('ent'), z = zona();
-    var agencia = porAgencia(), envio = ent === 'recojo' || agencia ? 0 : z.tarifa, pend = envio === null, desc = descuento();
+    var agencia = porAgencia(), envio = ent === 'recojo' || agencia ? 0 : T.envioCosto(z.key, tot.subtotal), pend = envio === null, desc = descuento();
     var h = '<div><dt>Subtotal</dt><dd>' + (soloCot ? 'A cotizar' : T.fmt(tot.subtotal)) + '</dd></div>';
     if(desc) h += '<div><dt>Cupón ' + esc(cupon) + '</dt><dd>− ' + T.fmt(desc) + '</dd></div>';
     if(tot.cotizar && !soloCot) h += '<div><dt>' + tot.cotizar + (tot.cotizar === 1 ? ' pieza' : ' piezas') + ' a cotizar</dt><dd>Lo confirma Giandeco</dd></div>';
-    h += '<div><dt>' + (ent === 'recojo' ? 'Recojo en Giandeco' : agencia ? 'Envío por agencia' : 'Envío · ' + z.label) + '</dt><dd>' +
-      (agencia ? 'A cargo del cliente' : pend ? 'Lo confirma Giandeco' : envio ? T.fmt(envio) : 'Sin costo') + '</dd></div>';
+    h += '<div><dt>' + (ent === 'recojo' ? 'Recojo en Giandeco' : agencia ? 'Envío por agencia' : 'Delivery · ' + z.label) + '</dt><dd>' +
+      (agencia ? 'A cargo del cliente' : pend ? 'Lo confirma Giandeco' : envio ? T.fmt(envio) : (ent === 'envio' && T.envioGratis(z.key, tot.subtotal) ? '<s>' + T.fmt(z.tarifa) + '</s> Gratis' : 'Sin costo')) + '</dd></div>';
     if($('coArmado').checked) h += '<div><dt>Armado / instalación</dt><dd>Lo cotiza Giandeco</dd></div>';
     if(!soloCot){
       var total = tot.subtotal - desc + (envio || 0);
@@ -308,6 +310,10 @@
       if(agencia) h += '<div class="es-igv"><dt>El flete se paga a la agencia al recibir o recoger.</dt><dd></dd></div>';
     }
     $('coTot').innerHTML = h;
+    var ep = T.envioProg ? T.envioProg(tot.subtotal, { zona: ent === 'recojo' ? null : zonaKey(), recojo: ent === 'recojo' }) : '';
+    if($('coEnvioProg')) $('coEnvioProg').innerHTML = ep;
+    if($('coEnvioProg2')) $('coEnvioProg2').innerHTML = ep;
+    if($('coEnvioMini')) $('coEnvioMini').innerHTML = ep;
     $('coMiniTot').textContent = soloCot ? 'A cotizar' : T.fmt(tot.subtotal - desc + (envio || 0));
   }
   function entregaTexto(){
@@ -332,7 +338,7 @@
     $('coOtroBox').hidden = !$('coOtro').checked;
     $('coAgBox').hidden = !porAgencia();
     var z = zona();
-    $('coEntNota').textContent = z.tarifa == null ? C.AGENCIA.nota : 'Despacho a ' + z.label + ': ' + T.fmt(z.tarifa) + '.';
+    $('coEntNota').textContent = z.tarifa == null ? C.AGENCIA.nota : (T.envioGratis(z.key, tot.subtotal) ? 'Delivery gratis a ' + z.label + '.' : 'Delivery a ' + z.label + ': ' + T.fmt(z.tarifa) + '.');
     $('coDir').placeholder = porAgencia() && radio('agdest') === 'oficina' ? 'Su dirección (para la guía de la agencia)' : 'Avenida, calle o jirón, número, dpto. o interior';
     pintarPago(); totales();
   }
@@ -434,6 +440,7 @@
       items: lineas, subtotal: tot.subtotal, cotizar: tot.cotizar, entrega: entrega,
       pago: pago ? pago.label : '', pagoKey: pago ? pago.key : '', nota: g('coNota'), cupon: cupon || '', descuento: desc,
       promo: $('coPromo').checked,
+      envio: ent === 'envio' && !porAgencia() ? T.envioCosto(z.key, tot.subtotal) : undefined,   // delivery ya calculado: el servidor cobra este mismo monto
       comprobante: comp === 'boleta' ? { tipo:'boleta', resumen:'Boleta · ' + tdoc + ' ' + doc }
                                      : { tipo:'factura', resumen:'Factura · RUC ' + g('coRuc') + ' · ' + g('coRazon') + ' · ' + g('coFiscal') },
       cliente: { nombre:g('coNombre'), cel:g('coCel'), email:g('coEmail') }
