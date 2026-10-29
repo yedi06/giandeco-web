@@ -193,6 +193,26 @@ var esHome = body.getAttribute('data-home') === 'true';
 
 function iconoBuscar(){ return '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>'; }
 
+/* --------------------------------------------------------------------------
+   BARRA DE PROMOCIONES (arriba del header)
+   Cada promoción lleva su nombre comercial, el mensaje y el enlace a sus
+   condiciones (legal/promociones). Para agregar o cambiar una, editar solo esta lista.
+   -------------------------------------------------------------------------- */
+var PROMOS = [
+  { nombre:'Envío Cortesía', texto:'Delivery gratis en Lima Metropolitana por compras mayores a S/ 399', corto:'Delivery gratis en Lima por compras mayores a S/ 399', extra:'Provincias: recojo en agencia', href:'legal/promociones#envio-cortesia' },
+  { nombre:'Bienvenida −10%', texto:'10% de descuento en su primera compra, solo en productos', corto:'10% de descuento en su primera compra, solo en productos', extra:'No aplica al delivery', href:'legal/promociones#bienvenida' }
+];
+function promoHTML(){
+  return '<div class="sh-promo" id="shPromo" role="region" aria-label="Promociones">' +
+    '<div class="sh-promo-in">' +
+      '<button class="sh-promo-flecha" type="button" data-promo="-1" aria-label="Promoción anterior"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>' +
+      '<div class="sh-promo-slides">' + PROMOS.map(function(p, i){
+        return '<p class="sh-promo-msg' + (i === 0 ? ' is-active' : '') + '"><b>' + p.nombre + '</b><span class="sh-promo-t"><span class="pc">' + p.texto + '</span><span class="mv">' + p.corto + '</span></span>' +
+          (p.extra ? '<span class="sh-promo-x">' + p.extra + '</span>' : '') + '<a href="' + p.href + '">Ver condiciones</a></p>';
+      }).join('') + '</div>' +
+      '<button class="sh-promo-flecha" type="button" data-promo="1" aria-label="Promoción siguiente"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>' +
+    '</div></div>';
+}
 function headerHTML(){
   var mundos = Object.keys(SITIO).map(function(k){
     var m = SITIO[k];
@@ -236,7 +256,7 @@ function headerHTML(){
       '</button><div class="sh-acc-panel">' + links + '</div></div>';
   }).join('');
 
-  return '' +
+  return promoHTML() +
   '<header class="site-header" id="siteHeader">' +
     '<div class="sh-marca"><div class="sh-marca-in">' +
       '<div class="sh-left">' +
@@ -327,7 +347,7 @@ function footerHTML(){
     '</div>' +
     '<nav class="gd-footer-ayuda" aria-label="Ayuda y condiciones">' +
       [['ayuda/compra-segura','Compra segura'], ['ayuda/envios-y-entregas','Envíos y entregas'], ['ayuda/cambios-y-garantia','Cambios y garantía'],
-       ['ayuda/preguntas-frecuentes','Preguntas frecuentes'], ['ayuda/opiniones','Opiniones de clientes'], ['legal/terminos-y-condiciones','Términos y condiciones'],
+       ['ayuda/preguntas-frecuentes','Preguntas frecuentes'], ['ayuda/opiniones','Opiniones de clientes'], ['legal/promociones','Promociones'], ['legal/terminos-y-condiciones','Términos y condiciones'],
        ['legal/politica-de-privacidad','Privacidad']].map(function(l){ return '<a href="' + l[0] + '">' + l[1] + '</a>'; }).join('') +
       '<a class="gd-footer-libro" href="legal/libro-de-reclamaciones" aria-label="Libro de Reclamaciones">' +
         '<img src="images/legal/libro-reclamaciones.svg" alt="Libro de Reclamaciones" width="204" height="128" decoding="async"></a>' +
@@ -361,9 +381,36 @@ if(!esHome){
    6. INTERACCIONES DEL HEADER
    -------------------------------------------------------------------------- */
 var header = document.getElementById('siteHeader');
-function setSolid(){ if(header) header.classList.toggle('is-solid', window.scrollY > 40); }
+var sobreHeader = false;   // el cursor (o el foco de teclado) está sobre el header
+var promo = document.getElementById('shPromo');
+function setSolid(){
+  if(header) header.classList.toggle('is-solid', window.scrollY > 40 || sobreHeader);
+  // la barra de promociones va arriba del todo; el header baja con ella y se queda en 0 al desplazarse
+  document.documentElement.style.setProperty('--promo-top', Math.max(0, (promo ? promo.offsetHeight : 0) - window.scrollY) + 'px');
+}
 setSolid();
 window.addEventListener('scroll', setSolid, { passive:true });
+window.addEventListener('resize', setSolid);
+window.addEventListener('load', setSolid);
+
+/* Header real al pasar el cursor: transparente sobre la portada (el video sigue corriendo)
+   y sólido, con su segunda fila, en cuanto el mouse o el teclado lo tocan. Solo con mouse. */
+if(header){
+  header.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ sobreHeader = true; setSolid(); } });
+  header.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse'){ sobreHeader = false; setSolid(); } });
+  header.addEventListener('focusin', function(){ sobreHeader = true; setSolid(); });
+  header.addEventListener('focusout', function(e){ if(!header.contains(e.relatedTarget)){ sobreHeader = false; setSolid(); } });
+}
+
+/* Barra de promociones: rota sola cada 6 s, se detiene al pasar el cursor o enfocar, y no rota con "reducir movimiento" */
+if(promo){
+  var msgs = [].slice.call(promo.querySelectorAll('.sh-promo-msg')), idx = 0, pausa = false, quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mostrarPromo(i){ idx = (i + msgs.length) % msgs.length; msgs.forEach(function(m, k){ m.classList.toggle('is-active', k === idx); }); }
+  promo.addEventListener('click', function(e){ var b = e.target.closest('[data-promo]'); if(b) mostrarPromo(idx + parseInt(b.getAttribute('data-promo'), 10)); });
+  ['mouseenter', 'focusin'].forEach(function(ev){ promo.addEventListener(ev, function(){ pausa = true; }); });
+  ['mouseleave', 'focusout'].forEach(function(ev){ promo.addEventListener(ev, function(){ pausa = false; }); });
+  if(!quieto && msgs.length > 1) setInterval(function(){ if(!pausa && !document.hidden) mostrarPromo(idx + 1); }, 6000);
+}
 
 var burger = document.getElementById('shBurger');
 var mobile = document.getElementById('shMobile');
@@ -392,7 +439,7 @@ Object.keys(SITIO).forEach(function(k){
 });
 PAGINAS.forEach(function(p){ INDICE.push({ label:p.label, href:p.href }); });
 // el blog ya no está en el menú, pero se sigue encontrando en la búsqueda
-INDICE.push({ label:'Retail · Blog', href:'retail/blog' }, { label:'Hogar · Blog', href:'hogar/blog' }, { label:'Retail · Navidad para tiendas (montaje de campaña)', href:'retail/' }, { label:'Retail · Montajes de Navidad 2026 (galería de fotos)', href:'proyectos/superhome-navidad-2026' });
+INDICE.push({ label:'Promociones y condiciones', href:'legal/promociones' }, { label:'Retail · Blog', href:'retail/blog' }, { label:'Hogar · Blog', href:'hogar/blog' }, { label:'Retail · Navidad para tiendas (montaje de campaña)', href:'retail/' }, { label:'Retail · Montajes de Navidad 2026 (galería de fotos)', href:'proyectos/superhome-navidad-2026' });
 [[PRODUCTOS,'Mueblería'],[ILUMINACION,'Iluminación'],[NAVIDAD,'Navidad']].forEach(function(L){
   Object.keys(L[0]).forEach(function(k){
     var p = L[0][k];

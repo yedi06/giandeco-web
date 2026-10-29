@@ -194,7 +194,7 @@ img{ max-width:100%; display:block; }
    HEADER
    ========================================================================== */
 .site-header{
-  position:fixed; top:0; left:0; right:0; z-index:70;
+  position:fixed; top:var(--promo-top, 0px); left:0; right:0; z-index:70;
   background:transparent; border-bottom:1px solid transparent; box-shadow:none;
   transition: background .4s var(--ease-header), border-color .4s var(--ease-header), box-shadow .4s var(--ease-header);
 }
@@ -206,6 +206,45 @@ img{ max-width:100%; display:block; }
 /* El header se comporta igual en todas las páginas que en el home: transparente
    sobre el hero y sólido al bajar. Es lo que le da el aire editorial. */
 
+/* El header sobre la portada lleva un degradé suave detrás: el menú se lee aunque el video sea claro.
+   Al volverse sólido (cursor encima o al bajar) el degradé desaparece. */
+.site-header::before{
+  content:''; position:absolute; left:0; right:0; top:0; height:calc(100% + 56px); z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(10,9,6,.55), rgba(10,9,6,0)); opacity:1; transition:opacity .4s var(--ease-header);
+}
+.site-header.is-solid::before{ opacity:0; }
+:root[data-tema="claro"] .site-header::before{ display:none; }
+
+/* ==========================================================================
+   BARRA DE PROMOCIONES — franja fina arriba del header; el header baja con ella
+   y se queda en el borde al desplazarse (--promo-top lo calcula js/giandeco.js)
+   ========================================================================== */
+:root{ --promo-h:38px; --promo-top:var(--promo-h); }
+.sh-promo{ position:relative; z-index:71; min-height:var(--promo-h); display:flex; align-items:center; background:#14120e; color:#DED8CB; border-bottom:1px solid rgba(222,216,203,.1); font-family:var(--body); }
+.sh-promo-in{ width:100%; max-width:var(--gd-max); margin:0 auto; padding-inline:var(--gd-gut); display:grid; grid-template-columns:28px 1fr 28px; align-items:center; gap:12px; }
+.sh-promo-slides{ display:grid; justify-items:center; text-align:center; }
+.sh-promo-t .mv{ display:none; }
+@media (max-width:719px){ .sh-promo-t .mv{ display:inline; } }
+.sh-promo-msg{ grid-area:1/1; margin:0; display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline; gap:2px 10px; font-size:.8rem; line-height:1.45; letter-spacing:.02em; opacity:0; visibility:hidden; transition:opacity .5s ease, visibility 0s linear .5s; }
+.sh-promo-msg.is-active{ opacity:1; visibility:visible; transition:opacity .5s ease; }
+.sh-promo-msg b{ font-weight:500; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--laton); }
+.sh-promo-x::before{ content:'·'; margin-right:10px; color:rgba(222,216,203,.4); }
+.sh-promo-msg a{ color:#DED8CB; text-decoration:underline; text-decoration-color:var(--laton); text-underline-offset:3px; transition:color .25s ease; }
+.sh-promo-msg a:hover, .sh-promo-msg a:focus-visible{ color:var(--laton); }
+.sh-promo-flecha{ width:28px; height:28px; display:grid; place-items:center; padding:0; background:none; border:0; border-radius:2px; color:rgba(222,216,203,.55); cursor:pointer; transition:color .25s ease; }
+.sh-promo-flecha:hover, .sh-promo-flecha:focus-visible{ color:var(--laton); }
+.sh-promo-flecha svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+@media (max-width:719px){
+  :root{ --promo-h:50px; }
+  .sh-promo-in{ grid-template-columns:1fr; padding-block:6px; }
+  .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc{ display:none; }
+  .sh-promo-msg{ font-size:.74rem; column-gap:12px; }
+  .sh-promo-msg b{ order:1; }
+  .sh-promo-msg a{ order:2; font-size:.7rem; }
+  .sh-promo-t{ order:3; flex-basis:100%; }
+}
+@media (prefers-reduced-motion: reduce){ .sh-promo-msg, .sh-promo-msg.is-active, .site-header::before{ transition:none; } }
+@media print{ .sh-promo{ display:none; } }
 .sh-marca{ height: var(--h-marca); display:flex; align-items:center; }
 @media (min-width:1180px){ .sh-marca{ height: var(--h-marca-d); } }
 .sh-marca-in{
