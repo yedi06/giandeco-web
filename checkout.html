@@ -43,7 +43,7 @@
   <a href="legal/libro-de-reclamaciones" target="_blank">Libro de reclamaciones</a>
 </footer>
 
-<script src="js/giandeco.js?v=20261030a"></script>
+<script src="js/giandeco.js?v=20261030b"></script>
 <script src="js/gd-tienda.js?v=20261030d"></script>
 <script src="js/gd-pago.js?v=20261018a"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
@@ -130,7 +130,7 @@
       (i < ULT ? '<button type="button" class="gd-btn gd-btn-primary" data-sigue>Continuar' + T.FLECHA + '</button>'
                : '<button type="submit" class="gd-btn gd-btn-primary">' + (soloCot ? 'Enviar solicitud' : 'Registrar pedido') + T.FLECHA + '</button>') + '</div>';
   }
-  var hayCupones = Object.keys(C.CUPONES || {}).length > 0;
+  var hayCupones = true;
 
   var pasoDatos =
     '<section class="co-paso" data-paso="0"><h2 class="co-paso-t">¿A nombre de quién va el pedido?</h2><div class="gd-form">' +
@@ -288,10 +288,12 @@
   }
   P.estado().then(function(a){ if(a !== pasarela){ pasarela = a; textosPago(); pintarPago(); } });
 
-  var cupon = null;
+  function cuponFn(c){ return fetch(T.NUBE.url + '/functions/v1/cupon', { method:'POST', headers:{ 'Content-Type':'application/json', apikey:T.NUBE.key }, body:JSON.stringify(c) }).then(function(r){ return r.json(); }).catch(function(){ return null; }); }
+  var cupon = null, unico = null;   // unico: código personal de bienvenida (GIAN-XXXXXX) ya validado con el servidor
   function descuento(){
     if(!cupon) return 0;
-    var c = C.CUPONES[cupon];
+    var c = C.CUPONES[cupon] || unico;
+    if(!c) return 0;
     return Math.min(tot.subtotal, c.pct ? tot.subtotal * c.pct / 100 : (c.monto || 0));
   }
   function totales(){
@@ -402,11 +404,24 @@
   $('coMini').addEventListener('click', function(){ $('coRes').scrollIntoView({ behavior:'smooth', block:'start' }); });
   var cBtn = $('coCuponBtn');
   if(cBtn) cBtn.addEventListener('click', function(){
-    var k = g('coCupon').toUpperCase(), msg = $('coCuponMsg');
-    cupon = C.CUPONES[k] ? k : null;
-    msg.style.display = 'block'; msg.style.color = cupon ? 'var(--accent)' : '';
-    msg.textContent = cupon ? 'Código aplicado.' : 'Ese código no es válido.';
-    totales();
+    var k = g('coCupon').toUpperCase().trim(), msg = $('coCuponMsg');
+    function listo(ok, texto){
+      msg.style.display = 'block'; msg.style.color = ok ? 'var(--accent)' : '';
+      msg.textContent = texto; totales();
+    }
+    unico = null;
+    if(C.CUPONES[k]){ cupon = k; listo(true, 'Código aplicado.'); return; }
+    cupon = null;
+    if(!/^GIAN-[A-Z0-9]{6}$/.test(k)){ listo(false, 'Ese código no es válido.'); return; }
+    // código personal de bienvenida: solo sirve con el correo al que se envió
+    var mail = g('coEmail').trim().toLowerCase();
+    if(!mail){ listo(false, 'Escriba primero su correo en los datos de contacto: el código solo sirve con el correo al que se envió.'); return; }
+    cBtn.disabled = true;
+    cuponFn({ accion:'validar', codigo:k, email:mail }).then(function(r){
+      cBtn.disabled = false;
+      if(r && r.ok){ cupon = k; unico = { pct:r.pct }; listo(true, 'Código aplicado.'); }
+      else listo(false, r && r.motivo === 'usado' ? 'Este código ya fue usado.' : r ? 'Ese código no es válido para este correo.' : 'No pudimos comprobar el código. Inténtelo de nuevo.');
+    });
   });
   pintarUbigeo(0); condicionales(); textosPago(); mostrar(0);
 
@@ -451,10 +466,16 @@
                     ubigeo:g('coDist'), dir:g('coDir'), ref:g('coRef'), agdest:radio('agdest'), agencia:g('coAgencia'), pago:pago ? pago.key : '' });
     enviando = true;
     T.carrito.vaciar();
-    // medio en línea: directo a pagar. Si el total aún depende del estudio, esa página lo explica.
-    if(enLinea(pago)){ location.href = 'pagar?n=' + encodeURIComponent(ped.n); return; }
-    if(!pago || pago.key !== 'directo') window.open(T.wa(T.pedidos.mensaje(ped)), '_blank', 'noopener');
-    location.href = 'checkout?ok=' + encodeURIComponent(ped.n);
+    // WhatsApp se abre antes de cualquier espera: si no, el navegador lo bloquea como ventana emergente
+    if(!enLinea(pago) && (!pago || pago.key !== 'directo')) window.open(T.wa(T.pedidos.mensaje(ped)), '_blank', 'noopener');
+    function seguir(){
+      // medio en línea: directo a pagar. Si el total aún depende del estudio, esa página lo explica.
+      if(enLinea(pago)){ location.href = 'pagar?n=' + encodeURIComponent(ped.n); return; }
+      location.href = 'checkout?ok=' + encodeURIComponent(ped.n);
+    }
+    // el código personal se marca como usado y queda atado a este pedido antes de seguir (el servidor lo exige al cobrar)
+    if(unico){ cuponFn({ accion:'canjear', codigo:cupon, email:g('coEmail').trim().toLowerCase(), pedido:ped.n }).then(seguir, seguir); }
+    else seguir();
   });
 })();
 </script>

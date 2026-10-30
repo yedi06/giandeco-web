@@ -956,3 +956,11 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
   var intentos = 0, v = setInterval(function(){ buscar(); if(++intentos > 12) clearInterval(v); }, 600);
   if(document.readyState !== 'loading') buscar(); else document.addEventListener('DOMContentLoaded', buscar);
 })();
+
+/* popup de bienvenida: solo se muestra si la función de cupones está activa (js/gd-bienvenida.js lo decide) */
+(function(){
+  var base = (document.currentScript && document.currentScript.src || '').replace(/js\/giandeco\.js.*$/, '');
+  if(!base) return;
+  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261030a'; document.head.appendChild(l);
+  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261030a'; s.defer = true; document.head.appendChild(s);
+})();
