@@ -93,7 +93,13 @@ var CFG = {
   if(o.EMPRESA) Object.keys(o.EMPRESA).forEach(function(k){ if(o.EMPRESA[k]) CFG.EMPRESA[k] = o.EMPRESA[k]; });
   ['PRECIOS_CON_IGV', 'LEGAL_VALIDADO', 'GOOGLE_RESENAS', 'CUPONES', 'OPINIONES', 'PREGUNTAS', 'TESTIMONIOS'].forEach(function(k){ if(o[k] !== undefined && o[k] !== null) CFG[k] = o[k]; });
   if(o.RECOJO_ACTIVO !== undefined) CFG.RECOJO.activo = o.RECOJO_ACTIVO;
-  if(o.ENVIO) CFG.ENVIO.forEach(function(z){ if(o.ENVIO[z.key] !== undefined) z.tarifa = o.ENVIO[z.key]; });
+  /* Lima y Callao tienen tarifa fija (S/ 15): un valor vacío o inválido del panel no la borra.
+     El resto del Perú sigue siendo por agencia (sin tarifa) salvo que el panel fije un monto. */
+  if(o.ENVIO) CFG.ENVIO.forEach(function(z){
+    var v = o.ENVIO[z.key];
+    if(v === undefined || v === null || v === '' || isNaN(Number(v)) || Number(v) < 0) return;
+    z.tarifa = Number(v);
+  });
   if(o.PAGO) CFG.PAGO.forEach(function(m){ if(o.PAGO[m.key] === false) m.activo = false; });
   // campo a campo: un dato vacío en el panel no borra el que trae el sitio
   if(o.PAGO_DIRECTO) ['yape', 'plin', 'banco'].forEach(function(k){
@@ -196,7 +202,7 @@ function rpc(fn, args){ return nubeFetch('rpc/' + fn, args).then(function(r){ re
 /* --------------------------------------------------------------------------
    3. CATÁLOGO UNIFICADO
    -------------------------------------------------------------------------- */
-var COND = 'No incluye instalación. Enviamos a todo el Perú por agencia de transporte; el flete lo paga el cliente a la agencia.';
+var COND = 'No incluye instalación. Delivery en Lima Metropolitana y Callao: S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga el cliente a la agencia.';
 var LINEAS = {
   muebleria:   { label:'Mueblería',   href:'catalogo/muebleria/',   src:'GD_PRODUCTOS' },
   iluminacion: { label:'Iluminación', href:'catalogo/iluminacion/', src:'GD_ILUMINACION' },
@@ -664,7 +670,7 @@ function montar(){
   }
   function gvCabecera(p, agotado, consulta){
     var instala = p.linea !== 'navidad';
-    var nota = consulta ? '' : (CFG.PRECIOS_CON_IGV ? 'Incluye IGV' : '') + (instala ? (CFG.PRECIOS_CON_IGV ? ' · ' : '') + 'No incluye envío ni instalación' : '');
+    var nota = consulta ? '' : (CFG.PRECIOS_CON_IGV ? 'Incluye IGV' : '') + (instala ? (CFG.PRECIOS_CON_IGV ? ' · ' : '') + 'No incluye instalación' : '');
     return '<span class="gv-cat">' + esc(p.cat) + '</span>' +
       '<h2 class="gv-nom">' + esc(p.nombre) + '</h2>' +
       '<p class="gv-pre"><b>' + esc(consulta ? 'Precio a consultar' : p.precio) + '</b>' + (nota ? '<span>' + nota + '</span>' : '') + '</p>' +
@@ -686,7 +692,7 @@ function montar(){
         (rasgos.length > 1 ? '<ul class="gv-lista">' + rasgos.map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('') + '</ul>' : '<p>' + esc(p.nota) + '</p>') + '</section>' +
       '<section class="gv-sec"><h3 class="gv-h">Ficha técnica</h3><dl class="gv-dl">' + filas.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl></section>' +
       '<section class="gv-sec"><h3 class="gv-h">Envío y pago</h3><ul class="gv-lista">' +
-        '<li>' + esc(instala ? COND : 'Enviamos a todo el Perú por agencia de transporte; el flete lo paga el cliente a la agencia.') + '</li>' +
+        '<li>' + esc(instala ? COND : 'Delivery en Lima Metropolitana y Callao: S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga el cliente a la agencia.') + '</li>' +
         (instala ? '<li>Armado e instalación opcional, a cargo del estudio; se cotiza según la pieza.</li>' : '') +
         '<li>Pago con tarjeta, Yape o depósito. Un asesor de Giandeco responde por WhatsApp.</li>' +
       '</ul></section>';

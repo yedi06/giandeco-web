@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/giandeco.css?v=20261029zzzz">
+<link rel="stylesheet" href="css/giandeco.css?v=20261030a">
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
@@ -44,7 +44,7 @@
 
 <div id="gdFooter"></div>
 <script src="js/giandeco.js?v=20261029w"></script>
-<script src="js/gd-tienda.js?v=20261030c"></script>
+<script src="js/gd-tienda.js?v=20261030d"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, esc = T.esc;
@@ -142,7 +142,7 @@
     '<div class="pdp-buy">' +
       '<h1>' + esc(p.nombre) + '</h1>' +
       '<p class="pdp-precio"><b>' + esc(consulta ? 'Precio a consultar' : p.precio) + '</b>' +
-        (consulta ? '' : '<span>' + (T.CFG.PRECIOS_CON_IGV ? 'Incluye IGV' : '') + (instala ? (T.CFG.PRECIOS_CON_IGV ? ' · ' : '') + 'No incluye envío ni instalación' : '') + '</span>') + '</p>' +
+        (consulta ? '' : '<span>' + (T.CFG.PRECIOS_CON_IGV ? 'Incluye IGV' : '') + (instala ? (T.CFG.PRECIOS_CON_IGV ? ' · ' : '') + 'No incluye instalación' : '') + '</span>') + '</p>' +
       '<p class="pdp-stock' + (p.stock <= 0 ? ' es-agotado' : '') + '">' + (p.stock <= 0 ? 'Agotado' : p.stock === 1 ? 'Última unidad disponible' : p.stock + ' unidades disponibles') + '</p>' +
       '<p class="pdp-nota">' + esc(p.nota) + '</p>' +
       variantes +
@@ -165,7 +165,7 @@
           T.logosPago(['visa', 'mastercard', 'amex', 'diners', 'yape']) + '<i class="pdp-confianza-mas" aria-hidden="true"></i></summary>' +
         '<div class="pdp-confianza-in">' +
           '<ul class="pdp-seg">' +
-            '<li>' + I.camion + '<span><b>Envío a todo el Perú</b>Por agencia de transporte. El flete lo paga usted a la agencia, al recibir o al recoger.</span></li>' +
+            '<li>' + I.camion + '<span><b>Delivery en Lima y Callao</b>S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga usted a la agencia.</span></li>' +
             (instala ? '<li>' + I.regla + '<span><b>Armado e instalación</b>Opcional, a cargo del estudio. Se cotiza según la pieza.</span></li>' : '') +
             '<li>' + I.chat + '<span><b>Un asesor de Giandeco le responde</b>Dudas de medida, acabado o combinación, por WhatsApp.</span></li>' +
           '</ul>' +
@@ -182,7 +182,7 @@
   var filas = [['Línea', '<a href="' + L.href + '">' + L.label + '</a>'], ['Categoría', esc(p.cat)]];
   if(p.v) filas.push(['Variante', esc(p.v)]);
   filas.push(['Referencia', esc(key.toUpperCase())]);
-  filas.push(['Entrega', esc(instala ? T.COND : 'Enviamos a todo el Perú por agencia de transporte; el flete lo paga el cliente a la agencia.')]);
+  filas.push(['Entrega', esc(instala ? T.COND : 'Delivery en Lima Metropolitana y Callao: S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga el cliente a la agencia.')]);
   // características, ficha y guía del estudio: plegadas, para que no tapen la compra ni empujen lo demás
   function det(titulo, cuerpo){
     return '<details class="pdp-det"><summary><span>' + titulo + '</span><i class="pdp-confianza-mas" aria-hidden="true"></i></summary>' +

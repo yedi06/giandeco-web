@@ -237,15 +237,16 @@ img{ max-width:100%; display:block; }
 .sh-promo-flecha:hover, .sh-promo-flecha:focus-visible{ color:var(--laton); }
 .sh-promo-flecha svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 @media (max-width:719px){
-  :root{ --promo-h:60px; }
-  .sh-promo-in{ grid-template-columns:1fr; padding-block:6px; }
-  .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc{ display:none; }
-  .sh-promo-msg{ font-size:.78rem; column-gap:10px; }
-  .sh-promo-ico svg{ width:18px; height:18px; }
-  .sh-promo-msg b{ order:1; }
-  .sh-promo-msg a{ order:2; font-size:.7rem; }
-  .sh-promo-t{ order:3; flex-basis:100%; }
+  /* móvil: una sola línea de 38px (antes 60px); todo el mensaje es el enlace a las condiciones */
+  :root{ --promo-h:38px; }
+  .sh-promo-in{ grid-template-columns:1fr; padding-block:0; padding-inline:12px; }
+  .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc, .sh-promo-msg b{ display:none; }
+  .sh-promo-msg{ position:relative; flex-wrap:nowrap; gap:8px; font-size:.72rem; line-height:1.2; letter-spacing:.01em; white-space:nowrap; }
+  .sh-promo-ico svg{ width:16px; height:16px; }
+  .sh-promo-msg a{ position:absolute; inset:0; font-size:0; text-decoration:none; overflow:hidden; }   /* todo el mensaje es el enlace; «Ver condiciones» queda para lectores de pantalla */
 }
+@media (max-width:380px){ .sh-promo-msg{ font-size:.68rem; gap:6px; } }
+@media (max-width:339px){ :root{ --promo-h:46px; } .sh-promo-in{ padding-block:4px; } .sh-promo-msg{ white-space:normal; text-align:left; } }   /* pantallas muy angostas: el texto pasa a dos líneas en vez de desbordar */
 @media (prefers-reduced-motion: reduce){ .sh-promo-msg, .sh-promo-msg.is-active, .site-header::before{ transition:none; } }
 @media print{ .sh-promo{ display:none; } }
 .sh-marca{ height: var(--h-marca); display:flex; align-items:center; }

@@ -315,7 +315,7 @@ V.ajustes = function(){
       '<div class="ad-form">' + campo('google', 'Enlace a las reseñas de Google (opcional)', c.GOOGLE_RESENAS) + '</div></section>' +
     '<section class="ad-caja"><h2>Envío</h2><div class="ad-form es-3">' +
       C.ENVIO.map(function(z){ return '<label>' + z.label + ' (S/)<input name="env-' + z.key + '" type="number" step="0.01" min="0" value="' + (env[z.key] != null ? env[z.key] : '') + '" placeholder="por agencia"></label>'; }).join('') + '</div>' +
-      '<p class="ad-nota">Vacío = envío por agencia, a cargo del cliente: el flete lo paga a la agencia y el pedido se cobra solo por las piezas. Con un monto, esa zona se cobra con el pedido.</p>' +
+      '<p class="ad-nota">Lima y Callao: si lo deja vacío se usa la tarifa del sitio (S/ 15); es gratis cuando el subtotal supera S/ 399. Resto del Perú: vacío = por agencia, a cargo del cliente.</p>' +
       '<label class="ad-check"><input type="checkbox" name="recojo"' + (c.RECOJO_ACTIVO === false ? '' : ' checked') + '> Ofrecer recojo en el estudio</label>' +
       '<h2 style="margin-top:28px;">Medios de pago</h2>' +
       C.PAGO.filter(function(m){ return m.activo || pg[m.key] === false; }).map(function(m){ return '<label class="ad-check"><input type="checkbox" name="pago-' + m.key + '"' + (pg[m.key] === false ? '' : ' checked') + '> ' + m.label + '</label>'; }).join('') + '</section></div>' +
