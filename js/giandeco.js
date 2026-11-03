@@ -200,7 +200,7 @@ function iconoBuscar(){ return '<svg viewBox="0 0 24 24"><circle cx="11" cy="11"
    -------------------------------------------------------------------------- */
 var PROMOS = [
   { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/></svg>', nombre:'Delivery gratis', texto:'Lima Metropolitana y Callao, en compras desde S/ 399', corto:'Lima y Callao desde S/ 399', extra:'Provincias, por agencia', href:'legal/promociones#envio-cortesia', accion:'Condiciones' },
-  { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5h17v3h-17zM5 12.5h14v8H5zM12 9.5v11M12 9.5C10.5 9.5 8 9 8 7a2 2 0 0 1 4-.5M12 9.5c1.5 0 4-.5 4-2.5a2 2 0 0 0-4-.5"/></svg>', nombre:'Bienvenida', texto:'10 % de descuento en su primera compra', corto:'10 % en su primera compra', extra:'Código personal por correo', href:'legal/promociones#bienvenida', accion:'Recibir mi código', cupon:true }
+  { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5h17v3h-17zM5 12.5h14v8H5zM12 9.5v11M12 9.5C10.5 9.5 8 9 8 7a2 2 0 0 1 4-.5M12 9.5c1.5 0 4-.5 4-2.5a2 2 0 0 0-4-.5"/></svg>', nombre:'Bienvenida', texto:'10 % de descuento en su primera compra', corto:'10 % en su primera compra', href:'legal/promociones#bienvenida', accion:'Ver mi código', cupon:true }
 ];
 function promoHTML(){
   return '<div class="sh-promo" id="shPromo" role="region" aria-label="Promociones">' +
@@ -968,6 +968,6 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 (function(){
   var base = (document.currentScript && document.currentScript.src || '').replace(/js\/giandeco\.js.*$/, '');
   if(!base) return;
-  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102b'; document.head.appendChild(l);
-  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102b'; s.defer = true; document.head.appendChild(s);
+  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102c'; document.head.appendChild(l);
+  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102c'; s.defer = true; document.head.appendChild(s);
 })();
