@@ -15,7 +15,7 @@ var SIN_AUTO = /(^|\/)(checkout|pagar|cuenta|seguimiento|admin|mantenimiento|404
 
 var NUBE = 'https://vsivmdfmecqxeumepyea.supabase.co', LLAVE = 'sb_publishable_mA4Evx59RnBY4lKVGh3GRg_Coe26bp-';
 var FN = NUBE + '/functions/v1/cupon', CLAVE = 'gd_bienvenida', ESPERA = 9000, REPOSO = 14 * 864e5;
-var IMG = 'images/popup/regalo.webp';
+var IMG = 'images/popup/regalo-navidad.webp';   // temporada; fuera de Navidad: images/popup/regalo.webp
 
 function leer(){ try{ return JSON.parse(localStorage.getItem(CLAVE) || 'null'); }catch(e){ return null; } }
 function guardar(v){ try{ localStorage.setItem(CLAVE, JSON.stringify(v)); }catch(e){} }
