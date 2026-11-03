@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261030c">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261102g">
 </head>
 <body data-mundo="catalogo" data-seccion="producto" data-p="comoda-flow">
 
@@ -43,8 +43,8 @@
 <main id="pdp"><section class="pdp-top"><div class="gd-in"><h1 class="gd-h1">Cómoda Flow 1.37</h1><p class="gd-body">S/ 879.00</p><p class="gd-body">4 cajones con correderas telescópicas de apertura por presión. Patas de madera maciza.</p><img src="images/mobiliario/comoda-flow-1.webp" alt="Cómoda Flow 1.37" width="600"></div></section></main>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261102f"></script>
-<script src="js/gd-tienda.js?v=20261102a"></script>
+<script src="js/giandeco.js?v=20261102g"></script>
+<script src="js/gd-tienda.js?v=20261102g"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, esc = T.esc;
@@ -149,7 +149,7 @@
       (p.stock <= 0 ? '<div class="pdp-acc" id="pdpAcc"><a class="gd-btn gd-btn-primary" target="_blank" rel="noopener" href="' + T.wa('Hola Giandeco, avísenme cuando vuelva a estar disponible: ' + p.nombre + '.') + '">Avíseme cuando vuelva' + T.FLECHA + '</a></div><div hidden>' : '') +
       '<div class="pdp-acc" id="pdpAcc">' +
         '<span class="gdt-qty" role="group" aria-label="Cantidad"><button type="button" data-pdp-qty="-1" aria-label="Quitar una">−</button><b id="pdpQty">1</b><button type="button" data-pdp-qty="1" aria-label="Añadir una">+</button></span>' +
-        '<button type="button" class="gd-btn gd-btn-primary" id="pdpAdd" data-gdt-add="' + key + '" data-qty="1">' + (consulta ? 'Añadir para cotizar' : 'Añadir a la bolsa') + T.FLECHA + '</button>' +
+        '<button type="button" class="gd-btn gd-btn-primary" id="pdpAdd" data-gdt-add="' + key + '" data-qty="1">' + (consulta ? 'Añadir para cotizar' : 'Añadir al carrito') + T.FLECHA + '</button>' +
         (consulta ? '<a class="gd-btn gd-btn-ghost" href="' + waPieza + '" target="_blank" rel="noopener">Consultar por WhatsApp</a>'
                   : '<button type="button" class="gd-btn gd-btn-ghost" id="pdpYa">Comprar ahora</button>') +
       '</div>' +

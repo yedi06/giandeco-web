@@ -100,7 +100,7 @@ function seleccionar(){
 }
 
 function abrir(origen){
-  if(el || document.querySelector('.gdt-drawer.is-open, .gd-luz.is-open')) return;   // no se monta sobre la bolsa ni la foto ampliada
+  if(el || document.querySelector('.gdt-drawer.is-open, .gd-luz.is-open')) return;   // no se monta sobre el carrito ni la foto ampliada
   construir();
   if(window.gdMedir) window.gdMedir('popup_ver', { modo:modo, origen:origen === 'barra' ? 'barra' : 'automatico' });
   previo = document.activeElement;

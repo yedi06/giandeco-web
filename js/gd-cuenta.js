@@ -473,7 +473,7 @@ root.addEventListener('click', function(e){
     T.abrir(); return; }
   if(t.closest('#cuSalir, #cuSalir2')){ A.salir(); location.hash = ''; vista = 'entrar'; pintar(); window.scrollTo(0, 0); return; }
   if(t.closest('#cuClave')){ var s1 = T.sesion.get(); A.recuperar(s1.email).then(function(x){ pintar(x.ok ? 'Le enviamos un enlace a ' + s1.email + ' para cambiar su clave.' : x.error); }); return; }
-  if(t.closest('#cuBorrar') && window.confirm('Se borrarán su sesión, pedidos, guardados y bolsa de este dispositivo. ¿Continuar?')){
+  if(t.closest('#cuBorrar') && window.confirm('Se borrarán su sesión, pedidos, guardados y carrito de este dispositivo. ¿Continuar?')){
     A.salir();
     ['sesion', 'pedidos', 'favs', 'vistos', 'datos', 'opiniones', 'carrito', 'reclamos', 'preguntas', 'testimonios'].forEach(function(k){ T.db(k, null); });
     location.href = 'cuenta';

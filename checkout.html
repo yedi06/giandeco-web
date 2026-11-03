@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261102a">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261030c">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261102g">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -43,8 +43,8 @@
   <a href="legal/libro-de-reclamaciones" target="_blank">Libro de reclamaciones</a>
 </footer>
 
-<script src="js/giandeco.js?v=20261102f"></script>
-<script src="js/gd-tienda.js?v=20261102a"></script>
+<script src="js/giandeco.js?v=20261102g"></script>
+<script src="js/gd-tienda.js?v=20261102g"></script>
 <script src="js/gd-pago.js?v=20261018a"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
 <script>
@@ -84,7 +84,7 @@
   /* ==================== SELECCIÓN VACÍA ==================== */
   var lineas = T.carrito.lineas();
   if(!lineas.length){
-    root.innerHTML = '<h1>Su bolsa está vacía</h1>' +
+    root.innerHTML = '<h1>Su carrito está vacío</h1>' +
       '<p class="co-lead">Añada piezas del catálogo o toque un punto sobre la foto de un espacio para empezar.</p>' +
       '<div class="co-ok-acc"><a class="gd-btn gd-btn-primary" href="catalogo/">Ver el catálogo' + T.FLECHA + '</a>' +
       '<a class="gd-btn gd-btn-ghost" href="catalogo/compra-espacio/">Compra el espacio</a></div>' +
@@ -198,12 +198,12 @@
   root.innerHTML =
     '<ol class="co-ruta" id="coRuta">' + PASOS.map(function(p, i){ return '<li data-ir="' + i + '"><i>' + (i + 1) + '</i><span>' + p + '</span></li>'; }).join('') + '</ol>' +
     // teléfono: el resumen queda debajo del formulario; esta barra muestra el total en cada paso y lleva a él
-    '<button type="button" class="co-mini" id="coMini" aria-controls="coRes"><span>Su bolsa · ' + lineas.reduce(function(a, x){ return a + x.qty; }, 0) + (lineas.reduce(function(a, x){ return a + x.qty; }, 0) === 1 ? ' pieza' : ' piezas') + '</span><b id="coMiniTot"></b><em>Ver detalle</em></button>' +
+    '<button type="button" class="co-mini" id="coMini" aria-controls="coRes"><span>Su carrito · ' + lineas.reduce(function(a, x){ return a + x.qty; }, 0) + (lineas.reduce(function(a, x){ return a + x.qty; }, 0) === 1 ? ' pieza' : ' piezas') + '</span><b id="coMiniTot"></b><em>Ver detalle</em></button>' +
     '<div id="coEnvioMini"></div>' +
     '<form class="co-grid" id="coForm" novalidate>' +
     '<div>' + pasoDatos + pasoEntrega + pasoFinal + '</div>' +
     '<aside class="co-res" id="coRes" aria-label="Resumen">' +
-      '<h2>Su bolsa</h2><ul class="gdt-lines">' + lineas.map(function(x){
+      '<h2>Su carrito</h2><ul class="gdt-lines">' + lineas.map(function(x){
         return '<li class="gdt-line">' + (x.img ? '<span class="gdt-line-img"><img decoding="async" src="' + esc(x.img) + '" alt=""></span>' : '<span class="gdt-line-img is-vacia" aria-hidden="true">G</span>') +
           '<div class="gdt-line-body"><span class="gdt-line-cat">' + esc(x.cat) + '</span><span class="gdt-line-name">' + esc(x.nombre) + '</span>' +
           '<div class="gdt-line-row"><span class="gdt-qty"><b>' + x.qty + '</b></span><span class="gdt-line-price">' + (x.valor === null ? 'A cotizar' : T.fmt(x.valor * x.qty)) + '</span></div></div></li>';
@@ -211,7 +211,7 @@
       (hayCupones && !soloCot ? '<div class="co-cupon"><input id="coCupon" type="text" placeholder="Código de descuento" aria-label="Código de descuento" autocomplete="off"><button type="button" id="coCuponBtn">Aplicar</button></div><p class="gdt-err" id="coCuponMsg" style="margin:0 0 8px;"></p>' : '') +
       '<div id="coEnvioProg"></div>' +
       '<dl class="co-tot" id="coTot"></dl>' +
-      '<p class="co-res-nota"><a href="#" data-gdt-abrir style="color:var(--text-dim);">Editar la bolsa</a></p>' +
+      '<p class="co-res-nota"><a href="#" data-gdt-abrir style="color:var(--text-dim);">Editar el carrito</a></p>' +
       '<ul class="co-conf">' +
         '<li id="coConfPago"></li>' +
         '<li>Boleta o factura electrónica a su correo.</li>' +

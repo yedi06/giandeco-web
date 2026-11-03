@@ -508,7 +508,7 @@ function card(key, o){
     // la tarjeta lleva a la ficha; la vista rápida es una opción aparte, sobre la foto
     '<span class="gdt-ojo-zona"><button type="button" class="gdt-ojo" data-gv-abrir="' + key + '" aria-label="Vista rápida de ' + esc(p.nombre) + '">' + OJO + '<span>Vista rápida</span></button></span>' +
     (o.porque ? '<p class="gdt-card-why">' + esc(o.porque) + '</p>' : '') +
-    (o.sinBoton ? '' : p.stock <= 0 ? '<span class="gdt-quick es-agotado">Agotado</span>' : '<button type="button" class="gdt-quick" data-gdt-add="' + key + '">' + (p.valor === null ? 'Añadir para cotizar' : 'Añadir a la bolsa') + '</button>') +
+    (o.sinBoton ? '' : p.stock <= 0 ? '<span class="gdt-quick es-agotado">Agotado</span>' : '<button type="button" class="gdt-quick" data-gdt-add="' + key + '">' + (p.valor === null ? 'Añadir para cotizar' : 'Añadir al carrito') + '</button>') +
   '</article>';
 }
 
@@ -541,7 +541,7 @@ function lineaHTML(x){
    DELIVERY GRATIS: barra de avance «le faltan S/ X para el delivery gratis»
    Promoción «Envío Cortesía» (condiciones en legal/promociones): delivery gratis
    en Lima Metropolitana y Callao en compras desde S/ 399. En provincias el pedido se
-   recoge en agencia. Se pinta en el cajón de la bolsa y en el checkout.
+   recoge en agencia. Se pinta en el cajón del carrito y en el checkout.
    -------------------------------------------------------------------------- */
 var ENVIO_GRATIS = { desde:399, minimo:398.99,   // desde S/ 398.99 ya es gratis: S/ 399 exacto no paga delivery
   zonas:['lima', 'callao'], lugar:{ lima:'Lima Metropolitana', callao:'Callao' } };
@@ -585,7 +585,7 @@ function pintarCajon(){
   cajon.querySelector('#gdtCount').textContent = t.piezas ? (t.piezas + (t.piezas === 1 ? ' pieza' : ' piezas')) : '';
   var cuerpo = cajon.querySelector('#gdtBody'), pie = cajon.querySelector('#gdtFoot');
   if(!l.length){
-    cuerpo.innerHTML = '<div class="gdt-vacio"><p class="gdt-vacio-t">Su bolsa está vacía</p>' +
+    cuerpo.innerHTML = '<div class="gdt-vacio"><p class="gdt-vacio-t">Su carrito está vacío</p>' +
       '<p>Añada piezas del catálogo o toque un punto sobre la foto de un espacio.</p>' +
       '<a class="gd-btn gd-btn-primary" href="catalogo/">Ver el catálogo' + FLECHA + '</a>' +
       '<a class="gd-link" href="catalogo/compra-espacio/">Compra el espacio' + FLECHA + '</a></div>';
@@ -636,8 +636,8 @@ function montar(){
   }
   document.body.insertAdjacentHTML('beforeend',
     '<div class="gdt-scrim" id="gdtScrim"></div>' +
-    '<aside class="gdt-drawer" id="gdtDrawer" role="dialog" aria-modal="true" aria-label="Su bolsa" aria-hidden="true">' +
-      '<header class="gdt-head"><div><span class="gdt-eyebrow">Su bolsa</span><b id="gdtCount"></b></div>' +
+    '<aside class="gdt-drawer" id="gdtDrawer" role="dialog" aria-modal="true" aria-label="Su carrito" aria-hidden="true">' +
+      '<header class="gdt-head"><div><span class="gdt-eyebrow">Su carrito</span><b id="gdtCount"></b></div>' +
         '<button type="button" class="gdt-x" data-gdt-cerrar aria-label="Cerrar">&times;</button></header>' +
       '<div class="gdt-body" id="gdtBody"></div>' +
       '<footer class="gdt-foot" id="gdtFoot"></footer>' +
@@ -701,7 +701,7 @@ function montar(){
   function gvPie(p, agotado, consulta){
     if(agotado) return '<a class="gd-btn gd-btn-primary" target="_blank" rel="noopener" href="' + wa('Hola Giandeco, avísenme cuando vuelva a estar disponible: ' + p.nombre + '.') + '">Avíseme cuando vuelva' + FLECHA + '</a>' + gvEnlaces(p, true);
     return '<div class="gv-comprar"><span class="gdt-qty" role="group" aria-label="Cantidad"><button type="button" data-gv-q="-1" aria-label="Quitar una">−</button><b id="gvQty">' + gvQty + '</b><button type="button" data-gv-q="1" aria-label="Añadir una">+</button></span>' +
-        '<button type="button" class="gd-btn gd-btn-primary" data-gv-add>' + (consulta ? 'Añadir para cotizar' : 'Añadir a la bolsa') + FLECHA + '</button></div>' +
+        '<button type="button" class="gd-btn gd-btn-primary" data-gv-add>' + (consulta ? 'Añadir para cotizar' : 'Añadir al carrito') + FLECHA + '</button></div>' +
       (consulta ? '' : '<button type="button" class="gd-btn gd-btn-ghost" data-gv-ya>Comprar ahora</button>') + gvEnlaces(p, false);
   }
   function gvEnlaces(p, sinWa){
@@ -765,7 +765,7 @@ function montar(){
   });
   // el header ya trae el botón de carrito: se conecta, y a su lado entra la cuenta
   document.querySelectorAll('button[aria-label="Carrito"]').forEach(function(b){
-    b.classList.add('gdt-cart-btn'); b.setAttribute('aria-label', 'Su bolsa');
+    b.classList.add('gdt-cart-btn'); b.setAttribute('aria-label', 'Su carrito');
     b.insertAdjacentHTML('beforeend', '<span class="gdt-badge" hidden></span>');
     b.addEventListener('click', abrir);
     b.insertAdjacentHTML('beforebegin',

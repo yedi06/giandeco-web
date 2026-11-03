@@ -745,7 +745,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   body .gd-ba-tag, body .g-cap .gg, body .gd-cat-cat{ font-size:12px; }
 }
 
-/* checkout en el teléfono: barra con el total de la bolsa bajo los pasos
+/* checkout en el teléfono: barra con el total del carrito bajo los pasos
    (el resumen completo vive al final del formulario) */
 .co-mini{ display:none; }
 @media (max-width:899px){
@@ -905,7 +905,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 #pdp .gdt-sec{ padding-block:clamp(40px,5.5vw,64px); }
 #pdp #preguntas{ padding-bottom:clamp(24px,3vw,36px); }
 #pdp #preguntas + #opiniones{ border-top:0; padding-top:0; }
-/* móvil: en las tarjetas de producto no hay "Añadir a la bolsa"; la compra solo en la ficha (la tarjeta entera lleva a ella) */
+/* móvil: en las tarjetas de producto no hay "Añadir al carrito"; la compra solo en la ficha (la tarjeta entera lleva a ella) */
 @media (max-width:719px){
   .gdt-card .gdt-quick:not(.es-agotado){ display:none; }
   .gdt-card .gd-prod-price{ margin-bottom:2px; }
@@ -1021,7 +1021,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 @media (prefers-reduced-motion: reduce){ .gv-th, .gv-chip, .gv-enlaces a, .gdt-ojo, .gdt-ojo span{ transition:none; } }
 
 /* ==========================================================================
-   DELIVERY GRATIS — barra de avance en la bolsa y en el checkout
+   DELIVERY GRATIS — barra de avance en el carrito y en el checkout
    ========================================================================== */
 .gdt-envio{ margin:0 0 18px; padding:14px 16px 12px; border:1px solid var(--line, #2a2621); border-radius:2px; background:rgba(201,162,74,.05); }
 .gdt-envio-t{ display:flex; align-items:flex-start; gap:10px; margin:0 0 10px; font-size:.9rem; line-height:1.45; color:var(--text, #DED8CB); }

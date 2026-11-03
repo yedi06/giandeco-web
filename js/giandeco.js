@@ -275,7 +275,7 @@ function headerHTML(){
         '</button>' +
         '<button class="sh-icon-btn sh-buscar-ico" id="shBuscarIco" type="button" aria-label="Buscar">' + iconoBuscar() + '</button>' +
         '<button class="sh-icon-btn" type="button" aria-label="Carrito">' +
-          '<svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>' +
+          '<svg viewBox="0 0 24 24"><path d="M2.5 4h2.6l2.3 10.6a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L21 8H6.1"/><circle cx="9.5" cy="19.6" r="1.4"/><circle cx="17.2" cy="19.6" r="1.4"/></svg>' +
         '</button>' +
       '</div>' +
     '</div></div>' +
@@ -681,7 +681,7 @@ function montarPuntos(){
       var href   = p ? window.GD_URL(key) : (dot.getAttribute('data-href') || WA_MSG);
       // con la capa de tienda cargada, el punto también suma la pieza a la selección
       var sumar  = !window.GD_TIENDA ? '' : (p
-        ? '<button class="gd-shop-card-add" type="button" data-gdt-add="' + key + '">Añadir a la bolsa</button>'
+        ? '<button class="gd-shop-card-add" type="button" data-gdt-add="' + key + '">Añadir al carrito</button>'
         : '<button class="gd-shop-card-add" type="button" data-gdt-add-esp="' + nombre + '" data-cat="' + cat + '">Añadir para cotizar</button>');
 
       card.innerHTML =
@@ -993,6 +993,6 @@ if(GA_ID && !/(^|\/)admin(\.html)?$/.test(location.pathname)){
 (function(){
   var base = (document.currentScript && document.currentScript.src || '').replace(/js\/giandeco\.js.*$/, '');
   if(!base) return;
-  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102f'; document.head.appendChild(l);
-  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102f'; s.defer = true; document.head.appendChild(s);
+  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102g'; document.head.appendChild(l);
+  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102g'; s.defer = true; document.head.appendChild(s);
 })();
