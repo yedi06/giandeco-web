@@ -993,6 +993,6 @@ if(GA_ID && !/(^|\/)admin(\.html)?$/.test(location.pathname)){
 (function(){
   var base = (document.currentScript && document.currentScript.src || '').replace(/js\/giandeco\.js.*$/, '');
   if(!base) return;
-  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102d'; document.head.appendChild(l);
-  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102d'; s.defer = true; document.head.appendChild(s);
+  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102f'; document.head.appendChild(l);
+  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102f'; s.defer = true; document.head.appendChild(s);
 })();

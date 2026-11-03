@@ -17,7 +17,7 @@ var P = location.pathname;
 var SIN_AUTO = /(^|\/)(checkout|pagar|cuenta|seguimiento|admin|mantenimiento|404)(\.html)?$/.test(P) || /\/(legal|ayuda)\//.test(P) || /\/catalogo\/[^\/]+\/[^\/]+/.test(P);
 
 var NUBE = 'https://vsivmdfmecqxeumepyea.supabase.co', LLAVE = 'sb_publishable_mA4Evx59RnBY4lKVGh3GRg_Coe26bp-';
-var FN = NUBE + '/functions/v1/cupon', CLAVE = 'gd_bienvenida', ESPERA = 9000, REPOSO = 14 * 864e5;
+var FN = NUBE + '/functions/v1/cupon', CLAVE = 'gd_bienvenida', ESPERA = 2500, REPOSO = 14 * 864e5;
 var IMG = 'images/popup/regalo-navidad.webp';   // temporada; fuera de Navidad: images/popup/regalo.webp
 
 function leer(){ try{ return JSON.parse(localStorage.getItem(CLAVE) || 'null'); }catch(e){ return null; } }
@@ -163,7 +163,16 @@ function encender(m){
     if(!a || (modo === 'personal' && (leer() || {}).enviado)) return;   // si ya recibió su código personal, el enlace lleva a las condiciones
     e.preventDefault(); clearTimeout(temporizador); abrir('barra');
   });
-  if(!silencio) temporizador = setTimeout(abrir, ESPERA);
+  if(!silencio) cuandoSeVe(function(){ temporizador = setTimeout(abrir, ESPERA); });
+}
+// en el inicio, primero se ve la intro del logo: el popup sale ya con el video corriendo detrás
+function cuandoSeVe(fn){
+  var r = document.documentElement;
+  if(!r.classList.contains('gd-intro-on') || r.classList.contains('gd-intro-out')) return fn();
+  var listo = false, o = new MutationObserver(function(){ if(r.classList.contains('gd-intro-out')) hecho(); });
+  function hecho(){ if(listo) return; listo = true; o.disconnect(); setTimeout(fn, 900); }   // 900 ms: termina de abrirse el telón
+  o.observe(r, { attributes:true, attributeFilter:['class'] });
+  setTimeout(hecho, 4000);   // la intro nunca pasa de 3,4 s
 }
 function programar(){
   estado().then(function(r){
@@ -174,5 +183,6 @@ function programar(){
     else [2500, 6000].forEach(function(t){ setTimeout(function(){ if(!modo && hayGeneral()) encender('general'); }, t); });
   });
 }
-if(document.readyState === 'complete') programar(); else window.addEventListener('load', programar);
+// arranca apenas la página es usable: no espera al video de la portada (en el teléfono, con datos, tardaba demasiado)
+if(document.readyState !== 'loading') programar(); else document.addEventListener('DOMContentLoaded', programar);
 })();
