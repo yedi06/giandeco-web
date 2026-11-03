@@ -29,7 +29,8 @@ var T = window.GD_TIENDA; if(!T) return;
 var ENVIO  = ['Registrado', 'Confirmado por el estudio', 'En preparación', 'En camino', 'Entregado'];
 var RECOJO = ['Registrado', 'Confirmado por el estudio', 'En preparación', 'Listo para recoger', 'Recogido'];
 
-function pasarela(){ return T.db('pasarela') === true; }
+function pasarela(){ return T.db('pasarela') === true; }   // tarjeta (Izipay)
+function tupay(){ return T.db('tupay') === true; }         // Yape, Plin, transferencia… (Tupay)
 function acc(t, href, pri, ext){ return { t:t, href:href, pri:!!pri, ext:!!ext }; }
 
 function de(p){
@@ -41,6 +42,7 @@ function de(p){
   var cot = !p.subtotal;
   var pagado = p.pagado === true;
   var directo = p.pagoKey === 'directo';
+  var contupay = p.pagoVia === 'tupay';
   var etapas = rec ? RECOJO : ENVIO;
 
   /* ---- eje del pago ---- */
@@ -65,7 +67,11 @@ function de(p){
         d:'Pague por Yape o transferencia con los datos de Giandeco y envíenos el comprobante por WhatsApp. En cuanto lo verifiquemos, confirmamos su pedido.',
         acc:[ acc('Ver datos de pago', 'checkout?ok=' + encodeURIComponent(n), true),
               acc('Enviar comprobante', T.wa('Hola Giandeco, ya pagué mi pedido ' + n + '. Les envío el comprobante.'), false, true) ] };
-    } else if(pasarela()){
+    } else if(contupay && tupay()){
+      sig = { tono:'accion', t:'Falta su pago',
+        d:'Pague con Yape, Plin, transferencia u otro medio, de forma segura, con Tupay. Su pedido se confirma en cuanto el pago es aprobado.',
+        acc:[ acc('Pagar ahora', 'pagar?n=' + encodeURIComponent(n) + '&m=tupay', true) ] };
+    } else if(!contupay && pasarela()){
       sig = { tono:'accion', t:'Falta su pago',
         d:'Pague con tarjeta, de forma segura, con Izipay. Su pedido se confirma en cuanto el pago es aprobado.',
         acc:[ acc('Pagar ahora', 'pagar?n=' + encodeURIComponent(n), true) ] };

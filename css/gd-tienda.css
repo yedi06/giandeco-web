@@ -447,9 +447,9 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .pdp-conf a{ font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px; transition:color .25s ease, border-color .25s ease; }
 .pdp-conf a:hover{ color:var(--accent); border-color:var(--accent); }
 .pdp-pagos{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin:18px 0 0; font-size:.74rem; color:var(--text-faint); line-height:1.7; }
-.pdp-culqi{ display:inline-flex; align-items:center; gap:8px; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; }
-.pdp-culqi img{ display:block; height:16px; width:auto; filter:invert(1) hue-rotate(180deg); }
-:root[data-tema="claro"] .pdp-culqi img{ filter:none; }
+.pdp-pagos-txt{ display:inline-flex; align-items:center; gap:8px; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; }
+.pdp-pagos-txt img{ display:block; height:16px; width:auto; filter:invert(1) hue-rotate(180deg); }
+:root[data-tema="claro"] .pdp-pagos-txt img{ filter:none; }
 
 /* ==========================================================================
    CENTRO DE AYUDA Y PÁGINAS LEGALES
@@ -563,12 +563,12 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .pg-t{ font-family:var(--display); font-weight:400; font-size:clamp(1.6rem,2.4vw,1.95rem); line-height:1.1; color:var(--lino); margin:0 0 12px; }
 .pg-pago .co-ayuda{ max-width:52ch; margin:0 0 var(--sp-24); font-size:.92rem; line-height:1.65; color:var(--text-dim); }
 .pg-aviso{ max-width:480px; margin:0 0 16px; padding:12px 14px; border:1px solid #8c4a3c; border-left-width:3px; border-radius:2px; background:rgba(140,74,60,.12); color:var(--lino); font-size:.86rem; line-height:1.5; }
-/* marco del formulario de Culqi: mismo fondo que pinta el formulario por dentro */
-.pg-culqi{ position:relative; max-width:480px; height:600px; background:var(--bg-raised); border:1px solid var(--line); border-radius:3px; overflow:hidden; }
-.pg-culqi iframe{ display:block; opacity:0; transition:opacity .4s ease; }
-.pg-culqi.is-lista iframe{ opacity:1; }
-.pg-culqi .pg-espera{ position:absolute; top:50%; left:50%; margin:-17px 0 0 -17px; }
-.pg-culqi.is-lista .pg-espera{ display:none; }
+/* marco del formulario de pago: mismo fondo que pinta el formulario por dentro */
+.pg-marco{ position:relative; max-width:480px; height:600px; background:var(--bg-raised); border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+.pg-marco iframe{ display:block; opacity:0; transition:opacity .4s ease; }
+.pg-marco.is-lista iframe{ opacity:1; }
+.pg-marco .pg-espera{ position:absolute; top:50%; left:50%; margin:-17px 0 0 -17px; }
+.pg-marco.is-lista .pg-espera{ display:none; }
 .pg-sellos{ list-style:none; max-width:480px; margin:18px 0 var(--sp-24); padding:0; display:flex; flex-wrap:wrap; gap:10px 22px; }
 .pg-sellos li{ display:inline-flex; align-items:center; gap:8px; font-size:.78rem; letter-spacing:.04em; color:var(--text-dim); }
 .pg-sellos svg{ width:16px; height:16px; flex:none; stroke:var(--accent); fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
@@ -576,10 +576,10 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .pg-res .gdt-line:last-child{ border-bottom:none; }
 .pg-res .co-tot{ border-top:1px solid var(--line); }
 @media (min-width:1000px){ .pg-grid{ grid-template-columns:1.1fr .9fr; } }
-@media (max-width:999px){ .pg-grid .pg-res{ order:-1; } .pg-culqi, .pg-aviso, .pg-sellos{ max-width:none; } }
+@media (max-width:999px){ .pg-grid .pg-res{ order:-1; } .pg-marco, .pg-aviso, .pg-sellos{ max-width:none; } }
 .pg-espera{ width:34px; height:34px; margin:var(--sp-24) 0; border-radius:50%; border:1px solid var(--line); border-top-color:var(--accent); animation:pgGira .9s linear infinite; }
 @keyframes pgGira{ to{ transform:rotate(360deg); } }
-@media (prefers-reduced-motion: reduce){ .pg-espera{ animation-duration:2.4s; } .pg-culqi iframe{ transition:none; } }
+@media (prefers-reduced-motion: reduce){ .pg-espera{ animation-duration:2.4s; } .pg-marco iframe{ transition:none; } }
 
 /* --- checkout y pago en tema claro (brandbook: sobre humo, acento en bronce y logotipo a una tinta) --- */
 :root[data-tema="claro"] .co-body{ --t-text:#171613; --t-dim:#4A4844; --t-faint:#6F6A63; --t-accent:#8A6F3C; --t-line:#D9D2C4; }
@@ -609,9 +609,9 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 
 /* --- sello de la pasarela junto al pago en línea --- */
 .co-etq.es-grupo{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 16px; }
-.co-culqi{ display:inline-flex; align-items:center; gap:8px; font-size:.62rem; letter-spacing:.1em; color:var(--text-faint); }
-.co-culqi img{ display:block; height:18px; width:auto; filter:invert(1) hue-rotate(180deg); }   /* el logotipo es negro: en tema oscuro se pasa a claro sin tocar el naranja */
-:root[data-tema="claro"] .co-culqi img{ filter:none; }
+.co-pasarela{ display:inline-flex; align-items:center; gap:8px; font-size:.62rem; letter-spacing:.1em; color:var(--text-faint); }
+.co-pasarela img{ display:block; height:18px; width:auto; filter:invert(1) hue-rotate(180deg); }   /* el logotipo es negro: en tema oscuro se pasa a claro sin tocar el naranja */
+:root[data-tema="claro"] .co-pasarela img{ filter:none; }
 
 /* --- pago directo al estudio --- */
 .pd{ margin:var(--sp-40) 0; }
@@ -668,7 +668,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   body .gd-field label, body .gd-footer-col h4, body .gd-hero-cap span, body .ct-dato h3,
   body .gdt-quick, body .pdp-sub a, body .pdp-sub button, body .pdp-conf a,
   body .gd-piezas-count{ font-size:12px; }
-  body .pdp-culqi, body .gd-prod-badge, body .gd-pieza-thumb.is-slot span{ font-size:11px; }
+  body .pdp-pagos-txt, body .gd-prod-badge, body .gd-pieza-thumb.is-slot span{ font-size:11px; }
 
   /* subrayados: área táctil invisible de 44px */
   body .gdt-quick, body .gd-link, body .pdp-conf a{ position:relative; }
@@ -786,7 +786,7 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .co-pasos[hidden]{ display:none; }
 
 /* ==========================================================================
-   CHECKOUT · DOS MEDIOS DE PAGO (Culqi y depósito) EN EL PASO FINAL
+   CHECKOUT · MEDIOS DE PAGO (tarjeta, Tupay y depósito) EN EL PASO FINAL
    ========================================================================== */
 .co-pagos{ gap:12px; }
 .co-pagos .gdt-op span{ padding-top:18px; padding-bottom:18px; }
@@ -1055,3 +1055,66 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 @media (max-width:899px){ #coEnvioMini{ display:block; } #coEnvioMini .gdt-envio{ margin:10px 0 18px; } #coEnvioProg2{ display:none; } .co-res .gdt-envio{ display:none; } }
 @media (prefers-reduced-motion: reduce){ .gdt-envio-bar i{ transition:none; } }
 .co-tot dd s{ margin-right:6px; color:var(--text-faint, #948D80); }
+
+/* ==========================================================================
+   MEDIOS DE PAGO · grupos por pasarela, sellos y bloque de confianza
+   (checkout y pagar). Tarjeta → Izipay · Billeteras, transferencia y efectivo → Tupay.
+   ========================================================================== */
+.co-pagos-g{ display:grid; gap:18px; }
+.gdt-pasarela{ display:inline-flex; align-items:center; gap:7px; padding:4px 10px 4px 9px; border:1px solid rgba(201,162,74,.34); border-radius:999px; background:rgba(201,162,74,.06); white-space:nowrap; }
+.gdt-pasarela::before{ content:''; width:12px; height:12px; flex:none; background:var(--accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat; }
+.gdt-pasarela img{ display:block; height:16px; width:auto; }
+.gdt-pasarela img + b.solo-sin-logo{ display:none; }          /* el logotipo de Izipay ya trae el nombre; sin logotipo se muestra el texto */
+.gdt-pasarela.es-izipay{ background:#0A0A09; border-color:rgba(255,255,255,.16); }
+.gdt-pasarela b{ font-weight:600; font-size:.82rem; letter-spacing:.03em; color:var(--lino); }
+
+.co-confianza{ list-style:none; margin:16px 0 0; padding:16px 18px; display:grid; gap:12px; border:1px solid var(--line); border-radius:2px; background:rgba(201,162,74,.035); }
+.co-confianza li{ display:flex; gap:12px; align-items:flex-start; }
+.co-confianza svg{ flex:none; width:18px; height:18px; margin-top:1px; stroke:var(--accent); fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.co-confianza span{ font-size:.8rem; line-height:1.5; color:var(--text-dim); }
+.co-confianza b{ display:block; font-weight:500; font-size:.82rem; color:var(--lino); }
+@media (min-width:700px){ .co-confianza{ grid-template-columns:1fr 1fr; gap:14px 22px; } }
+
+/* pantalla de pago con Tupay (pagar.html) */
+.pg-cab{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; max-width:480px; }
+.pg-cab .pg-t{ margin-bottom:12px; }
+.pg-pagar{ width:100%; max-width:480px; justify-content:center; gap:10px; margin:var(--sp-24, 24px) 0 0; }
+.pg-pagar svg{ width:16px; height:16px; flex:none; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.pg-pago .co-confianza{ max-width:480px; }
+.pg-otros{ max-width:480px; margin-top:var(--sp-24, 24px); }
+.pg-chips{ display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 14px; }
+.pg-chip{ display:inline-flex; align-items:center; gap:10px; padding:8px 14px 8px 8px; border:1px solid var(--line); border-radius:2px; color:var(--lino); text-decoration:none; font-size:.82rem; transition:border-color .25s ease, background-color .25s ease; }
+.pg-chip:hover, .pg-chip:focus-visible{ border-color:rgba(201,162,74,.6); background:rgba(201,162,74,.06); outline:none; }
+.pg-chip .gdt-logos{ display:inline-flex; }
+:root[data-tema="claro"] .gdt-pasarela b, :root[data-tema="claro"] .co-confianza b{ color:var(--text, #1a1815); }
+
+/* ---- bloque por proveedor (checkout): quién cobra, qué medios acepta y cada medio para elegirlo ---- */
+.co-prov{ border:1px solid var(--line); border-radius:3px; background:rgba(255,255,255,.015); overflow:hidden; }
+.co-prov.es-tupay, .co-prov.es-izipay{ border-color:rgba(201,162,74,.28); }
+.co-prov-cab{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px; padding:16px 18px 14px; border-bottom:1px solid var(--line); background:rgba(201,162,74,.045); }
+.co-prov.es-otro .co-prov-cab{ background:transparent; }
+.co-prov-id{ display:flex; align-items:center; gap:14px; min-width:0; }
+.co-prov-id b{ display:block; font-family:var(--display); font-weight:400; font-size:1.18rem; line-height:1.15; color:var(--lino); }
+.co-prov-id small{ display:block; margin-top:3px; font-size:.78rem; line-height:1.45; color:var(--text-faint); }
+.co-prov-acepta{ display:flex; align-items:center; gap:10px; }
+.co-prov-acepta > span{ font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint); }
+.co-prov .gdt-ops{ padding:14px 14px 16px; gap:8px; }
+.co-prov .gdt-op span{ background:var(--bg, transparent); }
+.co-prov.es-off{ opacity:.78; }
+.co-prov.es-otro{ margin-top:6px; }
+.gdt-pasarela.es-grande{ padding:7px 14px 7px 12px; }
+.gdt-pasarela.es-grande b{ font-size:1.02rem; }
+.gdt-pasarela.es-grande img{ height:22px; }
+.gdt-pasarela.es-grande::before{ width:15px; height:15px; }
+@media (max-width:640px){ .co-prov-cab{ padding:14px; } .co-prov .gdt-ops{ padding:12px; } .co-prov-acepta{ width:100%; } }
+
+/* imagen oficial de cada medio de Tupay (QR by tupay, tupay Banca en línea) */
+.gdt-op.con-tile > span{ position:relative; padding-right:104px; min-height:76px; }
+.gdt-tile{ position:absolute; right:14px; top:50%; transform:translateY(-50%); width:72px; height:72px; border-radius:8px; overflow:hidden; background:#fff; box-shadow:0 0 0 1px rgba(128,120,104,.3); display:flex; align-items:center; justify-content:center; }
+.gdt-tile img{ display:block; width:100%; height:100%; object-fit:cover; }
+.gdt-tile img[src$=".svg"]{ width:58%; height:58%; object-fit:contain; }
+.pg-chip img{ display:block; width:36px; height:36px; border-radius:6px; background:#fff; object-fit:cover; flex:none; }
+.pg-chip img[src$=".svg"]{ object-fit:contain; padding:5px; }
+@media (max-width:640px){ .gdt-op.con-tile > span{ padding-right:88px; } .gdt-tile{ width:60px; height:60px; right:12px; } }

@@ -59,7 +59,7 @@ var CSS_PAGINA = [
   '#pg.es-pago .pg-medios, #pg.es-pago .pg-sellos{ max-width:none !important; width:100%; box-sizing:border-box; }',
   '#pg.es-pago .pg-medios{ display:flex; align-items:center; gap:14px; margin:0 0 26px; padding:0 0 24px; border-bottom:1px solid var(--line); }',
   '#pg.es-pago .pg-medios > span:first-child{ font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim); }',
-  '#pg.es-pago #pgCulqi{ max-width:none !important; min-height:0 !important; padding:0 !important; background:transparent !important; border:0 !important; border-radius:0 !important; }',
+  '#pg.es-pago #pgMarco{ max-width:none !important; min-height:0 !important; padding:0 !important; background:transparent !important; border:0 !important; border-radius:0 !important; }',
   '#pg.es-pago .pg-sellos{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 20px; margin:28px 0 0; padding:22px 0 0; border-top:1px solid var(--line); list-style:none; }',
   '#pg.es-pago .pg-sellos li{ display:flex; align-items:center; gap:9px; font-size:.74rem; letter-spacing:.02em; color:var(--text-dim); }',
   '#pg.es-pago .gd-form-nota{ margin:18px 0 0; font-size:.78rem; color:var(--text-faint); }',
@@ -79,24 +79,24 @@ var CSS_PAGINA = [
   '#pg.es-pago .co-tot .es-igv{ padding:2px 0 0; }',
   '#pg.es-pago .co-tot .es-igv dt, #pg.es-pago .co-tot .es-igv dd{ font-size:.72rem; color:var(--text-faint); }',
   /* formulario: dos columnas (vencimiento + código), etiquetas arriba */
-  '#pgCulqi .kr-embedded{ display:grid !important; grid-template-columns:1fr 1fr; gap:20px 16px; }',
-  '#pgCulqi .kr-embedded > *{ grid-column:1 / -1; min-width:0; }',
-  '#pgCulqi .kr-embedded > .kr-expiry{ grid-column:1; }',
-  '#pgCulqi .kr-embedded > .kr-security-code{ grid-column:2; }',
-  '#pgCulqi .kr-field-element{ flex-direction:column !important; align-items:stretch !important; height:auto !important; gap:9px; background:transparent !important; border:0 !important; box-shadow:none !important; }',
-  '#pgCulqi .kr-field-element.kr-pan::before{ content:"Número de tarjeta"; }',
-  '#pgCulqi .kr-field-element.kr-expiry::before{ content:"Vencimiento"; }',
-  '#pgCulqi .kr-field-element.kr-security-code::before{ content:"Código CVV"; }',
-  '#pgCulqi .kr-field-element.kr-card-holder-name::before{ content:"Nombre del titular"; }',
-  '#pgCulqi .kr-field-element.kr-pan::before, #pgCulqi .kr-field-element.kr-expiry::before, #pgCulqi .kr-field-element.kr-security-code::before, #pgCulqi .kr-field-element.kr-card-holder-name::before{ font-size:.64rem; letter-spacing:.17em; text-transform:uppercase; color:var(--text-dim); }',
-  '#pgCulqi .kr-field-wrapper{ box-sizing:border-box !important; width:100% !important; height:56px !important; min-height:56px; align-items:center; padding:0 6px 0 16px; border:1px solid var(--line) !important; border-radius:3px !important; background:rgba(255,255,255,.028) !important; transition:border-color .2s, box-shadow .2s; }',
-  '#pgCulqi .kr-field-component{ flex:1 1 auto; min-width:0; }',
-  '#pgCulqi .kr-field-wrapper:focus-within, #pgCulqi .kr-field-wrapper.kr-focus{ border-color:var(--accent) !important; box-shadow:0 0 0 3px rgba(201,162,74,.14) !important; }',
-  '#pgCulqi .kr-payment-button{ height:60px !important; width:100% !important; margin-top:8px; display:flex; flex-direction:row !important; align-items:center; justify-content:center; gap:11px; font-size:.78rem !important; letter-spacing:.2em !important; box-shadow:0 12px 28px -18px rgba(201,162,74,.6) !important; transition:filter .2s, transform .2s; }',
-  '#pgCulqi .kr-payment-button:hover{ transform:translateY(-1px); }',
-  '#pgCulqi .kr-payment-button .kr-spinner{ position:absolute; }',
-  '#pgCulqi .kr-payment-button::before{ content:""; width:15px; height:15px; background:currentColor; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M6 11V8a6 6 0 0 1 12 0v3M5 11h14v10H5z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M6 11V8a6 6 0 0 1 12 0v3M5 11h14v10H5z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat; }',
-  ':root[data-tema="claro"] #pgCulqi .kr-field-wrapper{ background:rgba(0,0,0,.03) !important; }',
+  '#pgMarco .kr-embedded{ display:grid !important; grid-template-columns:1fr 1fr; gap:20px 16px; }',
+  '#pgMarco .kr-embedded > *{ grid-column:1 / -1; min-width:0; }',
+  '#pgMarco .kr-embedded > .kr-expiry{ grid-column:1; }',
+  '#pgMarco .kr-embedded > .kr-security-code{ grid-column:2; }',
+  '#pgMarco .kr-field-element{ flex-direction:column !important; align-items:stretch !important; height:auto !important; gap:9px; background:transparent !important; border:0 !important; box-shadow:none !important; }',
+  '#pgMarco .kr-field-element.kr-pan::before{ content:"Número de tarjeta"; }',
+  '#pgMarco .kr-field-element.kr-expiry::before{ content:"Vencimiento"; }',
+  '#pgMarco .kr-field-element.kr-security-code::before{ content:"Código CVV"; }',
+  '#pgMarco .kr-field-element.kr-card-holder-name::before{ content:"Nombre del titular"; }',
+  '#pgMarco .kr-field-element.kr-pan::before, #pgMarco .kr-field-element.kr-expiry::before, #pgMarco .kr-field-element.kr-security-code::before, #pgMarco .kr-field-element.kr-card-holder-name::before{ font-size:.64rem; letter-spacing:.17em; text-transform:uppercase; color:var(--text-dim); }',
+  '#pgMarco .kr-field-wrapper{ box-sizing:border-box !important; width:100% !important; height:56px !important; min-height:56px; align-items:center; padding:0 6px 0 16px; border:1px solid var(--line) !important; border-radius:3px !important; background:rgba(255,255,255,.028) !important; transition:border-color .2s, box-shadow .2s; }',
+  '#pgMarco .kr-field-component{ flex:1 1 auto; min-width:0; }',
+  '#pgMarco .kr-field-wrapper:focus-within, #pgMarco .kr-field-wrapper.kr-focus{ border-color:var(--accent) !important; box-shadow:0 0 0 3px rgba(201,162,74,.14) !important; }',
+  '#pgMarco .kr-payment-button{ height:60px !important; width:100% !important; margin-top:8px; display:flex; flex-direction:row !important; align-items:center; justify-content:center; gap:11px; font-size:.78rem !important; letter-spacing:.2em !important; box-shadow:0 12px 28px -18px rgba(201,162,74,.6) !important; transition:filter .2s, transform .2s; }',
+  '#pgMarco .kr-payment-button:hover{ transform:translateY(-1px); }',
+  '#pgMarco .kr-payment-button .kr-spinner{ position:absolute; }',
+  '#pgMarco .kr-payment-button::before{ content:""; width:15px; height:15px; background:currentColor; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M6 11V8a6 6 0 0 1 12 0v3M5 11h14v10H5z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M6 11V8a6 6 0 0 1 12 0v3M5 11h14v10H5z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat; }',
+  ':root[data-tema="claro"] #pgMarco .kr-field-wrapper{ background:rgba(0,0,0,.03) !important; }',
   /* --- bloque de seguridad con la marca de Izipay --- */
   '#pg.es-pago .pg-seguro{ display:flex; align-items:center; gap:16px; margin:0 0 24px; padding:16px 18px; border:1px solid rgba(201,162,74,.3); border-radius:3px; background:linear-gradient(100deg,rgba(201,162,74,.09),rgba(201,162,74,.025)); }',
   '#pg.es-pago .pg-seguro-ic{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; flex:none; border-radius:50%; border:1px solid rgba(201,162,74,.45); }',
@@ -115,7 +115,7 @@ var CSS_PAGINA = [
   '#pg.es-pago .pg-estado .gd-form{ max-width:560px; }',
   '#pg.es-pago .pg-estado .co-ok-acc{ margin-top:var(--sp-24); }',
   '@media (max-width:999px){ #pg.es-pago .pg-grid .pg-estado{ order:-2; } #pg.es-pago .pg-res{ position:static; } #pg.es-pago .pg-sellos{ flex-direction:column; } #pg.es-pago .pg-res{ padding:20px 22px; } #pg.es-pago .pg-res .gdt-line{ grid-template-columns:52px 1fr; padding:10px 0; } #pg.es-pago .pg-res .gdt-line-img{ width:52px; height:65px; } }',
-    '@media (max-width:520px){ #pg.es-pago .pg-pago{ padding:22px 16px 24px; } #pg.es-pago .pg-res{ padding:18px 16px; } #pg.es-pago .pg-seguro{ flex-wrap:wrap; gap:12px 14px; padding:14px; } #pg.es-pago .pg-seguro-izi{ flex-direction:row; align-items:center; justify-content:space-between; width:100%; padding-top:12px; border-top:1px solid rgba(201,162,74,.22); } #pgCulqi .kr-embedded{ gap:18px 12px; } #pgCulqi .kr-field-wrapper{ padding:0 4px 0 12px; } #pgCulqi .kr-expiry .kr-icon-wrapper-root{ display:none !important; } }'
+    '@media (max-width:520px){ #pg.es-pago .pg-pago{ padding:22px 16px 24px; } #pg.es-pago .pg-res{ padding:18px 16px; } #pg.es-pago .pg-seguro{ flex-wrap:wrap; gap:12px 14px; padding:14px; } #pg.es-pago .pg-seguro-izi{ flex-direction:row; align-items:center; justify-content:space-between; width:100%; padding-top:12px; border-top:1px solid rgba(201,162,74,.22); } #pgMarco .kr-embedded{ gap:18px 12px; } #pgMarco .kr-field-wrapper{ padding:0 4px 0 12px; } #pgMarco .kr-expiry .kr-icon-wrapper-root{ display:none !important; } }'
 ].join('\n');
 
 /* ---------- apariencia: el formulario toma los colores del sitio (oscuro o claro) ---------- */
@@ -123,24 +123,24 @@ function estilo(){
   if(document.getElementById('gdPagoCss')) return;
   var s = document.createElement('style'); s.id = 'gdPagoCss';
   s.textContent =
-    '#pgCulqi{ height:auto; min-height:300px; overflow:visible; max-width:540px !important; padding:22px 22px 24px; }' +
-    '#pgCulqi .kr-smart-form, #pgCulqi .kr-embedded{ width:100% !important; max-width:none !important; }' +
-    '#pgCulqi .kr-field-element{ width:100% !important; }' +
-    '#pgCulqi .kr-card-header{ display:none !important; }' +   /* las marcas ya se ven arriba, en "Aceptamos" */
-    '#pgCulqi .kr-first-installment-delay, #pgCulqi .kr-installment-number.kr-read-only{ display:none !important; }' +   /* "Pago sin diferido" y "Sin cuotas" cuando no hay nada que elegir */
-    '#pgCulqi .kr-smart-form, #pgCulqi .kr-embedded{ background:transparent !important; color:var(--text-dim) !important; font-family:inherit !important; box-shadow:none !important; border:0 !important; }' +
-    '#pgCulqi .kr-smart-form *{ font-family:inherit; }' +
-    '#pgCulqi .kr-field-wrapper label, #pgCulqi .kr-smart-form label{ color:var(--text-dim) !important; font-size:.66rem !important; letter-spacing:.12em; text-transform:uppercase; }' +
-    '#pgCulqi .kr-smart-form input, #pgCulqi .kr-smart-form select, #pgCulqi .kr-field-control, #pgCulqi .kr-field-element{ background:var(--bg-raised) !important; color:var(--lino) !important; border-color:var(--line) !important; border-radius:2px !important; }' +
-    '#pgCulqi .kr-smart-form input:focus, #pgCulqi .kr-field-control.kr-focus, #pgCulqi .kr-field-wrapper.kr-focus .kr-field-control{ border-color:var(--accent) !important; box-shadow:none !important; }' +
-    '#pgCulqi .kr-field-component{ background:transparent !important; }' +
-    '#pgCulqi .kr-card-header{ background:var(--bg-raised) !important; border-color:var(--line) !important; border-radius:2px !important; }' +
-    '#pgCulqi .kr-card-header-label{ color:var(--text-dim) !important; }' +
-    '#pgCulqi .kr-payment-button{ background:#C9A24A !important; color:#0A0A09 !important; border:0 !important; border-radius:2px !important; letter-spacing:.16em; text-transform:uppercase; font-weight:500; font-size:.74rem !important; }' +
-    '#pgCulqi .kr-payment-button:hover{ filter:brightness(1.06); }' +
-    '#pgCulqi .kr-payment-button[disabled], #pgCulqi .kr-payment-button.kr-disabled{ opacity:.55; }' +
-    '#pgCulqi .kr-form-error, #pgCulqi .kr-error-message{ color:#D9917F !important; }' +
-    ':root[data-tema="claro"] #pgCulqi .kr-payment-button{ background:#8A6F3C !important; color:#F4F1EA !important; }' +
+    '#pgMarco{ height:auto; min-height:300px; overflow:visible; max-width:540px !important; padding:22px 22px 24px; }' +
+    '#pgMarco .kr-smart-form, #pgMarco .kr-embedded{ width:100% !important; max-width:none !important; }' +
+    '#pgMarco .kr-field-element{ width:100% !important; }' +
+    '#pgMarco .kr-card-header{ display:none !important; }' +   /* las marcas ya se ven arriba, en "Aceptamos" */
+    '#pgMarco .kr-first-installment-delay, #pgMarco .kr-installment-number.kr-read-only{ display:none !important; }' +   /* "Pago sin diferido" y "Sin cuotas" cuando no hay nada que elegir */
+    '#pgMarco .kr-smart-form, #pgMarco .kr-embedded{ background:transparent !important; color:var(--text-dim) !important; font-family:inherit !important; box-shadow:none !important; border:0 !important; }' +
+    '#pgMarco .kr-smart-form *{ font-family:inherit; }' +
+    '#pgMarco .kr-field-wrapper label, #pgMarco .kr-smart-form label{ color:var(--text-dim) !important; font-size:.66rem !important; letter-spacing:.12em; text-transform:uppercase; }' +
+    '#pgMarco .kr-smart-form input, #pgMarco .kr-smart-form select, #pgMarco .kr-field-control, #pgMarco .kr-field-element{ background:var(--bg-raised) !important; color:var(--lino) !important; border-color:var(--line) !important; border-radius:2px !important; }' +
+    '#pgMarco .kr-smart-form input:focus, #pgMarco .kr-field-control.kr-focus, #pgMarco .kr-field-wrapper.kr-focus .kr-field-control{ border-color:var(--accent) !important; box-shadow:none !important; }' +
+    '#pgMarco .kr-field-component{ background:transparent !important; }' +
+    '#pgMarco .kr-card-header{ background:var(--bg-raised) !important; border-color:var(--line) !important; border-radius:2px !important; }' +
+    '#pgMarco .kr-card-header-label{ color:var(--text-dim) !important; }' +
+    '#pgMarco .kr-payment-button{ background:#C9A24A !important; color:#0A0A09 !important; border:0 !important; border-radius:2px !important; letter-spacing:.16em; text-transform:uppercase; font-weight:500; font-size:.74rem !important; }' +
+    '#pgMarco .kr-payment-button:hover{ filter:brightness(1.06); }' +
+    '#pgMarco .kr-payment-button[disabled], #pgMarco .kr-payment-button.kr-disabled{ opacity:.55; }' +
+    '#pgMarco .kr-form-error, #pgMarco .kr-error-message{ color:#D9917F !important; }' +
+    ':root[data-tema="claro"] #pgMarco .kr-payment-button{ background:#8A6F3C !important; color:#F4F1EA !important; }' +
     CSS_PAGINA;
   document.head.appendChild(s);
 }
@@ -166,7 +166,7 @@ function realzar(caja){
     ol.innerHTML = '<li class="is-hecho"><i>1</i><span>Sus datos</span></li><li class="is-hecho"><i>2</i><span>Entrega</span></li><li class="is-activo" aria-current="step"><i>3</i><span>Pago</span></li>';
     grid.parentNode.insertBefore(ol, grid.parentNode.firstChild);
   }
-  if(ayuda){ ayuda.textContent = 'Complete los datos de su tarjeta' + (/Yape/.test(ayuda.textContent) ? ' o elija Yape' : '') + '. Solo toma un minuto.'; }
+  if(ayuda){ ayuda.textContent = 'Complete los datos de su tarjeta. Solo toma un minuto.'; }
 
   var b = document.createElement('div'); b.className = 'pg-seguro'; b.setAttribute('role', 'note');
   b.innerHTML = '<span class="pg-seguro-ic">' + SVG_CANDADO + '</span>' +
@@ -251,14 +251,10 @@ function cerrar(){
   actual = null;
 }
 
-/* ¿hay pasarela? Se recuerda en el dispositivo para pintar sin esperar. */
-var EN_LINEA = ['culqi', 'tarjeta', 'cuotas'];   // 'culqi' es el nombre interno del medio "pago en línea" en js/gd-tienda.js (no es la pasarela)
-function yape(on){ var i = EN_LINEA.indexOf('yape'); if(on && i === -1) EN_LINEA.push('yape'); else if(!on && i !== -1) EN_LINEA.splice(i, 1); }
-yape(T.db('pasarela_yape') === true);
+/* ¿hay pasarela de tarjeta? Se recuerda en el dispositivo para pintar sin esperar. */
+var EN_LINEA = ['tarjeta'];   // medios que se cobran aquí, con Izipay (Yape y demás billeteras: js/gd-tupay.js)
 function estado(){
-  return llamar({ accion:'estado' }).then(function(r){
-    var a = !!(r && r.activa); T.db('pasarela', a); T.db('pasarela_yape', a && !!r.yape); yape(a && !!r.yape); return a;
-  });
+  return llamar({ accion:'estado' }).then(function(r){ var a = !!(r && r.activa); T.db('pasarela', a); return a; });
 }
 function consulta(n, cel){ return llamar({ accion:'consulta', n:n, cel:cel }); }
 
@@ -267,7 +263,7 @@ estilo();   // los estilos van desde el principio: la página no cambia de forma
 window.GD_PAGO = {
   estado: estado, consulta: consulta, pagar: pagar, cerrar: cerrar,
   activa: function(){ return T.db('pasarela') === true; },
-  /* medios que se cobran en línea cuando hay pasarela (Yape solo si está activo en la tienda de Izipay) */
+  /* medios que se cobran con tarjeta cuando hay pasarela */
   EN_LINEA: EN_LINEA
 };
 })();

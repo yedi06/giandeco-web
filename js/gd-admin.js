@@ -191,8 +191,8 @@ function pedidoDetalle(p){
       (p.entrega.porAgencia ? '<dt>Despacho</dt><dd>Por agencia, a cargo del cliente · ' + (p.entrega.destino === 'oficina' ? 'recoge en oficina' : 'a domicilio') + (p.entrega.agencia ? ' · ' + esc(p.entrega.agencia) : ' · sin preferencia') + '</dd>' : '') +
       (p.entrega.recibe ? '<dt>Recibe</dt><dd>' + esc(p.entrega.recibe) + '</dd>' : '') + (p.entrega.horario ? '<dt>Horario</dt><dd>' + esc(p.entrega.horario) + '</dd>' : '') +
       '<dt>Armado</dt><dd>' + (p.entrega.armado ? 'Sí, cotizar' : 'No') + '</dd><dt>Pago</dt><dd>' + esc(p.pago || '—') + '</dd>' +
-      (p.pagoOnline ? '<dt>Cobro en línea</dt><dd>' + fmt(p.pagoOnline.monto / 100) + ' · ' + esc(p.pagoOnline.medio === 'yape' ? 'Yape' : (p.pagoOnline.marca || 'Tarjeta') + (p.pagoOnline.ultimos4 ? ' ···· ' + p.pagoOnline.ultimos4 : '')) +
-        (p.pagoOnline.cuotas > 1 ? ' · ' + p.pagoOnline.cuotas + ' cuotas' : '') + '<br><small>Pasarela ' + esc(p.pagoOnline.cargo) + (p.pagoOnline.prueba ? ' · PRUEBA' : '') + '</small></dd>' : '') +
+      (p.pagoOnline ? '<dt>Cobro en línea</dt><dd>' + fmt(p.pagoOnline.monto / 100) + ' · ' + esc(p.pagoOnline.proveedor === 'tupay' ? 'Tupay' + (p.pagoOnline.marca ? ' · ' + p.pagoOnline.marca : '') : p.pagoOnline.medio === 'yape' ? 'Yape' : (p.pagoOnline.marca || 'Tarjeta') + (p.pagoOnline.ultimos4 ? ' ···· ' + p.pagoOnline.ultimos4 : '')) +
+        (p.pagoOnline.cuotas > 1 ? ' · ' + p.pagoOnline.cuotas + ' cuotas' : '') + '<br><small>' + (p.pagoOnline.proveedor === 'tupay' ? 'Tupay' : 'Izipay') + ' ' + esc(p.pagoOnline.cargo) + (p.pagoOnline.prueba ? ' · PRUEBA' : '') + '</small></dd>' : '') +
       (p.nota ? '<dt>Nota</dt><dd>' + esc(p.nota) + '</dd>' : '') + '<dt>Novedades</dt><dd>' + (p.promo ? 'Aceptó recibirlas' : 'No aceptó') + '</dd></dl></section></div>';
 }
 
