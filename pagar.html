@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261103a">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261103e">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261103g">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -44,9 +44,9 @@
 </footer>
 
 <script src="js/giandeco.js?v=20261103d"></script>
-<script src="js/gd-tienda.js?v=20261103f"></script>
+<script src="js/gd-tienda.js?v=20261103g"></script>
 <script src="js/gd-pago.js?v=20261103a"></script>
-<script src="js/gd-tupay.js?v=20261103a"></script>
+<script src="js/gd-tupay.js?v=20261103b"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, P = window.GD_PAGO, TP = window.GD_TUPAY, esc = T.esc;
@@ -184,36 +184,25 @@
 
   /* ---------- Tupay: listo para pagar (se paga en la página de Tupay y se vuelve aquí) ---------- */
   function listoTupay(aviso){
-    var otros = MEDIOS_TUPAY.filter(function(m){ return m.activo && (!M || m.key !== M.key); });
     var titulo = M ? 'Pagar con ' + M.label : 'Pagar con Tupay';
-    var logos = M ? M.logos : ['yape', 'plin', 'bcp', 'efectivo'];
-    var ayuda = M ? esc(M.nota.replace(/ Su pedido queda confirmado al pagar\.| Su pedido se confirma cuando se acredita el pago\./, '')) + ' '
-                  : '¡Con Tupay, tú tienes el control! Elija cómo pagar: efectivo, banca en línea o QR de billeteras digitales. ';
+    function enlace(txt, href, ext){ return '<a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + txt + '</a>'; }
+    var otros = MEDIOS_TUPAY.filter(function(m){ return m.activo && (!M || m.key !== M.key); }).map(function(m){ return enlace(esc(m.label), 'pagar?n=' + encodeURIComponent(n) + '&m=tupay&k=' + m.key); });
+    otros.push(enlace('Tarjeta', 'pagar?n=' + encodeURIComponent(n) + '&m=tarjeta'));
+    otros.push(local ? enlace('Pago directo', 'checkout?ok=' + encodeURIComponent(n) + '&dep=1')
+                     : enlace('Pago directo', T.wa('Hola Giandeco, quiero pagar por depósito mi pedido ' + n + '.'), true));
     root.classList.add('es-pago');
     root.innerHTML =
       '<p class="gd-eyebrow">Pago en línea</p><h1>Pagar mi pedido</h1>' +
       '<p class="pg-meta"><span class="co-ok-n">' + esc(n) + '</span>' + (c.prueba ? '<span class="pg-prueba">Modo de prueba · no se realizan cobros reales</span>' : '') + '</p>' +
       '<div class="co-grid pg-grid">' +
         '<section class="pg-pago" aria-labelledby="pgT">' +
-          '<div class="pg-cab"><h2 class="pg-t" id="pgT">' + esc(titulo) + '</h2>' + T.sello('tupay') + '</div>' +
-          '<div class="co-medios pg-medios"><span>' + (M ? 'Medio elegido' : 'Medios disponibles') + '</span>' + T.logosPago(logos) + '</div>' +
-          '<p class="co-ayuda">' + ayuda + 'Al continuar pasará a la <b>página segura de Tupay</b> para completar el pago. Cuando termine, vuelve aquí y su pedido queda confirmado.</p>' +
+          '<h2 class="pg-t" id="pgT">' + esc(titulo) + '</h2>' +
+          '<p class="co-ayuda">Se abrirá la página segura de pago. Al terminar, vuelve aquí.</p>' +
           '<p class="pg-aviso" id="pgAviso" role="alert"' + (aviso ? '' : ' hidden') + '>' + (aviso ? esc(aviso) : '') + '</p>' +
           '<button type="button" class="gd-btn gd-btn-primary pg-pagar" id="pgTupay">' +
-            '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Pagar ' + money(c.monto) + ' de forma segura' + T.FLECHA + '</button>' +
-          '<ul class="co-confianza">' +
-            '<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span><b>Conexión cifrada</b>Su pago viaja protegido de punta a punta.</span></li>' +
-            '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><span><b>Pasarela autorizada</b>El cobro lo procesa Tupay en su página segura.</span></li>' +
-            '<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span><b>Sus datos no pasan por Giandeco</b>No vemos ni guardamos los datos de su cuenta.</span></li>' +
-            '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg><span><b>Comprobante electrónico</b>Boleta o factura a su correo al confirmar el pago.</span></li>' +
-          '</ul>' +
-          '<div class="pg-otros">' +
-            (otros.length ? '<p class="gd-form-nota">¿Prefiere otro medio?</p><div class="pg-chips">' + otros.map(function(m){
-              return '<a class="pg-chip" href="pagar?n=' + encodeURIComponent(n) + '&m=tupay&k=' + m.key + '"><img src="images/pago/' + m.img + (m.img === 'tupay' ? '.svg' : '.webp') + '" alt="" width="36" height="36" decoding="async"><span>' + esc(m.label) + '</span></a>'; }).join('') + '</div>' : '') +
-            '<p class="gd-form-nota"><a href="pagar?n=' + encodeURIComponent(n) + '&m=tarjeta">Pagar con tarjeta</a> · ' + (local
-              ? '<a href="checkout?ok=' + encodeURIComponent(n) + '&dep=1">Pagar por depósito a Giandeco</a>'
-              : '<a href="' + T.wa('Hola Giandeco, quiero pagar por depósito mi pedido ' + n + '.') + '" target="_blank" rel="noopener">Pedir la cuenta por WhatsApp</a>') + '</p>' +
-          '</div>' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Pagar ' + money(c.monto) + T.FLECHA + '</button>' +
+          T.seguroPago(['tupay']).replace('class="mp-seguro"', 'class="mp-seguro es-solo"') +
+          '<p class="mp-otros">Otro medio: ' + otros.join(' · ') + '</p>' +
         '</section>' +
         resumen() +
       '</div>';
@@ -229,6 +218,7 @@
       boton.disabled = false; boton.removeAttribute('aria-busy');
       if(r && r.motivo === 'incierto'){ resultado({ motivo:'incierto' }); return; }
       if(r && r.motivo === 'en-curso'){ avisoTupay('Ya hay un pago en curso para este pedido. Espere un momento y vuelva a intentarlo.'); return; }
+      if(r && r.mensaje){ avisoTupay(r.mensaje); return; }                                              // Tupay lo rechazó: se dice por qué
       if(r && r.motivo && r.motivo !== 'error' && r.motivo !== 'sin-cobro'){ consultar(0); return; }   // el pedido cambió mientras tanto
       avisoTupay((r && r.mensaje) || 'No se pudo abrir el pago. Inténtelo de nuevo en un momento.');
     });

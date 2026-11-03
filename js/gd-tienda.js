@@ -48,49 +48,37 @@ var CFG = {
     nota: 'Por agencia a todo el Perú. El flete se paga a la agencia al recibir o recoger.',
     lista: ['Shalom', 'Olva Courier', 'Marvisur', 'Cruz del Sur Cargo']
   },
-  /* Medios de pago, en tres grupos. Cada uno guarda su clave en el pedido (pagoKey) y
-     la pasarela que lo cobra (pagoVia).
-     · TARJETA   (via 'izipay'): crédito o débito, en cuotas si el banco lo permite.
-                 Formulario incrustado de IZIPAY (js/gd-pago.js · función `pago`).
-                 Esta web nunca recibe datos de tarjeta.
-     · TUPAY     (via 'tupay'): el cliente termina el pago en la página segura de Tupay y
-                 vuelve aquí (js/gd-tupay.js · función `tupay`). Son los medios de la familia
-                 Tupay y cada uno abre directo el suyo (`codigo`; el servidor lo valida):
-                   qr     → XAQR  «QR by tupay»: Yape, Plin, Tunki y más billeteras
-                   banca  → XABT  «tupay Banca en línea»: BCP, Interbank, Scotiabank, BBVA
-                   tupay  → XA    todos los medios de Tupay (incluye efectivo)
-                 Las imágenes `img` son las oficiales que Tupay entrega a los comercios.
-     · DIRECTO   (via 'directo'): depósito o transferencia a las cuentas de Giandeco
-                 (PAGO_DIRECTO) y envío del comprobante por WhatsApp. Va siempre al final
-                 y se retira (activo:false) cuando Tupay esté funcionando.
-     activo:false lo quita del checkout; el panel también puede apagarlos.
-     TUPAY_ACTIVO está apagado para el público hasta que la función `tupay` y sus llaves estén listas
-     (solo se ve con ?vista=tupay en este navegador). Para encenderlo a todos, ver el final de este bloque. */
+  /* Medios de pago, en este orden y en tres grupos (tarjeta · Tupay · directo). Cada medio guarda su clave
+     en el pedido (pagoKey) y la pasarela que lo cobra (pagoVia).
+     · tarjeta (via 'izipay'): crédito o débito, en cuotas si el banco lo permite. Formulario incrustado de
+       IZIPAY (js/gd-pago.js · función `pago`). Esta web nunca recibe datos de tarjeta.
+     · Tupay (via 'tupay'): el cliente termina el pago en la página segura de pago y vuelve aquí
+       (js/gd-tupay.js · función `tupay`). `codigo` es el medio que se abre directo; el servidor lo valida:
+         qr       → XAQR  «QR by tupay»: Yape, Plin, Tunki y más billeteras (el medio principal en Perú)
+         banca    → XABT  «tupay Banca en línea»: BCP, Interbank, Scotiabank, BBVA
+         efectivo → EF    PagoEfectivo: código para pagar en agentes y bodegas (hay que tenerlo habilitado en la cuenta)
+         tupay    → XA    todos los medios que Tupay tenga habilitados
+       `img` es la imagen oficial que Tupay entrega a los comercios (images/pago/).
+     · directo (via 'directo'): depósito o transferencia a las cuentas de Giandeco (PAGO_DIRECTO) y envío del
+       comprobante por WhatsApp. Va siempre al final y se retira (activo:false) cuando Tupay esté funcionando.
+     activo:false lo quita del checkout; el panel también puede apagarlos. Cada medio de Tupay se puede apagar por
+     separado si la cuenta no lo habilita. Los medios de Tupay están apagados para el público hasta que la función
+     `tupay` y sus llaves estén listas (solo se ven con ?vista=tupay en este navegador); para encenderlos a todos
+     cambie vistaTupay() por true al final del bloque. */
   PAGO: (function(TUPAY_ACTIVO){ return [
     { key:'tarjeta', via:'izipay', activo:true, grupo:'tarjeta', label:'Tarjeta de crédito o débito', logos:['visa','mastercard','amex','diners'],
-      nota:'También en cuotas si su banco lo permite. Su pedido queda confirmado al pagar.',
-      notaOff:'No disponible en este momento. Puede pagar con otro medio.' },
-    { key:'qr', via:'tupay', codigo:'XAQR', activo:TUPAY_ACTIVO, grupo:'tupay', label:'QR Tupay · Yape, Plin y más', img:'tupay-qr', logos:['yape','plin'],
-      nota:'Escanee el QR y pague desde su billetera digital favorita. Su pedido queda confirmado al pagar.',
-      notaOff:'No disponible en este momento. Puede pagar con otro medio.' },
-    { key:'banca', via:'tupay', codigo:'XABT', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Banca en línea', img:'tupay-banca', logos:['bcp'],
-      nota:'Transferencia desde su banco: BCP, Interbank, Scotiabank, BBVA. Su pedido queda confirmado al pagar.',
-      notaOff:'No disponible en este momento. Puede pagar con otro medio.' },
-    { key:'tupay', via:'tupay', codigo:'XA', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Otros medios con Tupay', img:'tupay', logos:['efectivo'],
-      nota:'Elija en la página de Tupay: efectivo, transferencia, QR de billeteras digitales y más. La elección es suya.',
-      notaOff:'No disponible en este momento. Puede pagar con otro medio.' },
-    { key:'directo', via:'directo', activo:true, grupo:'directo', label:'Yape con QR, celular o cuenta de Giandeco', logos:['yape','bcp'],
-      nota:'Al registrar el pedido verá el código QR de Yape, el celular de Giandeco y la cuenta BCP. Paga, nos envía el comprobante por WhatsApp y confirmamos.' }
-  ]; })(vistaTupay()),   // público: false. Para encenderlo a todos, cambie vistaTupay() por true.
-  /* encabezado de cada grupo en el checkout (pasarela que procesa el pago).
-     Tupay pide que su logo vaya siempre con el nombre «Tupay» y sugiere este texto. */
-  PAGO_GRUPOS: {
-    tarjeta: { titulo:'Pagar con tarjeta', sub:'Crédito o débito, en un formulario cifrado', via:'izipay',
-               acepta:['visa','mastercard','amex','diners'] },
-    tupay:   { titulo:'Pagar con Tupay', sub:'¡Con Tupay, tú tienes el control! Compra en línea y elige cómo pagar: efectivo, banca en línea o QR de billeteras digitales.', via:'tupay',
-               acepta:['yape','plin','bcp','efectivo'] },
-    directo: { titulo:'Otra forma de pagar', sub:'Pago directo a Giandeco, con comprobante por WhatsApp', via:'', acepta:[] }
-  },
+      nota:'Crédito o débito, también en cuotas.', notaOff:'No disponible por ahora.' },
+    { key:'qr', via:'tupay', codigo:'XAQR', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Tupay QR', img:'tupay-qr.webp',
+      nota:'Escanee con Yape, Plin, Tunki y más.', notaOff:'No disponible por ahora.' },
+    { key:'banca', via:'tupay', codigo:'XABT', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Tupay Banca en línea', img:'tupay-banca.webp',
+      nota:'BCP, Interbank, Scotiabank y BBVA.', notaOff:'No disponible por ahora.' },
+    { key:'efectivo', via:'tupay', codigo:'EF', activo:TUPAY_ACTIVO, grupo:'tupay', label:'PagoEfectivo', img:'pagoefectivo.svg',
+      nota:'Genere un código y pague en agentes o bodegas.', notaOff:'No disponible por ahora.' },
+    { key:'tupay', via:'tupay', codigo:'XA', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Más medios con Tupay', img:'tupay.svg',
+      nota:'Elija su medio en la página de pago de Tupay.', notaOff:'No disponible por ahora.' },
+    { key:'directo', via:'directo', activo:true, grupo:'directo', label:'Pago directo a Giandeco', logos:['yape','bcp'],
+      nota:'Yape, QR o cuenta BCP. Confirme por WhatsApp.' }
+  ]; })(vistaTupay()),
   /* Códigos de descuento:  { 'BIENVENIDA': { pct:10 } }  o  { 'ENVIO': { monto:30 } }.
      Vacío = el campo de cupón no se muestra. */
   CUPONES: {},
@@ -167,16 +155,20 @@ function emitir(n){ try{ document.dispatchEvent(new CustomEvent('gd:' + n)); }ca
 /* logos de medios de pago (images/pago). Las tarjetas vienen de
    aaronfagan/svg-credit-card-payment-icons (Apache 2.0); Yape, de Wikimedia Commons;
    Plin, del juego de logos oficial de cada marca. */
-var MARCAS = { visa:'Visa', mastercard:'Mastercard', amex:'American Express', diners:'Diners Club', yape:'Yape', plin:'Plin', bcp:'BCP', transferencia:'Transferencia bancaria', efectivo:'Efectivo' };
-/* Sello de la pasarela que procesa el pago, con su logotipo oficial (images/pago/tupay.svg, izipay.png).
-   Si la imagen no carga, queda el nombre en letra de marca (nunca una imagen rota). */
-function sello(k, grande){
-  var n = k === 'izipay' ? 'Izipay' : k === 'tupay' ? 'Tupay' : '';
-  if(!n) return '';
-  var img = 'images/pago/' + k + (k === 'izipay' ? '.png' : '.svg');
-  /* Tupay: isotipo + nombre «tupay» (la guía de marca no permite el isotipo solo). Izipay: su logotipo ya trae el nombre. */
-  return '<span class="gdt-pasarela es-' + k + (grande ? ' es-grande' : '') + '" title="Pago procesado por ' + n + '"><img src="' + img + '" alt="' + (k === 'izipay' ? n : '') + '" height="' + (grande ? 22 : 16) + '" decoding="async" onerror="this.remove()">' +
-    (k === 'tupay' ? '<b>tupay</b>' : '<b class="solo-sin-logo">izipay</b>') + '</span>';
+var MARCAS = { visa:'Visa', mastercard:'Mastercard', amex:'American Express', diners:'Diners Club', yape:'Yape', plin:'Plin', bcp:'BCP' };
+/* Marca de la pasarela que procesa el pago, con su logotipo oficial (images/pago/izipay.png, tupay.svg). Tupay pide que
+   su isotipo vaya siempre con el nombre «tupay». Si una imagen no carga, queda el nombre (nunca una imagen rota). */
+function sello(k){
+  if(k === 'izipay') return '<span class="mp-marca es-izipay"><img src="images/pago/izipay.png" alt="Izipay" height="15" decoding="async" onerror="this.parentNode.classList.add(\'sin-logo\');this.remove()"><b>izipay</b></span>';
+  if(k === 'tupay')  return '<span class="mp-marca es-tupay"><img src="images/pago/tupay.svg" alt="" height="16" decoding="async" onerror="this.remove()"><b>tupay</b></span>';
+  return '';
+}
+/* Una sola línea de confianza bajo los medios: qué se protege y quién procesa. `vias` = pasarelas en uso. */
+function seguroPago(vias){
+  var p = (vias || []).map(sello).join('');
+  if(!p) return '';
+  return '<p class="mp-seguro"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>' +
+    '<span>Pago cifrado. Giandeco no guarda sus datos de pago.</span><span class="mp-proc">Procesa ' + p + '</span></p>';
 }
 function logosPago(lista){
   return '<i class="gdt-logos">' + (lista || []).map(function(k){
@@ -985,7 +977,7 @@ function montar(){
 
 window.GD_TIENDA = {
   CFG:CFG, CAT:CAT, LINEAS:LINEAS, COND:COND, CRITERIOS:CRITERIOS, ESTADOS:ESTADOS, FLECHA:FLECHA,
-  esc:esc, fmt:fmt, wa:wa, logosPago:logosPago, sello:sello, pagoDirectoHTML:pagoDirectoHTML, url:url, db:db, card:card, NUBE:NUBE, nube:nube, rpc:rpc, uid:uid,
+  esc:esc, fmt:fmt, wa:wa, logosPago:logosPago, sello:sello, seguroPago:seguroPago, pagoDirectoHTML:pagoDirectoHTML, url:url, db:db, card:card, NUBE:NUBE, nube:nube, rpc:rpc, uid:uid,
   familia:familia, complementos:complementos, similares:similares, espaciosDe:espaciosDe, recomendados:recomendados,
   carrito:carrito, cupon:cupon, favs:favs, vistos:vistos, sesion:sesion, pedidos:pedidos, opiniones:opiniones,
   abrir:abrir, cerrar:cerrar

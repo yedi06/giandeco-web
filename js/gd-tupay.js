@@ -24,7 +24,9 @@ function estado(){
   return llamar({ accion:'estado' }).then(function(r){ var a = !!(r && r.activa); T.db('tupay', a); return a; });
 }
 function consulta(n, cel){ return llamar({ accion:'consulta', n:n, cel:cel }); }
-function iniciar(n, cel, medio){ return llamar({ accion:'iniciar', n:n, cel:cel, medio:medio || '' }); }   // medio: qr, banca, tupay ('' = todos)
+function iniciar(n, cel, medio){   // medio: qr, banca, efectivo, tupay ('' = todos). En celular, Tupay permite descargar el QR.
+  return llamar({ accion:'iniciar', n:n, cel:cel, medio:medio || '', mobile:/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent) });
+}
 function verificar(n, cel){ return llamar({ accion:'verificar', n:n, cel:cel }); }
 
 window.GD_TUPAY = {

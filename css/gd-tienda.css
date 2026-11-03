@@ -1057,64 +1057,66 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .co-tot dd s{ margin-right:6px; color:var(--text-faint, #948D80); }
 
 /* ==========================================================================
-   MEDIOS DE PAGO · grupos por pasarela, sellos y bloque de confianza
-   (checkout y pagar). Tarjeta → Izipay · Billeteras, transferencia y efectivo → Tupay.
+   MEDIOS DE PAGO · lista plana (checkout y pagar)
+   Una fila por medio, sin cajas: el grupo se separa con espacio, la fila elegida con un tono y el radio en latón.
+   El detalle solo se abre en el medio elegido. Tarjeta → Izipay · Tupay QR, Banca, PagoEfectivo → Tupay.
    ========================================================================== */
-.co-pagos-g{ display:grid; gap:18px; }
-.gdt-pasarela{ display:inline-flex; align-items:center; gap:7px; padding:4px 10px 4px 9px; border:1px solid rgba(201,162,74,.34); border-radius:999px; background:rgba(201,162,74,.06); white-space:nowrap; }
-.gdt-pasarela::before{ content:''; width:12px; height:12px; flex:none; background:var(--accent);
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27/%3E%3C/svg%3E") center/contain no-repeat; }
-.gdt-pasarela img{ display:block; height:16px; width:auto; }
-.gdt-pasarela img + b.solo-sin-logo{ display:none; }          /* el logotipo de Izipay ya trae el nombre; sin logotipo se muestra el texto */
-.gdt-pasarela.es-izipay{ background:#0A0A09; border-color:rgba(255,255,255,.16); }
-.gdt-pasarela b{ font-weight:600; font-size:.82rem; letter-spacing:.03em; color:var(--lino); }
+.mp-lista{ display:grid; gap:34px; }
+.mp-grupo{ display:grid; }
+.mp-fila{ position:relative; display:grid; grid-template-columns:20px minmax(0,1fr) auto; align-items:center; column-gap:16px; padding:15px 16px; min-height:68px; border-radius:6px; cursor:pointer; transition:background-color .25s cubic-bezier(.16,1,.3,1); }
+.mp-fila input{ position:absolute; opacity:0; width:1px; height:1px; margin:0; }
+.mp-fila + .mp-fila::before{ content:''; position:absolute; left:52px; right:16px; top:0; height:1px; background:rgba(222,216,203,.08); }
+.mp-fila:hover{ background:rgba(222,216,203,.035); }
+.mp-fila:has(input:checked){ background:rgba(222,216,203,.065); }
+.mp-fila:has(input:checked)::before, .mp-fila:has(input:checked) + .mp-fila::before{ opacity:0; }
+.mp-radio{ width:18px; height:18px; box-sizing:border-box; border-radius:50%; border:1.5px solid rgba(222,216,203,.42); transition:border-color .2s, background-color .2s, box-shadow .2s; }
+.mp-fila input:checked ~ .mp-radio{ border-color:var(--accent); background:var(--accent); box-shadow:inset 0 0 0 3.5px var(--bg, #0A0A09); }
+.mp-fila input:focus-visible ~ .mp-radio{ outline:2px solid var(--accent); outline-offset:3px; }
+.mp-txt{ min-width:0; }
+.mp-nombre{ display:block; font-size:1rem; font-weight:500; line-height:1.3; color:var(--lino); }
+.mp-det{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .32s cubic-bezier(.16,1,.3,1); }
+.mp-det > span{ overflow:hidden; font-size:.84rem; line-height:1.5; color:var(--text-dim); }
+.mp-det i{ display:block; padding-top:3px; font-style:normal; }
+.mp-fila input:checked ~ .mp-txt .mp-det{ grid-template-rows:1fr; }
+.mp-vis{ display:flex; align-items:center; }
+.mp-vis .gdt-logos{ display:flex; flex-wrap:nowrap; gap:5px; }
+.mp-vis .gdt-logos img{ width:34px; height:22px; }
+.mp-tile{ display:flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:7px; overflow:hidden; background:#fff; box-shadow:0 0 0 1px rgba(222,216,203,.14); }
+.mp-tile img{ display:block; width:100%; height:100%; object-fit:cover; }
+.mp-tile img[src$="tupay.svg"]{ width:60%; height:60%; object-fit:contain; }
+.mp-fila.es-off{ opacity:.42; cursor:not-allowed; }
+.mp-fila.es-off .mp-det{ grid-template-rows:0fr !important; }
+.mp-grupo.es-directo{ margin-top:4px; }
+.mp-grupo.es-directo .mp-nombre{ font-weight:400; color:var(--text-dim); }
 
-.co-confianza{ list-style:none; margin:16px 0 0; padding:16px 18px; display:grid; gap:12px; border:1px solid var(--line); border-radius:2px; background:rgba(201,162,74,.035); }
-.co-confianza li{ display:flex; gap:12px; align-items:flex-start; }
-.co-confianza svg{ flex:none; width:18px; height:18px; margin-top:1px; stroke:var(--accent); fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
-.co-confianza span{ font-size:.8rem; line-height:1.5; color:var(--text-dim); }
-.co-confianza b{ display:block; font-weight:500; font-size:.82rem; color:var(--lino); }
-@media (min-width:700px){ .co-confianza{ grid-template-columns:1fr 1fr; gap:14px 22px; } }
+/* una sola línea de confianza: qué se protege y quién procesa (con el isotipo siempre junto al nombre «tupay») */
+.mp-seguro{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; margin:28px 0 0; padding:0 16px; font-size:.8rem; line-height:1.5; color:var(--text-faint); }
+.mp-seguro > svg{ width:15px; height:15px; flex:none; margin-right:-8px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.mp-seguro.es-solo{ padding:0; }
+.mp-proc{ display:inline-flex; align-items:center; gap:10px; }
+.mp-marca{ display:inline-flex; align-items:center; gap:6px; color:var(--lino); }
+.mp-marca img{ display:block; height:15px; width:auto; }
+.mp-marca b{ font-weight:600; font-size:.88rem; letter-spacing:.01em; }
+.mp-marca.es-izipay b{ display:none; }
+.mp-marca.es-izipay.sin-logo b{ display:inline; }
 
 /* pantalla de pago con Tupay (pagar.html) */
-.pg-cab{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; max-width:480px; }
-.pg-cab .pg-t{ margin-bottom:12px; }
 .pg-pagar{ width:100%; max-width:480px; justify-content:center; gap:10px; margin:var(--sp-24, 24px) 0 0; }
 .pg-pagar svg{ width:16px; height:16px; flex:none; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
-.pg-pago .co-confianza{ max-width:480px; }
-.pg-otros{ max-width:480px; margin-top:var(--sp-24, 24px); }
-.pg-chips{ display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 14px; }
-.pg-chip{ display:inline-flex; align-items:center; gap:10px; padding:8px 14px 8px 8px; border:1px solid var(--line); border-radius:2px; color:var(--lino); text-decoration:none; font-size:.82rem; transition:border-color .25s ease, background-color .25s ease; }
-.pg-chip:hover, .pg-chip:focus-visible{ border-color:rgba(201,162,74,.6); background:rgba(201,162,74,.06); outline:none; }
-.pg-chip .gdt-logos{ display:inline-flex; }
-:root[data-tema="claro"] .gdt-pasarela b, :root[data-tema="claro"] .co-confianza b{ color:var(--text, #1a1815); }
+.mp-otros{ max-width:480px; margin:22px 0 0; font-size:.84rem; line-height:1.8; color:var(--text-faint); }
+.mp-otros a{ color:var(--lino); text-decoration:underline; text-decoration-color:rgba(222,216,203,.3); text-underline-offset:3px; transition:text-decoration-color .2s; }
+.mp-otros a:hover, .mp-otros a:focus-visible{ text-decoration-color:var(--accent); }
 
-/* ---- bloque por proveedor (checkout): quién cobra, qué medios acepta y cada medio para elegirlo ---- */
-.co-prov{ border:1px solid var(--line); border-radius:3px; background:rgba(255,255,255,.015); overflow:hidden; }
-.co-prov.es-tupay, .co-prov.es-izipay{ border-color:rgba(201,162,74,.28); }
-.co-prov-cab{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px; padding:16px 18px 14px; border-bottom:1px solid var(--line); background:rgba(201,162,74,.045); }
-.co-prov.es-otro .co-prov-cab{ background:transparent; }
-.co-prov-id{ display:flex; align-items:center; gap:14px; min-width:0; }
-.co-prov-id b{ display:block; font-family:var(--display); font-weight:400; font-size:1.18rem; line-height:1.15; color:var(--lino); }
-.co-prov-id small{ display:block; margin-top:3px; font-size:.78rem; line-height:1.45; color:var(--text-faint); }
-.co-prov-acepta{ display:flex; align-items:center; gap:10px; }
-.co-prov-acepta > span{ font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint); }
-.co-prov .gdt-ops{ padding:14px 14px 16px; gap:8px; }
-.co-prov .gdt-op span{ background:var(--bg, transparent); }
-.co-prov.es-off{ opacity:.78; }
-.co-prov.es-otro{ margin-top:6px; }
-.gdt-pasarela.es-grande{ padding:7px 14px 7px 12px; }
-.gdt-pasarela.es-grande b{ font-size:1.02rem; }
-.gdt-pasarela.es-grande img{ height:22px; }
-.gdt-pasarela.es-grande::before{ width:15px; height:15px; }
-@media (max-width:640px){ .co-prov-cab{ padding:14px; } .co-prov .gdt-ops{ padding:12px; } .co-prov-acepta{ width:100%; } }
-
-/* imagen oficial de cada medio de Tupay (QR by tupay, tupay Banca en línea) */
-.gdt-op.con-tile > span{ position:relative; padding-right:104px; min-height:76px; }
-.gdt-tile{ position:absolute; right:14px; top:50%; transform:translateY(-50%); width:72px; height:72px; border-radius:8px; overflow:hidden; background:#fff; box-shadow:0 0 0 1px rgba(128,120,104,.3); display:flex; align-items:center; justify-content:center; }
-.gdt-tile img{ display:block; width:100%; height:100%; object-fit:cover; }
-.gdt-tile img[src$=".svg"]{ width:58%; height:58%; object-fit:contain; }
-.pg-chip img{ display:block; width:36px; height:36px; border-radius:6px; background:#fff; object-fit:cover; flex:none; }
-.pg-chip img[src$=".svg"]{ object-fit:contain; padding:5px; }
-@media (max-width:640px){ .gdt-op.con-tile > span{ padding-right:88px; } .gdt-tile{ width:60px; height:60px; right:12px; } }
+@media (max-width:640px){
+  .mp-fila{ padding:14px 10px; column-gap:12px; }
+  .mp-fila + .mp-fila::before{ left:42px; right:10px; }
+  .mp-seguro{ padding:0 10px; }
+  .mp-vis .gdt-logos img:nth-child(n+4){ display:none; }
+}
+@media (prefers-reduced-motion: reduce){ .mp-fila, .mp-radio, .mp-det{ transition:none; } }
+:root[data-tema="claro"] .mp-fila + .mp-fila::before{ background:rgba(0,0,0,.09); }
+:root[data-tema="claro"] .mp-fila:hover{ background:rgba(0,0,0,.035); }
+:root[data-tema="claro"] .mp-fila:has(input:checked){ background:rgba(0,0,0,.055); }
+:root[data-tema="claro"] .mp-radio{ border-color:rgba(0,0,0,.4); }
+:root[data-tema="claro"] .mp-marca, :root[data-tema="claro"] .mp-nombre{ color:var(--text, #1a1815); }
+:root[data-tema="claro"] .mp-marca.es-izipay img{ filter:invert(1) hue-rotate(180deg); }

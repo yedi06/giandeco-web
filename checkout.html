@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261103a">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261103e">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261103g">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -44,9 +44,9 @@
 </footer>
 
 <script src="js/giandeco.js?v=20261103d"></script>
-<script src="js/gd-tienda.js?v=20261103f"></script>
+<script src="js/gd-tienda.js?v=20261103g"></script>
 <script src="js/gd-pago.js?v=20261103a"></script>
-<script src="js/gd-tupay.js?v=20261103a"></script>
+<script src="js/gd-tupay.js?v=20261103b"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
 <script>
 (function(){
@@ -123,9 +123,9 @@
     return '<div class="gd-field"><label for="' + id + '">' + label + '</label><select id="' + id + '">' +
       ops.map(function(o){ return '<option' + (o === val ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></div>';
   }
-  function opcion(name, value, titulo, nota, on, marcas, logos, off, tile){
-    return '<label class="gdt-op' + (logos ? ' con-logos' : '') + (tile ? ' con-tile' : '') + (off ? ' es-off' : '') + '"><input type="radio" name="' + name + '" value="' + value + '"' + (on ? ' checked' : '') + (off ? ' disabled' : '') + '><span><b>' + titulo + '</b>' +
-      (tile ? '<i class="gdt-tile"><img src="images/pago/' + tile + (tile === 'tupay' ? '.svg' : '.webp') + '" alt="" width="72" height="72" loading="lazy" decoding="async"></i>' : logos ? T.logosPago(logos) : marcas ? '<em>' + marcas + '</em>' : '') + (nota ? '<small>' + nota + '</small>' : '') + '</span></label>';
+  function opcion(name, value, titulo, nota, on, marcas, logos, off){
+    return '<label class="gdt-op' + (logos ? ' con-logos' : '') + (off ? ' es-off' : '') + '"><input type="radio" name="' + name + '" value="' + value + '"' + (on ? ' checked' : '') + (off ? ' disabled' : '') + '><span><b>' + titulo + '</b>' +
+      (logos ? T.logosPago(logos) : marcas ? '<em>' + marcas + '</em>' : '') + (nota ? '<small>' + nota + '</small>' : '') + '</span></label>';
   }
   function pie(i){
     return '<div class="co-nav">' + (i ? '<button type="button" class="co-atras" data-ir="' + (i - 1) + '">Volver</button>' : '<span></span>') +
@@ -264,36 +264,22 @@
     var host = $('coPago'); if(!host) return;
     var ops = C.PAGO.filter(function(m){ return m.activo; }), antes = pagoTocado ? radio('pago') : datos.pago;
     var elegido = ops.filter(function(m){ return usable(m) && m.key === antes; })[0] || ops.filter(usable)[0];
-    /* un bloque por proveedor: quién cobra, qué medios acepta y, debajo, cada medio para elegirlo */
-    var G = C.PAGO_GRUPOS || {}, orden = ['tarjeta', 'tupay', 'directo'];
-    host.innerHTML = ops.length ? '<div class="co-pagos-g">' + orden.map(function(k){
-        var lista = ops.filter(function(m){ return m.grupo === k; }); if(!lista.length) return '';
-        var g = G[k] || {}, apagado = lista.every(function(m){ return !usable(m); });
-        var acepta = (g.acepta || []).length ? '<div class="co-prov-acepta"><span>Acepta</span>' + T.logosPago(g.acepta) + '</div>' : '';
-        return '<section class="co-prov es-' + (g.via || 'otro') + (apagado ? ' es-off' : '') + '" aria-label="' + esc(g.titulo || '') + '">' +
-          '<header class="co-prov-cab"><div class="co-prov-id">' + (g.via ? T.sello(g.via, true) : '') +
-            '<div><b>' + esc(g.titulo || '') + '</b><small>' + esc(g.sub || '') + '</small></div></div>' + acepta + '</header>' +
-          '<div class="gdt-ops co-pagos">' + lista.map(function(m){
-            return opcion('pago', m.key, m.label, usable(m) ? m.nota : m.notaOff, !!elegido && m.key === elegido.key, null, k === 'tarjeta' ? null : m.img ? null : m.logos, !usable(m), k === 'tupay' ? m.img : '');   // las tarjetas ya se ven arriba, en "Acepta"
-          }).join('') + '</div></section>';
-      }).join('') + '</div>' +
-      (ops.some(function(m){ return usable(m) && enLinea(m); }) ? confianza(ops) : '')
+    /* lista plana: una fila por medio, el detalle solo en el elegido; los grupos se separan con espacio, no con cajas */
+    function fila(m){
+      var ok = usable(m), on = !!elegido && m.key === elegido.key;
+      var vis = m.img ? '<i class="mp-tile"><img src="images/pago/' + m.img + '" alt="" width="42" height="42" loading="lazy" decoding="async"></i>' : T.logosPago(m.logos);
+      return '<label class="mp-fila' + (ok ? '' : ' es-off') + '"><input type="radio" name="pago" value="' + m.key + '"' + (on ? ' checked' : '') + (ok ? '' : ' disabled') + '>' +
+        '<span class="mp-radio" aria-hidden="true"></span>' +
+        '<span class="mp-txt"><b class="mp-nombre">' + esc(m.label) + '</b><span class="mp-det"><span><i>' + esc(ok ? m.nota : m.notaOff) + '</i></span></span></span>' +
+        '<span class="mp-vis">' + vis + '</span></label>';
+    }
+    var vias = ['izipay', 'tupay'].filter(function(v){ return ops.some(function(m){ return m.via === v && usable(m); }); });
+    host.innerHTML = ops.length ? '<div class="mp-lista" role="radiogroup" aria-label="Medio de pago">' + ['tarjeta', 'tupay', 'directo'].map(function(k){
+        var l = ops.filter(function(m){ return m.grupo === k; });
+        return l.length ? '<div class="mp-grupo es-' + k + '">' + l.map(fila).join('') + '</div>' : '';
+      }).join('') + '</div>' + T.seguroPago(vias)
       : '<p class="co-ayuda">Giandeco le escribirá por WhatsApp para coordinar el pago.</p>';
     botonFinal(); textosPago();
-  }
-  /* por qué pagar aquí es seguro: solo hechos que la pasarela respalda */
-  var CANDADO = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>';
-  var ESCUDO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>';
-  var BOLETA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg>';
-  function confianza(ops){
-    var izi = ops.some(function(m){ return m.via === 'izipay' && usable(m); }), tup = ops.some(function(m){ return m.via === 'tupay' && usable(m); });
-    var quien = izi && tup ? 'Izipay (tarjetas) y Tupay (billeteras, transferencia y efectivo)' : izi ? 'Izipay' : 'Tupay';
-    return '<ul class="co-confianza">' +
-      '<li>' + CANDADO + '<span><b>Conexión cifrada</b>Su pago viaja protegido de punta a punta.</span></li>' +
-      '<li>' + ESCUDO + '<span><b>Pasarelas autorizadas</b>El cobro lo procesa ' + quien + ' en su página segura.</span></li>' +
-      '<li>' + CANDADO + '<span><b>Sus datos no pasan por Giandeco</b>No vemos ni guardamos los datos de su tarjeta ni de su cuenta.</span></li>' +
-      '<li>' + BOLETA + '<span><b>Comprobante electrónico</b>Boleta o factura a su correo al confirmar el pago.</span></li>' +
-    '</ul>';
   }
   /* el último botón dice lo que va a pasar */
   function botonFinal(){
