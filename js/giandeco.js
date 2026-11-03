@@ -410,7 +410,13 @@ if(promo){
     msgs = todos.filter(function(m){ return !m.classList.contains('es-cupon') || document.documentElement.classList.contains('gd-cupon-on'); });
     promo.classList.toggle('es-una', msgs.length < 2);
   }
-  function mostrarPromo(i){ idx = (i + msgs.length) % msgs.length; todos.forEach(function(m){ m.classList.toggle('is-active', m === msgs[idx]); }); }
+  var vistas = {};   // cada promoción se cuenta una vez por página
+  function nombrePromo(m){ var b = m && m.querySelector('b'); return b ? b.textContent.trim() : ''; }
+  function mostrarPromo(i){
+    idx = (i + msgs.length) % msgs.length; todos.forEach(function(m){ m.classList.toggle('is-active', m === msgs[idx]); });
+    var n = nombrePromo(msgs[idx]); if(n && !vistas[n]){ vistas[n] = true; if(window.gdMedir) window.gdMedir('promo_ver', { promo:n }); }
+  }
+  promo.addEventListener('click', function(e){ var a = e.target.closest('.sh-promo-msg a'); if(a && window.gdMedir) window.gdMedir('promo_clic', { promo:nombrePromo(a.closest('.sh-promo-msg')) }); });
   visibles();
   document.addEventListener('gd:cupon', function(){ visibles(); mostrarPromo(idx); });
   promo.addEventListener('click', function(e){ var b = e.target.closest('[data-promo]'); if(b) mostrarPromo(idx + parseInt(b.getAttribute('data-promo'), 10)); });
@@ -964,10 +970,29 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
   if(document.readyState !== 'loading') buscar(); else document.addEventListener('DOMContentLoaded', buscar);
 })();
 
+/* MEDICIÓN DE PROMOCIONES — cada evento va a window.dataLayer y, si GA_ID tiene el ID
+   de Google Analytics 4 (G-XXXXXXXXXX), también a GA4. Sin ID no se envía nada a nadie.
+   Eventos: promo_ver, promo_clic, popup_ver, popup_cerrar, popup_codigo (enviado o copiado),
+   cupon_aplicado, pedido_registrado y purchase (con el cupón usado). */
+var GA_ID = '';
+window.dataLayer = window.dataLayer || [];
+window.gdMedir = function(evento, datos){
+  try{
+    var d = datos || {}, o = { event:evento }; for(var k in d) o[k] = d[k];
+    window.dataLayer.push(o);
+    if(window.gtag) window.gtag('event', evento, d);
+  }catch(e){}
+};
+if(GA_ID && !/(^|\/)admin(\.html)?$/.test(location.pathname)){
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date()); window.gtag('config', GA_ID);
+  var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(ga);
+}
+
 /* popup de bienvenida: solo se muestra si la función de cupones está activa (js/gd-bienvenida.js lo decide) */
 (function(){
   var base = (document.currentScript && document.currentScript.src || '').replace(/js\/giandeco\.js.*$/, '');
   if(!base) return;
-  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102c'; document.head.appendChild(l);
-  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102c'; s.defer = true; document.head.appendChild(s);
+  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102d'; document.head.appendChild(l);
+  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102d'; s.defer = true; document.head.appendChild(s);
 })();

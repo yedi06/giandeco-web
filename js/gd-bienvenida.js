@@ -87,6 +87,7 @@ function construir(){
   if(modo === 'general'){
     el.querySelector('[data-copia]').addEventListener('click', function(){
       var b = this;
+      if(window.gdMedir) window.gdMedir('popup_codigo', { modo:'general', accion:'copiado' });
       function hecho(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar código'; }, 2400); }
       try{ navigator.clipboard.writeText(GENERAL).then(hecho, seleccionar); }catch(err){ seleccionar(); }
     });
@@ -98,15 +99,17 @@ function seleccionar(){
   var r = document.createRange(); r.selectNodeContents(n); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
 }
 
-function abrir(){
+function abrir(origen){
   if(el || document.querySelector('.gdt-drawer.is-open, .gd-luz.is-open')) return;   // no se monta sobre la bolsa ni la foto ampliada
   construir();
+  if(window.gdMedir) window.gdMedir('popup_ver', { modo:modo, origen:origen === 'barra' ? 'barra' : 'automatico' });
   previo = document.activeElement;
   requestAnimationFrame(function(){ el.classList.add('is-on'); setTimeout(function(){ var i = el.querySelector('#gdbMail, [data-copia]'); if(i) i.focus({ preventScroll:true }); }, 450); });
 }
 function cerrar(){
   if(!el) return;
   el.classList.remove('is-on');
+  if(window.gdMedir && !el.classList.contains('enviado')) window.gdMedir('popup_cerrar', { modo:modo });
   if(!(leer() || {}).enviado) guardar({ cerrado:Date.now() });
   var x = el; el = null;
   setTimeout(function(){ if(x.parentNode) x.parentNode.removeChild(x); }, 600);
@@ -130,6 +133,7 @@ function enviar(e){
     btn.disabled = false; btn.textContent = 'Recibir mi código';
     if(r && r.ok){
       guardar({ enviado:true });
+      if(window.gdMedir) window.gdMedir('popup_codigo', { modo:'personal', accion:'enviado' });
       el.querySelector('.gdb-quien').textContent = mail;
       el.classList.add('enviado');
       el.querySelector('.gdb-ok').focus();
@@ -157,7 +161,7 @@ function encender(m){
   document.addEventListener('click', function(e){
     var a = e.target.closest('[data-gdb-abrir]');
     if(!a || (modo === 'personal' && (leer() || {}).enviado)) return;   // si ya recibió su código personal, el enlace lleva a las condiciones
-    e.preventDefault(); clearTimeout(temporizador); abrir();
+    e.preventDefault(); clearTimeout(temporizador); abrir('barra');
   });
   if(!silencio) temporizador = setTimeout(abrir, ESPERA);
 }

@@ -43,7 +43,7 @@
   <a href="legal/libro-de-reclamaciones" target="_blank">Libro de reclamaciones</a>
 </footer>
 
-<script src="js/giandeco.js?v=20261102c"></script>
+<script src="js/giandeco.js?v=20261102d"></script>
 <script src="js/gd-tienda.js?v=20261102a"></script>
 <script src="js/gd-pago.js?v=20261018a"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
@@ -410,7 +410,7 @@
       msg.textContent = texto; totales();
     }
     unico = null;
-    if(C.CUPONES[k]){ cupon = k; listo(true, 'Código aplicado.'); return; }
+    if(C.CUPONES[k]){ cupon = k; listo(true, 'Código aplicado.'); if(window.gdMedir) window.gdMedir('cupon_aplicado', { cupon:k, tipo:'general' }); return; }
     cupon = null;
     if(!/^GIAN-[A-Z0-9]{6}$/.test(k)){ listo(false, 'Ese código no es válido.'); return; }
     // código personal de bienvenida: solo sirve con el correo al que se envió
@@ -419,7 +419,7 @@
     cBtn.disabled = true;
     cuponFn({ accion:'validar', codigo:k, email:mail }).then(function(r){
       cBtn.disabled = false;
-      if(r && r.ok){ cupon = k; unico = { pct:r.pct }; listo(true, 'Código aplicado.'); }
+      if(r && r.ok){ cupon = k; unico = { pct:r.pct }; listo(true, 'Código aplicado.'); if(window.gdMedir) window.gdMedir('cupon_aplicado', { cupon:'BIENVENIDA-PERSONAL', tipo:'personal' }); }
       else listo(false, r && r.motivo === 'usado' ? 'Este código ya fue usado.' : r ? 'Ese código no es válido para este correo.' : 'No pudimos comprobar el código. Inténtelo de nuevo.');
     });
   });
@@ -464,6 +464,15 @@
     T.sesion.set({ nombre:g('coNombre'), cel:g('coCel'), email:g('coEmail') });
     T.db('datos', { comp:comp, tdoc:tdoc, doc:doc, ruc:g('coRuc'), razon:g('coRazon'), fiscal:g('coFiscal'), ent:ent,
                     ubigeo:g('coDist'), dir:g('coDir'), ref:g('coRef'), agdest:radio('agdest'), agencia:g('coAgencia'), pago:pago ? pago.key : '' });
+    // medición: el pedido con su cupón y si tuvo delivery gratis (los códigos personales se agrupan en uno solo)
+    if(window.gdMedir){
+      var envio = ent === 'envio' && !porAgencia() ? T.envioCosto(z.key, tot.subtotal) : null;
+      var tipoCupon = !cupon ? '' : unico ? 'BIENVENIDA-PERSONAL' : cupon;
+      var valor = Math.max(0, (tot.subtotal || 0) - (desc || 0) + (envio || 0));
+      window.gdMedir('pedido_registrado', { pedido:ped.n, valor:valor, cupon:tipoCupon, delivery_gratis:envio === 0, pago:pago ? pago.key : '' });
+      window.gdMedir('purchase', { transaction_id:ped.n, value:valor, currency:'PEN', coupon:tipoCupon, shipping:envio || 0,
+        items:lineas.map(function(x){ return { item_id:x.id, item_name:x.nombre, price:x.valor || 0, quantity:x.qty || 1 }; }) });
+    }
     enviando = true;
     T.carrito.vaciar();
     // WhatsApp se abre antes de cualquier espera: si no, el navegador lo bloquea como ventana emergente
