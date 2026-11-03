@@ -237,17 +237,25 @@ img{ max-width:100%; display:block; }
 .sh-promo-flecha{ width:24px; height:24px; display:grid; place-items:center; padding:0; background:none; border:0; border-radius:2px; color:rgba(222,216,203,.4); cursor:pointer; transition:color .25s ease; }
 .sh-promo-flecha:hover, .sh-promo-flecha:focus-visible{ color:var(--laton); }
 .sh-promo-flecha svg{ width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+/* la bienvenida solo se muestra con la función de cupones activa; con una sola promoción, sin flechas */
+html:not(.gd-cupon-on) .sh-promo-msg.es-cupon{ display:none; }
+.sh-promo.es-una .sh-promo-flecha{ visibility:hidden; }
 @media (max-width:1099px){ .sh-promo-x{ display:none; } }   /* en pantallas medianas se queda solo lo esencial, siempre en una línea */
 @media (max-width:719px){
   /* móvil: una sola línea de 38px (antes 60px); todo el mensaje es el enlace a las condiciones */
   :root{ --promo-h:38px; }
   .sh-promo-in{ grid-template-columns:1fr; padding-block:0; padding-inline:12px; }
-  .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc, .sh-promo-msg b{ display:none; }
-  .sh-promo-msg{ position:relative; gap:8px; font-size:.72rem; line-height:1.2; letter-spacing:.01em; }
+  .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc{ display:none; }
+  /* móvil: el nombre en latón y una frase corta, separados por un punto; sin ícono para que respire */
+  .sh-promo-ico{ display:none; }
+  .sh-promo-msg{ position:relative; gap:0; font-size:.74rem; line-height:1.2; letter-spacing:.02em; }
+  .sh-promo-msg b{ font-size:.62rem; letter-spacing:.18em; }
+  .sh-promo-msg b::after{ content:''; display:inline-block; width:3px; height:3px; margin:0 10px 0 11px; border-radius:50%; background:rgba(201,162,74,.7); vertical-align:middle; }
+  .sh-promo-t .mv{ color:#DED8CB; }
   .sh-promo-ico svg{ width:16px; height:16px; }
   .sh-promo-msg a{ position:absolute; inset:0; margin:0; padding:0; border:0; font-size:0; overflow:hidden; }   /* todo el mensaje es el enlace; «Ver condiciones» queda para lectores de pantalla */
 }
-@media (max-width:380px){ .sh-promo-msg{ font-size:.68rem; gap:6px; } }
+@media (max-width:380px){ .sh-promo-msg{ font-size:.7rem; } .sh-promo-msg b{ letter-spacing:.14em; } .sh-promo-msg b::after{ margin:0 8px; } }
 @media (max-width:339px){ :root{ --promo-h:46px; } .sh-promo-in{ padding-block:4px; } .sh-promo-msg{ white-space:normal; text-align:left; } }   /* pantallas muy angostas: el texto pasa a dos líneas en vez de desbordar */
 @media (prefers-reduced-motion: reduce){ .sh-promo-msg, .sh-promo-msg.is-active, .site-header::before{ transition:none; } }
 @media print{ .sh-promo{ display:none; } }

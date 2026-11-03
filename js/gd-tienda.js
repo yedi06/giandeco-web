@@ -540,14 +540,15 @@ function lineaHTML(x){
 /* --------------------------------------------------------------------------
    DELIVERY GRATIS: barra de avance «le faltan S/ X para el delivery gratis»
    Promoción «Envío Cortesía» (condiciones en legal/promociones): delivery gratis
-   en Lima Metropolitana por compras mayores a S/ 399. En provincias el pedido se
+   en Lima Metropolitana y Callao en compras desde S/ 399. En provincias el pedido se
    recoge en agencia. Se pinta en el cajón de la bolsa y en el checkout.
    -------------------------------------------------------------------------- */
-var ENVIO_GRATIS = { desde:399, zonas:['lima', 'callao'], lugar:{ lima:'Lima Metropolitana', callao:'Callao' } };
+var ENVIO_GRATIS = { desde:399, minimo:398.99,   // desde S/ 398.99 ya es gratis: S/ 399 exacto no paga delivery
+  zonas:['lima', 'callao'], lugar:{ lima:'Lima Metropolitana', callao:'Callao' } };
 var ICO_CAMION = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/></svg>';
-/* delivery propio: S/ 15 en Lima Metropolitana y Callao (tarifa en CFG.ENVIO), gratis por compras mayores a S/ 399.
+/* delivery propio: S/ 15 en Lima Metropolitana y Callao (tarifa en CFG.ENVIO), gratis en compras desde S/ 399.
    Fuera de esas zonas el pedido va por agencia, a cargo del cliente (tarifa null). */
-function envioGratis(zona, subtotal){ return ENVIO_GRATIS.zonas.indexOf(zona) !== -1 && Number(subtotal) > ENVIO_GRATIS.desde; }
+function envioGratis(zona, subtotal){ return ENVIO_GRATIS.zonas.indexOf(zona) !== -1 && Number(subtotal) >= ENVIO_GRATIS.minimo; }
 function envioCosto(zona, subtotal){
   var z = CFG.ENVIO.filter(function(x){ return x.key === zona; })[0];
   if(!z || z.tarifa == null) return null;                           // por agencia
@@ -557,9 +558,9 @@ function envioProg(subtotal, o){
   o = o || {};
   subtotal = Number(subtotal) || 0;
   if(subtotal <= 0) return '';                                       // solo piezas a cotizar: no hay monto que medir
-  var desde = ENVIO_GRATIS.desde, ok = subtotal > desde;
+  var desde = ENVIO_GRATIS.desde, ok = subtotal >= ENVIO_GRATIS.minimo;
   var tarifa = (CFG.ENVIO.filter(function(x){ return x.key === 'lima'; })[0] || {}).tarifa;
-  var regla = (tarifa != null ? 'Delivery de ' + fmt(tarifa) + ' en Lima Metropolitana y Callao, gratis por compras mayores a ' + fmt(desde) + '. ' : '') + 'Resto del Perú: por agencia, a cargo del cliente.';
+  var regla = (tarifa != null ? 'Delivery de ' + fmt(tarifa) + ' en Lima Metropolitana y Callao, gratis en compras desde ' + fmt(desde) + '. ' : '') + 'Resto del Perú: por agencia, a cargo del cliente.';
   var nota = '<a href="legal/promociones#envio-cortesia">Ver condiciones</a>';
   if(o.recojo){                                                       // recoge en Giandeco: no hay delivery que medir
     return '<div class="gdt-envio"><p class="gdt-envio-t">' + ICO_CAMION + '<span>Recojo en Giandeco, <b>sin costo</b>.</span></p></div>';

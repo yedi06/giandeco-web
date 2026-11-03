@@ -8,8 +8,10 @@
 if(window.GD_BIENVENIDA) return;
 window.GD_BIENVENIDA = true;
 
-// no interrumpe donde la persona está comprando, leyendo o administrando
-if(/(^|\/)(checkout|pagar|cuenta|seguimiento|admin|mantenimiento|404)(\.html)?$/.test(location.pathname) || /\/(legal|ayuda)\//.test(location.pathname)) return;
+// no se abre solo donde la persona está comprando, decidiendo una pieza, leyendo o administrando;
+// ahí solo se abre si la persona lo pide desde la barra de promociones
+var P = location.pathname;
+var SIN_AUTO = /(^|\/)(checkout|pagar|cuenta|seguimiento|admin|mantenimiento|404)(\.html)?$/.test(P) || /\/(legal|ayuda)\//.test(P) || /\/catalogo\/[^\/]+\/[^\/]+/.test(P);
 
 var NUBE = 'https://vsivmdfmecqxeumepyea.supabase.co', LLAVE = 'sb_publishable_mA4Evx59RnBY4lKVGh3GRg_Coe26bp-';
 var FN = NUBE + '/functions/v1/cupon', CLAVE = 'gd_bienvenida', ESPERA = 9000, REPOSO = 14 * 864e5;
@@ -22,8 +24,8 @@ function llamar(cuerpo){
     .then(function(r){ return r.json(); }).catch(function(){ return null; });
 }
 
-var est = leer();
-if(est && (est.enviado || (est.cerrado && Date.now() - est.cerrado < REPOSO))) return;
+var est = leer() || {};
+var silencio = SIN_AUTO || est.enviado || (est.cerrado && Date.now() - est.cerrado < REPOSO);
 
 var el, previo, temporizador;
 function construir(){
@@ -36,13 +38,13 @@ function construir(){
       '<button class="gdb-x" type="button" data-cierra aria-label="Cerrar"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg></button>' +
       '<figure class="gdb-img"></figure>' +
       '<div class="gdb-cuerpo">' +
-        '<h2 class="gdb-t" id="gdbT"><em>10 %</em> en su primera compra</h2>' +
-        '<p class="gdb-p gdb-p--ini">Déjenos su correo y le enviamos un código personal, de un solo uso. Válido solo en productos.</p>' +
+        '<h2 class="gdb-t" id="gdbT">Su primera pieza, con <em>10 %</em> de descuento</h2>' +
+        '<p class="gdb-p gdb-p--ini">Déjenos su correo y le enviamos un código personal para su primera compra en la tienda Giandeco.</p>' +
         '<form class="gdb-form" novalidate>' +
           '<div class="gdb-campo"><label for="gdbMail">Correo electrónico</label><input id="gdbMail" type="email" name="email" inputmode="email" autocomplete="email" placeholder="nombre@correo.com" required></div>' +
           '<p class="gdb-msg" role="alert" aria-live="polite"></p>' +
           '<button class="gdb-btn" type="submit">Recibir mi código</button>' +
-          '<p class="gdb-leyes">Usamos su correo solo para enviarle este código. <a href="' + raiz + 'legal/promociones">Condiciones</a> · <a href="' + raiz + 'legal/politica-de-privacidad">Privacidad</a></p>' +
+          '<p class="gdb-leyes">Válido una vez, solo en productos. Usamos su correo solo para enviarle este código. <a href="' + raiz + 'legal/promociones">Condiciones</a> · <a href="' + raiz + 'legal/politica-de-privacidad">Privacidad</a></p>' +
         '</form>' +
         '<button class="gdb-no" type="button" data-cierra>No, gracias</button>' +
         '<div class="gdb-ok" tabindex="-1"><p>Le enviamos el código a <strong class="gdb-quien"></strong>. Si no lo ve en unos minutos, revise la carpeta de correo no deseado.</p><p>Escríbalo en el paso de pago, con este mismo correo.</p><button class="gdb-btn" type="button" data-cierra>Seguir comprando</button></div>' +
@@ -109,10 +111,27 @@ function enviar(e){
   });
 }
 
+// la función de cupones se consulta una vez por visita (no en cada página)
+function estado(){
+  var c = null; try{ c = sessionStorage.getItem('gd_cupon_estado'); }catch(e){}
+  if(c) return Promise.resolve({ ok:true, activa:c === '1' });
+  return llamar({ accion:'estado' }).then(function(r){
+    if(r && r.ok) try{ sessionStorage.setItem('gd_cupon_estado', r.activa ? '1' : '0'); }catch(e){}
+    return r;
+  });
+}
 function programar(){
-  llamar({ accion:'estado' }).then(function(r){
+  estado().then(function(r){
     if(!r || !r.ok || !r.activa) return;     // sin correo configurado o sin respuesta: no se muestra nada
-    temporizador = setTimeout(abrir, ESPERA);
+    // la barra de promociones muestra la bienvenida y, al tocarla, abre este popup
+    document.documentElement.classList.add('gd-cupon-on');
+    document.dispatchEvent(new CustomEvent('gd:cupon'));
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('[data-gdb-abrir]');
+      if(!a || (leer() || {}).enviado) return;   // si ya recibió su código, el enlace lleva a las condiciones
+      e.preventDefault(); clearTimeout(temporizador); abrir();
+    });
+    if(!silencio) temporizador = setTimeout(abrir, ESPERA);
   });
 }
 if(document.readyState === 'complete') programar(); else window.addEventListener('load', programar);

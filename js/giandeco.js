@@ -199,16 +199,16 @@ function iconoBuscar(){ return '<svg viewBox="0 0 24 24"><circle cx="11" cy="11"
    condiciones (legal/promociones). Para agregar o cambiar una, editar solo esta lista.
    -------------------------------------------------------------------------- */
 var PROMOS = [
-  { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/></svg>', nombre:'Delivery gratis', texto:'En Lima Metropolitana por compras mayores a S/ 399', corto:'Delivery gratis en Lima por compras mayores a S/ 399', extra:'Provincias: recojo en agencia', href:'legal/promociones#envio-cortesia' },
-  { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5h17v3h-17zM5 12.5h14v8H5zM12 9.5v11M12 9.5C10.5 9.5 8 9 8 7a2 2 0 0 1 4-.5M12 9.5c1.5 0 4-.5 4-2.5a2 2 0 0 0-4-.5"/></svg>', nombre:'−10% de bienvenida', texto:'En su primera compra, solo en productos', corto:'−10% en su primera compra, solo en productos', extra:'No aplica al delivery', href:'legal/promociones#bienvenida' }
+  { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/></svg>', nombre:'Delivery gratis', texto:'Lima Metropolitana y Callao, en compras desde S/ 399', corto:'Lima y Callao desde S/ 399', extra:'Provincias, por agencia', href:'legal/promociones#envio-cortesia', accion:'Condiciones' },
+  { icono:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5h17v3h-17zM5 12.5h14v8H5zM12 9.5v11M12 9.5C10.5 9.5 8 9 8 7a2 2 0 0 1 4-.5M12 9.5c1.5 0 4-.5 4-2.5a2 2 0 0 0-4-.5"/></svg>', nombre:'Bienvenida', texto:'10 % de descuento en su primera compra', corto:'10 % en su primera compra', extra:'Código personal por correo', href:'legal/promociones#bienvenida', accion:'Recibir mi código', cupon:true }
 ];
 function promoHTML(){
   return '<div class="sh-promo" id="shPromo" role="region" aria-label="Promociones">' +
     '<div class="sh-promo-in">' +
       '<button class="sh-promo-flecha" type="button" data-promo="-1" aria-label="Promoción anterior"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>' +
       '<div class="sh-promo-slides">' + PROMOS.map(function(p, i){
-        return '<p class="sh-promo-msg' + (i === 0 ? ' is-active' : '') + '"><span class="sh-promo-ico">' + p.icono + '</span><b>' + p.nombre + '</b>' + '<span class="sh-promo-t"><span class="pc">' + p.texto + '</span><span class="mv">' + p.corto + '</span></span>' +
-          (p.extra ? '<span class="sh-promo-x">' + p.extra + '</span>' : '') + '<a href="' + p.href + '">Condiciones</a></p>';
+        return '<p class="sh-promo-msg' + (i === 0 ? ' is-active' : '') + (p.cupon ? ' es-cupon' : '') + '"><span class="sh-promo-ico">' + p.icono + '</span><b>' + p.nombre + '</b>' + '<span class="sh-promo-t"><span class="pc">' + p.texto + '</span><span class="mv">' + p.corto + '</span></span>' +
+          (p.extra ? '<span class="sh-promo-x">' + p.extra + '</span>' : '') + '<a href="' + p.href + '"' + (p.cupon ? ' data-gdb-abrir' : '') + '>' + p.accion + '</a></p>';
       }).join('') + '</div>' +
       '<button class="sh-promo-flecha" type="button" data-promo="1" aria-label="Promoción siguiente"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>' +
     '</div></div>';
@@ -404,12 +404,19 @@ if(header){
 
 /* Barra de promociones: rota sola cada 6 s, se detiene al pasar el cursor o enfocar, y no rota con "reducir movimiento" */
 if(promo){
-  var msgs = [].slice.call(promo.querySelectorAll('.sh-promo-msg')), idx = 0, pausa = false, quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function mostrarPromo(i){ idx = (i + msgs.length) % msgs.length; msgs.forEach(function(m, k){ m.classList.toggle('is-active', k === idx); }); }
+  var todos = [].slice.call(promo.querySelectorAll('.sh-promo-msg')), msgs = todos, idx = 0, pausa = false, quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // la promoción de bienvenida solo entra a la rotación cuando la función de cupones está activa (js/gd-bienvenida.js)
+  function visibles(){
+    msgs = todos.filter(function(m){ return !m.classList.contains('es-cupon') || document.documentElement.classList.contains('gd-cupon-on'); });
+    promo.classList.toggle('es-una', msgs.length < 2);
+  }
+  function mostrarPromo(i){ idx = (i + msgs.length) % msgs.length; todos.forEach(function(m){ m.classList.toggle('is-active', m === msgs[idx]); }); }
+  visibles();
+  document.addEventListener('gd:cupon', function(){ visibles(); mostrarPromo(idx); });
   promo.addEventListener('click', function(e){ var b = e.target.closest('[data-promo]'); if(b) mostrarPromo(idx + parseInt(b.getAttribute('data-promo'), 10)); });
   ['mouseenter', 'focusin'].forEach(function(ev){ promo.addEventListener(ev, function(){ pausa = true; }); });
   ['mouseleave', 'focusout'].forEach(function(ev){ promo.addEventListener(ev, function(){ pausa = false; }); });
-  if(!quieto && msgs.length > 1) setInterval(function(){ if(!pausa && !document.hidden) mostrarPromo(idx + 1); }, 6000);
+  if(!quieto) setInterval(function(){ if(!pausa && !document.hidden && msgs.length > 1) mostrarPromo(idx + 1); }, 6000);
 }
 
 var burger = document.getElementById('shBurger');
@@ -961,6 +968,6 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 (function(){
   var base = (document.currentScript && document.currentScript.src || '').replace(/js\/giandeco\.js.*$/, '');
   if(!base) return;
-  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261030a'; document.head.appendChild(l);
-  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261030a'; s.defer = true; document.head.appendChild(s);
+  var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'css/gd-bienvenida.css?v=20261102a'; document.head.appendChild(l);
+  var s = document.createElement('script'); s.src = base + 'js/gd-bienvenida.js?v=20261102a'; s.defer = true; document.head.appendChild(s);
 })();
