@@ -56,13 +56,13 @@ var CFG = {
        (js/gd-tupay.js · función `tupay`). `codigo` es el medio que se abre directo; el servidor lo valida:
          qr       → XAQR  «QR by tupay»: Yape, Plin, Tunki y más billeteras (el medio principal en Perú)
          banca    → XABT  «tupay Banca en línea»: BCP, Interbank, Scotiabank, BBVA
-         efectivo → EF    PagoEfectivo: código para pagar en agentes y bodegas (hay que tenerlo habilitado en la cuenta)
-         tupay    → XA    todos los medios que Tupay tenga habilitados
+       Son los dos medios que Tupay habilitó en la cuenta de Giandeco (confirmado por su área comercial). Para sumar otro
+       (PagoEfectivo `EF`, Kasnet…) primero hay que pedirlo a Tupay; luego se agrega una fila más con su código.
        `img` es la imagen oficial que Tupay entrega a los comercios (images/pago/).
      · directo (via 'directo'): depósito o transferencia a las cuentas de Giandeco (PAGO_DIRECTO) y envío del
        comprobante por WhatsApp. Va siempre al final y se retira (activo:false) cuando Tupay esté funcionando.
      activo:false lo quita del checkout; el panel también puede apagarlos. Cada medio de Tupay se puede apagar por
-     separado si la cuenta no lo habilita. Los medios de Tupay están apagados para el público hasta que la función
+     separado. Los medios de Tupay están apagados para el público hasta que la función
      `tupay` y sus llaves estén listas (solo se ven con ?vista=tupay en este navegador); para encenderlos a todos
      cambie vistaTupay() por true al final del bloque. */
   PAGO: (function(TUPAY_ACTIVO){ return [
@@ -72,10 +72,6 @@ var CFG = {
       nota:'Escanee con Yape, Plin, Tunki y más.', notaOff:'No disponible por ahora.' },
     { key:'banca', via:'tupay', codigo:'XABT', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Tupay Banca en línea', img:'tupay-banca.webp',
       nota:'BCP, Interbank, Scotiabank y BBVA.', notaOff:'No disponible por ahora.' },
-    { key:'efectivo', via:'tupay', codigo:'EF', activo:TUPAY_ACTIVO, grupo:'tupay', label:'PagoEfectivo', img:'pagoefectivo.svg',
-      nota:'Genere un código y pague en agentes o bodegas.', notaOff:'No disponible por ahora.' },
-    { key:'tupay', via:'tupay', codigo:'XA', activo:TUPAY_ACTIVO, grupo:'tupay', label:'Más medios con Tupay', img:'tupay.svg',
-      nota:'Elija su medio en la página de pago de Tupay.', notaOff:'No disponible por ahora.' },
     { key:'directo', via:'directo', activo:true, grupo:'directo', label:'Pago directo a Giandeco', logos:['yape','bcp'],
       nota:'Yape, QR o cuenta BCP. Confirme por WhatsApp.' }
   ]; })(vistaTupay()),

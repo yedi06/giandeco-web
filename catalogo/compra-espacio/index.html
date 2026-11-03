@@ -134,7 +134,7 @@
 
 <div id="gdFooter"></div>
 <script src="js/giandeco.js?v=20261103d"></script>
-<script src="js/gd-tienda.js?v=20261103g" defer></script>
+<script src="js/gd-tienda.js?v=20261103h" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-chat.js?v=20261027a" defer></script>
 <script>(function(){function go(){var T=window.GD_TIENDA,box=document.getElementById("cePiezas");if(!T||!box||!T.CAT)return;var ks=[].slice.call(document.querySelectorAll(".ce-shop .gd-shop-dot")).map(function(d){return d.getAttribute("data-prod")}).filter(function(k){return T.CAT[k]});if(!ks.length)return;box.innerHTML="<p class=\"ce-piezas-t\">Piezas de esta escena</p><div class=\"gd-grid es-carrusel\">"+ks.map(function(k){return T.card(k,{sinBoton:true})}).join("")+"</div>"}if(document.readyState==="complete")go();else window.addEventListener("load",go)})();</script>
