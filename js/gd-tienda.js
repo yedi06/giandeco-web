@@ -406,6 +406,55 @@ var vistos = {
 };
 
 /* --------------------------------------------------------------------------
+   CUPÓN: un código por compra, guardado junto al carrito (gd.cupon) para que el
+   que se aplica en el cajón llegue igual al checkout.
+   · general: los que el estudio crea en admin → Cupones (CFG.CUPONES)
+   · personal: GIAN-XXXXXX de bienvenida; la función `cupon` lo valida con el
+     correo al que se envió y lo canjea al registrar el pedido (checkout).
+   El descuento es sobre las piezas con precio; el delivery gratis se mide con
+   el subtotal antes del descuento.
+   -------------------------------------------------------------------------- */
+var PERSONAL = /^GIAN-[A-Z0-9]{6}$/, CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function cuponFn(c){
+  return fetch(NUBE.url + '/functions/v1/cupon', { method:'POST', headers:{ 'Content-Type':'application/json', apikey:NUBE.key }, body:JSON.stringify(c) })
+    .then(function(r){ return r.json(); }).catch(function(){ return null; });
+}
+var cupon = {
+  get: function(){
+    var c = db('cupon'); if(!c || !c.codigo) return null;
+    if(c.tipo === 'general' && !CFG.CUPONES[c.codigo]){ db('cupon', null); return null; }   // el estudio lo retiró
+    return c;
+  },
+  personal: function(k){ return PERSONAL.test(k); },
+  // devuelve una promesa con { ok, msg, falta:'email' }
+  aplicar: function(codigo, email, origen){
+    var k = String(codigo || '').toUpperCase().replace(/\s+/g, ''), mail = String(email || '').trim().toLowerCase();
+    function listo(c){
+      db('cupon', c); emitir('cupon'); pintarCajon();
+      if(window.gdMedir) window.gdMedir('cupon_aplicado', { cupon:c.tipo === 'personal' ? 'BIENVENIDA-PERSONAL' : c.codigo, tipo:c.tipo, origen:origen || '' });
+      return { ok:true, cupon:c };
+    }
+    if(!k) return Promise.resolve({ ok:false, msg:'Escriba su código.' });
+    var g = CFG.CUPONES[k];
+    if(g) return Promise.resolve(listo({ codigo:k, tipo:'general', pct:g.pct || 0, monto:g.monto || 0 }));
+    if(!PERSONAL.test(k)) return Promise.resolve({ ok:false, msg:'Ese código no es válido.' });
+    if(!CORREO.test(mail)) return Promise.resolve({ ok:false, falta:'email', msg:'Escriba el correo con el que recibió el código: solo sirve con ese correo.' });
+    return cuponFn({ accion:'validar', codigo:k, email:mail }).then(function(r){
+      if(r && r.ok) return listo({ codigo:k, tipo:'personal', pct:r.pct || 10, email:mail });
+      return { ok:false, msg:r && r.motivo === 'usado' ? 'Este código ya fue usado.' : r ? 'Ese código no es válido para este correo.' : 'No pudimos comprobar el código. Inténtelo de nuevo.' };
+    });
+  },
+  quitar: function(){ db('cupon', null); emitir('cupon'); pintarCajon(); },
+  descuento: function(subtotal, c){
+    c = c === undefined ? cupon.get() : c; subtotal = Number(subtotal) || 0;
+    if(!c || subtotal <= 0) return 0;
+    var d = c.pct ? subtotal * c.pct / 100 : (c.monto || 0);
+    return Math.round(Math.min(subtotal, d) * 100) / 100;
+  },
+  etiqueta: function(c){ return c.pct ? c.pct + ' % de descuento' : fmt(c.monto) + ' de descuento'; }
+};
+
+/* --------------------------------------------------------------------------
    6. CUENTA, PEDIDOS Y OPINIONES
    -------------------------------------------------------------------------- */
 var sesion = {
@@ -578,6 +627,19 @@ function envioProg(subtotal, o){
     '<p class="gdt-envio-n">' + (ok ? 'Promoción Envío Cortesía aplicada. ' : regla + ' ') + nota + '</p></div>';
 }
 
+// campo del cupón en el cajón: aplicado, o el formulario (el correo aparece solo para un código personal)
+function cuponHTML(c){
+  if(c) return '<div class="gdt-cupon is-on"><p class="gdt-cupon-ok"><span>Código <b>' + esc(c.codigo) + '</b> aplicado · ' + esc(cupon.etiqueta(c)) + '</span>' +
+    '<button type="button" data-gdt-cupon-quitar>Quitar</button></p></div>';
+  var s = sesion.get() || {}, mail = db('cupon_mail') || s.email || '';
+  return '<form class="gdt-cupon" id="gdtCupon" novalidate><label for="gdtCuponIn">¿Tiene un código de descuento?</label>' +
+    '<div class="gdt-cupon-row"><input id="gdtCuponIn" name="codigo" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Escriba su código">' +
+    '<button type="submit">Aplicar</button></div>' +
+    '<div class="gdt-cupon-mail" hidden><label for="gdtCuponMail">Correo con el que recibió el código</label>' +
+    '<input id="gdtCuponMail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="nombre@correo.com" value="' + esc(mail) + '"></div>' +
+    '<p class="gdt-cupon-msg" role="status" aria-live="polite"></p></form>';
+}
+
 function pintarCajon(){
   var l = carrito.lineas(), t = carrito.total(l);
   document.querySelectorAll('.gdt-badge').forEach(function(b){ b.textContent = t.piezas; b.hidden = !t.piezas; });
@@ -591,22 +653,12 @@ function pintarCajon(){
       '<a class="gd-link" href="catalogo/compra-espacio/">Compra el espacio' + FLECHA + '</a></div>';
     pie.innerHTML = ''; return;
   }
-  // una sugerencia, la de la última pieza añadida, y solo si no está ya dentro
-  var ult = l[l.length - 1], sug = '';
-  if(ult.key){
-    var c = complementos(ult.key, 3).filter(function(r){ return !l.some(function(x){ return x.id === r.key; }); })[0];
-    if(c){
-      var q = CAT[c.key];
-      sug = '<div class="gdt-sug"><span class="gdt-sug-t">' + esc(c.porque) + '</span>' +
-        '<div class="gdt-sug-row"><a href="' + url(c.key) + '"><img decoding="async" src="' + q.img + '" alt=""></a>' +
-        '<span><a href="' + url(c.key) + '">' + esc(q.nombre) + '</a><i>' + esc(q.precio) + '</i></span>' +
-        '<button type="button" data-gdt-add="' + c.key + '" data-quieto>Añadir</button></div></div>';
-    }
-  }
-  cuerpo.innerHTML = envioProg(t.subtotal) + '<ul class="gdt-lines">' + l.map(lineaHTML).join('') + '</ul>' + sug;
-  var soloCot = !t.subtotal;
+  var soloCot = !t.subtotal, cup = soloCot ? null : cupon.get(), desc = cupon.descuento(t.subtotal, cup);
+  cuerpo.innerHTML = envioProg(t.subtotal) + '<ul class="gdt-lines">' + l.map(lineaHTML).join('') + '</ul>' + (soloCot ? '' : cuponHTML(cup));
   pie.innerHTML =
     '<div class="gdt-tot"><span>Subtotal</span><b>' + (soloCot ? 'A cotizar' : fmt(t.subtotal)) + '</b></div>' +
+    (desc ? '<div class="gdt-tot es-desc"><span>Cupón ' + esc(cup.codigo) + '</span><b>− ' + fmt(desc) + '</b></div>' +
+            '<div class="gdt-tot es-total"><span>Total de piezas</span><b>' + fmt(t.subtotal - desc) + '</b></div>' : '') +
     (t.cotizar && !soloCot ? '<p class="gdt-tot-nota">+ ' + t.cotizar + (t.cotizar === 1 ? ' pieza' : ' piezas') + ' a cotizar por el estudio.</p>' : '') +
     '<p class="gdt-tot-nota">Delivery en Lima Metropolitana y Callao: ' + fmt((CFG.ENVIO[0] || {}).tarifa || 0) + ', gratis desde ' + fmt(ENVIO_GRATIS.desde) + '. Resto del Perú: por agencia, a cargo del cliente. Armado, a cotizar.</p>' +
     '<a class="gd-btn gd-btn-primary" href="checkout">' + (soloCot ? 'Solicitar cotización' : 'Finalizar pedido') + FLECHA + '</a>' +
@@ -803,8 +855,30 @@ function montar(){
     }
   });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrar(); });
-  // otra pestaña cambió la selección
-  window.addEventListener('storage', function(e){ if(e.key === 'gd.carrito') pintarCajon(); });
+
+  // cupón en el cajón
+  cajon.addEventListener('click', function(e){ if(e.target.closest('[data-gdt-cupon-quitar]')) cupon.quitar(); });
+  cajon.addEventListener('input', function(e){
+    if(e.target.id !== 'gdtCuponIn') return;
+    var f = e.target.form, k = e.target.value.toUpperCase().trim();
+    f.querySelector('.gdt-cupon-mail').hidden = !/^GIAN-/.test(k);   // el código personal solo sirve con su correo
+    f.querySelector('.gdt-cupon-msg').textContent = '';
+  });
+  cajon.addEventListener('submit', function(e){
+    var f = e.target; if(f.id !== 'gdtCupon') return;
+    e.preventDefault();
+    var btn = f.querySelector('button[type="submit"]'), msg = f.querySelector('.gdt-cupon-msg'), cod = f.codigo.value, mail = f.email.value;
+    btn.disabled = true; msg.textContent = 'Comprobando…';
+    cupon.aplicar(cod, mail, 'carrito').then(function(r){
+      if(CORREO.test(mail.trim())) db('cupon_mail', mail.trim().toLowerCase());
+      if(r.ok) return;   // el cajón se repinta con el código aplicado
+      btn.disabled = false; msg.textContent = r.msg;
+      if(r.falta === 'email'){ f.querySelector('.gdt-cupon-mail').hidden = false; f.email.focus(); }
+    });
+  });
+
+  // otra pestaña cambió la selección o el cupón
+  window.addEventListener('storage', function(e){ if(e.key === 'gd.carrito' || e.key === 'gd.cupon') pintarCajon(); });
   pintarCajon();
 
   // ajustes del estudio (precios, envío, medios de pago, opiniones publicadas):
@@ -832,7 +906,7 @@ window.GD_TIENDA = {
   CFG:CFG, CAT:CAT, LINEAS:LINEAS, COND:COND, CRITERIOS:CRITERIOS, ESTADOS:ESTADOS, FLECHA:FLECHA,
   esc:esc, fmt:fmt, wa:wa, logosPago:logosPago, pagoDirectoHTML:pagoDirectoHTML, url:url, db:db, card:card, NUBE:NUBE, nube:nube, rpc:rpc, uid:uid,
   familia:familia, complementos:complementos, similares:similares, espaciosDe:espaciosDe, recomendados:recomendados,
-  carrito:carrito, favs:favs, vistos:vistos, sesion:sesion, pedidos:pedidos, opiniones:opiniones,
+  carrito:carrito, cupon:cupon, favs:favs, vistos:vistos, sesion:sesion, pedidos:pedidos, opiniones:opiniones,
   abrir:abrir, cerrar:cerrar
 };
 

@@ -56,17 +56,31 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .gdt-qty button:hover{ color:var(--t-accent); }
 .gdt-qty b{ min-width:26px; text-align:center; font-weight:400; font-size:.88rem; font-variant-numeric:tabular-nums; color:var(--t-text); }
 
-.gdt-sug{ margin-top:22px; padding:16px; border:1px solid var(--t-line); border-radius:2px; background:rgba(201,162,74,.05); }
-.gdt-sug-t{ display:block; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--t-accent); margin-bottom:12px; }
-.gdt-sug-row{ display:grid; grid-template-columns:52px 1fr auto; gap:12px; align-items:center; }
-.gdt-sug-row img{ width:52px; height:52px; object-fit:cover; border-radius:2px; background:#fff; display:block; }
-.gdt-sug-row span a{ display:block; font-weight:500; font-size:.86rem; color:var(--t-text); text-decoration:none; line-height:1.3; }
-.gdt-sug-row span i{ font-style:normal; font-size:.8rem; color:var(--t-dim); }
-.gdt-sug-row button{ background:none; border:1px solid var(--t-line); color:var(--t-text); font-family:inherit; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; padding:9px 12px; border-radius:2px; cursor:pointer; }
-.gdt-sug-row button:hover{ border-color:var(--t-accent); color:var(--t-accent); }
+/* cupón en el cajón: una línea discreta bajo las piezas, sin caja que parezca otra pieza */
+.gdt-cupon{ margin-top:22px; padding-top:18px; border-top:1px solid var(--t-line); display:grid; gap:8px; }
+.gdt-cupon label{ font-size:.8rem; color:var(--t-dim); }
+.gdt-cupon-row{ display:flex; gap:8px; }
+.gdt-cupon input{ flex:1; min-width:0; width:100%; box-sizing:border-box; background:rgba(222,216,203,.03); border:1px solid var(--t-line); border-radius:2px; padding:11px 12px; color:var(--t-text); font-family:inherit; font-size:16px; }
+.gdt-cupon #gdtCuponIn{ text-transform:uppercase; letter-spacing:.06em; }
+.gdt-cupon #gdtCuponIn::placeholder{ text-transform:none; letter-spacing:0; }
+.gdt-cupon input:focus{ outline:none; border-color:var(--t-accent); }
+.gdt-cupon-row button{ background:none; border:1px solid var(--t-line); border-radius:2px; padding:0 16px; cursor:pointer; color:var(--t-text); font-family:inherit; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; }
+.gdt-cupon-row button:hover{ border-color:var(--t-accent); color:var(--t-accent); }
+.gdt-cupon-row button:disabled{ opacity:.5; cursor:wait; }
+.gdt-cupon-mail{ display:grid; gap:6px; margin-top:4px; }
+.gdt-cupon-mail[hidden]{ display:none; }
+.gdt-cupon-msg{ margin:0; font-size:.78rem; color:var(--t-dim); line-height:1.45; }
+.gdt-cupon-msg:empty{ display:none; }
+.gdt-cupon-ok{ margin:0; display:flex; align-items:baseline; justify-content:space-between; gap:12px; font-size:.84rem; color:var(--t-dim); line-height:1.45; }
+.gdt-cupon-ok b{ font-weight:500; color:var(--t-accent); letter-spacing:.04em; }
+.gdt-cupon-ok button{ background:none; border:none; padding:4px 0; color:var(--t-dim); font-family:inherit; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; text-decoration:underline; text-underline-offset:3px; cursor:pointer; white-space:nowrap; }
+.gdt-cupon-ok button:hover{ color:var(--t-accent); }
 
 .gdt-tot{ display:flex; align-items:baseline; justify-content:space-between; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--t-dim); }
 .gdt-tot b{ font-weight:400; font-size:1.25rem; letter-spacing:0; text-transform:none; color:var(--t-text); font-variant-numeric:tabular-nums; }
+.gdt-tot.es-desc b{ font-size:.95rem; color:var(--t-accent); }
+.gdt-tot.es-desc span{ text-transform:none; letter-spacing:.02em; }
+.gdt-tot.es-total{ padding-top:10px; border-top:1px solid var(--t-line); color:var(--t-text); }
 .gdt-tot-nota{ margin:0; font-size:.78rem; color:var(--t-faint); line-height:1.5; }
 .gdt-seguir{ background:none; border:none; color:var(--t-dim); font-family:inherit; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; padding:8px; cursor:pointer; }
 .gdt-seguir:hover{ color:var(--t-accent); }
@@ -420,6 +434,8 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .co-cupon input:focus{ outline:none; border-color:var(--accent); }
 .co-cupon button{ background:none; border:1px solid var(--line); border-radius:2px; padding:0 16px; cursor:pointer; color:var(--text); font-family:var(--body); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; }
 .co-cupon button:hover{ border-color:var(--accent); color:var(--accent); }
+.co-cupon-x{ background:none; border:none; padding:0 0 0 6px; color:var(--text-dim); font:inherit; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.co-cupon-x:hover{ color:var(--accent); }
 .co-tot .es-igv{ font-size:.76rem; color:var(--text-faint); }
 .co-conf{ list-style:none; margin:4px 0 0; padding:16px 0 0; border-top:1px solid var(--line); display:grid; gap:8px; }
 .co-conf li{ position:relative; padding-left:20px; font-size:.8rem; color:var(--text-dim); line-height:1.5; }

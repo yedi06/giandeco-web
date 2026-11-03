@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261102a">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261102g">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261102h">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -44,7 +44,7 @@
 </footer>
 
 <script src="js/giandeco.js?v=20261102g"></script>
-<script src="js/gd-tienda.js?v=20261102g"></script>
+<script src="js/gd-tienda.js?v=20261102h"></script>
 <script src="js/gd-pago.js?v=20261018a"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
 <script>
@@ -289,13 +289,11 @@
   P.estado().then(function(a){ if(a !== pasarela){ pasarela = a; textosPago(); pintarPago(); } });
 
   function cuponFn(c){ return fetch(T.NUBE.url + '/functions/v1/cupon', { method:'POST', headers:{ 'Content-Type':'application/json', apikey:T.NUBE.key }, body:JSON.stringify(c) }).then(function(r){ return r.json(); }).catch(function(){ return null; }); }
+  // el cupón es el mismo del cajón (T.cupon, guardado en gd.cupon): se puede aplicar en cualquiera de los dos
   var cupon = null, unico = null;   // unico: código personal de bienvenida (GIAN-XXXXXX) ya validado con el servidor
-  function descuento(){
-    if(!cupon) return 0;
-    var c = C.CUPONES[cupon] || unico;
-    if(!c) return 0;
-    return Math.min(tot.subtotal, c.pct ? tot.subtotal * c.pct / 100 : (c.monto || 0));
-  }
+  function leerCupon(){ var c = soloCot ? null : T.cupon.get(); cupon = c ? c.codigo : null; unico = c && c.tipo === 'personal' ? c : null; return c; }
+  leerCupon();
+  function descuento(){ return cupon ? T.cupon.descuento(tot.subtotal) : 0; }
   function totales(){
     var ent = radio('ent'), z = zona();
     var agencia = porAgencia(), envio = ent === 'recojo' || agencia ? 0 : T.envioCosto(z.key, tot.subtotal), pend = envio === null, desc = descuento();
@@ -403,26 +401,53 @@
   $('coCel').addEventListener('input', function(){ this.value = this.value.replace(/\D/g, ''); });
   $('coMini').addEventListener('click', function(){ $('coRes').scrollIntoView({ behavior:'smooth', block:'start' }); });
   var cBtn = $('coCuponBtn');
+  // mensaje bajo el campo; con el código aplicado ofrece quitarlo
+  function avisoCupon(ok, texto){
+    var msg = $('coCuponMsg'); if(!msg) return;
+    msg.style.display = texto ? 'block' : ''; msg.style.color = ok ? 'var(--accent)' : '';
+    msg.innerHTML = esc(texto || '') + (ok && cupon ? ' <button type="button" class="co-cupon-x" id="coCuponX">Quitar</button>' : '');
+    totales();
+  }
+  function cuponPintado(texto){
+    leerCupon();
+    if($('coCupon')) $('coCupon').value = cupon || '';
+    avisoCupon(!!cupon, cupon ? (texto || 'Código ' + cupon + ' aplicado · ' + T.cupon.etiqueta(T.cupon.get()) + '.') : texto || '');
+  }
   if(cBtn) cBtn.addEventListener('click', function(){
-    var k = g('coCupon').toUpperCase().trim(), msg = $('coCuponMsg');
-    function listo(ok, texto){
-      msg.style.display = 'block'; msg.style.color = ok ? 'var(--accent)' : '';
-      msg.textContent = texto; totales();
-    }
-    unico = null;
-    if(C.CUPONES[k]){ cupon = k; listo(true, 'Código aplicado.'); if(window.gdMedir) window.gdMedir('cupon_aplicado', { cupon:k, tipo:'general' }); return; }
-    cupon = null;
-    if(!/^GIAN-[A-Z0-9]{6}$/.test(k)){ listo(false, 'Ese código no es válido.'); return; }
-    // código personal de bienvenida: solo sirve con el correo al que se envió
-    var mail = g('coEmail').trim().toLowerCase();
-    if(!mail){ listo(false, 'Escriba primero su correo en los datos de contacto: el código solo sirve con el correo al que se envió.'); return; }
+    var k = g('coCupon').toUpperCase().trim(), mail = g('coEmail').trim().toLowerCase();
     cBtn.disabled = true;
-    cuponFn({ accion:'validar', codigo:k, email:mail }).then(function(r){
+    T.cupon.aplicar(k, mail, 'checkout').then(function(r){
       cBtn.disabled = false;
-      if(r && r.ok){ cupon = k; unico = { pct:r.pct }; listo(true, 'Código aplicado.'); if(window.gdMedir) window.gdMedir('cupon_aplicado', { cupon:'BIENVENIDA-PERSONAL', tipo:'personal' }); }
-      else listo(false, r && r.motivo === 'usado' ? 'Este código ya fue usado.' : r ? 'Ese código no es válido para este correo.' : 'No pudimos comprobar el código. Inténtelo de nuevo.');
+      if(r.ok){ cuponPintado(); return; }
+      leerCupon();
+      avisoCupon(false, r.falta === 'email' ? 'Escriba primero su correo en los datos de contacto: el código solo sirve con el correo al que se envió.' : r.msg);
     });
   });
+  if(cBtn) $('coCupon').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); cBtn.click(); } });
+  root.addEventListener('click', function(e){ if(e.target.id === 'coCuponX'){ T.cupon.quitar(); cuponPintado('Código quitado.'); } });
+  // el código personal solo vale con su correo: si el correo cambia, se vuelve a comprobar
+  function revisarCupon(){
+    if(!unico) return;
+    var mail = g('coEmail').trim().toLowerCase(), cod = unico.codigo;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail) || mail === unico.email) return;
+    T.cupon.aplicar(cod, mail, 'checkout').then(function(r){
+      if(r.ok) cuponPintado();
+      else { T.cupon.quitar(); cuponPintado('El código ' + cod + ' no se pudo usar con este correo y se quitó. ' + (r.msg || '')); }
+    });
+  }
+  $('coEmail').addEventListener('change', revisarCupon);
+  // el cajón (Editar el carrito) también puede aplicar o quitar el código
+  document.addEventListener('gd:cupon', function(){ if(!enviando) cuponPintado(); });
+  if(cupon){
+    if(unico && !g('coEmail')) $('coEmail').value = unico.email;   // el correo con el que se validó en el cajón
+    cuponPintado();
+    // un código personal guardado se vuelve a comprobar con el servidor (pudo usarse en otro pedido)
+    if(unico) cuponFn({ accion:'validar', codigo:unico.codigo, email:unico.email }).then(function(r){
+      var cod = unico && unico.codigo;
+      if(r && !r.ok){ T.cupon.quitar(); cuponPintado(r.motivo === 'usado' ? 'El código ' + cod + ' ya fue usado y se quitó.' : 'El código ya no es válido y se quitó.'); }
+      else revisarCupon();
+    });
+  }
   pintarUbigeo(0); condicionales(); textosPago(); mostrar(0);
 
   // si la selección cambia desde el cajón, el resumen se rehace entero
@@ -450,6 +475,9 @@
     entrega.armado = $('coArmado').checked;
     if($('coOtro').checked) entrega.recibe = g('coOtroN') + ' (doc. ' + g('coOtroD') + ')';
 
+    // el código personal tiene que ir con el correo con el que se comprobó (si se cambió, se vuelve a comprobar)
+    leerCupon();
+    if(unico && g('coEmail').trim().toLowerCase() !== unico.email){ revisarCupon(); $('coRes').scrollIntoView({ block:'start' }); return; }
     var desc = descuento();
     var ped = T.pedidos.crear({
       items: lineas, subtotal: tot.subtotal, cotizar: tot.cotizar, entrega: entrega,
@@ -475,6 +503,7 @@
     }
     enviando = true;
     T.carrito.vaciar();
+    T.cupon.quitar();   // el código ya va en el pedido (variables cupon y unico siguen para el canje)
     // WhatsApp se abre antes de cualquier espera: si no, el navegador lo bloquea como ventana emergente
     if(!enLinea(pago) && (!pago || pago.key !== 'directo')) window.open(T.wa(T.pedidos.mensaje(ped)), '_blank', 'noopener');
     function seguir(){
