@@ -267,7 +267,7 @@ var SEC = {
           bn(I.escudo, 'Cambios y garantía', 'Las condiciones de cambio y garantía de sus piezas.', 'ayuda/cambios-y-garantia', 'Ver condiciones', false, true) +
           bn(I.navidad, 'Navidad 2026', 'Las 26 piezas de la colección, con precio y ficha.', 'catalogo/navidad/', 'Ver colección', false, true) +
           bnVacio('Próximamente.') + '</div>' +
-        '<div class="cx-filas">' + fila(I.waMsg, 'Su asesor', 'Le responde por WhatsApp', asesor(s)) + fila(I.escudo, 'Cambios y garantía', 'Condiciones de sus piezas', 'ayuda/cambios-y-garantia') + fila(I.navidad, 'Navidad 2026', '26 piezas con precio y ficha', 'catalogo/navidad/') + '</div></section>' +
+        '<div class="cx-filas">' + fila(I.waMsg, 'Su asesor', 'Le responde por WhatsApp', asesor(s)) + fila(I.escudo, 'Cambios y garantía', 'Condiciones de sus piezas', 'ayuda/cambios-y-garantia') + fila(I.navidad, 'Navidad 2026', 'Más de 70 piezas con precio y ficha', 'catalogo/navidad/') + '</div></section>' +
       '<section class="cx-sec"><h2 class="cx-h2">Servicios</h2>' + servicio(true) + '</section>' +
       (L.fav.length ? '<section class="cx-sec"><div class="cx-sec-cab"><h2 class="cx-h2">Guardados</h2><a class="cx-ver" href="#guardados">Ver los ' + L.fav.length + '</a></div>' + pcs(L.fav.slice(0, 4)) + '</section>' : '');
   },
@@ -308,7 +308,7 @@ var SEC = {
         bn(I.escudo, 'Cambios y garantía', 'Conozca las condiciones de cambio y garantía de sus piezas.', 'ayuda/cambios-y-garantia', 'Ver condiciones') +
         bn(I.envio, 'Envíos y entregas', 'Plazos, cobertura y cómo recibir su pedido.', 'ayuda/envios-y-entregas', 'Ver detalles') +
         bnVacio('Próximamente.') + '</div>' +
-      '<div class="cx-filas">' + fila(I.waMsg, 'Su asesor', 'Le responde por WhatsApp', asesor(s)) + fila(I.navidad, 'Colección Navidad 2026', '26 piezas con precio y ficha', 'catalogo/navidad/') +
+      '<div class="cx-filas">' + fila(I.waMsg, 'Su asesor', 'Le responde por WhatsApp', asesor(s)) + fila(I.navidad, 'Colección Navidad 2026', 'Más de 70 piezas con precio y ficha', 'catalogo/navidad/') +
         fila(I.escudo, 'Cambios y garantía', 'Condiciones de sus piezas', 'ayuda/cambios-y-garantia') + fila(I.envio, 'Envíos y entregas', 'Plazos y cobertura', 'ayuda/envios-y-entregas') + '</div>' +
       '<section class="cx-sec"><div style="display:flex;flex-direction:column;gap:6px"><h2 class="cx-h2" style="line-height:normal">Servicios</h2><p class="cx-p">Servicios del estudio con costo, aparte de sus beneficios.</p></div>' + servicio(false, true) + '</section>' +
       proyectoBloque(s);

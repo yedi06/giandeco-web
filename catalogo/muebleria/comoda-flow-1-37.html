@@ -43,8 +43,8 @@
 <main id="pdp"><section class="pdp-top"><div class="gd-in"><h1 class="gd-h1">Cómoda Flow 1.37</h1><p class="gd-body">S/ 879.00</p><p class="gd-body">4 cajones con correderas telescópicas de apertura por presión. Patas de madera maciza.</p><img src="images/mobiliario/comoda-flow-1.webp" alt="Cómoda Flow 1.37" width="600"></div></section></main>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261102g"></script>
-<script src="js/gd-tienda.js?v=20261102h"></script>
+<script src="js/giandeco.js?v=20261103a"></script>
+<script src="js/gd-tienda.js?v=20261103a"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, esc = T.esc;
@@ -180,6 +180,8 @@
   /* ==================== 2. FICHA ==================== */
   var rasgos = p.nota.split(/\.\s+/).map(function(x){ return x.replace(/\.$/, '').trim(); }).filter(Boolean);
   var filas = [['Línea', '<a href="' + L.href + '">' + L.label + '</a>'], ['Categoría', esc(p.cat)]];
+  // ficha del estudio: medidas, material, acabado y forma de venta
+  [['Medidas', p.medida], ['Material', p.material], ['Acabado', p.acabado], ['Se vende por', p.venta], ['Modelo', p.modelo]].forEach(function(f){ if(f[1]) filas.push([f[0], esc(f[1])]); });
   if(p.v) filas.push(['Variante', esc(p.v)]);
   filas.push(['Referencia', esc(key.toUpperCase())]);
   filas.push(['Entrega', esc(instala ? T.COND : 'Delivery en Lima Metropolitana y Callao: S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga el cliente a la agencia.')]);

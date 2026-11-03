@@ -6,7 +6,7 @@
 <script src="js/gd-acceso.js?v=20261018a"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Árbol navideño iluminado — Navidad · Giandeco Studio Design</title>
-<meta name="description" content="Árbol navideño iluminado · Iluminados · S/ 62.30. Árbol blanco calado con estrellas por las que sale la luz. Material de porcelana. Envío a todo el Perú.">
+<meta name="description" content="Árbol navideño iluminado · Iluminados · S/ 71.60. Pino blanco de porcelana con luces. Alto 26 cm · largo 15 cm · profundidad 7 cm. Envío a todo el Perú.">
 <meta name="theme-color" content="#0A0A09">
 <!-- favicon -->
 <link rel="icon" href="favicon.ico?v=1" sizes="32x32">
@@ -20,11 +20,11 @@
 <meta property="og:site_name" content="Giandeco Studio Design">
 <meta property="og:locale" content="es_PE">
 <meta property="og:title" content="Árbol navideño iluminado — Navidad · Giandeco Studio Design">
-<meta property="og:description" content="Árbol navideño iluminado · Iluminados · S/ 62.30. Árbol blanco calado con estrellas por las que sale la luz. Material de porcelana. Envío a todo el Perú.">
+<meta property="og:description" content="Árbol navideño iluminado · Iluminados · S/ 71.60. Pino blanco de porcelana con luces. Alto 26 cm · largo 15 cm · profundidad 7 cm. Envío a todo el Perú.">
 <meta property="og:url" content="https://giandeco.com/catalogo/navidad/arbol-navideno-iluminado">
-<meta property="og:image" content="https://giandeco.com/images/navidad/arbol-iluminado-1.jpg">
+<meta property="og:image" content="https://giandeco.com/images/navidad/2026/arbol-iluminado.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Árbol navideño iluminado","sku":"arbol-iluminado","category":"Iluminados","description":"Árbol blanco calado con estrellas por las que sale la luz. Material de porcelana.","image":["https://giandeco.com/images/navidad/arbol-iluminado-1.jpg"],"brand":{"@type":"Brand","name":"Giandeco"},"offers":{"@type":"Offer","priceCurrency":"PEN","price":"62.30","url":"https://giandeco.com/catalogo/navidad/arbol-navideno-iluminado","seller":{"@type":"Organization","name":"Giandeco Studio Design"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Árbol navideño iluminado","sku":"arbol-iluminado","category":"Iluminados","description":"Pino blanco de porcelana con luces.","image":["https://giandeco.com/images/navidad/2026/arbol-iluminado.jpg"],"brand":{"@type":"Brand","name":"Giandeco"},"material":"Porcelana","offers":{"@type":"Offer","priceCurrency":"PEN","price":"71.60","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","url":"https://giandeco.com/catalogo/navidad/arbol-navideno-iluminado","seller":{"@type":"Organization","name":"Giandeco Studio Design"}}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Catálogo","item":"https://giandeco.com/catalogo/"},{"@type":"ListItem","position":2,"name":"Navidad","item":"https://giandeco.com/catalogo/navidad/"},{"@type":"ListItem","position":3,"name":"Árbol navideño iluminado","item":"https://giandeco.com/catalogo/navidad/arbol-navideno-iluminado"}]}</script>
 <!-- /seo -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,11 +40,11 @@
 
 <div id="gdHeader"></div>
 
-<main id="pdp"><section class="pdp-top"><div class="gd-in"><h1 class="gd-h1">Árbol navideño iluminado</h1><p class="gd-body">S/ 62.30</p><p class="gd-body">Árbol blanco calado con estrellas por las que sale la luz. Material de porcelana.</p><img src="images/navidad/arbol-iluminado-1.jpg" alt="Árbol navideño iluminado" width="600"></div></section></main>
+<main id="pdp"><section class="pdp-top"><div class="gd-in"><h1 class="gd-h1">Árbol navideño iluminado</h1><p class="gd-body">S/ 71.60</p><p class="gd-body">Pino blanco de porcelana con luces.</p><p class="gd-body">Alto 26 cm · largo 15 cm · profundidad 7 cm · Porcelana</p><img src="images/navidad/2026/arbol-iluminado.jpg" alt="Árbol navideño iluminado" width="600"></div></section></main>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261102g"></script>
-<script src="js/gd-tienda.js?v=20261102h"></script>
+<script src="js/giandeco.js?v=20261103a"></script>
+<script src="js/gd-tienda.js?v=20261103a"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, esc = T.esc;
@@ -180,6 +180,8 @@
   /* ==================== 2. FICHA ==================== */
   var rasgos = p.nota.split(/\.\s+/).map(function(x){ return x.replace(/\.$/, '').trim(); }).filter(Boolean);
   var filas = [['Línea', '<a href="' + L.href + '">' + L.label + '</a>'], ['Categoría', esc(p.cat)]];
+  // ficha del estudio: medidas, material, acabado y forma de venta
+  [['Medidas', p.medida], ['Material', p.material], ['Acabado', p.acabado], ['Se vende por', p.venta], ['Modelo', p.modelo]].forEach(function(f){ if(f[1]) filas.push([f[0], esc(f[1])]); });
   if(p.v) filas.push(['Variante', esc(p.v)]);
   filas.push(['Referencia', esc(key.toUpperCase())]);
   filas.push(['Entrega', esc(instala ? T.COND : 'Delivery en Lima Metropolitana y Callao: S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga el cliente a la agencia.')]);

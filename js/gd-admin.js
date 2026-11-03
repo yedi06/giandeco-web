@@ -73,7 +73,9 @@ function catalogo(){
     var src = window.GD_BASE ? window.GD_BASE[l] : {};
     Object.keys(src).forEach(function(k){
       var b = src[k], o = P.over[k] || {};
-      out.push({ key:k, linea:l, nombre:b.nombre, cat:b.cat, img:b.img, base:b.precio, precio:o.precio != null ? o.precio : null, stock:o.stock, activo:o.activo !== false, nuevo:!!P.nuevos[k] });
+      // el stock del panel rige solo si se guardó para la versión vigente del catálogo (ver js/giandeco.js, 2d)
+      var stock = o.stock != null && (b.stock == null || o.sv === window.GD_CATALOGO_V) ? o.stock : b.stock;
+      out.push({ key:k, linea:l, nombre:b.nombre, cat:b.cat, img:b.img, base:b.precio, precio:o.precio != null ? o.precio : null, stock:stock, activo:o.activo !== false, nuevo:!!P.nuevos[k] });
     });
   });
   return out;
@@ -460,6 +462,7 @@ root.addEventListener('change', function(e){
   var P = prod(), k = el.getAttribute('data-k'), o = P.over[k] || (P.over[k] = {});
   if(c === 'activo') o.activo = el.checked;
   else o[c] = el.value === '' ? null : parseFloat(el.value);
+  if(c === 'stock') o.sv = window.GD_CATALOGO_V;
   DATOS.guardar('prod', P);
   if(c === 'activo') el.closest('tr').classList.toggle('es-off', !el.checked);
   aviso('Guardado');

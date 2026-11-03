@@ -6,7 +6,7 @@
 <script src="js/gd-acceso.js?v=20261018a"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adorno reno de pie con plato — Navidad · Giandeco Studio Design</title>
-<meta name="description" content="Adorno reno de pie con plato · Adornos · S/ 116.30. Reno dorado de pie con esfera de cristal y plato dorado sobre el lomo. Material de poliresina. Envío a todo el Perú.">
+<meta name="description" content="Adorno reno de pie con plato · Adornos · S/ 139.50. Reno dorado de pie, con astas que sostienen una esfera transparente y una bandeja circular sobre el…">
 <meta name="theme-color" content="#0A0A09">
 <!-- favicon -->
 <link rel="icon" href="favicon.ico?v=1" sizes="32x32">
@@ -20,11 +20,11 @@
 <meta property="og:site_name" content="Giandeco Studio Design">
 <meta property="og:locale" content="es_PE">
 <meta property="og:title" content="Adorno reno de pie con plato — Navidad · Giandeco Studio Design">
-<meta property="og:description" content="Adorno reno de pie con plato · Adornos · S/ 116.30. Reno dorado de pie con esfera de cristal y plato dorado sobre el lomo. Material de poliresina. Envío a todo el Perú.">
+<meta property="og:description" content="Adorno reno de pie con plato · Adornos · S/ 139.50. Reno dorado de pie, con astas que sostienen una esfera transparente y una bandeja circular sobre el…">
 <meta property="og:url" content="https://giandeco.com/catalogo/navidad/adorno-reno-de-pie-con-plato">
-<meta property="og:image" content="https://giandeco.com/images/navidad/reno-de-pie-plato-1.jpg">
+<meta property="og:image" content="https://giandeco.com/images/navidad/2026/reno-de-pie-plato.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Adorno reno de pie con plato","sku":"reno-de-pie-plato","category":"Adornos","description":"Reno dorado de pie con esfera de cristal y plato dorado sobre el lomo. Material de poliresina.","image":["https://giandeco.com/images/navidad/reno-de-pie-plato-1.jpg"],"brand":{"@type":"Brand","name":"Giandeco"},"offers":{"@type":"Offer","priceCurrency":"PEN","price":"116.30","url":"https://giandeco.com/catalogo/navidad/adorno-reno-de-pie-con-plato","seller":{"@type":"Organization","name":"Giandeco Studio Design"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Adorno reno de pie con plato","sku":"reno-de-pie-plato","category":"Adornos","description":"Reno dorado de pie, con astas que sostienen una esfera transparente y una bandeja circular sobre el lomo.","image":["https://giandeco.com/images/navidad/2026/reno-de-pie-plato.jpg"],"brand":{"@type":"Brand","name":"Giandeco"},"material":"Resina","offers":{"@type":"Offer","priceCurrency":"PEN","price":"139.50","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","url":"https://giandeco.com/catalogo/navidad/adorno-reno-de-pie-con-plato","seller":{"@type":"Organization","name":"Giandeco Studio Design"}}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Catálogo","item":"https://giandeco.com/catalogo/"},{"@type":"ListItem","position":2,"name":"Navidad","item":"https://giandeco.com/catalogo/navidad/"},{"@type":"ListItem","position":3,"name":"Adorno reno de pie con plato","item":"https://giandeco.com/catalogo/navidad/adorno-reno-de-pie-con-plato"}]}</script>
 <!-- /seo -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,11 +40,11 @@
 
 <div id="gdHeader"></div>
 
-<main id="pdp"><section class="pdp-top"><div class="gd-in"><h1 class="gd-h1">Adorno reno de pie con plato</h1><p class="gd-body">S/ 116.30</p><p class="gd-body">Reno dorado de pie con esfera de cristal y plato dorado sobre el lomo. Material de poliresina.</p><img src="images/navidad/reno-de-pie-plato-1.jpg" alt="Adorno reno de pie con plato" width="600"></div></section></main>
+<main id="pdp"><section class="pdp-top"><div class="gd-in"><h1 class="gd-h1">Adorno reno de pie con plato</h1><p class="gd-body">S/ 139.50</p><p class="gd-body">Reno dorado de pie, con astas que sostienen una esfera transparente y una bandeja circular sobre el lomo.</p><p class="gd-body">Alto 30 cm · largo 18 cm · Resina</p><img src="images/navidad/2026/reno-de-pie-plato.jpg" alt="Adorno reno de pie con plato" width="600"></div></section></main>
 
 <div id="gdFooter"></div>
-<script src="js/giandeco.js?v=20261102g"></script>
-<script src="js/gd-tienda.js?v=20261102h"></script>
+<script src="js/giandeco.js?v=20261103a"></script>
+<script src="js/gd-tienda.js?v=20261103a"></script>
 <script>
 (function(){
   var T = window.GD_TIENDA, esc = T.esc;
@@ -180,6 +180,8 @@
   /* ==================== 2. FICHA ==================== */
   var rasgos = p.nota.split(/\.\s+/).map(function(x){ return x.replace(/\.$/, '').trim(); }).filter(Boolean);
   var filas = [['Línea', '<a href="' + L.href + '">' + L.label + '</a>'], ['Categoría', esc(p.cat)]];
+  // ficha del estudio: medidas, material, acabado y forma de venta
+  [['Medidas', p.medida], ['Material', p.material], ['Acabado', p.acabado], ['Se vende por', p.venta], ['Modelo', p.modelo]].forEach(function(f){ if(f[1]) filas.push([f[0], esc(f[1])]); });
   if(p.v) filas.push(['Variante', esc(p.v)]);
   filas.push(['Referencia', esc(key.toUpperCase())]);
   filas.push(['Entrega', esc(instala ? T.COND : 'Delivery en Lima Metropolitana y Callao: S/ 15, gratis desde S/ 399. Resto del Perú por agencia de transporte; el flete lo paga el cliente a la agencia.')]);
