@@ -737,13 +737,12 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   body .gd-shop-ver, body .gd-shop-amp{ width:44px; height:44px; }
 }
 
-/* ficha de producto en el teléfono: la foto va de borde a borde desde el borde superior, con la cabecera
-   transparente encima (como en las páginas de espacio); el texto conserva solo el margen lateral mínimo */
+/* ficha de producto en el teléfono: la foto va de borde a borde justo debajo de la cabecera (una franja,
+   --h-marca), para que la pieza se vea completa y nada de ella quede tapado; el texto conserva solo el margen lateral mínimo */
 @media (max-width:719px){
-  body .pdp-top{ padding-top:0; padding-bottom:32px; }
+  body .pdp-top{ padding-top:var(--h-marca); padding-bottom:32px; }
   body .pdp-grid{ gap:24px; }
   body .pdp-gal{ position:relative; margin-inline:calc(var(--gd-gut) * -1); gap:10px; }
-  body .pdp-gal::before{ content:''; position:absolute; inset:0 0 auto; height:96px; z-index:2; pointer-events:none; background:linear-gradient(rgba(10,10,9,.5), rgba(10,10,9,0)); }
   body .pdp-plate{ border-radius:0; }
   body .pdp-thumbs{ padding-inline:var(--gd-gut); }
   body .pdp-buy h1{ margin-bottom:12px; }

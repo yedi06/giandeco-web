@@ -1173,7 +1173,8 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
    recorta y el espacio que sobra es fondo liso (nunca otra foto de producto) */
 .gd-prod-thumb.es-entera{ background:#fff; }
 .pdp-plate.es-entera{ background:#fff; }
-.gd-prod-thumb.es-entera img, .pdp-plate.es-entera img{ object-fit:contain; }
+.ctl-ph.es-entera{ background:#fff; }
+.gd-prod-thumb.es-entera img, .pdp-plate.es-entera img, .ctl-ph.es-entera img{ object-fit:contain; }
 
 /* ==========================================================================
    FONDO EN ESPERA DE FOTO — .gd-fondo
