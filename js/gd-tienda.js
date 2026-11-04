@@ -35,7 +35,7 @@ function vistaTupay(){
 var CFG = {
   WA: '51920775559',
   PRECIOS_CON_IGV: true,
-  RECOJO: { activo:true, lugar:'Giandeco', dir:'Ca. Las Bellísimas 170, Urb. Vipol — Callao' },
+  RECOJO: { activo:false,   /* sin recojo en tienda por ahora: Giandeco indica que no esta disponible */ lugar:'Giandeco', dir:'Ca. Las Bellísimas 170, Urb. Vipol — Callao' },
   ENVIO: [
     { key:'lima',      label:'Lima Metropolitana', tarifa:15 },
     { key:'callao',    label:'Callao',             tarifa:15 },
@@ -120,7 +120,7 @@ var CFG = {
   if(!o) return;
   if(o.EMPRESA) Object.keys(o.EMPRESA).forEach(function(k){ if(o.EMPRESA[k]) CFG.EMPRESA[k] = o.EMPRESA[k]; });
   ['PRECIOS_CON_IGV', 'LEGAL_VALIDADO', 'GOOGLE_RESENAS', 'CUPONES', 'OPINIONES', 'PREGUNTAS', 'TESTIMONIOS'].forEach(function(k){ if(o[k] !== undefined && o[k] !== null) CFG[k] = o[k]; });
-  if(o.RECOJO_ACTIVO !== undefined) CFG.RECOJO.activo = o.RECOJO_ACTIVO;
+  if(o.RECOJO_ACTIVO === false) CFG.RECOJO.activo = false;   // el panel solo puede apagarlo; reactivarlo se hace aqui (activo:true)
   /* Lima y Callao tienen tarifa fija (S/ 15): un valor vacío o inválido del panel no la borra.
      El resto del Perú sigue siendo por agencia (sin tarifa) salvo que el panel fije un monto. */
   if(o.ENVIO) CFG.ENVIO.forEach(function(z){
