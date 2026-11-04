@@ -1024,7 +1024,8 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
   .gv-foto{ aspect-ratio:4/3; max-height:34vh; }
   .gv-col-info{ padding-bottom:0; }
   /* la compra pasa al final del orden visual y queda fija abajo, siempre a la vista */
-  .gv-buy{ order:9; position:sticky; bottom:0; margin:12px -24px 0; padding:14px 24px 18px; background:var(--t-bg); border-top:1px solid var(--t-line); }
+  /* z-index: los renglones de la descripcion (position:relative) van despues en el HTML y, sin esto, se pintaban encima de la barra al desplazar */
+  .gv-buy{ order:9; position:sticky; bottom:0; z-index:3; margin:12px -24px 0; padding:14px 24px 18px; background:var(--t-bg); border-top:1px solid var(--t-line); }
   .gv-sec{ order:2; }
   .gv-enlaces{ justify-content:space-between; flex-wrap:nowrap; gap:12px; }
   .gv-enlaces a{ font-size:.64rem; letter-spacing:.1em; white-space:nowrap; }
