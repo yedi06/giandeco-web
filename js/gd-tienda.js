@@ -436,7 +436,18 @@ function espaciosDe(key){
    rubro el cliente arma un ambiente, no un ticket.
    -------------------------------------------------------------------------- */
 var carrito = {
-  lineas: function(){ return db('carrito') || []; },
+  // precio, nombre, foto y stock salen siempre del catálogo vigente: la línea guardada solo
+  // recuerda qué pieza y cuántas. Una pieza retirada o agotada sale del carrito.
+  lineas: function(){
+    return (db('carrito') || []).filter(function(x){
+      if(!x.key) return true;                                        // pieza de espacio, a cotizar
+      var p = CAT[x.key];
+      if(!p || p.stock <= 0) return false;
+      x.nombre = p.nombre; x.cat = p.cat; x.precio = p.precio; x.valor = p.valor; x.img = p.img; x.href = url(x.key);
+      x.max = p.stock; x.qty = Math.max(1, Math.min(x.max, x.qty || 1));
+      return true;
+    });
+  },
   guardar: function(l){ db('carrito', l); pintarCajon(); emitir('carrito'); },
   add: function(item, qty){
     var l = carrito.lineas(), q = Math.max(1, qty || 1), i;
@@ -683,28 +694,23 @@ function envioProg(subtotal, o){
   subtotal = Number(subtotal) || 0;
   if(subtotal <= 0) return '';                                       // solo piezas a cotizar: no hay monto que medir
   var desde = ENVIO_GRATIS.desde, ok = subtotal >= ENVIO_GRATIS.minimo;
-  var tarifa = (CFG.ENVIO.filter(function(x){ return x.key === 'lima'; })[0] || {}).tarifa;
-  var regla = (tarifa != null ? 'Delivery de ' + fmt(tarifa) + ' en Lima Metropolitana y Callao, gratis en compras desde ' + fmt(desde) + '. ' : '') + 'Resto del Perú: por agencia, a cargo del cliente.';
-  var nota = '<a href="legal/promociones#envio-cortesia">Ver condiciones</a>';
   if(o.recojo){                                                       // recoge en Giandeco: no hay delivery que medir
     return '<div class="gdt-envio"><p class="gdt-envio-t">' + ICO_CAMION + '<span>Recojo en Giandeco, <b>sin costo</b>.</span></p></div>';
   }
   if(o.zona && ENVIO_GRATIS.zonas.indexOf(o.zona) === -1){            // provincias: la promoción es de delivery
-    return '<div class="gdt-envio"><p class="gdt-envio-t">' + ICO_CAMION + '<span>Envío por agencia, <b>a cargo del cliente</b>.</span></p>' +
-      '<p class="gdt-envio-n">' + (tarifa != null ? 'El delivery de ' + fmt(tarifa) + ' (gratis desde ' + fmt(desde) + ') aplica en Lima Metropolitana y Callao. ' : '') + nota + '</p></div>';
+    return '<div class="gdt-envio"><p class="gdt-envio-t">' + ICO_CAMION + '<span>Envío por agencia, <b>a cargo del cliente</b>.</span></p></div>';
   }
-  var lugar = o.zona ? ENVIO_GRATIS.lugar[o.zona] : 'Lima Metropolitana y Callao';
+  var lugar = o.zona ? ENVIO_GRATIS.lugar[o.zona] : 'Lima y Callao';
   var falta = Math.max(0, desde - subtotal), pct = Math.min(100, Math.round(subtotal / desde * 100));
   var texto = ok ? '<b>Delivery gratis</b> en ' + lugar + '.' :
     (falta > 0 ? 'Le faltan <b>' + fmt(falta) + '</b> para el delivery gratis en ' + lugar + '.' : 'Añada una pieza más para el delivery gratis en ' + lugar + '.');
   return '<div class="gdt-envio' + (ok ? ' is-ok' : '') + '"><p class="gdt-envio-t">' + ICO_CAMION + '<span>' + texto + '</span></p>' +
-    '<div class="gdt-envio-bar" role="progressbar" aria-label="Avance hacia el delivery gratis" aria-valuemin="0" aria-valuemax="' + desde + '" aria-valuenow="' + Math.min(desde, Math.round(subtotal)) + '"><i style="width:' + (ok ? 100 : pct) + '%"></i></div>' +
-    '<p class="gdt-envio-n">' + (ok ? 'Promoción Envío Cortesía aplicada. ' : regla + ' ') + nota + '</p></div>';
+    '<div class="gdt-envio-bar" role="progressbar" aria-label="Avance hacia el delivery gratis" aria-valuemin="0" aria-valuemax="' + desde + '" aria-valuenow="' + Math.min(desde, Math.round(subtotal)) + '"><i style="width:' + (ok ? 100 : pct) + '%"></i></div></div>';
 }
 
 // campo del cupón en el cajón: aplicado, o el formulario (el correo aparece solo para un código personal)
 function cuponHTML(c){
-  if(c) return '<div class="gdt-cupon is-on"><p class="gdt-cupon-ok"><span>Código <b>' + esc(c.codigo) + '</b> aplicado · ' + esc(cupon.etiqueta(c)) + '</span>' +
+  if(c) return '<div class="gdt-cupon is-on"><p class="gdt-cupon-ok"><span>Código <b>' + esc(c.codigo) + '</b>: ' + esc(cupon.etiqueta(c)) + '</span>' +
     '<button type="button" data-gdt-cupon-quitar>Quitar</button></p></div>';
   var s = sesion.get() || {}, mail = db('cupon_mail') || s.email || '';
   return '<form class="gdt-cupon" id="gdtCupon" novalidate><label for="gdtCuponIn">¿Tiene un código de descuento?</label>' +
@@ -735,7 +741,7 @@ function pintarCajon(){
     (desc ? '<div class="gdt-tot es-desc"><span>Cupón ' + esc(cup.codigo) + '</span><b>− ' + fmt(desc) + '</b></div>' +
             '<div class="gdt-tot es-total"><span>Total de piezas</span><b>' + fmt(t.subtotal - desc) + '</b></div>' : '') +
     (t.cotizar && !soloCot ? '<p class="gdt-tot-nota">+ ' + t.cotizar + (t.cotizar === 1 ? ' pieza' : ' piezas') + ' a cotizar por el estudio.</p>' : '') +
-    '<p class="gdt-tot-nota">Delivery en Lima Metropolitana y Callao: ' + fmt((CFG.ENVIO[0] || {}).tarifa || 0) + ', gratis desde ' + fmt(ENVIO_GRATIS.desde) + '. Resto del Perú: por agencia, a cargo del cliente. Armado, a cotizar.</p>' +
+    '<p class="gdt-tot-nota">El delivery se calcula al finalizar.</p>' +
     '<a class="gd-btn gd-btn-primary" href="checkout">' + (soloCot ? 'Solicitar cotización' : 'Finalizar pedido') + FLECHA + '</a>' +
     '<button type="button" class="gdt-seguir" data-gdt-cerrar>Seguir viendo</button>';
 }

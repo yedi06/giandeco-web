@@ -231,7 +231,6 @@ img{ max-width:100%; display:block; }
 .sh-promo-ico{ display:inline-grid; place-items:center; flex:none; color:var(--laton); }
 .sh-promo-ico svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
 .sh-promo-msg b{ font-weight:500; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--laton); }
-.sh-promo-x::before{ content:''; display:inline-block; width:3px; height:3px; margin-right:10px; border-radius:50%; background:rgba(201,162,74,.6); vertical-align:middle; }
 .sh-promo-msg a{ margin-left:4px; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(222,216,203,.6); text-decoration:none; border-bottom:1px solid rgba(201,162,74,.5); padding-bottom:1px; transition:color .25s ease, border-color .25s ease; }
 .sh-promo-msg a:hover, .sh-promo-msg a:focus-visible{ color:var(--laton); border-color:var(--laton); }
 .sh-promo-flecha{ width:24px; height:24px; display:grid; place-items:center; padding:0; background:none; border:0; border-radius:2px; color:rgba(222,216,203,.4); cursor:pointer; transition:color .25s ease; }
@@ -240,22 +239,21 @@ img{ max-width:100%; display:block; }
 /* la bienvenida solo se muestra con la función de cupones activa; con una sola promoción, sin flechas */
 html:not(.gd-cupon-on) .sh-promo-msg.es-cupon{ display:none; }
 .sh-promo.es-una .sh-promo-flecha{ visibility:hidden; }
-@media (max-width:1099px){ .sh-promo-x{ display:none; } }   /* en pantallas medianas se queda solo lo esencial, siempre en una línea */
 @media (max-width:719px){
   /* móvil: una sola línea de 38px (antes 60px); todo el mensaje es el enlace a las condiciones */
   :root{ --promo-h:38px; }
   .sh-promo-in{ grid-template-columns:1fr; padding-block:0; padding-inline:12px; }
-  .sh-promo-flecha, .sh-promo-x, .sh-promo-t .pc{ display:none; }
-  /* móvil: el nombre en latón y una frase corta, separados por un punto; sin ícono para que respire */
+  .sh-promo-flecha, .sh-promo-t .pc{ display:none; }
+  /* móvil: el nombre en latón y una frase corta, separados por aire; sin ícono para que respire */
   .sh-promo-ico{ display:none; }
   .sh-promo-msg{ position:relative; gap:0; font-size:.74rem; line-height:1.2; letter-spacing:.02em; }
   .sh-promo-msg b{ font-size:.62rem; letter-spacing:.18em; }
-  .sh-promo-msg b::after{ content:''; display:inline-block; width:3px; height:3px; margin:0 10px 0 11px; border-radius:50%; background:rgba(201,162,74,.7); vertical-align:middle; }
+  .sh-promo-msg b{ margin-right:12px; }
   .sh-promo-t .mv{ color:#DED8CB; }
   .sh-promo-ico svg{ width:16px; height:16px; }
   .sh-promo-msg a{ position:absolute; inset:0; margin:0; padding:0; border:0; font-size:0; overflow:hidden; }   /* todo el mensaje es el enlace; «Ver condiciones» queda para lectores de pantalla */
 }
-@media (max-width:380px){ .sh-promo-msg{ font-size:.7rem; } .sh-promo-msg b{ letter-spacing:.14em; } .sh-promo-msg b::after{ margin:0 8px; } }
+@media (max-width:380px){ .sh-promo-msg{ font-size:.7rem; } .sh-promo-msg b{ letter-spacing:.14em; margin-right:10px; } }
 @media (max-width:339px){ :root{ --promo-h:46px; } .sh-promo-in{ padding-block:4px; } .sh-promo-msg{ white-space:normal; text-align:left; } }   /* pantallas muy angostas: el texto pasa a dos líneas en vez de desbordar */
 @media (prefers-reduced-motion: reduce){ .sh-promo-msg, .sh-promo-msg.is-active, .site-header::before{ transition:none; } }
 @media print{ .sh-promo{ display:none; } }
