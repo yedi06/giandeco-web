@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261103m">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261103k">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261103n">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -44,7 +44,7 @@
 </footer>
 
 <script src="js/giandeco.js?v=20261103m"></script>
-<script src="js/gd-tienda.js?v=20261103m"></script>
+<script src="js/gd-tienda.js?v=20261103n"></script>
 <script src="js/gd-pago.js?v=20261103a"></script>
 <script src="js/gd-tupay.js?v=20261103b"></script>
 <script src="js/gd-ubigeo.js?v=20261018a"></script>
@@ -97,6 +97,21 @@
 
   /* ==================== COMPRA POR PASOS ==================== */
   var tot = T.carrito.total(lineas), soloCot = !tot.subtotal;
+  // resumen: cada pieza con su cantidad editable (− + y quitar); los botones usan el carrito de gd-tienda.js
+  function lineasRes(){
+    return lineas.map(function(x){
+      var max = x.max || 99;
+      return '<li class="gdt-line">' + (x.img ? '<span class="gdt-line-img"><img decoding="async" src="' + esc(x.img) + '" alt=""></span>' : '<span class="gdt-line-img is-vacia" aria-hidden="true">G</span>') +
+        '<div class="gdt-line-body"><span class="gdt-line-cat">' + esc(x.cat) + '</span><span class="gdt-line-name">' + esc(x.nombre) + '</span>' +
+        '<div class="gdt-line-row"><span class="gdt-qty" role="group" aria-label="Cantidad de ' + esc(x.nombre) + '">' +
+          '<button type="button" data-gdt-qty="-1" data-id="' + esc(x.id) + '" aria-label="Quitar una"' + (x.qty <= 1 ? ' disabled' : '') + '>−</button>' +
+          '<b aria-live="polite">' + x.qty + '</b>' +
+          '<button type="button" data-gdt-qty="1" data-id="' + esc(x.id) + '" aria-label="Añadir una"' + (x.qty >= max ? ' disabled' : '') + '>+</button></span>' +
+        '<span class="gdt-line-price">' + (x.valor === null ? 'A cotizar' : T.fmt(x.valor * x.qty)) + '</span></div></div>' +
+        '<button type="button" class="gdt-line-x" data-gdt-quitar="' + esc(x.id) + '" aria-label="Quitar ' + esc(x.nombre) + '">&times;</button></li>';
+    }).join('');
+  }
+  function miniN(){ var n = lineas.reduce(function(a, x){ return a + x.qty; }, 0); return 'Su carrito · ' + n + (n === 1 ? ' pieza' : ' piezas'); }
   var ses = T.sesion.get() || {}, datos = T.db('datos') || {};
   // tres pasos: el pago se elige en el mismo paso en que se confirma, sin una pantalla solo para eso
   var PASOS = soloCot ? ['Sus datos', 'Entrega', 'Confirmar'] : ['Sus datos', 'Entrega', 'Pago'];
@@ -200,20 +215,15 @@
   root.innerHTML =
     '<ol class="co-ruta" id="coRuta">' + PASOS.map(function(p, i){ return '<li data-ir="' + i + '"><i>' + (i + 1) + '</i><span>' + p + '</span></li>'; }).join('') + '</ol>' +
     // teléfono: el resumen queda debajo del formulario; esta barra muestra el total en cada paso y lleva a él
-    '<button type="button" class="co-mini" id="coMini" aria-controls="coRes"><span>Su carrito · ' + lineas.reduce(function(a, x){ return a + x.qty; }, 0) + (lineas.reduce(function(a, x){ return a + x.qty; }, 0) === 1 ? ' pieza' : ' piezas') + '</span><b id="coMiniTot"></b><em>Ver detalle</em></button>' +
+    '<button type="button" class="co-mini" id="coMini" aria-controls="coRes"><span id="coMiniN">' + miniN() + '</span><b id="coMiniTot"></b><em>Ver detalle</em></button>' +
     '<div id="coEnvioMini"></div>' +
     '<form class="co-grid" id="coForm" novalidate>' +
     '<div>' + pasoDatos + pasoEntrega + pasoFinal + '</div>' +
     '<aside class="co-res" id="coRes" aria-label="Resumen">' +
-      '<h2>Su carrito</h2><ul class="gdt-lines">' + lineas.map(function(x){
-        return '<li class="gdt-line">' + (x.img ? '<span class="gdt-line-img"><img decoding="async" src="' + esc(x.img) + '" alt=""></span>' : '<span class="gdt-line-img is-vacia" aria-hidden="true">G</span>') +
-          '<div class="gdt-line-body"><span class="gdt-line-cat">' + esc(x.cat) + '</span><span class="gdt-line-name">' + esc(x.nombre) + '</span>' +
-          '<div class="gdt-line-row"><span class="gdt-qty"><b>' + x.qty + '</b></span><span class="gdt-line-price">' + (x.valor === null ? 'A cotizar' : T.fmt(x.valor * x.qty)) + '</span></div></div></li>';
-      }).join('') + '</ul>' +
+      '<h2>Su carrito</h2><ul class="gdt-lines" id="coLineas">' + lineasRes() + '</ul>' +
       (hayCupones && !soloCot ? '<div class="co-cupon"><input id="coCupon" type="text" placeholder="Código de descuento" aria-label="Código de descuento" autocomplete="off"><button type="button" id="coCuponBtn">Aplicar</button></div><p class="gdt-err" id="coCuponMsg" style="margin:0 0 8px;"></p>' : '') +
       '<div id="coEnvioProg"></div>' +
       '<dl class="co-tot" id="coTot"></dl>' +
-      '<p class="co-res-nota"><a href="#" data-gdt-abrir style="color:var(--text-dim);">Editar el carrito</a></p>' +
       '<ul class="co-conf">' +
         '<li id="coConfPago"></li>' +
         '<li>Boleta o factura electrónica a su correo.</li>' +
@@ -321,7 +331,8 @@
       if(agencia) h += '<div class="es-igv"><dt>El flete se paga a la agencia al recibir o recoger.</dt><dd></dd></div>';
     }
     $('coTot').innerHTML = h;
-    var ep = T.envioProg ? T.envioProg(tot.subtotal, { zona: ent === 'recojo' ? null : zonaKey(), recojo: ent === 'recojo' }) : '';
+    var zk = ent === 'recojo' ? null : zonaKey();
+    var ep = !T.envioProg || agencia || (zk && T.envioCosto(zk, tot.subtotal) === null) ? '' : T.envioProg(tot.subtotal, { zona:zk });
     if($('coEnvioProg')) $('coEnvioProg').innerHTML = ep;
     if($('coEnvioProg2')) $('coEnvioProg2').innerHTML = ep;
     if($('coEnvioMini')) $('coEnvioMini').innerHTML = ep;
@@ -463,7 +474,14 @@
 
   // si la selección cambia desde el cajón, el resumen se rehace entero
   var enviando = false;
-  document.addEventListener('gd:carrito', function(){ if(!enviando) location.reload(); });
+  document.addEventListener('gd:carrito', function(){
+    if(enviando) return;
+    var nuevas = T.carrito.lineas(), t2 = T.carrito.total(nuevas);
+    if(!nuevas.length || !t2.subtotal !== soloCot){ location.reload(); return; }   // vacío o cambia a solo cotización: otra pantalla
+    lineas = nuevas; tot = t2;
+    $('coLineas').innerHTML = lineasRes(); $('coMiniN').textContent = miniN();
+    totales();
+  });
 
   form.addEventListener('submit', function(e){
     e.preventDefault();

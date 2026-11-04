@@ -661,9 +661,9 @@ function lineaHTML(x){
       (x.href ? '<a class="gdt-line-name" href="' + esc(x.href) + '">' + esc(x.nombre) + '</a>' : '<span class="gdt-line-name">' + esc(x.nombre) + '</span>') +
       '<div class="gdt-line-row">' +
         '<span class="gdt-qty" role="group" aria-label="Cantidad">' +
-          '<button type="button" data-gdt-qty="-1" data-id="' + esc(x.id) + '" aria-label="Quitar una">−</button>' +
+          '<button type="button" data-gdt-qty="-1" data-id="' + esc(x.id) + '" aria-label="Quitar una"' + (x.qty <= 1 ? ' disabled' : '') + '>−</button>' +
           '<b>' + x.qty + '</b>' +
-          '<button type="button" data-gdt-qty="1" data-id="' + esc(x.id) + '" aria-label="Añadir una">+</button>' +
+          '<button type="button" data-gdt-qty="1" data-id="' + esc(x.id) + '" aria-label="Añadir una"' + (x.qty >= (x.max || 99) ? ' disabled' : '') + '>+</button>' +
         '</span>' +
         '<span class="gdt-line-price">' + (x.valor === null ? 'A cotizar' : fmt(x.valor * x.qty)) + '</span>' +
       '</div>' +
