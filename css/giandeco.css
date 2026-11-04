@@ -1252,6 +1252,4 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
   .gd-hero.is-corto h1{ font-size:clamp(2rem,min(4.5vw,7.2svh),3.5rem); margin-bottom:clamp(10px,2.2svh,24px); }
   .gd-hero-panel > p{ margin-bottom:clamp(14px,2.8svh,36px); line-height:1.6; }
   .gd-hero-eyebrow{ margin-bottom:clamp(10px,2svh,22px); }
-  /* la cabecera va sobre ébano liso: la foto empieza debajo y el logo no cae sobre el corte */
-  .gd-hero-media{ margin-top:var(--h-marca-d); }
 }
