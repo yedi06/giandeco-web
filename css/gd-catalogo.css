@@ -22,7 +22,8 @@
 .ctb .gd-shop-dot i::after{ inset:11px; }
 
 @media (min-width:900px){
-  .ctb{ aspect-ratio: 1440/600; max-height: 82vh; }
+  /* la cabecera va sobre ébano liso: la foto empieza debajo, sin logo ni menú encima, y recorta menos */
+  .ctb{ aspect-ratio: 1440/640; margin-top: var(--h-marca-d); max-height: calc(var(--portada-h) - var(--h-marca-d)); }
   .ctb-m{ display:none; }
   /* sin transform: un transform crea un contexto de apilamiento y dejaba el título y los botones POR ENCIMA de los puntos y de la ficha
      (el clic caía en «Comprar el aparador» en vez de «Ver la pieza»). 29.8cqw = 53 % del alto de la foto (16:9) */
@@ -31,8 +32,7 @@
   .ctb-d .gd-shop-img{ width:100%; height:100%; object-fit:cover; }
   /* el oscuro se concentra detrás del título (abajo a la izquierda); el resto de la foto se ve clara */
   .ctb-shade{ background:
-      radial-gradient(ellipse 62% 86% at 0% 100%, rgba(10,10,9,.88) 0%, rgba(10,10,9,.62) 50%, rgba(10,10,9,0) 100%),
-      linear-gradient(180deg, rgba(10,10,9,.5) 0%, rgba(10,10,9,0) 16%); }
+      radial-gradient(ellipse 62% 86% at 0% 100%, rgba(10,10,9,.88) 0%, rgba(10,10,9,.62) 50%, rgba(10,10,9,0) 100%); }
   .ctb-tip{ display:none; }
   .ctb-txt{ display:block; position:absolute; left:0; right:0; bottom: clamp(36px,5vw,64px); z-index:2; pointer-events:none;
     width:auto; height:auto; overflow:visible; clip:auto; clip-path:none; white-space:normal; }

@@ -50,6 +50,8 @@
 .rd-halves:has(.rd-half:hover) .rd-half:hover{ flex:1.5 1 0; }
 .rd-half::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(10,10,9,.8) 0%,rgba(10,10,9,0) 30%), linear-gradient(to bottom,rgba(10,10,9,.66) 0%,rgba(10,10,9,0) 24%); pointer-events:none; }
 .rd-half .rd-chip{ position:absolute; left:24px; bottom:28px; z-index:1; }
+/* la cabecera va sobre ébano liso: las fotos empiezan debajo y el logo no cae sobre el corte */
+@media (min-width:900px){ .rd-halves{ margin-top:var(--h-marca-d); min-height:0; } }
 
 /* ---------- 2 · MARCAS ---------- */
 .rd-marcas{ background:#12110f; border-bottom:1px solid #1d1b17; }
