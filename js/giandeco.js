@@ -643,18 +643,21 @@ var MARCOS = '.gd-prod-thumb img, .pdp-plate img, .ctl-ph img';
 /* el fondo liso toma el color del borde de la foto, para que continúe sin corte.
    Se calcula una vez por foto: al volver a pintar una rejilla se reutiliza */
 var COLOR_BORDE = {};
-function colorDeBorde(img){
-  var k = img.currentSrc || img.src;
+function colorDeBorde(img, lados){
+  var k = (img.currentSrc || img.src) + '|' + (lados || '');
   if(k in COLOR_BORDE) return COLOR_BORDE[k];
-  return (COLOR_BORDE[k] = medirBorde(img));
+  return (COLOR_BORDE[k] = medirBorde(img, lados));
 }
-function medirBorde(img){
+/* lados: 'lr' = solo las columnas izquierda y derecha (foto más alta que su marco: las franjas quedan a los lados),
+   'tb' = solo arriba y abajo (foto más ancha). Así el relleno toma el color de la pared y no el del piso. */
+function medirBorde(img, lados){
   try{
     var c = document.createElement('canvas'), n = 12; c.width = c.height = n;
     var x = c.getContext('2d'); x.drawImage(img, 0, 0, n, n);
     var d = x.getImageData(0, 0, n, n).data, r = 0, g = 0, b = 0, k = 0;
     for(var i = 0; i < n; i++) for(var j = 0; j < n; j++){
-      if(i && j && i < n - 1 && j < n - 1) continue;   // solo el contorno
+      var borde = lados === 'lr' ? (i === 0 || i === n - 1) : lados === 'tb' ? (j === 0 || j === n - 1) : !(i && j && i < n - 1 && j < n - 1);
+      if(!borde) continue;   // solo el contorno (o solo los lados donde quedan las franjas)
       var p = (j * n + i) * 4; r += d[p]; g += d[p + 1]; b += d[p + 2]; k++;
     }
     return 'rgb(' + Math.round(r / k) + ',' + Math.round(g / k) + ',' + Math.round(b / k) + ')';
@@ -666,7 +669,7 @@ function encajarFoto(img){
   var r = img.naturalWidth / img.naturalHeight, rc = caja.clientWidth / caja.clientHeight;
   var entera = Math.abs(r - rc) / rc > 0.04;
   caja.classList.toggle('es-entera', entera);
-  if(entera) caja.style.backgroundColor = colorDeBorde(img);
+  if(entera) caja.style.backgroundColor = colorDeBorde(img, r < rc ? 'lr' : 'tb');
 }
 document.addEventListener('load', function(e){ if(e.target.matches && e.target.matches(MARCOS)) encajarFoto(e.target); }, true);
 document.querySelectorAll(MARCOS).forEach(function(img){ if(img.complete) encajarFoto(img); });

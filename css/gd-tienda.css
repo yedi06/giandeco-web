@@ -127,9 +127,11 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 .pdp-gal{ display:grid; gap:12px; }
 @media (min-width:960px){ .pdp-gal{ position:sticky; top:calc(var(--h-total) + 16px); } .pdp-gal.con-thumbs{ grid-template-columns:72px 1fr; } }
 .pdp-plate{ position:relative; overflow:hidden; border-radius:2px; background:var(--humo); aspect-ratio:1/1; display:grid; place-items:center; }
-.pdp-plate img{ width:100%; height:100%; object-fit:cover; transition:transform .5s var(--gd-ease); will-change:transform; }
+/* la foto se fija al tamaño del marco (position:absolute): en una rejilla con aspect-ratio, height:100% tomaba la altura natural de la foto
+   y las fotos verticales desbordaban el marco, que recortaba su parte de abajo (la base del producto) */
+.pdp-plate img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s var(--gd-ease); will-change:transform; }
 /* foto de origen pequeña: se enseña a su tamaño, nunca estirada */
-.pdp-plate.is-chica img{ width:auto; height:auto; object-fit:contain; }
+.pdp-plate.is-chica img{ position:static; inset:auto; width:auto; height:auto; object-fit:contain; }
 .pdp-plate.is-zoom{ cursor:zoom-in; }
 .pdp-plate.is-zoom:hover img{ transform:scale(1.9); transition:transform .2s ease-out; }
 .pdp-thumbs{ display:flex; gap:10px; order:2; }

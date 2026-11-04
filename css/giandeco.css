@@ -244,8 +244,8 @@ html:not(.gd-cupon-on) .sh-promo-msg.es-cupon{ display:none; }
   :root{ --promo-h:38px; }
   .sh-promo-in{ grid-template-columns:1fr; padding-block:0; padding-inline:12px; }
   .sh-promo-flecha, .sh-promo-t .pc{ display:none; }
-  /* móvil: el nombre en latón y una frase corta, separados por aire; sin ícono para que respire */
-  .sh-promo-ico{ display:none; }
+  /* móvil: ícono (camión, regalo), nombre en latón y una frase corta, en una sola línea */
+  .sh-promo-ico{ margin-right:8px; }
   .sh-promo-msg{ position:relative; gap:0; font-size:.74rem; line-height:1.2; letter-spacing:.02em; }
   .sh-promo-msg b{ font-size:.62rem; letter-spacing:.18em; }
   .sh-promo-msg b{ margin-right:12px; }
