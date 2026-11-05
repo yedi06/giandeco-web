@@ -1,0 +1,8 @@
+.git
+.impeccable
+.wrangler
+node_modules
+wrangler.jsonc
+.assetsignore
+CNAME
+*.md

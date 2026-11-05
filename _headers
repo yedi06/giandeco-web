@@ -1,0 +1,45 @@
+# Cabeceras de seguridad y de cache (Cloudflare). Se aplican a todo el sitio.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(self)
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  # CSP en modo "solo reportar": no bloquea nada, deja constancia en la consola del navegador.
+  # Cuando se compruebe que no hay avisos en checkout, pago y panel, se cambia a Content-Security-Policy.
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.micuentaweb.pe https://cdnwebb.izipay.pe https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://static.micuentaweb.pe https://cdnwebb.izipay.pe; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://vsivmdfmecqxeumepyea.supabase.co https://*.micuentaweb.pe https://*.izipay.pe https://*.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com; frame-src 'self' https://*.micuentaweb.pe https://*.izipay.pe https://www.google.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://*.micuentaweb.pe https://*.izipay.pe
+
+# Paginas privadas o de proceso: que no se indexen (con y sin .html)
+/admin
+  X-Robots-Tag: noindex, nofollow
+/admin.html
+  X-Robots-Tag: noindex, nofollow
+/checkout
+  X-Robots-Tag: noindex, nofollow
+/checkout.html
+  X-Robots-Tag: noindex, nofollow
+/pagar
+  X-Robots-Tag: noindex, nofollow
+/pagar.html
+  X-Robots-Tag: noindex, nofollow
+/cuenta
+  X-Robots-Tag: noindex, nofollow
+/cuenta.html
+  X-Robots-Tag: noindex, nofollow
+/seguimiento
+  X-Robots-Tag: noindex, nofollow
+/seguimiento.html
+  X-Robots-Tag: noindex, nofollow
+
+# Archivos con version (?v=): cache de una semana
+/css/*
+  Cache-Control: public, max-age=604800
+/js/*
+  Cache-Control: public, max-age=604800
+
+# Imagenes y videos: cache de una semana (si una foto cambia con el mismo nombre, sube su ?v=).
+# Si dos reglas coinciden, Cloudflare junta sus valores: por eso hay una sola regla por ruta.
+/images/*
+  Cache-Control: public, max-age=604800

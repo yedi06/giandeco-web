@@ -1,0 +1,10 @@
+{
+  // Giandeco: sitio estatico servido por Cloudflare (Workers con archivos estaticos).
+  // No contiene claves ni datos privados. Las cabeceras estan en _headers y las redirecciones en _redirects.
+  "name": "giandeco-web",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  }
+}
