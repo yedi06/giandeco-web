@@ -415,7 +415,7 @@ function footerHTML(){
     '</div>' +
     '<div class="gd-footer-bar">' +
       '<span>© 2026 Giandeco Studio Design · ' + EMPRESA.razon + ', RUC ' + EMPRESA.ruc + ' · Atención de ' + EMPRESA.horario + ' · Todos los derechos reservados.</span>' +
-      '<em>Espacios que saben vender</em>' +
+      '<em>Espacios que saben Vender</em>' +
     '</div>' +
   '</div></footer>';
 }
