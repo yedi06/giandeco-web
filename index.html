@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giandeco Studio Design · Visual merchandising e interiorismo en Lima</title>
 <meta name="description" content="Estudio de diseño comercial en Lima: visual merchandising, diseño de tiendas e interiorismo con producción y montaje propios.">
-<link rel="stylesheet" href="css/giandeco.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261106c">
+<link rel="stylesheet" href="css/giandeco.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261106f">
 <!-- la portada del hero es el LCP: se pide ya, solo la que corresponde a la pantalla -->
 <link rel="preload" as="image" type="image/webp" href="images/hero/hero-navidad-poster-mobile.webp" media="(orientation: portrait) and (max-width: 1024px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="images/hero/hero-navidad-poster-desktop.webp" media="(orientation: landscape), (min-width: 1025px)" fetchpriority="high">
@@ -94,7 +94,7 @@
     line-height: 1.05;
     letter-spacing: -0.01em;
     margin: 0 0 18px;
-    text-wrap: balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    text-wrap: balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 
   .lede{
     max-width: 62ch;
@@ -162,7 +162,7 @@
     font-weight:550;
     font-size: clamp(1.9rem, 2.6vw, 2.2rem);
     white-space: nowrap;
-    margin: 0 0 6px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    margin: 0 0 6px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 
   @media (max-width: 400px){
     .steps-heading{ white-space: normal; }
@@ -268,7 +268,7 @@
     font-family: var(--display);
     font-weight:550;
     font-size: clamp(1.9rem, 2.4vw, 2.2rem);
-    margin: 0 0 24px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    margin: 0 0 24px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .section-h span{
     font-family: var(--body);
     font-weight: 500;
@@ -439,7 +439,7 @@
     width: 100%; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
     gap: 10px 24px; padding-top: 18px;
   }
-  .gd-light-cap{ font-family: var(--display); font-weight:550; font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--lino); margin: 0; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  .gd-light-cap{ font-family: var(--display); font-weight:550; font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--lino); margin: 0; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .gd-light-count{ font-family: var(--mono); font-size:.8125rem; letter-spacing: .12em; color: var(--text-faint); white-space: nowrap; }
   .gd-light-cta{
     display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
@@ -482,7 +482,7 @@
     font-family: var(--display);
     font-weight:550;
     font-size: clamp(1.9rem, 2.4vw, 2.2rem);
-    margin: 0 0 10px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    margin: 0 0 10px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 
   .how > p{
     color: var(--text-dim);
@@ -873,7 +873,7 @@
   .gd-hero h1{
     font-family: var(--display); font-weight:550; color: var(--lino);
     font-size: clamp(2.5rem, 5.6vw, 4.4rem); line-height:1; letter-spacing:-.02em;
-    margin:0 0 24px; max-width:13ch; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    margin:0 0 24px; max-width:13ch; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .gd-hero h1 em{ font-style:normal; color: var(--accent); }
   .gd-hero-panel > p{ color: var(--text-dim); font-size: clamp(.98rem, 1.25vw, 1.08rem); line-height:1.7; max-width:46ch; margin:0 0 36px; }
   .gd-hero-cta{ display:flex; flex-wrap:wrap; gap:12px; }
@@ -948,7 +948,7 @@
   .gd-manifiesto .gd-body{ text-align:left; }
   .gd-triada{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; margin-top: var(--sp-40); font-family:var(--body); font-size:.95rem; color: var(--text-faint); }
   .gd-triada b{ display:block; font-weight:400; }
-  .gd-triada .is-yes{ color: var(--lino); font-family: var(--display); font-size: clamp(1.9rem,2.6vw,2.1rem); margin-top:6px; font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  .gd-triada .is-yes{ color: var(--lino); font-family: var(--display); font-size: clamp(1.9rem,2.6vw,2.1rem); margin-top:6px; font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .gd-triada .is-yes em{ font-style:normal; color: var(--accent); }
   .gd-manifiesto-media{ position:relative; border-radius:2px; overflow:hidden; aspect-ratio: 4/4.4; isolation:isolate; }
   .gd-manifiesto-media .gd-curtain{ position:absolute; inset:0; }
@@ -987,7 +987,7 @@
   }
   .gd-univ:hover img{ transform: scale(1.04); }
   .gd-univ-body{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding: clamp(20px,3vw,34px); }
-  .gd-univ-title{ font-family:var(--display); font-weight:550; color:var(--lino); font-size: clamp(1.9rem,2.8vw,2.4rem); line-height:1.05; margin:0 0 8px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  .gd-univ-title{ font-family:var(--display); font-weight:550; color:var(--lino); font-size: clamp(1.9rem,2.8vw,2.4rem); line-height:1.05; margin:0 0 8px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .gd-univ-desc{ color: rgba(222,216,203,.76); font-size:.9rem; line-height:1.55; max-width:40ch; margin:0 0 14px; }
   .gd-univ-more{ display:inline-flex; align-items:center; gap:8px; font-family:var(--body); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--lino); }
   .gd-univ-more i{ width:16px; height:1px; background: var(--accent); display:block; transition: width .35s var(--gd-ease); }
@@ -1375,9 +1375,9 @@
     .gd-estudio-foto img{ aspect-ratio:1/1; object-fit:cover; object-position:50% 22%; }
   }
 </style>
-<link rel="stylesheet" href="css/gd-movil.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-tema.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-home-d.css?v=20261106c">
+<link rel="stylesheet" href="css/gd-movil.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-tema.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-home-d.css?v=20261106f">
 <script src="js/gd-tema.js?v=20261018a"></script>
 
 <!-- intro de marca: se decide antes de pintar, para que nunca haya un parpadeo del telón -->
@@ -2209,4 +2209,4 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="js/gd-tienda.js?v=20261103o" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-home-d.js?v=20261026w" defer></script>
-<script src="js/gd-chat.js?v=20261106c" defer></script>
+<script src="js/gd-chat.js?v=20261106f" defer></script>

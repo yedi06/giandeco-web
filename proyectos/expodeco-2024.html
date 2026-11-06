@@ -28,10 +28,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Jost:wght@400..600&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/giandeco.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-movil.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-tema.css?v=20261106c">
+<link rel="stylesheet" href="css/giandeco.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-movil.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-tema.css?v=20261106f">
 <script src="js/gd-tema.js?v=20261018a"></script>
 <style>
   /* ==========================================================================
@@ -45,7 +45,7 @@
   .px-lead p{
     font-family: var(--display); font-weight:550; color: var(--lino);
     font-size: clamp(1.5rem,3.1vw,2.3rem); line-height:1.35; letter-spacing:-.01em;
-    max-width:22ch; margin:0; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    max-width:22ch; margin:0; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .px-lead p em{ font-style:normal; color: var(--accent); }
 
   .px-dossier{ padding-block: clamp(24px,4vw,40px) clamp(80px,9vw,120px); }
@@ -82,8 +82,8 @@
   .px-ghost{
     font-family: var(--display); font-weight:550; line-height:.78; flex:none;
     font-size: clamp(3.4rem,7vw,5.6rem); color:transparent;
-    -webkit-text-stroke:1px rgba(201,162,74,.4); text-stroke:1px rgba(201,162,74,.4); font-optical-sizing:none; font-variation-settings:"opsz" 18; }
-  .px-heading{ font-family: var(--display); font-weight:550; font-size: clamp(1.7rem,2.5vw,2.3rem); color: var(--lino); margin:0 0 8px; line-height:1.12; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    -webkit-text-stroke:1px rgba(201,162,74,.4); text-stroke:1px rgba(201,162,74,.4); font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
+  .px-heading{ font-family: var(--display); font-weight:550; font-size: clamp(1.7rem,2.5vw,2.3rem); color: var(--lino); margin:0 0 8px; line-height:1.12; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .px-body{ margin:0; color: var(--text-dim); font-size:1rem; line-height:1.8; max-width:60ch; }
   .px-body + .px-body{ margin-top:16px; }
 
@@ -91,7 +91,7 @@
   .px-dim{ margin:28px 0 40px; }
   .px-dim b{
     display:block; font-family: var(--display); font-weight:550; color: var(--lino);
-    font-size: clamp(2.3rem,5vw,3.5rem); line-height:1; letter-spacing:-.01em; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    font-size: clamp(2.3rem,5vw,3.5rem); line-height:1; letter-spacing:-.01em; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .px-dim b em{ font-style:normal; color: var(--accent); padding-inline:.3em; }
   .px-dim span{ display:block; margin-top:14px; font-family: var(--body); font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color: var(--text-faint); }
   .px-specs{ border-top:1px solid var(--line); }
@@ -133,7 +133,7 @@
   .px-cta-in{ position:relative; z-index:1; max-width:640px; margin-inline:auto; text-align:center; }
   .px-cta-eyebrow{ font-family: var(--body); font-weight:500; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color: var(--accent); margin:0 0 20px; }
   .px-cta-quote{ font-family: var(--script); font-style:italic; font-weight:300; color: var(--text-dim); font-size: clamp(1.3rem,2.2vw,1.7rem); margin:0 0 22px; }
-  .px-cta h2{ font-family: var(--display); font-weight:550; color: var(--lino); font-size: clamp(2rem,4.2vw,3rem); line-height:1.08; margin:0 0 18px; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  .px-cta h2{ font-family: var(--display); font-weight:550; color: var(--lino); font-size: clamp(2rem,4.2vw,3rem); line-height:1.08; margin:0 0 18px; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .px-cta p.gd-body{ margin-inline:auto; }
   .px-cta-btns{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top: var(--sp-24); }
 </style>
@@ -300,6 +300,6 @@
 </script>
 <script src="js/gd-tienda.js?v=20261103o" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
-<script src="js/gd-chat.js?v=20261106c" defer></script>
+<script src="js/gd-chat.js?v=20261106f" defer></script>
 </body>
 </html>

@@ -28,11 +28,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Jost:wght@400..600&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/giandeco.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-movil.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-proyecto.css?v=20261106c">
-<link rel="stylesheet" href="css/gd-tema.css?v=20261106c">
+<link rel="stylesheet" href="css/giandeco.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-movil.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-proyecto.css?v=20261106f">
+<link rel="stylesheet" href="css/gd-tema.css?v=20261106f">
 <script src="js/gd-tema.js?v=20261018a"></script>
 <style>
   .hi-bloque{ display:grid; gap:clamp(28px,4vw,64px); grid-template-columns:1fr; align-items:center; padding-block:clamp(40px,5vw,72px); border-top:1px solid var(--line); }
@@ -43,7 +43,7 @@
   .hi-media{ border-radius:2px; overflow:hidden; aspect-ratio:4/3; }
   .hi-media img{ width:100%; height:100%; object-fit:cover; }
   .hi-num{ font-family:var(--body); font-size:.8125rem; letter-spacing:.2em; color:var(--accent); display:block; margin-bottom:12px; }
-  .hi-bloque h2{ font-family:var(--display); font-weight:550; font-size:clamp(1.9rem,3vw,2.4rem); color:var(--lino); margin:0 0 14px; line-height:1.08; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  .hi-bloque h2{ font-family:var(--display); font-weight:550; font-size:clamp(1.9rem,3vw,2.4rem); color:var(--lino); margin:0 0 14px; line-height:1.08; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .hi-bloque p{ color:var(--text-dim); font-size:.98rem; line-height:1.75; margin:0; max-width:54ch; }
   /* ============ PROCESO — 4 pasos numerados con foto real ============
      Se probó una línea conectora + punto animado entre los círculos y se
@@ -58,7 +58,7 @@
     width:46px; height:46px; border-radius:50%; flex:none; background:var(--bronce);
     border:1px solid var(--bronce); color:#fff;
     display:flex; align-items:center; justify-content:center;
-    font-family:var(--display); font-size:1.05rem; margin-bottom:20px; font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+    font-family:var(--display); font-size:1.05rem; margin-bottom:20px; font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .mt-media{
     position:relative; border-radius:2px; overflow:hidden; aspect-ratio:4/5; margin-bottom:18px; background:var(--humo);
     box-shadow:0 0 0 0 rgba(10,9,6,0); transition: box-shadow .35s ease;
@@ -73,7 +73,7 @@
       linear-gradient(155deg, #efeadd, #ded5bd);
   }
   .mt-media.is-slot span{ font-family:var(--body); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--grafito); line-height:1.7; text-align:center; }
-  .mt-media.is-slot span b{ display:block; font-family:var(--display); font-weight:550; font-size:3rem; letter-spacing:0; color:var(--bronce-texto); line-height:1; margin-bottom:10px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  .mt-media.is-slot span b{ display:block; font-family:var(--display); font-weight:550; font-size:3rem; letter-spacing:0; color:var(--bronce-texto); line-height:1; margin-bottom:10px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
   .mt-title{ font-family:var(--body); font-weight:500; font-size:1.05rem; color:var(--ebano); margin:0 0 8px; transition: color .3s ease; }
   .mt-step:hover .mt-title{ color: var(--bronce-texto); }
   .mt-desc{ margin:0; color:var(--grafito); font-size:.9rem; line-height:1.6; }
@@ -186,6 +186,6 @@
 <script src="js/gd-proyecto.js?v=20261028b" defer></script>
 <script src="js/gd-tienda.js?v=20261103o" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
-<script src="js/gd-chat.js?v=20261106c" defer></script>
+<script src="js/gd-chat.js?v=20261106f" defer></script>
 </body>
 </html>

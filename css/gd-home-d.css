@@ -14,7 +14,7 @@
 .hm-bar-links{ display:flex; flex-wrap:wrap; gap:10px 32px; }
 .hm-h{
   margin:0; font-family:var(--display); font-weight:550; font-size:clamp(2.3rem,4.6vw,4.6rem); line-height:1; letter-spacing:-.022em;
-  color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-h em{ font-style:normal; color:var(--accent); }
 .hm-go{ display:inline-flex; align-items:center; gap:12px; font-family:var(--body); font-weight:500; font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
 .hm-go i{ display:none; }
@@ -22,7 +22,7 @@
 /* ---------- APERTURA · una sola línea editorial sobre las tres imágenes (sin lista ni bloque aparte) ---------- */
 .hm-open-h{
   margin:0 0 clamp(20px,2.2vw,36px); font-family:var(--display); font-weight:550; font-size:clamp(1.9rem,3.7vw,4.9rem); line-height:1.04; letter-spacing:-.03em;
-  color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-open-h em{ font-style:normal; color:var(--accent); }
 /* la frase va en dos líneas también en escritorio: «Un espacio no se decora.» / «Se diseña para vender.» */
 .hm-open-h span, .hm-open-h em{ display:block; }
@@ -35,7 +35,7 @@
 .hm-marcas-head{ margin-bottom:clamp(14px,1.8vw,28px); align-items:center; }
 .hm-marcas-t{
   margin:0; font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.5vw,3rem); line-height:1.08; letter-spacing:-.025em;
-  color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-marcas-t em{ font-style:normal; color:var(--accent); }
 .hm-marcas-s{ margin:0; font-family:var(--body); font-weight:500; font-size:var(--hm-t-label,.76rem); letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim); }
 .hm-marcas-row{ padding-block:clamp(6px,1vw,14px); }
@@ -95,7 +95,7 @@
 }
 .hm-mundo:focus-visible{ outline:2px solid #C9A24A; outline-offset:-4px; }
 .hm-mundo-body{ position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding:clamp(22px,2.6vw,48px); }
-.hm-mundo-k{ font-family:var(--display); font-weight:550; font-size:clamp(2.8rem,5vw,5.6rem); line-height:.95; letter-spacing:-.03em; color:#DED8CB; text-shadow:0 2px 24px rgba(10,10,9,.5); font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.hm-mundo-k{ font-family:var(--display); font-weight:550; font-size:clamp(2.8rem,5vw,5.6rem); line-height:.95; letter-spacing:-.03em; color:#DED8CB; text-shadow:0 1px 2px rgba(10,10,9,.55), 0 2px 24px rgba(10,10,9,.5); font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-mundo-s{ font-size:clamp(.95rem,1.1vw,1.1rem); line-height:1.4; color:rgba(222,216,203,.86); margin-bottom:10px; text-shadow:0 1px 14px rgba(10,10,9,.6); }
 .hm-mundo:hover .hm-go i, .hm-mundo:focus-visible .hm-go i{ width:44px; }
 @media (max-width:899px){
@@ -143,7 +143,7 @@
   position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:8px; padding:clamp(16px,1.9vw,30px);
   border:1px solid rgba(201,162,74,.5); font-family:var(--body);
 }
-.hm-stat b{ font-family:var(--display); font-weight:550; font-size:clamp(3.6rem,6.4vw,7rem); line-height:.9; letter-spacing:-.04em; color:#C9A24A; font-variant-numeric:tabular-nums; margin-bottom:auto; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.hm-stat b{ font-family:var(--display); font-weight:550; font-size:clamp(3.6rem,6.4vw,7rem); line-height:.9; letter-spacing:-.04em; color:#C9A24A; font-variant-numeric:tabular-nums; margin-bottom:auto; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-stat span{ font-size:clamp(.66rem,.78vw,.78rem); letter-spacing:.16em; text-transform:uppercase; color:rgba(222,216,203,.82); line-height:1.4; }
 .hm-stat-in{ transition:border-color .45s var(--gd-ease); }
 .hm-stat:hover .hm-stat-in, .hm-stat:focus-visible .hm-stat-in{ border-color:rgba(201,162,74,.95); }
@@ -207,14 +207,14 @@
 .hm-cat-p:hover img, .hm-cat-p:focus-visible img{ transform:scale(1.04); }
 .hm-cat-p:focus-visible{ outline:2px solid #8A6F3C; outline-offset:3px; }
 .hm-cat-cap{ position:absolute; left:0; right:0; bottom:0; display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding:clamp(20px,2.6vw,44px); }
-.hm-cat-cap b{ font-family:var(--display); font-weight:550; font-size:clamp(2.2rem,3.8vw,4rem); line-height:1; letter-spacing:-.025em; color:#DED8CB; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.hm-cat-cap b{ font-family:var(--display); font-weight:550; font-size:clamp(2.2rem,3.8vw,4rem); line-height:1; letter-spacing:-.025em; color:#DED8CB; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-cat-cap .hm-go{ color:#C9A24A; padding-bottom:.5em; }
 .hm-cat-p:hover .hm-go i, .hm-cat-p:focus-visible .hm-go i{ width:44px; }
 
 /* ---------- CIERRE ---------- */
 .hm-cta{ padding-block:clamp(88px,11vw,180px); }
 .hm-cta .gd-in{ max-width:1000px; }
-.hm-cta-h{ margin:0 0 clamp(16px,2vw,26px); font-family:var(--display); font-weight:550; font-size:clamp(2.6rem,6.4vw,6.6rem); line-height:.98; letter-spacing:-.03em; color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.hm-cta-h{ margin:0 0 clamp(16px,2vw,26px); font-family:var(--display); font-weight:550; font-size:clamp(2.6rem,6.4vw,6.6rem); line-height:.98; letter-spacing:-.03em; color:var(--lino); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .hm-cta-h em{ font-style:normal; color:var(--accent); }
 .hm-cta-p{ margin:0 auto clamp(26px,3vw,40px); max-width:40ch; font-size:clamp(1rem,1.2vw,1.15rem); line-height:1.6; color:var(--text-dim); }
 

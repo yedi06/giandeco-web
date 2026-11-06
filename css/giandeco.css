@@ -90,15 +90,15 @@ img{ max-width:100%; display:block; }
 .gd-h1{
   font-family: var(--display); font-weight:550; color: var(--lino);
   font-size: clamp(2.5rem, 5.4vw, 4.2rem); line-height:1; letter-spacing:-.02em;
-  margin:0 0 var(--sp-24); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  margin:0 0 var(--sp-24); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .gd-h1 em{ font-style:normal; color: var(--accent); }
 .gd-h2{
   font-family: var(--display); font-weight:550;
   font-size: clamp(2rem, 4vw, 3rem); line-height:1.05; letter-spacing:-.01em;
-  margin:0 0 var(--sp-24); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  margin:0 0 var(--sp-24); text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .gd-h3{
   font-family: var(--display); font-weight:550;
-  font-size: clamp(1.9rem, 2.2vw, 2.1rem); line-height:1.1; margin:0 0 10px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  font-size: clamp(1.9rem, 2.2vw, 2.1rem); line-height:1.1; margin:0 0 10px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 /* subtítulo de tarjeta: Jost, porque Bodoni no baja de 30px (lámina 32) */
 .gd-h4{
   font-family: var(--body); font-weight:500; font-size:1.05rem;
@@ -442,7 +442,7 @@ html:not(.gd-cupon-on) .sh-promo-msg.es-cupon{ display:none; }
 .sh-search-in{ width:100%; max-width:720px; }
 .sh-search-input{
   width:100%; background:none; border:none; border-bottom:1px solid var(--line);
-  padding:12px 0; font-family: var(--display); font-size: clamp(1.9rem,3.4vw,2.4rem); color: var(--text); outline:none; font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  padding:12px 0; font-family: var(--display); font-size: clamp(1.9rem,3.4vw,2.4rem); color: var(--text); outline:none; font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .sh-search-input::placeholder{ color: var(--text-faint); }
 .sh-search-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
 .sh-search-chip{
@@ -503,7 +503,7 @@ html:not(.gd-cupon-on) .sh-promo-msg.es-cupon{ display:none; }
 .gd-hero h1{
   font-family: var(--display); font-weight:550; color: var(--lino);
   font-size: clamp(2.5rem,5.6vw,4.4rem); line-height:1; letter-spacing:-.02em;
-  margin:0 0 24px; max-width:13ch; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  margin:0 0 24px; max-width:13ch; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .gd-hero h1 em{ font-style:normal; color: var(--accent); }
 /* los titulares interiores tienden a ser más largos que el del home: la
    clase .is-corto ahora solo ajusta tipografía (nunca el alto del hero,
@@ -814,7 +814,7 @@ html:not(.gd-cupon-on) .sh-promo-msg.es-cupon{ display:none; }
    detalle de producto, no una portada */
 .gd-esp-head{ display:grid; gap:var(--sp-24) clamp(28px,4vw,56px); grid-template-columns:1fr; align-items:start; margin-bottom:var(--sp-16); }
 @media (min-width:900px){ .gd-esp-head{ grid-template-columns:1.3fr 1fr; } }
-.gd-esp-info h1{ font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.8vw,2.3rem); color:var(--lino); margin:0 0 12px; line-height:1.1; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.gd-esp-info h1{ font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.8vw,2.3rem); color:var(--lino); margin:0 0 12px; line-height:1.1; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .gd-esp-info p{ margin:0; color:var(--text-dim); font-size:.96rem; line-height:1.7; max-width:44ch; }
 .gd-esp-info .gd-btn{ margin-top:var(--sp-24); }
 
@@ -1065,12 +1065,12 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 .pj-hero > img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
 .pj-hero::after{ content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgba(10,10,9,.55) 0, rgba(10,10,9,0) 30%, rgba(10,10,9,.15) 55%, rgba(10,10,9,.9) 100%); }
 .pj-hero-txt{ padding-bottom:clamp(36px,6vw,72px); }
-.pj-hero h1{ font-family:var(--display); font-weight:550; color:#DED8CB; font-size:clamp(2rem,4.2vw,3.75rem); line-height:1.04; letter-spacing:-.01em; margin:6px 0 10px; max-width:20ch; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.pj-hero h1{ font-family:var(--display); font-weight:550; color:#DED8CB; font-size:clamp(2rem,4.2vw,3.75rem); line-height:1.04; letter-spacing:-.01em; margin:6px 0 10px; max-width:20ch; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .pj-hero .gd-eyebrow{ color:#C9A24A; margin:0; }
 .pj-hero-sub{ margin:0; font-family:var(--script); font-style:italic; font-weight:300; font-size:clamp(1.15rem,2vw,1.5rem); color:rgba(222,216,203,.85); }
 @media (max-width:719px){ .pj-hero{ min-height:72svh; } }
 .pj-etq{ margin:0 0 10px; font-family:var(--body); font-weight:500; font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
-.pj-h2{ font-family:var(--display); font-weight:550; font-size:clamp(1.9rem,3.6vw,2.6rem); color:var(--lino); line-height:1.08; margin:0 0 24px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.pj-h2{ font-family:var(--display); font-weight:550; font-size:clamp(1.9rem,3.6vw,2.6rem); color:var(--lino); line-height:1.08; margin:0 0 24px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .pj-intro{ padding-bottom:clamp(32px,5vw,64px); }
 .pj-intro-grid{ display:grid; gap:28px; }
 @media (min-width:900px){ .pj-intro-grid{ grid-template-columns:1.7fr 1fr; gap:clamp(48px,7vw,120px); align-items:start; } }
@@ -1102,7 +1102,7 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 .pj-texto-grid{ display:grid; gap:36px; }
 @media (min-width:900px){ .pj-texto-grid{ grid-template-columns:1.4fr 1fr; gap:clamp(48px,7vw,120px); } }
 .pj-p{ margin:0; color:var(--text-dim); font-size:1rem; line-height:1.75; max-width:62ch; }
-.pj-res-txt{ margin:0 0 20px; font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.6vw,2rem); line-height:1.2; color:var(--lino); font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.pj-res-txt{ margin:0 0 20px; font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.6vw,2rem); line-height:1.2; color:var(--lino); font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .pj-rel{ background:var(--bg-raised); }
 .pj-rel-head{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; }
 @media (min-width:900px){ .pj-grid.es-3{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
@@ -1138,7 +1138,7 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 @media (min-width:720px){ .nr-fechas{ grid-template-columns:repeat(3,1fr); } }
 .nr-fechas li{ display:grid; gap:6px; }
 .nr-fechas span{ font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-faint); }
-.nr-fechas b{ font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.4vw,1.9rem); line-height:1.15; color:var(--lino); font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.nr-fechas b{ font-family:var(--display); font-weight:550; font-size:clamp(1.875rem,2.4vw,1.9rem); line-height:1.15; color:var(--lino); font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 
 /* ==========================================================================
    SERVICIOS — tarjeta (foto + título) y página de servicio (gd-proyectos-ui.js)
@@ -1183,7 +1183,7 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
     radial-gradient(90% 70% at 100% 100%, rgba(138,111,60,.18), transparent 62%),
     linear-gradient(160deg, #1d1a15 0%, #0E0D0B 100%); }
 .gd-fondo::before{ content:'G'; font-family:var(--display); font-weight:550; font-size:clamp(64px, 14vw, 150px); line-height:1;
-  color:transparent; background:linear-gradient(170deg, rgba(222,196,140,.42), rgba(201,162,74,.08)); -webkit-background-clip:text; background-clip:text; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+  color:transparent; background:linear-gradient(170deg, rgba(222,196,140,.42), rgba(201,162,74,.08)); -webkit-background-clip:text; background-clip:text; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 .pj-card-img .gd-fondo, .gd-esp-thumb .gd-fondo{ border-radius:inherit; }
 .gd-esp-thumb:has(.gd-fondo), .pj-card-img:has(.gd-fondo){ background:#0E0D0B; }
 .pj-foto-fondo{ position:relative; aspect-ratio:4/3; cursor:default; }
@@ -1211,7 +1211,7 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
 /* fotos muy anchas (más de 1,6:1) en móvil: puntos más pequeños para que no tapen ni se salgan */
 @media (max-width:719px){ .gd-shop.is-ancha .gd-shop-dot{ width:26px; height:26px; } .gd-shop.is-ancha .gd-shop-dot i::before{ inset:4px; } .gd-shop.is-ancha .gd-shop-dot i::after{ inset:9px; } }
 
-.pj-h1{ font-family:var(--display); font-weight:550; font-size:clamp(2.2rem,4.4vw,3.4rem); line-height:1.05; color:var(--lino); margin:6px 0 14px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
+.pj-h1{ font-family:var(--display); font-weight:550; font-size:clamp(2.2rem,4.4vw,3.4rem); line-height:1.05; color:var(--lino); margin:6px 0 14px; font-optical-sizing:none; font-variation-settings:"opsz" var(--gd-opsz,18); }
 /* página de espacio: el texto arranca a la altura de la foto; la pista de los puntos, sin tanto espaciado en móvil */
 .gd-esp-info .gd-eyebrow{ line-height:1; }
 @media (max-width:719px){ .gd-shop-hint{ letter-spacing:.08em; } }
@@ -1248,3 +1248,7 @@ input[type="checkbox"], input[type="radio"]{ cursor: default; }
   .gd-hero-panel > p{ margin-bottom:clamp(14px,2.8svh,36px); line-height:1.6; }
   .gd-hero-eyebrow{ margin-bottom:clamp(10px,2svh,22px); }
 }
+
+/* tipografia de titulos: trazo fino de Bodoni Moda. Escritorio 18; en celular 9 (trazos mas firmes para que no desaparezcan) */
+:root{ --gd-opsz:18; }
+@media (max-width:899px){ :root{ --gd-opsz:9; } }
