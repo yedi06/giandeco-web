@@ -76,7 +76,7 @@ var CSS_PAGINA = [
   '#pg.es-pago .co-tot dd{ margin:0; font-size:.88rem; color:var(--lino); font-variant-numeric:tabular-nums; }',
   '#pg.es-pago .co-tot .es-total{ margin-top:8px; padding:22px 0 6px; border-top:1px solid var(--line); align-items:flex-end; }',
   '#pg.es-pago .co-tot .es-total dt{ font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim); padding-bottom:6px; }',
-  '#pg.es-pago .co-tot .es-total dd{ font-family:var(--display); font-size:clamp(2rem,2.8vw,2.5rem); font-weight:500; font-optical-sizing:none; font-variation-settings:"opsz" 18; line-height:1; color:var(--lino); }',
+  '#pg.es-pago .co-tot .es-total dd{ font-family:var(--display); font-size:clamp(2rem,2.8vw,2.5rem); font-weight:550; font-optical-sizing:none; font-variation-settings:"opsz" 18; line-height:1; color:var(--lino); }',
   '#pg.es-pago .co-tot .es-igv{ padding:2px 0 0; }',
   '#pg.es-pago .co-tot .es-igv dt, #pg.es-pago .co-tot .es-igv dd{ font-size:.72rem; color:var(--text-faint); }',
   /* formulario: dos columnas (vencimiento + código), etiquetas arriba */

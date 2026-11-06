@@ -50,7 +50,7 @@
   .gd-oscuro
 ){
   --bg:#0A0A09; --bg-raised:#171613; --panel:#1c1a16; --panel-2:#262319; --line:#2a2621;
-  --text:#DED8CB; --text-dim:#B9B3A6; --text-faint:#948D80;
+  --text:#DED8CB; --text-dim:#CBC5B8; --text-faint:#AEA799;
   --accent:#C9A24A; --accent-2:#8A6F3C; --accent-soft:rgba(201,162,74,.16);
   --lino:#DED8CB;
   color: var(--text);
@@ -143,7 +143,7 @@
 .gd-tema-fila{
   display:flex; align-items:center; justify-content:space-between; width:100%;
   background:none; border:none; border-bottom:1px solid var(--line); padding:16px 0; margin:0; cursor:pointer;
-  font-family: var(--body, 'Jost', system-ui, sans-serif); font-size:.92rem; font-weight:400; color: var(--text-dim); text-align:left;
+  font-family: var(--body, 'Jost', system-ui, sans-serif); font-size:.92rem; font-weight:450; color: var(--text-dim); text-align:left;
 }
 .gd-tema-fila:hover{ color: var(--text); }
 .gd-tema-ico{ position:relative; width:20px; height:20px; flex:none; color: var(--accent); }
