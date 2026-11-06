@@ -1147,3 +1147,43 @@ a.gdt-line-name:hover{ color:var(--t-accent); }
 :root[data-tema="claro"] .mp-radio{ border-color:rgba(0,0,0,.4); }
 :root[data-tema="claro"] .mp-marca, :root[data-tema="claro"] .mp-nombre{ color:var(--text, #1a1815); }
 :root[data-tema="claro"] .mp-marca.es-izipay img{ filter:invert(1) hue-rotate(180deg); }
+
+/* ==========================================================================
+   CHECKOUT · CLARIDAD (2026-11-05)
+   Un solo aviso de delivery por pantalla, «Volver» que dice a dónde lleva, medios de pago con su
+   descripción siempre a la vista y una pantalla final con un botón principal y enlaces, igual en
+   checkout y en pagar.
+   ========================================================================== */
+@media (min-width:900px){ #coEnvioProg2{ display:none; } }   /* en escritorio el aviso ya está en el resumen fijo */
+
+.co-atras{ display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:10px 8px 10px 0; color:var(--text, #DED8CB); letter-spacing:.1em; }
+.co-atras svg{ width:15px; height:15px; flex:none; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; transition:transform .25s cubic-bezier(.16,1,.3,1); }
+.co-atras:hover svg{ transform:translateX(-3px); }
+.co-atras:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.co-nav > span:empty{ display:none; }
+@media (max-width:560px){
+  .co-nav{ flex-direction:column-reverse; align-items:stretch; gap:6px; }
+  .co-nav .gd-btn{ justify-content:center; }
+  .co-atras{ justify-content:center; }
+}
+@media (prefers-reduced-motion: reduce){ .co-atras svg{ transition:none; } }
+
+/* medios de pago: la descripción de cada medio se ve siempre, no solo en el elegido */
+.mp-det{ grid-template-rows:1fr; }
+.mp-fila.es-off .mp-det{ grid-template-rows:1fr !important; }
+
+/* pantalla final (checkout?ok y pagar): botón principal arriba, opciones y enlaces debajo, sin líneas ni botones repetidos */
+.co-ok-mas{ display:grid; gap:var(--sp-16, 16px); margin-top:var(--sp-40, 40px); max-width:760px; }
+.co-ok-mas .co-etq{ margin:0; }
+.co-ok-mas .co-ok-acc .gd-btn{ flex:1 1 220px; justify-content:center; }
+.co-ok-enlaces{ display:flex; flex-wrap:wrap; gap:8px 28px; align-items:center; }
+.co-ok-mas .co-ok-enlaces{ margin-top:var(--sp-8, 8px); }
+
+/* pagar con Tupay: «otro medio» como opciones que se pueden tocar */
+.mp-otros{ max-width:480px; margin:28px 0 0; font-size:inherit; line-height:inherit; }
+.mp-otros p{ margin:0 0 10px; font-size:.84rem; color:var(--text-dim); }
+.mp-otros > div{ display:flex; flex-wrap:wrap; gap:8px; }
+.mp-otros a{ display:inline-flex; align-items:center; min-height:44px; padding:0 16px; border:1px solid var(--line); border-radius:2px; font-size:.82rem; letter-spacing:.02em; color:var(--lino); text-decoration:none; transition:border-color .2s, color .2s; }
+.mp-otros a:hover, .mp-otros a:focus-visible{ border-color:var(--accent); color:var(--accent); }
+/* pago directo: las tarjetas de Yape, Plin y BCP usan el ancho disponible en vez de quedarse en media pantalla */
+.co-ok:has(.pd){ max-width:980px; }

@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261103r">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261103p">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261105a">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -59,6 +59,8 @@
     var ped = T.pedidos.get(ok);
     if(!ped){ location.replace('cuenta#pedidos'); return; }
     var cot = !ped.subtotal;
+    var enlinea = !cot && !ped.pagado, conTarjeta = enlinea && P.activa(),
+        conQR = enlinea && TP.activa() && C.PAGO.some(function(m){ return m.via === 'tupay' && m.activo; });
     root.innerHTML = '<div class="co-ok">' +
       '<p class="gd-eyebrow">' + (cot ? 'Cotización registrada' : 'Pedido registrado') + '</p>' +
       '<h1>Gracias, ' + esc(ped.cliente.nombre.split(' ')[0]) + '</h1>' +
@@ -74,10 +76,10 @@
              : '<li><b>Usted paga</b>' + esc(ped.pago) + '. Recibe su comprobante electrónico en ' + esc(ped.cliente.email) + '.</li>') +
         '<li><b>' + (ped.entrega.tipo === 'recojo' ? 'Recoge en Giandeco' : ped.entrega.destino === 'oficina' ? 'Recoge en la oficina de la agencia' : 'Recibe en su dirección') + '</b>' + esc(ped.entrega.resumen) + '</li>' +
       '</ol>' +
-      '<div class="co-ok-acc">' + (!cot && !ped.pagado && P.activa() ? '<a class="gd-btn gd-btn-ghost" href="pagar?n=' + encodeURIComponent(ped.n) + '">Pagar con tarjeta</a>' : '') +
-        (!cot && !ped.pagado && TP.activa() && C.PAGO.some(function(m){ return m.via === 'tupay' && m.activo; }) ? '<a class="gd-btn gd-btn-ghost" href="pagar?n=' + encodeURIComponent(ped.n) + '&m=tupay">Pagar con Yape, Plin u otro medio</a>' : '') +
-        '<a class="gd-btn gd-btn-ghost" href="cuenta#pedidos">Ver mis pedidos</a>' +
-        '<a class="gd-link" href="seguimiento?n=' + encodeURIComponent(ped.n) + '" style="align-self:center;">Seguir este pedido' + T.FLECHA + '</a></div></div>' +
+      '<div class="co-ok-mas">' + (conTarjeta || conQR ? '<p class="co-etq">¿Prefiere pagar en línea?</p><div class="co-ok-acc">' + (conTarjeta ? '<a class="gd-btn gd-btn-ghost" href="pagar?n=' + encodeURIComponent(ped.n) + '">Pagar con tarjeta</a>' : '') +
+        (conQR ? '<a class="gd-btn gd-btn-ghost" href="pagar?n=' + encodeURIComponent(ped.n) + '&m=tupay">Pagar con QR o banca en línea</a>' : '') + '</div>' : '') +
+        '<div class="co-ok-enlaces"><a class="gd-link" href="cuenta#pedidos">Ver mis pedidos' + T.FLECHA + '</a>' +
+        '<a class="gd-link" href="seguimiento?n=' + encodeURIComponent(ped.n) + '">Seguir este pedido' + T.FLECHA + '</a></div></div></div>' +
       '<section class="gdt-sec" style="margin-top:var(--sp-64);"><div class="gdt-sec-head"><div><p class="gd-eyebrow">Selección Giandeco</p><h2 class="gd-h2">Para seguir armando el ambiente</h2></div></div>' +
         '<div class="gd-grid">' + T.recomendados(4).map(function(k){ return T.card(k); }).join('') + '</div></section>';
     return;
@@ -143,9 +145,10 @@
       (logos ? T.logosPago(logos) : marcas ? '<em>' + marcas + '</em>' : '') + (nota ? '<small>' + nota + '</small>' : '') + '</span></label>';
   }
   function pie(i){
-    return '<div class="co-nav">' + (i ? '<button type="button" class="co-atras" data-ir="' + (i - 1) + '">Volver</button>' : '<span></span>') +
+    var atras = ['', 'sus datos', 'la entrega'][i];   // el botón dice a dónde lleva
+    return '<div class="co-nav">' + (i ? '<button type="button" class="co-atras" data-ir="' + (i - 1) + '"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Volver a ' + atras + '</button>' : '<span></span>') +
       (i < ULT ? '<button type="button" class="gd-btn gd-btn-primary" data-sigue>Continuar' + T.FLECHA + '</button>'
-               : '<button type="submit" class="gd-btn gd-btn-primary">' + (soloCot ? 'Enviar solicitud' : 'Registrar pedido') + T.FLECHA + '</button>') + '</div>';
+               : '<button type="submit" class="gd-btn gd-btn-primary">' + (soloCot ? 'Enviar solicitud' : 'Confirmar pedido') + T.FLECHA + '</button>') + '</div>';
   }
   var hayCupones = true;
 
@@ -195,8 +198,8 @@
       '</div>' +
       '<label class="gdt-check"><input type="checkbox" id="coOtro"><span id="coOtroT">Recibirá el pedido otra persona.</span></label>' +
       '<div class="co-sub gd-form gd-form-2" id="coOtroBox" hidden>' +
-        campo('coOtroN', 'Nombre de quien recibe', 'type="text"', 'Indique el nombre.', '') +
-        campo('coOtroD', 'Su documento (DNI o CE)', 'type="text" maxlength="12"', 'Indique el documento.', '') +
+        campo('coOtroN', 'Nombre de quien recibe', 'type="text" autocomplete="off"', 'Indique nombre y apellido de quien recibe.', '') +
+        campo('coOtroD', 'Documento de quien recibe (DNI o CE)', 'type="text" maxlength="12" autocomplete="off"', 'Indique el documento de quien recibe.', '') +
       '</div>' +
       '<label class="gdt-check"><input type="checkbox" id="coArmado"><span>Quiero que Giandeco cotice el armado o la instalación.</span></label>' +
     '</div>' + pie(1) + '</section>';
@@ -294,7 +297,7 @@
   /* el último botón dice lo que va a pasar */
   function botonFinal(){
     var b = form.querySelector('.co-paso[data-paso="' + ULT + '"] button[type="submit"]'); if(!b || soloCot) return;
-    b.innerHTML = (enLinea(pagoElegido()) ? 'Continuar al pago' : 'Registrar pedido') + T.FLECHA;
+    b.innerHTML = (enLinea(pagoElegido()) ? 'Continuar al pago' : 'Confirmar pedido') + T.FLECHA;
   }
   function pagoElegido(){ var k = radio('pago'); return C.PAGO.filter(function(m){ return m.key === k; })[0]; }
 

@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/giandeco.css?v=20261103r">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261103p">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261105a">
 <link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
 <script src="js/gd-tema.js?v=20261018a"></script>
 </head>
@@ -84,8 +84,8 @@
     return '<div class="co-grid pg-grid"><section class="pg-pago pg-estado">' + dentro + '</section>' + (conResumen ? resumen() : '') + '</div>';
   }
   function enlaces(){
-    return '<div class="co-ok-acc" style="margin-top:var(--sp-40);"><a class="gd-btn gd-btn-ghost" href="cuenta#pedidos">Ver mis pedidos</a>' +
-      '<a class="gd-link" href="seguimiento?n=' + encodeURIComponent(n) + '" style="align-self:center;">Seguir este pedido' + T.FLECHA + '</a></div>';
+    return '<div class="co-ok-enlaces" style="margin-top:var(--sp-40);"><a class="gd-link" href="cuenta#pedidos">Ver mis pedidos' + T.FLECHA + '</a>' +
+      '<a class="gd-link" href="seguimiento?n=' + encodeURIComponent(n) + '">Seguir este pedido' + T.FLECHA + '</a></div>';
   }
 
   /* ---------- sin número, o pedido hecho en otro dispositivo ---------- */
@@ -184,12 +184,12 @@
 
   /* ---------- Tupay: listo para pagar (se paga en la página de Tupay y se vuelve aquí) ---------- */
   function listoTupay(aviso){
-    var titulo = M ? 'Pagar con ' + M.label : 'Pagar con Tupay';
+    var titulo = M ? M.label : 'Tupay';   // el h1 ya dice «Pagar mi pedido»: aquí solo el medio
     function enlace(txt, href, ext){ return '<a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + txt + '</a>'; }
     var otros = MEDIOS_TUPAY.filter(function(m){ return m.activo && (!M || m.key !== M.key); }).map(function(m){ return enlace(esc(m.label), 'pagar?n=' + encodeURIComponent(n) + '&m=tupay&k=' + m.key); });
-    otros.push(enlace('Tarjeta', 'pagar?n=' + encodeURIComponent(n) + '&m=tarjeta'));
-    otros.push(local ? enlace('Pago directo', 'checkout?ok=' + encodeURIComponent(n) + '&dep=1')
-                     : enlace('Pago directo', T.wa('Hola Giandeco, quiero pagar por depósito mi pedido ' + n + '.'), true));
+    otros.push(enlace('Tarjeta de crédito o débito', 'pagar?n=' + encodeURIComponent(n) + '&m=tarjeta'));
+    otros.push(local ? enlace('Depósito o transferencia', 'checkout?ok=' + encodeURIComponent(n) + '&dep=1')
+                     : enlace('Depósito o transferencia', T.wa('Hola Giandeco, quiero pagar por depósito mi pedido ' + n + '.'), true));
     root.classList.add('es-pago');
     root.innerHTML =
       '<p class="gd-eyebrow">Pago en línea</p><h1>Pagar mi pedido</h1>' +
@@ -202,7 +202,7 @@
           '<button type="button" class="gd-btn gd-btn-primary pg-pagar" id="pgTupay">' +
             '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Pagar ' + money(c.monto) + T.FLECHA + '</button>' +
           T.seguroPago(['tupay']).replace('class="mp-seguro"', 'class="mp-seguro es-solo"') +
-          '<p class="mp-otros">Otro medio: ' + otros.join(' · ') + '</p>' +
+          '<div class="mp-otros"><p>¿Prefiere otro medio de pago?</p><div>' + otros.join('') + '</div></div>' +
         '</section>' +
         resumen() +
       '</div>';
