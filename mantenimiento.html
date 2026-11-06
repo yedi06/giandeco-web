@@ -16,7 +16,7 @@
 <!-- /favicon -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Jost:wght@400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="images/material/mantenimiento-nacimiento.webp">
 <style>
   :root{
@@ -27,7 +27,7 @@
   }
   *{ box-sizing:border-box; }
   html, body{ height:100%; }
-  body{ margin:0; background:var(--ebano); color:var(--lino); font-family:var(--body); font-weight:300; -webkit-font-smoothing:antialiased; }
+  body{ margin:0; background:var(--ebano); color:var(--lino); font-family:var(--body); font-weight:400; -webkit-font-smoothing:antialiased; }
   a{ color:inherit; }
   ::selection{ background:var(--laton); color:var(--ebano); }
 
@@ -39,7 +39,7 @@
   @media (min-width:900px){ .mt-panel{ order:1; padding:clamp(40px,5vw,72px); } }
   .mt-logo img{ height:74px; width:auto; display:block; }
   .mt-eyebrow{ margin:0 0 22px; font-size:.68rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--laton); }
-  .mt h1{ font-family:var(--display); font-weight:400; font-size:clamp(2.4rem,5vw,4rem); line-height:1; letter-spacing:-.02em; margin:0 0 24px; max-width:13ch; text-wrap:balance; }
+  .mt h1{ font-family:var(--display); font-weight:500; font-size:clamp(2.4rem,5vw,4rem); line-height:1; letter-spacing:-.02em; margin:0 0 24px; max-width:13ch; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .mt h1 em{ font-style:normal; color:var(--laton); }
   .mt-texto{ margin:0 0 36px; max-width:44ch; color:var(--dim); font-size:clamp(.98rem,1.25vw,1.08rem); line-height:1.7; }
   .mt-cta{ display:flex; flex-wrap:wrap; gap:12px; }
@@ -65,7 +65,7 @@
     background:linear-gradient(to bottom, rgba(10,9,6,.55) 0%, transparent 34%), linear-gradient(to right, rgba(10,9,6,.5) 0%, transparent 28%), linear-gradient(to top, rgba(10,9,6,.6) 0%, transparent 36%); }
   .mt-media::after{ content:''; position:absolute; inset:0; z-index:2; background:var(--ebano); border-right:2px solid var(--laton); transform-origin:right center; animation:mtCortina 1.15s cubic-bezier(.76,0,.16,1) .2s forwards; }
   .mt-cap{ position:absolute; left:0; right:0; bottom:0; z-index:3; padding:clamp(18px,3vw,30px); }
-  .mt-cap b{ display:block; font-family:var(--display); font-weight:400; font-size:1.05rem; }
+  .mt-cap b{ display:block; font-family:var(--display); font-weight:500; font-size:1.05rem; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .mt-cap span{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(222,216,203,.68); }
   @keyframes mtZoom{ from{ transform:scale(1); } to{ transform:scale(1.09); } }
   @keyframes mtCortina{ to{ transform:scaleX(0); } }

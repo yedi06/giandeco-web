@@ -25,7 +25,7 @@
 
   var css = ''
   + '.gdc,.gdc-panel{--e:#0A0A09;--l:#C9A24A;--li:#DED8CB;--dim:#B9B3A6;--faint:#948D80;--hair:rgba(222,216,203,.11);'
-  +   'font-family:var(--body,"Jost",system-ui,sans-serif);font-weight:300;-webkit-font-smoothing:antialiased;box-sizing:border-box}'
+  +   'font-family:var(--body,"Jost",system-ui,sans-serif);font-weight:400;-webkit-font-smoothing:antialiased;box-sizing:border-box}'
   + '.gdc *,.gdc-panel *{box-sizing:border-box}'
 
   /* ---------- sello lanzador: un solo círculo, sin contornos ---------- */
@@ -84,7 +84,7 @@
   + '.gdc-close:focus-visible{outline:1px solid var(--l);outline-offset:2px}'
   + '.gdc-close svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round}'
   + '.gdc-eyebrow{margin:0 0 18px;font-size:.6rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--l)}'
-  + '.gdc-title{margin:0;font-family:var(--display,"Bodoni Moda",Georgia,serif);font-weight:400;font-size:2.05rem;line-height:1.08;letter-spacing:-.015em;color:var(--li);text-wrap:balance}'
+  + '.gdc-title{margin:0;font-family:var(--display,"Bodoni Moda",Georgia,serif);font-weight:500;font-optical-sizing:none;font-variation-settings:"opsz" 18;font-size:2.05rem;line-height:1.08;letter-spacing:-.015em;color:var(--li);text-wrap:balance}'
   + '.gdc-title em{font-style:normal;color:var(--l)}'
   + '.gdc-lead{margin:16px 0 0;font-size:.88rem;line-height:1.65;color:var(--faint);max-width:30ch}'
   + '.gdc-list{list-style:none;margin:28px 0 0;padding:0}'
@@ -94,7 +94,7 @@
   + '.gdc-row:hover::before,.gdc-row:focus-visible::before{transform:scaleX(1)}'
   + '.gdc-row:focus-visible{outline:none}'
   + '.gdc-n{font-size:.6rem;font-weight:400;letter-spacing:.14em;color:var(--faint);font-variant-numeric:tabular-nums;transition:color .3s ease}'
-  + '.gdc-t{font-size:.97rem;font-weight:300;letter-spacing:.005em;transition:transform .5s ' + EASE + '}'
+  + '.gdc-t{font-size:.97rem;font-weight:400;letter-spacing:.005em;transition:transform .5s ' + EASE + '}'
   + '.gdc-row svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;opacity:.35;transition:opacity .3s ease,transform .5s ' + EASE + '}'
   + '.gdc-row:hover,.gdc-row:focus-visible{color:var(--l)}'
   + '.gdc-row:hover .gdc-n,.gdc-row:focus-visible .gdc-n{color:var(--l)}'

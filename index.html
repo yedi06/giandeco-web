@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giandeco Studio Design · Visual merchandising e interiorismo en Lima</title>
 <meta name="description" content="Estudio de diseño comercial en Lima: visual merchandising, diseño de tiendas e interiorismo con producción y montaje propios.">
-<link rel="stylesheet" href="css/giandeco.css?v=20261103r">
-<link rel="stylesheet" href="css/gd-tienda.css?v=20261103p">
+<link rel="stylesheet" href="css/giandeco.css?v=20261106b">
+<link rel="stylesheet" href="css/gd-tienda.css?v=20261106b">
 <!-- la portada del hero es el LCP: se pide ya, solo la que corresponde a la pantalla -->
 <link rel="preload" as="image" type="image/webp" href="images/hero/hero-navidad-poster-mobile.webp" media="(orientation: portrait) and (max-width: 1024px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="images/hero/hero-navidad-poster-desktop.webp" media="(orientation: landscape), (min-width: 1025px)" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@400;500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#0A0A09" id="metaThemeColor">
 <!-- favicon -->
 <link rel="icon" href="favicon.ico?v=1" sizes="32x32">
@@ -89,13 +89,12 @@
 
   h1{
     font-family: var(--display);
-    font-weight: 400;
+    font-weight:500;
     font-size: clamp(2rem, 4.4vw, 3.1rem);
     line-height: 1.05;
     letter-spacing: -0.01em;
     margin: 0 0 18px;
-    text-wrap: balance;
-  }
+    text-wrap: balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
 
   .lede{
     max-width: 62ch;
@@ -160,11 +159,10 @@
 
   .steps-heading{
     font-family: var(--display);
-    font-weight: 400;
+    font-weight:500;
     font-size: clamp(1.9rem, 2.6vw, 2.2rem);
     white-space: nowrap;
-    margin: 0 0 6px;
-  }
+    margin: 0 0 6px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
 
   @media (max-width: 400px){
     .steps-heading{ white-space: normal; }
@@ -268,10 +266,9 @@
   /* ---------- Section labels (patterns 2 & 3) ---------- */
   .section-h{
     font-family: var(--display);
-    font-weight: 400;
+    font-weight:500;
     font-size: clamp(1.9rem, 2.4vw, 2.2rem);
-    margin: 0 0 24px;
-  }
+    margin: 0 0 24px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .section-h span{
     font-family: var(--body);
     font-weight: 500;
@@ -442,7 +439,7 @@
     width: 100%; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
     gap: 10px 24px; padding-top: 18px;
   }
-  .gd-light-cap{ font-family: var(--display); font-weight: 400; font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--lino); margin: 0; }
+  .gd-light-cap{ font-family: var(--display); font-weight:500; font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--lino); margin: 0; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .gd-light-count{ font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; color: var(--text-faint); white-space: nowrap; }
   .gd-light-cta{
     display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
@@ -483,10 +480,9 @@
   /* ---------- How it works ---------- */
   .how h2{
     font-family: var(--display);
-    font-weight: 400;
+    font-weight:500;
     font-size: clamp(1.9rem, 2.4vw, 2.2rem);
-    margin: 0 0 10px;
-  }
+    margin: 0 0 10px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
 
   .how > p{
     color: var(--text-dim);
@@ -875,10 +871,9 @@
   .gd-hero-eyebrow{ font-family:var(--body); font-weight:500; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--text-dim); margin:0 0 22px; }
   .gd-hero-eyebrow i{ display:none; }
   .gd-hero h1{
-    font-family: var(--display); font-weight:400; color: var(--lino);
+    font-family: var(--display); font-weight:500; color: var(--lino);
     font-size: clamp(2.5rem, 5.6vw, 4.4rem); line-height:1; letter-spacing:-.02em;
-    margin:0 0 24px; max-width:13ch; text-wrap:balance;
-  }
+    margin:0 0 24px; max-width:13ch; text-wrap:balance; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .gd-hero h1 em{ font-style:normal; color: var(--accent); }
   .gd-hero-panel > p{ color: var(--text-dim); font-size: clamp(.98rem, 1.25vw, 1.08rem); line-height:1.7; max-width:46ch; margin:0 0 36px; }
   .gd-hero-cta{ display:flex; flex-wrap:wrap; gap:12px; }
@@ -953,7 +948,7 @@
   .gd-manifiesto .gd-body{ text-align:left; }
   .gd-triada{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; margin-top: var(--sp-40); font-family:var(--body); font-size:.95rem; color: var(--text-faint); }
   .gd-triada b{ display:block; font-weight:400; }
-  .gd-triada .is-yes{ color: var(--lino); font-family: var(--display); font-size: clamp(1.9rem,2.6vw,2.1rem); margin-top:6px; }
+  .gd-triada .is-yes{ color: var(--lino); font-family: var(--display); font-size: clamp(1.9rem,2.6vw,2.1rem); margin-top:6px; font-weight:500; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .gd-triada .is-yes em{ font-style:normal; color: var(--accent); }
   .gd-manifiesto-media{ position:relative; border-radius:2px; overflow:hidden; aspect-ratio: 4/4.4; isolation:isolate; }
   .gd-manifiesto-media .gd-curtain{ position:absolute; inset:0; }
@@ -992,7 +987,7 @@
   }
   .gd-univ:hover img{ transform: scale(1.04); }
   .gd-univ-body{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding: clamp(20px,3vw,34px); }
-  .gd-univ-title{ font-family:var(--display); font-weight:400; color:var(--lino); font-size: clamp(1.9rem,2.8vw,2.4rem); line-height:1.05; margin:0 0 8px; }
+  .gd-univ-title{ font-family:var(--display); font-weight:500; color:var(--lino); font-size: clamp(1.9rem,2.8vw,2.4rem); line-height:1.05; margin:0 0 8px; font-optical-sizing:none; font-variation-settings:"opsz" 18; }
   .gd-univ-desc{ color: rgba(222,216,203,.76); font-size:.9rem; line-height:1.55; max-width:40ch; margin:0 0 14px; }
   .gd-univ-more{ display:inline-flex; align-items:center; gap:8px; font-family:var(--body); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--lino); }
   .gd-univ-more i{ width:16px; height:1px; background: var(--accent); display:block; transition: width .35s var(--gd-ease); }
@@ -1232,7 +1227,7 @@
   .hm-hero-pie::before{ content:""; position:absolute; inset:-160px 0 0; z-index:-1; background:linear-gradient(to top, rgba(10,9,6,.82), rgba(10,9,6,.4) 50%, transparent); }
   .hm-hero-frase{ text-shadow:0 1px 14px rgba(10,9,6,.5); }
   .hm-hero-pie .gd-in{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 40px; }
-  .hm-hero-frase{ margin:0; max-width:34ch; font-family:var(--body); font-weight:300; font-size:clamp(1rem,1.35vw,1.2rem); line-height:1.5; color:#DED8CB; text-wrap:balance; }
+  .hm-hero-frase{ margin:0; max-width:34ch; font-family:var(--body); font-weight:400; font-size:clamp(1rem,1.35vw,1.2rem); line-height:1.5; color:#DED8CB; text-wrap:balance; }
   .hm-hero-pie .gd-link{ pointer-events:auto; min-height:44px; color:#DED8CB; border-bottom-color:rgba(222,216,203,.4); }
   .hm-hero-pie .gd-link:hover{ color:#C9A24A; border-bottom-color:#C9A24A; }
   /* con la intro de marca, el pie entra después de que sube el telón */
@@ -1380,9 +1375,9 @@
     .gd-estudio-foto img{ aspect-ratio:1/1; object-fit:cover; object-position:50% 22%; }
   }
 </style>
-<link rel="stylesheet" href="css/gd-movil.css?v=20261020f">
-<link rel="stylesheet" href="css/gd-tema.css?v=20261026r">
-<link rel="stylesheet" href="css/gd-home-d.css?v=20261026v">
+<link rel="stylesheet" href="css/gd-movil.css?v=20261106b">
+<link rel="stylesheet" href="css/gd-tema.css?v=20261106b">
+<link rel="stylesheet" href="css/gd-home-d.css?v=20261106b">
 <script src="js/gd-tema.js?v=20261018a"></script>
 
 <!-- intro de marca: se decide antes de pintar, para que nunca haya un parpadeo del telón -->
@@ -2214,4 +2209,4 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="js/gd-tienda.js?v=20261103o" defer></script>
 <script src="js/gd-movil.js?v=20261018a" defer></script>
 <script src="js/gd-home-d.js?v=20261026w" defer></script>
-<script src="js/gd-chat.js?v=20261027a" defer></script>
+<script src="js/gd-chat.js?v=20261106b" defer></script>

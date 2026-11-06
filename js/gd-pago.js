@@ -67,7 +67,8 @@ var CSS_PAGINA = [
   '#pg.es-pago .pg-prueba::before{ content:""; width:6px; height:6px; border-radius:50%; background:#D9A441; box-shadow:0 0 0 3px rgba(217,164,65,.18); }',
   /* resumen del pedido */
   '#pg.es-pago .co-res h2{ margin:0 0 4px; }',
-  '#pg.es-pago .co-res .gdt-line{ grid-template-columns:76px 1fr; gap:18px; padding:20px 0; border-bottom:1px solid var(--line); }',
+  '#pg.es-pago .co-res .gdt-line{ grid-template-columns:76px 1fr; gap:18px; padding:20px 0; border-bottom:0; }',
+  '#pg.es-pago .co-res .gdt-line:not(:last-child){ border-bottom:1px solid var(--line); }',   /* entre piezas sí; tras la última no: la línea de los totales ya la cierra */
   '#pg.es-pago .co-res .gdt-line-img{ width:76px; height:96px; border-radius:2px; }',
   '#pg.es-pago .co-tot{ margin:6px 0 0; }',
   '#pg.es-pago .co-tot > div{ display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; }',
@@ -75,7 +76,7 @@ var CSS_PAGINA = [
   '#pg.es-pago .co-tot dd{ margin:0; font-size:.88rem; color:var(--lino); font-variant-numeric:tabular-nums; }',
   '#pg.es-pago .co-tot .es-total{ margin-top:8px; padding:22px 0 6px; border-top:1px solid var(--line); align-items:flex-end; }',
   '#pg.es-pago .co-tot .es-total dt{ font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim); padding-bottom:6px; }',
-  '#pg.es-pago .co-tot .es-total dd{ font-family:var(--display); font-size:clamp(2rem,2.8vw,2.5rem); font-weight:400; line-height:1; color:var(--lino); }',
+  '#pg.es-pago .co-tot .es-total dd{ font-family:var(--display); font-size:clamp(2rem,2.8vw,2.5rem); font-weight:500; font-optical-sizing:none; font-variation-settings:"opsz" 18; line-height:1; color:var(--lino); }',
   '#pg.es-pago .co-tot .es-igv{ padding:2px 0 0; }',
   '#pg.es-pago .co-tot .es-igv dt, #pg.es-pago .co-tot .es-igv dd{ font-size:.72rem; color:var(--text-faint); }',
   /* formulario: dos columnas (vencimiento + código), etiquetas arriba */
